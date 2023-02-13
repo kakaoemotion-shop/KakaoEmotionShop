@@ -1,0 +1,18 @@
+server:
+  port: 8000
+
+spring:
+  mvc:
+    static-path-pattern: /static/**
+    pathmatch:
+      matching-strategy: ant_path_matcher
+
+  datasource:
+    driver-class-name:
+    url: jdbc:mysql://pkh.cksewrsk3guy.ap-northeast-2.rds.amazonaws.com:3306
+    username: admin
+    password: 1q2w3e4r
+
+  mybatis:
+    mapper-locations:
+      - /mappers/*.xml
