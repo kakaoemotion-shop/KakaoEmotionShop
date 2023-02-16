@@ -3,6 +3,7 @@
   width: 100%;
   height: 110px;
   background-color: white;
+  border-bottom: 1.5px solid #dbdbdb;
 }
 
 .header-top{
@@ -24,6 +25,8 @@
   border: none;
   outline: none;
   background-color: white;
+
+  cursor: pointer;
 }
 
 .logo-button{
@@ -33,6 +36,8 @@
 
   width: 190px;
   height: 26px;
+
+  cursor: pointer;
 }
 .logo-button h1{
   font-size: 20px;
@@ -56,6 +61,8 @@
   border: none;
   outline-style: none;
   background-color: white;
+
+  cursor: pointer;
 }
 
 .mypage-button{
@@ -69,7 +76,10 @@
   border: none;
   border-radius: 10px;
   outline-style: none;
+
+  cursor: pointer;
 }
+
 .mypage-button img{
   width: 30px;
   height: 30px;
@@ -97,6 +107,8 @@
   font-weight: 600;
   text-align: center;
   color: #000;
+
+  cursor: pointer;
 }
 .menu-list-button:hover{
   border-bottom: 2px solid #000;
@@ -117,6 +129,8 @@
 .main-img {
   width: 1024px;
   height: 531px;
+
+  cursor: pointer;
 }
 
 
@@ -191,6 +205,8 @@
 
   width: 150px;
   height: 150px;
+
+  cursor: pointer;
 }
 .new-list li h2{
   display: flex;
@@ -199,6 +215,8 @@
 
   margin: 20px 5px;
   margin-top: 2px;
+
+  cursor: pointer;
 }
 /* .new-list li h2:hover{
   font-weight: 600;
@@ -270,12 +288,16 @@
 
   font-size: 30px;
   font-weight: 400;
+
+  cursor: pointer;
 }
 .hot-sub-list{
   display: flex;
   flex-direction: column;
 
   margin: 30px 20px 20px 20px; 
+
+  cursor: pointer;
 }
 .hot-sub-list h2{
   font-size: 15px;
@@ -283,32 +305,10 @@
 .hot-sub-list p{
   font-size: 13px;
 }
+
 .hot-list img{
   margin-left: 180px;
-}
-
-
-
-
-/* =============== 이모티콘 설정 ================ */
-.emo-img{
-  width: 90px;
-  height: 90px;
-}
-.emo-neme{
-  font-size: 14px;
-  font-weight: 200;
-  text-decoration: none;
-}
-.emo-id{
-  font-size: 20px;
-  font-weight: 600;
-  color: brown;
-}
-.author{
-  font-size: 12px;
-  font-weight: 200;
-  color: rgb(91, 91, 91);
+  cursor: pointer;
 }
 
 
