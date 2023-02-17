@@ -26,8 +26,7 @@ class RegisterApi {
             },
             error: error => {
                 console.log(error);
-                alert("오류발생")
-//                RegisterService.getInstance().setErrorMessage(error.responseJSON.data);
+                RegisterService.getInstance().setErrorMessage(error.responseJSON.data);
             }
         });
     }
