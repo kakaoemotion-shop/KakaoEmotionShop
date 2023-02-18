@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.korit.kakaoemotionshop.repository.EmoRepository">
+    <select id="searchEmo" parameterType="com.korit.kakaoemotionshop.web.dto.SearchReqDto"
+            resultType="com.korit.kakaoemotionshop.entity.EmoMst">
+        select
+            emo_id as emoId,
+            emo_code as emoCode,
+            emo_name as emoName,
+            company,
+            emo_date as emoDate
+        from
+            emo_mst
+        where
+            1 = 1
+        <if test = "searchValue != null">
+            and (
+                emo_name like concat('%', #{searchValue}, '%')
+                or company like concat('%', #{searchValue}, '%')
+            )
+        </if>
+
+        order by
+        <choose>
+             <when test = 'order == "emoName"'>emo_name,</when>
+             <when test = 'order == "company"'>company,</when>
+             <when test = 'order == "dateAsc"'>emo_date,</when>
+             <when test = 'order == "dataDesc"'>emo_date desc,</when>
+        </choose>
+        emo_id
+        <if test = 'limit == "Y"'>
+            limit #{index}, #{count}
+        </if>
+    </select>
+</mapper>
