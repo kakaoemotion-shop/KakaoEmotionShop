@@ -8,13 +8,16 @@ import com.korit.kakaoemotionshop.web.dto.CMRespDto;
 import com.korit.kakaoemotionshop.web.dto.EmoReqDto;
 import com.korit.kakaoemotionshop.web.dto.SearchReqDto;
 import io.swagger.annotations.Api;
+import org.apache.tomcat.jni.File;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
+import java.io.IOException;
 import java.util.List;
 
 @Api(tags = {"관리자 이모티콘 API"})
@@ -33,7 +36,7 @@ public class EmoApi {
         return ResponseEntity
                 .ok()
                 .body(new CMRespDto<>(HttpStatus.OK.value(),
-                        "Success",
+                        "Successfully",
                         emoService.searchEmo(searchReqDto)));
     }
 
@@ -70,6 +73,22 @@ public class EmoApi {
                 .ok()
                 .body(new CMRespDto<>(HttpStatus.OK.value(),
                         "Successfully", true));
+    }
+
+    @ParamsAspect
+    @PostMapping("/emo/{emoCode}/images")
+    public ResponseEntity<CMRespDto<?>> registerEmoImg(@PathVariable String emoCode,
+                                                       @RequestPart List<MultipartFile> files) {
+        emoService.registerEmoImages(emoCode, files);
+
+//        for (MultipartFile file : files) {
+//            System.out.println(file.getOriginalFilename());
+//        }
+
+        return ResponseEntity
+                .ok()
+                .body(new CMRespDto<>(HttpStatus.OK.value(),
+                        "Successfully",true));
     }
 
 }

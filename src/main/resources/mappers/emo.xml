@@ -55,6 +55,14 @@
             (0, #{emoCode},#{emoName}, #{company}, #{emoDate})
     </insert>
 
+    <insert id="registerEmoImages" parameterType="list">
+        insert into emo_image
+        values
+        <foreach collection="list" item="file" separator=",">
+            (0, #{file.emoCode}, #{file.saveName}, #{file.originName})
+        </foreach>
+    </insert>
+
     <update id="updateEmoByEmoCode" parameterType="com.korit.kakaoemotionshop.web.dto.EmoReqDto">
         update emo_mst
         set

@@ -16,3 +16,6 @@ spring:
 mybatis:
   mapper-locations:
     - /mappers/*.xml
+
+file:
+  path: D:\project\KakaoEmotionShop\upload

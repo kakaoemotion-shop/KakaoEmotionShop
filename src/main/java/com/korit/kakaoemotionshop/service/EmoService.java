@@ -1,20 +1,28 @@
 package com.korit.kakaoemotionshop.service;
 
+import com.korit.kakaoemotionshop.entity.EmoImage;
 import com.korit.kakaoemotionshop.entity.EmoMst;
 import com.korit.kakaoemotionshop.exception.CustomValidationException;
 import com.korit.kakaoemotionshop.repository.EmoRepository;
 import com.korit.kakaoemotionshop.web.dto.EmoReqDto;
 import com.korit.kakaoemotionshop.web.dto.SearchReqDto;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.*;
 
 @Service
 public class EmoService {
 
+    @Value("${file.path}")
+    private String filePath;
     @Autowired
     private EmoRepository emoRepository;
 
@@ -44,5 +52,43 @@ public class EmoService {
 
     public void removeEmo(String emoCode) {
         emoRepository.deleteEmo(emoCode);
+    }
+
+    public void registerEmoImages(String emoCode, List<MultipartFile> files) {
+        if(files.size()<1) {
+            Map<String, String>  errorMap = new HashMap<String, String>();
+            errorMap.put("files", "업로드할 이미지를 4개 선택해주세요");
+
+            throw new CustomValidationException(errorMap);
+        }
+        List<EmoImage> emoImages = new ArrayList<>();
+
+        files.forEach(file ->{
+           String originFileName = file.getOriginalFilename();
+           String extension = originFileName.substring(originFileName.lastIndexOf("."));
+           String tempFileName = UUID.randomUUID().toString().replaceAll("-","")+extension;
+
+           Path uploadPath = Paths.get(filePath+"/emo/"+tempFileName);
+
+           File f = new File(filePath + "/emo");
+           if(!f.exists()) {
+               f.mkdirs();
+           }
+           try {
+               Files.write(uploadPath, file.getBytes());
+           } catch (IOException e) {
+               throw new RuntimeException(e);
+           }
+
+           EmoImage emoImage = EmoImage.builder()
+                   .emoCode(emoCode)
+                   .saveName(tempFileName)
+                   .originName(originFileName)
+                   .build();
+
+           emoImages.add(emoImage);
+        });
+
+        emoRepository.registerEmoImages(emoImages);
     }
 }

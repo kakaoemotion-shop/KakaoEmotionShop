@@ -10,6 +10,7 @@ package com.korit.kakaoemotionshop.repository;
 //        U : 이모티콘 수정
 //        D : 이모티콘 삭제
 
+import com.korit.kakaoemotionshop.entity.EmoImage;
 import com.korit.kakaoemotionshop.entity.EmoMst;
 import com.korit.kakaoemotionshop.web.dto.EmoReqDto;
 import com.korit.kakaoemotionshop.web.dto.SearchReqDto;
@@ -24,5 +25,5 @@ public interface EmoRepository {
     public EmoMst findEmoByEmoCode(String EmoCode);
     public int updateEmoByEmoCode(EmoReqDto emoReqDto);
     public int deleteEmo(String EmoCode);
-
+    public int registerEmoImages(List<EmoImage> emoImages);
 }
