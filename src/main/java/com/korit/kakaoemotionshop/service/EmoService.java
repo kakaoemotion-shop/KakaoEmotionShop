@@ -91,4 +91,26 @@ public class EmoService {
 
         emoRepository.registerEmoImages(emoImages);
     }
+
+    public List<EmoImage> getEmos(String emoCode) {
+        return emoRepository.findEmoImageAll(emoCode);
+    }
+
+    public void removeEmoImage(int imageId) {
+        EmoImage emoImage = emoRepository.findEmoImageByImageId(imageId);
+
+        if(emoImage == null) {
+            Map<String,String> errorMap = new HashMap<String,String>();
+            errorMap.put("error","존재하지 않는 imageId 입니다");
+
+            throw  new CustomValidationException(errorMap);
+        }
+
+        if(emoRepository.deleteEmoImage(imageId) > 0 ) {
+            File file = new File(filePath+"emo/"+emoImage.getSaveName());
+            if(file.exists()) {
+                file.delete();
+            }
+        }
+    }
 }

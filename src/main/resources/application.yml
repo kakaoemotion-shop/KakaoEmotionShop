@@ -18,4 +18,4 @@ mybatis:
     - /mappers/*.xml
 
 file:
-  path: D:\project\KakaoEmotionShop\upload
+  path: D:\project\KakaoEmotionShop\upload\

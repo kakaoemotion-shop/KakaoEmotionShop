@@ -2,6 +2,7 @@ package com.korit.kakaoemotionshop.web.api;
 
 import com.korit.kakaoemotionshop.aop.annotation.ParamsAspect;
 import com.korit.kakaoemotionshop.aop.annotation.ValidAspect;
+import com.korit.kakaoemotionshop.entity.EmoImage;
 import com.korit.kakaoemotionshop.entity.EmoMst;
 import com.korit.kakaoemotionshop.service.EmoService;
 import com.korit.kakaoemotionshop.web.dto.CMRespDto;
@@ -89,6 +90,26 @@ public class EmoApi {
                 .ok()
                 .body(new CMRespDto<>(HttpStatus.OK.value(),
                         "Successfully",true));
+    }
+
+    @ParamsAspect
+    @GetMapping("/emo/{emoCode}/images")
+    public ResponseEntity<CMRespDto<?>> getImages(@PathVariable String emoCode) {
+        List<EmoImage> emoImages = emoService.getEmos(emoCode);
+        return ResponseEntity
+                .ok()
+                .body(new CMRespDto<>(HttpStatus.OK.value(),
+                        "Successfully",emoImages));
+    }
+
+    @DeleteMapping("/emo/{emoCode}/image/{imageId}")
+    public ResponseEntity<CMRespDto<?>> removeEmoImg(@PathVariable String emoCode,
+                                                     @PathVariable int imageId) {
+        emoService.removeEmoImage(imageId);
+        return ResponseEntity
+                .ok()
+                .body(new CMRespDto<>(HttpStatus.OK.value(),
+                        "Successfully",null));
     }
 
 }

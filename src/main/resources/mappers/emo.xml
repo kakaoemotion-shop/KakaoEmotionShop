@@ -49,6 +49,30 @@
             emo_code = #{emoCode}
     </select>
 
+    <select id="findEmoImageAll" resultType="com.korit.kakaoemotionshop.entity.EmoImage">
+        select
+            image_id as imageId,
+            emo_code as emoCode,
+            save_name as saveName,
+            origin_name as originName
+        from
+            emo_image
+        where
+            emo_code = #{emoCode}
+    </select>
+
+    <select id="findEmoImageByImageId" resultType="com.korit.kakaoemotionshop.entity.EmoImage">
+        select
+            image_id as imageId,
+            emo_code as emoCode,
+            save_name as saveName,
+            origin_name as originName
+        from
+            emo_image
+        where
+            image_id = #{imageId}
+    </select>
+
     <insert id="saveEmo" parameterType="com.korit.kakaoemotionshop.web.dto.EmoReqDto">
         insert into emo_mst
         values
@@ -79,5 +103,13 @@
             emo_mst
         where
             emo_code = #{emoCode}
+    </delete>
+
+    <delete id="deleteEmoImage">
+        delete
+        from
+            emo_image
+        where
+            image_id = #{imageId}
     </delete>
 </mapper>
