@@ -49,4 +49,27 @@ public class EmoApi {
                         "Successfully", true));
     }
 
+    @ParamsAspect
+    @ValidAspect
+    @PutMapping("/emo/{emoCode}")
+    public ResponseEntity<CMRespDto<?>> modifyEmo(@PathVariable String emoCode,
+                                                    @Valid @RequestBody EmoReqDto emoReqDto,
+                                                    BindingResult bindingResult) {
+        emoService.modifyEmo(emoReqDto);
+        return ResponseEntity
+                .ok()
+                .body(new CMRespDto<>(HttpStatus.OK.value(),
+                        "Successfully", true));
+    }
+
+    @ParamsAspect
+    @DeleteMapping("/emo/{emoCode}")
+    public ResponseEntity<CMRespDto<?>> removeEmo(@PathVariable String emoCode) {
+        emoService.removeEmo(emoCode);
+        return ResponseEntity
+                .ok()
+                .body(new CMRespDto<>(HttpStatus.OK.value(),
+                        "Successfully", true));
+    }
+
 }

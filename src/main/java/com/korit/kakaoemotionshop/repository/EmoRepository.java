@@ -20,6 +20,9 @@ import java.util.List;
 @Mapper
 public interface EmoRepository {
     public List<EmoMst> searchEmo(SearchReqDto searchReqDto);
-
     public int saveEmo(EmoReqDto emoReqDto);
+    public EmoMst findEmoByEmoCode(String EmoCode);
+    public int updateEmoByEmoCode(EmoReqDto emoReqDto);
+    public int deleteEmo(String EmoCode);
+
 }
