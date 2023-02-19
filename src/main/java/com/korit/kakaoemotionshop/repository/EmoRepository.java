@@ -11,6 +11,7 @@ package com.korit.kakaoemotionshop.repository;
 //        D : 이모티콘 삭제
 
 import com.korit.kakaoemotionshop.entity.EmoMst;
+import com.korit.kakaoemotionshop.web.dto.EmoReqDto;
 import com.korit.kakaoemotionshop.web.dto.SearchReqDto;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -19,4 +20,6 @@ import java.util.List;
 @Mapper
 public interface EmoRepository {
     public List<EmoMst> searchEmo(SearchReqDto searchReqDto);
+
+    public int saveEmo(EmoReqDto emoReqDto);
 }

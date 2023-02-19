@@ -35,4 +35,10 @@
             limit #{index}, #{count}
         </if>
     </select>
+
+    <insert id="saveEmo" parameterType="com.korit.kakaoemotionshop.web.dto.EmoReqDto">
+        insert into emo_mst
+        values
+            (0, #{emoCode},#{emoName}, #{company}, #{emoDate})
+    </insert>
 </mapper>

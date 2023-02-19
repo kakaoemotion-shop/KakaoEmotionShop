@@ -5,15 +5,14 @@ import com.korit.kakaoemotionshop.aop.annotation.ValidAspect;
 import com.korit.kakaoemotionshop.entity.EmoMst;
 import com.korit.kakaoemotionshop.service.EmoService;
 import com.korit.kakaoemotionshop.web.dto.CMRespDto;
+import com.korit.kakaoemotionshop.web.dto.EmoReqDto;
 import com.korit.kakaoemotionshop.web.dto.SearchReqDto;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -37,4 +36,17 @@ public class EmoApi {
                         "Success",
                         emoService.searchEmo(searchReqDto)));
     }
+
+    @ParamsAspect
+    @ValidAspect
+    @PostMapping("/emo")
+    public ResponseEntity<CMRespDto<?>> registerEmo(@Valid @RequestBody EmoReqDto emoReqDto,
+                                                               BindingResult bindingResult) {
+        emoService.registerEmo(emoReqDto);
+        return ResponseEntity
+                .created(null)
+                .body(new CMRespDto<>(HttpStatus.CREATED.value(),
+                        "Successfully", true));
+    }
+
 }
