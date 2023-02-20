@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="/static/css/reset.css">
     <link rel="stylesheet" href="/static/css/index.css">
+    <link rel="stylesheet" href="/static/css/search.css">
 </head>
 <body>
     <header class="header">
@@ -36,11 +37,19 @@
                 <li class="menu-list-button"><a href="">인기</a></li>
             </ul>
         </nav>
-
+        
+        <div class="search-page">
+            <div class="search-bar">
+                <input class="search-bar-input" type="text" placeholder="이모티콘을 검색해보세요!">
+                <button class="search-bar-button">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </button>
+            </div>
+        </div>
     </header>
     
-    <div class="main">
-        <img src="/static/images/main.gif" alt="" class="main-img">
+    <!-- <div class="main">
+        <img src="./image/main.gif" alt="" class="main-img">
     </div>
 
     <div class="content">
@@ -50,43 +59,43 @@
             <div class="new-emotion">
                 <ul class="new-list">
                     <li>
-                        <img src="/static/images/noimg.jpg" alt="" class="emo-img">
+                        <img src="./image/noimg.jpg" alt="" class="emo-img">
                         <h2 class="emo-name">이모티콘 이름1</h2>
                     </li>
                     <li>
-                        <img src="/static/images/noimg.jpg" alt="" class="emo-img">
+                        <img src="./image/noimg.jpg" alt="" class="emo-img">
                         <h2 class="emo-name">이모티콘 이름2</h2>
                     </li>
                     <li>
-                        <img src="/static/images/noimg.jpg" alt="" class="emo-img">
+                        <img src="./image/noimg.jpg" alt="" class="emo-img">
                         <h2 class="emo-name">이모티콘 이름3</h2>
                     </li>
                     <li>
-                        <img src="/static/images/noimg.jpg" alt="" class="emo-img">
+                        <img src="./image/noimg.jpg" alt="" class="emo-img">
                         <h2 class="emo-name">이모티콘 이름4</h2>
                     </li>
                     <li>
-                        <img src="/static/images/noimg.jpg" alt="" class="emo-img">
+                        <img src="./image/noimg.jpg" alt="" class="emo-img">
                         <h2 class="emo-name">이모티콘 이름5</h2>
                     </li>
                     <li>
-                        <img src="/static/images/noimg.jpg" alt="" class="emo-img">
+                        <img src="./image/noimg.jpg" alt="" class="emo-img">
                         <h2 class="emo-name">이모티콘 이름6</h2>
                     </li>
                     <li>
-                        <img src="/static/images/noimg.jpg" alt="" class="emo-img">
+                        <img src="./image/noimg.jpg" alt="" class="emo-img">
                         <h2 class="emo-name">이모티콘 이름7</h2>
                     </li>
                     <li>
-                        <img src="/static/images/noimg.jpg" alt="" class="emo-img">
+                        <img src="./image/noimg.jpg" alt="" class="emo-img">
                         <h2 class="emo-name">이모티콘 이름8</h2>
                     </li>
                     <li>
-                        <img src="/static/images/noimg.jpg" alt="" class="emo-img">
+                        <img src="./image/noimg.jpg" alt="" class="emo-img">
                         <h2 class="emo-name">이모티콘 이름9</h2>
                     </li>
                     <li>
-                        <img src="/static/images/noimg.jpg" alt="" class="emo-img">
+                        <img src="./image/noimg.jpg" alt="" class="emo-img">
                         <h2 class="emo-name">이모티콘 이름10</h2>
                     </li>
                 </ul>
@@ -103,7 +112,7 @@
                         <h2 class="emo-name">이모티콘 이름1</h2>
                         <p class="author">작가 이름1</p>
                       </div>
-                      <img src="/static/images/noimg.jpg" alt="" class="emo-img">
+                      <img src="./image/noimg.jpg" alt="" class="emo-img">
                   </li>
                   <li>
                       <span class="emo-id">2</span>
@@ -111,7 +120,7 @@
                         <h2 class="emo-name">이모티콘 이름1</h2>
                         <p class="author">작가 이름1</p>
                       </div>
-                      <img src="/static/images/noimg.jpg" alt="" class="emo-img">
+                      <img src="./image/noimg.jpg" alt="" class="emo-img">
                   </li>
                   <li>
                       <span class="emo-id">3</span>
@@ -119,7 +128,7 @@
                         <h2 class="emo-name">이모티콘 이름1</h2>
                         <p class="author">작가 이름1</p>
                       </div>
-                      <img src="/static/images/noimg.jpg" alt="" class="emo-img">
+                      <img src="./image/noimg.jpg" alt="" class="emo-img">
                   </li>
                   <li>
                       <span class="emo-id">4</span>
@@ -127,7 +136,7 @@
                         <h2 class="emo-name">이모티콘 이름1</h2>
                         <p class="author">작가 이름1</p>
                       </div>
-                      <img src="/static/images/noimg.jpg" alt="" class="emo-img">
+                      <img src="./image/noimg.jpg" alt="" class="emo-img">
                   </li>
                   <li>
                       <span class="emo-id">5</span>
@@ -135,7 +144,7 @@
                         <h2 class="emo-name">이모티콘 이름1</h2>
                         <p class="author">작가 이름1</p>
                       </div>
-                      <img src="/static/images/noimg.jpg" alt="" class="emo-img">
+                      <img src="./image/noimg.jpg" alt="" class="emo-img">
                   </li>
                   <li>
                       <span class="emo-id">6</span>
@@ -143,7 +152,7 @@
                         <h2 class="emo-name">이모티콘 이름1</h2>
                         <p class="author">작가 이름1</p>
                       </div>
-                      <img src="/static/images/noimg.jpg" alt="" class="emo-img">
+                      <img src="./image/noimg.jpg" alt="" class="emo-img">
                   </li>
                   <li>
                       <span class="emo-id">7</span>
@@ -151,7 +160,7 @@
                         <h2 class="emo-name">이모티콘 이름1</h2>
                         <p class="author">작가 이름1</p>
                       </div>
-                      <img src="/static/images/noimg.jpg" alt="" class="emo-img">
+                      <img src="./image/noimg.jpg" alt="" class="emo-img">
                   </li>
                   <li>
                       <span class="emo-id">8</span>
@@ -159,7 +168,7 @@
                         <h2 class="emo-name">이모티콘 이름1</h2>
                         <p class="author">작가 이름1</p>
                       </div>
-                      <img src="/static/images/noimg.jpg" alt="" class="emo-img">
+                      <img src="./image/noimg.jpg" alt="" class="emo-img">
                   </li>
                   <li>
                       <span class="emo-id">9</span>
@@ -167,7 +176,7 @@
                         <h2 class="emo-name">이모티콘 이름1</h2>
                         <p class="author">작가 이름1</p>
                       </div>
-                      <img src="/static/images/noimg.jpg" alt="" class="emo-img">
+                      <img src="./image/noimg.jpg" alt="" class="emo-img">
                   </li>
                   <li>
                       <span class="emo-id">10</span>
@@ -175,7 +184,7 @@
                         <h2 class="emo-name">이모티콘 이름1</h2>
                         <p class="author">작가 이름1</p>
                       </div>
-                      <img src="/static/images/noimg.jpg" alt="" class="emo-img">
+                      <img src="./image/noimg.jpg" alt="" class="emo-img">
                   </li>
                 </ul>
             </div>
@@ -202,7 +211,7 @@
             주소: 제주특별자치도 제주시 첨단로 242(영평동) 호스팅사업자: (주)카카오고객센터 1577-3754 메일: help.notice@kakaocorp.com
           </h4>
         </div>
-      </footer>
+      </footer> -->
 
 </body>
 </html>

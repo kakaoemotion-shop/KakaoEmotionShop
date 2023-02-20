@@ -1,0 +1,39 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+body{
+  width: 100%;
+}
+img {
+  border: 0;
+}
+ul,
+li {
+  list-style: none;
+}
+a {
+  text-decoration: none;
+}
+
+
+/* =============== 이모티콘 설정 ================ */
+.emo-img{
+  width: 90px;
+  height: 90px;
+}
+.emo-name{
+  font-size: 14px;
+  font-weight: 200;
+  text-decoration: none;
+}
+.emo-id{
+  font-size: 20px;
+  font-weight: 600;
+  color: brown;
+}
+.author{
+  font-size: 12px;
+  font-weight: 200;
+  color: rgb(91, 91, 91);
+}
