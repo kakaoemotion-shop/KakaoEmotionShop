@@ -9,10 +9,13 @@ spring:
 
   datasource:
     driver-class-name:
-    url: jdbc:mysql://pkh.cksewrsk3guy.ap-northeast-2.rds.amazonaws.com:3306
+    url: jdbc:mysql://pkh.cksewrsk3guy.ap-northeast-2.rds.amazonaws.com:3306/emoticonshop
     username: admin
     password: 1q2w3e4r
 
-  mybatis:
-    mapper-locations:
-      - /mappers/*.xml
+mybatis:
+  mapper-locations:
+    - /mappers/*.xml
+
+file:
+  path: C:\project\KakaoEmotionShop\upload\
