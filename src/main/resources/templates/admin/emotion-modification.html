@@ -52,14 +52,17 @@
               <li>
                 <h2 class="modification-li-title">이모티콘 코드</h2>
                 <input type="text" placeholder="코드를 입력하세요." class="modification-input">
+                <div class="error-message">다시 입력하세요</div>
               </li>
               <li>
                 <h2 class="modification-li-title">이모티콘 이름</h2>
                 <input type="text" placeholder="이름을 입력하세요." class="modification-input">
+                <div class="error-message">다시 입력하세요</div>
               </li>
               <li>
                 <h2 class="modification-li-title">제작사</h2>
                 <input type="text" placeholder="제작사의 이름을 입력하세요." class="modification-input">
+                <div class="error-message">다시 입력하세요</div>
               </li>
               <li>
                 <h2 class="modification-li-title">등록일</h2>
@@ -70,29 +73,33 @@
           </div>
           
           <div class="modification-right">
-            <ul>
-              <li>
-                <img src="/static/images/noimg.jpg" alt="" class="emo-img">
-                <button class="img-modification-btn">이미지 불러오기</button>
-              </li>
-              <li>
-                <img src="/static/images/noimg.jpg" alt="" class="emo-img">
-                <button class="img-modification-btn">이미지 불러오기</button>
-              </li>
-              <li>
-                <img src="/static/images/noimg.jpg" alt="" class="emo-img">
-                <button class="img-modification-btn">이미지 불러오기</button>
-              </li>
-              <li>
-                <img src="/static/images/noimg.jpg" alt="" class="emo-img">
-                <button class="img-modification-btn">이미지 불러오기</button>
-              </li>
-            </ul>
-            <button class="all-img-but">이미지 등록</button>
-            <button class="img-cencel-btn">등록 취소</button>
+            <form class="img-form">
+              <div class="img-container">
+                <input type="file" name="file" class="img-file">
+                <img src="/static/images/noimg.jpg" class="emo-img">
+                <button type="button" class="img-add-button" disabled>이미지 불러오기</button>
+              </div>
+              <div class="img-container">
+                <input type="file" name="file" class="img-file">
+                <img src="/static/images/noimg.jpg" class="emo-img">
+                <button type="button" class="img-add-button" disabled>이미지 불러오기</button>
+              </div>
+              <div class="img-container">
+                <input type="file" name="file" class="img-file">
+                <img src="/static/images/noimg.jpg" class="emo-img">
+                <button type="button" class="img-add-button" disabled>이미지 불러오기</button>
+              </div>
+              <div class="img-container">
+                <input type="file" name="file" class="img-file">
+                <img src="/static/images/noimg.jpg" class="emo-img">
+                <button type="button" class="img-add-button" disabled>이미지 불러오기</button>
+              </div>
+              <div class="button-group">
+                <button type="button" class="img-modification-button" disabled>이미지 등록</button>
+                <button type="button" class="img-cencel-button" disabled>등록 취소</button>
+              </div>
+            </form>
           </div>
-        </div>
-
       </div>
     </div>
 </body>
