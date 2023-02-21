@@ -117,44 +117,7 @@
 
 /* =============== 콘텐츠 부분 ================ */
 .content{
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-
   background-color: #373737;
-}
-
-.guide{
-  position: absolute;
-  left: 50px;
-  top: 226px;
-
-  width: 350px;
-  height: 600px;
-
-  color: white;
-}
-
-.guide-text{
-  margin-top: 40px;
-
-  width: 350px;
-  height: 300px;
-}
-.guide-text h1{
-  font-size: 30px;
-  text-align: center;
-}
-.guide-text h2{
-  font-size: 20px;
-  text-align: center;
-}
-.guide img{
-  margin-left: 60px;
-
-  width: 200px;
-  height: 250px;
-  transform: scaleX(-1);
 }
 
 .modification{
@@ -168,7 +131,7 @@
   background-color: white;
 }
 
-.modification-title{
+.reigster-title{
   position: relative;
   left: 500px;
   top: 0px;
