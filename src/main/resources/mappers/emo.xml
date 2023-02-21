@@ -12,6 +12,7 @@
             emo_name as emoName,
             company,
             emo_date as emoDate
+<!--            emo_style as emoStyle-->
         from
             emo_mst
         where
@@ -43,6 +44,7 @@
             emo_name as emoName,
             company,
             emo_date as emoDate
+<!--            emo_style as emoStyle-->
         from
             emo_mst
         where
