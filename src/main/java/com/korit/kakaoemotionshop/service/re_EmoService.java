@@ -19,7 +19,7 @@ import java.nio.file.Paths;
 import java.util.*;
 
 @Service
-public class EmoService {
+public class re_EmoService {
 
     @Value("${file.path}")
     private String filePath;
@@ -68,9 +68,9 @@ public class EmoService {
            String extension = originFileName.substring(originFileName.lastIndexOf("."));
            String tempFileName = UUID.randomUUID().toString().replaceAll("-","")+extension;
 
-           Path uploadPath = Paths.get(filePath+"/emo/"+tempFileName);
+           Path uploadPath = Paths.get(filePath+"emo/"+tempFileName);
 
-           File f = new File(filePath + "/emo");
+           File f = new File(filePath + "emo");
            if(!f.exists()) {
                f.mkdirs();
            }
