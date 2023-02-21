@@ -1,5 +1,7 @@
 window.onload = () => {
 
+    ComponentEvent.getInstance().addClickEventImgAddButton();
+    ComponentEvent.getInstance().addClickEventRegisterButton();
 }
 
 const emoObj = {
