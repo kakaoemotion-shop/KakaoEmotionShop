@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="/static/css/reset.css">
     <link rel="stylesheet" href="/static/css/index.css">
-    <link rel="stylesheet" href="/static/css/admin/emotion-register.css">
+    <link rel="stylesheet" href="/static/css/admin/emotion_register.css">
 </head>
 <body>
     <header class="header">
@@ -52,48 +52,55 @@
               <li>
                 <h2 class="register-li-title">이모티콘 코드</h2>
                 <input type="text" placeholder="코드를 입력하세요." class="register-input">
+                <div class="error-message"></div>
               </li>
               <li>
                 <h2 class="register-li-title">이모티콘 이름</h2>
                 <input type="text" placeholder="이름을 입력하세요." class="register-input">
+                <div class="error-message"></div>
               </li>
               <li>
                 <h2 class="register-li-title">제작사</h2>
                 <input type="text" placeholder="제작사의 이름을 입력하세요." class="register-input">
+                <div class="error-message"></div>
               </li>
               <li>
                 <h2 class="register-li-title">등록일</h2>
                 <input type="date" placeholder="날짜를 입력하세요." class="register-input">
+                <div class="error-message"></div>
               </li>
             </ul>
             <button class="register-btn">등록</button>
           </div>
           
           <div class="register-right">
-            <ul>
-              <li>
-                <img src="/static/images/noimg.jpg" alt="" class="emo-img">
-                <button class="img-register-btn">이미지 불러오기</button>
-              </li>
-              <li>
-                <img src="/static/images/noimg.jpg" alt="" class="emo-img">
-                <button class="img-register-btn">이미지 불러오기</button>
-              </li>
-              <li>
-                <img src="/static/images/noimg.jpg" alt="" class="emo-img">
-                <button class="img-register-btn">이미지 불러오기</button>
-              </li>
-              <li>
-                <img src="/static/images/noimg.jpg" alt="" class="emo-img">
-                <button class="img-register-btn">이미지 불러오기</button>
-              </li>
-            </ul>
-            <button class="all-img-but">이미지 등록</button>
-            <button class="img-cencel-btn">등록 취소</button>
+            <form class="img-form">
+              <ul>
+                <li>
+                  <input type="file" class="emo-img">
+                  <button class="img-register-btn">이미지 불러오기</button>
+                </li>
+                <li>
+                  <img src="/static/images/noimg.jpg" alt="" class="emo-img">
+                  <button class="img-register-btn">이미지 불러오기</button>
+                </li>
+                <li>
+                  <img src="/static/images/noimg.jpg" alt="" class="emo-img">
+                  <button class="img-register-btn">이미지 불러오기</button>
+                </li>
+                <li>
+                  <img src="/static/images/noimg.jpg" alt="" class="emo-img">
+                  <button class="img-register-btn">이미지 불러오기</button>
+                </li>
+              </ul>
+              <button class="all-img-but">이미지 등록</button>
+              <button class="img-cencel-btn">등록 취소</button>
+          </form>
           </div>
         </div>
 
       </div>
     </div>
+    <script src="/static/js/admin/emo_register.js"></script>
 </body>
 </html>
