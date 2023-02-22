@@ -4,7 +4,9 @@ import com.korit.kakaoemotionshop.entity.EmoImage;
 import com.korit.kakaoemotionshop.entity.EmoMst;
 import com.korit.kakaoemotionshop.exception.CustomValidationException;
 import com.korit.kakaoemotionshop.repository.EmoRepository;
+import com.korit.kakaoemotionshop.web.dto.DeleteReqDto;
 import com.korit.kakaoemotionshop.web.dto.EmoReqDto;
+import com.korit.kakaoemotionshop.web.dto.SearchNumberListDto;
 import com.korit.kakaoemotionshop.web.dto.SearchReqDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -113,4 +115,13 @@ public class EmoService {
             }
         }
     }
+
+    public int getEmoTotalCount(SearchNumberListDto searchNumberListDto){
+        return emoRepository.getEmoTotalCount(searchNumberListDto);
+    }
+
+    public void removeEmos(DeleteReqDto deleteReqDto){
+        emoRepository.deleteEmos(deleteReqDto.getEmoId());
+    }
+
 }
