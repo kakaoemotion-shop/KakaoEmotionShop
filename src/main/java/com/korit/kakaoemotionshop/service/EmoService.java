@@ -19,7 +19,7 @@ import java.nio.file.Paths;
 import java.util.*;
 
 @Service
-public class re_EmoService {
+public class EmoService {
 
     @Value("${file.path}")
     private String filePath;
