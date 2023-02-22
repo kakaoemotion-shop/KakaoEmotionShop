@@ -117,7 +117,7 @@ class SearchApi{
                     <td>${data.emoName}</td>
                     <td>${data.company}</td>
                     <td>${data.emoDate}</td>
-                    <td><a></a><i class="fa-solid fa-square-pen"></i></td>
+                    <td><a href="/templates/admin/emotion_modification.html?emoCode=${data.emoCode}"><i class="fa-solid fa-square-pen"></i></td>
                 </tr>
             `
         })    

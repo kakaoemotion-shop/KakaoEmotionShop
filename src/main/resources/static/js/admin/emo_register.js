@@ -42,7 +42,7 @@ class EmoRegisterApi {
             },
             error: error => {
                 console.log(error);
-                // EmoRegisterService.getInstance().setErrors(error.responseJSON.data);
+                EmoRegisterService.getInstance().setErrors(error.responseJSON.data);
             }
         });
 
@@ -145,11 +145,18 @@ class ComponentEvent {
             }
 
             if(confirm("이미지를 등록하시겠습니까?")) {
-                const imgAddButton = document.querySelector(".img-add-button");
-                const imgCancelButton = document.querySelector(".img-cancel-button");
+                const imgAddButtons = document.querySelectorAll(".img-add-button");
+                const imgCancelButton = document.querySelector(".img-cencel-button");
 
-                imgAddButton.disabled = false;
                 imgCancelButton.disabled = false;
+
+                imgAddButtons.forEach((button, index) => {
+                    button.disabled = false;
+                    const imgFiles = document.querySelectorAll(".img-file");
+                    button.onclick = () => {
+                        imgFiles[index].click();
+                    }
+                })
             }else{
                 location.reload();
             }
@@ -158,7 +165,7 @@ class ComponentEvent {
 
     addClickEventImgAddButton() {
         const imgFile = document.querySelector(".img-file")
-        const addButton = document.querySelector(".img-add-button")
+        const addButton = document.querySelectorAll(".img-add-button")
 
         addButton.onclick = () => {
             imgFile.click();
@@ -187,7 +194,7 @@ class ComponentEvent {
                 const imgRegisterButton = document.querySelector(".img-register-button");
                 imgRegisterButton.disabled = false;
 
-                ImgFileService.getInstance().getImgPreview();
+//                ImgFileService.getInstance().getImgPreview();
                 imgFile.value = null;
             }
         }
