@@ -197,6 +197,9 @@
 .new-list li:hover{
   box-shadow: 2px 2px 8px 4px #dbdbdb;
 }
+
+.index-link{
+}
 .new-list li img{
   display: flex;
   justify-content: center;
@@ -280,6 +283,9 @@
 }
 .hot-list li:hover{
   box-shadow: 2px 2px 8px 4px #dbdbdb;
+}
+.index-hot-link{
+  display: flex;
 }
 .hot-list li span{
   margin: 20px;

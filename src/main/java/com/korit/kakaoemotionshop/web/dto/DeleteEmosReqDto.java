@@ -6,5 +6,5 @@ import java.util.List;
 
 @Data
 public class DeleteEmosReqDto {
-    private List<Integer> userIds;
+    private List<Integer> emoId;
 }

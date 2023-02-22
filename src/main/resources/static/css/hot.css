@@ -148,7 +148,7 @@
 }
 .hot-info li{
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
 
   margin-top: 20px;
@@ -157,6 +157,10 @@
 
   border-bottom: 1px solid #dbdbdb;
   background-color: white;
+}
+.hot-link{
+  display: flex;
+  align-items: center;
 }
 .emo-id{
   display: flex;

@@ -13,6 +13,7 @@ package com.korit.kakaoemotionshop.repository;
 import com.korit.kakaoemotionshop.entity.EmoImage;
 import com.korit.kakaoemotionshop.entity.EmoMst;
 import com.korit.kakaoemotionshop.web.dto.EmoReqDto;
+import com.korit.kakaoemotionshop.web.dto.SearchNumberListDto;
 import com.korit.kakaoemotionshop.web.dto.SearchReqDto;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -21,10 +22,13 @@ import java.util.List;
 @Mapper
 public interface EmoRepository {
     public List<EmoMst> searchEmo(SearchReqDto searchReqDto);
+    public int getEmoTotalCount(SearchNumberListDto searchNumberListDto);
+
     public int saveEmo(EmoReqDto emoReqDto);
-    public EmoMst findEmoByEmoCode(String EmoCode);
+    public EmoMst findEmoByEmoCode(String emoCode);
     public int updateEmoByEmoCode(EmoReqDto emoReqDto);
-    public int deleteEmo(String EmoCode);
+    public int deleteEmo(String emoCode);
+    public int deleteEmos(List<Integer> emoId);
     public int registerEmoImages(List<EmoImage> emoImages);
     public List<EmoImage> findEmoImageAll(String emoCode);
     public int deleteEmoImage(int emoId);

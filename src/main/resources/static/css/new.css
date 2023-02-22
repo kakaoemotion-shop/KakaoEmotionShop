@@ -152,6 +152,10 @@
   background-color: white;
 }
 
+.new-link{
+  display: flex;
+}
+
 .new-info-title{
   display: flex;
   flex-direction: column;

@@ -4,7 +4,9 @@ import com.korit.kakaoemotionshop.entity.EmoImage;
 import com.korit.kakaoemotionshop.entity.EmoMst;
 import com.korit.kakaoemotionshop.exception.CustomValidationException;
 import com.korit.kakaoemotionshop.repository.EmoRepository;
+import com.korit.kakaoemotionshop.web.dto.DeleteEmosReqDto;
 import com.korit.kakaoemotionshop.web.dto.EmoReqDto;
+import com.korit.kakaoemotionshop.web.dto.SearchNumberListDto;
 import com.korit.kakaoemotionshop.web.dto.SearchReqDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -30,6 +32,9 @@ public class EmoService {
         searchReqDto.setIndex();
         return emoRepository.searchEmo(searchReqDto);
     }
+    public int getEmoTotalCount(SearchNumberListDto searchNumberListDto){
+        return emoRepository.getEmoTotalCount(searchNumberListDto);
+    }
 
     public void registerEmo(EmoReqDto emoReqDto){
         duplicateEmoCode(emoReqDto.getEmoCode());
@@ -52,6 +57,9 @@ public class EmoService {
 
     public void removeEmo(String emoCode) {
         emoRepository.deleteEmo(emoCode);
+    }
+    public void removeEmos(DeleteEmosReqDto deleteEmosReqDto) {
+        emoRepository.deleteEmos(deleteEmosReqDto.getEmoId());
     }
 
     public void registerEmoImages(String emoCode, List<MultipartFile> files) {

@@ -5,10 +5,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>카카오 이모티콘샵</title>
+    <script src="https://code.jquery.com/jquery-latest.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="/static/css/reset.css">
     <link rel="stylesheet" href="/static/css/index.css">
     <link rel="stylesheet" href="/static/css/admin/emotion-search.css">
+    
 </head>
 <body>
     <header class="header">
@@ -70,14 +72,13 @@
                     <tbody>
                         <tr>
                             <td><input type="checkbox" class="delete-checkbox"></td>
-                            <td>001</td>
-                            <td>code-01</td>
-                            <td>이모티콘 이름01</td>
-                            <td>제작사 이름</td>
-                            <td>2023-02-18</td>
-                            <td><a></a><i class="fa-solid fa-square-pen" ></i></td>
+                            <td>${data.emoId}</td>
+                            <td>${data.emoCode}</td>
+                            <td>${data.emoName}</td>
+                            <td>${data.company}</td>
+                            <td>${data.emoDate}</td>
+                            <td><a></a><i class="fa-solid fa-square-pen"></i></td>
                         </tr>
-                        
                     </tbody>
                 </table>
             </div>
@@ -91,9 +92,10 @@
                     <a href=""><li>4</li></a>
                     <a href=""><li>5</li></a>
                 </ul>
-                <a href="" class="disabled">다음</a>
+                <a href="" class="">다음</a>
             </div>
         </div>
     </div>
+    <script src="/static/js/search/search.js"></script>
 </body>
 </html>
