@@ -1,4 +1,4 @@
-package com.korit.kakaoemotionshop.web.api;
+package com.korit.kakaoemotionshop.web.api.admin;
 
 import com.korit.kakaoemotionshop.aop.annotation.ParamsAspect;
 import com.korit.kakaoemotionshop.aop.annotation.ValidAspect;
