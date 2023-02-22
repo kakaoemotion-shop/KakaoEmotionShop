@@ -1,4 +1,12 @@
-onst bookObj = {
+BookRegisterService.getInstance().loadCategories();
+
+    ComponentEvent.getInstance().addClickEventRegisterButton();
+    ComponentEvent.getInstance().addClickEventImgAddButton();
+    ComponentEvent.getInstance().addChangeEventImgFile();
+    ComponentEvent.getInstance().addClickEventImgRegisterButton();
+    ComponentEvent.getInstance().addClickEventImgCancelButton();
+
+const bookObj = {
     bookCode: "",
     bookName: "",
     author: "",

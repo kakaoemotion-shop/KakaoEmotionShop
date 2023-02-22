@@ -1,6 +1,7 @@
 package com.korit.kakaoemotionshop.config;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.Resource;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
@@ -11,6 +12,7 @@ import java.io.IOException;
 import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
 
+@Configuration
 public class WebMvcConfig implements WebMvcConfigurer {
 
     @Value("${file.path}")

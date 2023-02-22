@@ -1,7 +1,9 @@
 window.onload = () => {
-
-    ComponentEvent.getInstance().addClickEventImgAddButton();
     ComponentEvent.getInstance().addClickEventRegisterButton();
+    ComponentEvent.getInstance().addClickEventImgAddButton();
+    ComponentEvent.getInstance().addChangeEventImgFile();
+    ComponentEvent.getInstance().addClickEventImgRegitserButton();
+    ComponentEvent.getInstance().addClickEventImgCencelButton();
 }
 
 const emoObj = {
@@ -29,7 +31,7 @@ class EmoRegisterApi{
 
         $.ajax({
             async: false,
-            type: "",
+            type: "post",
             url: "http://localhost:8000/api/admin/emo",
             contentType: "application/json",
             data: JSON.stringify(emoObj),
@@ -49,15 +51,15 @@ class EmoRegisterApi{
     registerImg() {
         $.ajax({
             async: false,
-            type: "",
-            url: "http://localhost:8000/api/admin/emo/${emoObj.emoCode}/images",
+            type: "post",
+            url: `http://localhost:8000/api/admin/emo/${fileObj.emoCode}/images`,
             encType: "multipart/form-data",
             contentType: false,
             processData: false,
             data: fileObj.formData,
             dataType: "json",
             success: response => {
-                alert("이미티콘 이미지 등록 완료!");
+                alert("이모티콘 이미지 등록 완료!");
                 location.reload();
             },
             error: error => {
@@ -121,7 +123,7 @@ class ImgFileService {
         const emoImg = document.querySelectorAll(".emo-img");
         const reader = new FileReader();
 
-        reader.onload = e => {
+        reader.onload = (e) => {
             emoImg.src = e.target.result;
         }
 
@@ -165,6 +167,60 @@ class ComponentEvent {
     }
 
     addClickEventImgAddButton() {
-        const imgFile = document.querySelector(".");
+        const imgFile = document.querySelector(".img-file");
+        const addButton = document.querySelector(".img-add-button");
+        
+        addButton.onclick = () => {
+            imgFile.click();
+        }
     }
+
+    addChangeEventImgFile() {
+        const imgFile = document.querySelector(".img-file");
+
+        imgFile.onchange = () => {
+            const formData = new FormData(document.querySelector(".img-form"));
+            let changeFlag = false;
+
+            fileObj.files.pop();
+
+            formData.forEach(value => {
+                console.log(value);
+
+                if(value.size != 0) {
+                    fileObj.files.push(value);
+                    changeFlag = true;
+                }
+            });
+
+            if(changeFlag) {
+                const imgRegisterButton = document.querySelector(".img-register-button");
+                imgRegisterButton.disabled = false;
+
+                ImgFileService.getInstance().getImgPreview();
+                imgFile.value = null;
+            }
+        }
+    }
+
+    addClickEventImgRegitserButton() {
+        const imgRegisterButton = document.querySelector(".img-register-button");
+
+        imgRegisterButton.onclick = () => {
+            fileObj.formData.append("files", fileObj.files[0]);
+            EmoRegisterApi.getInstance().registerImg();
+        }
+    }
+
+    addClickEventImgCencelButton() {
+        const imgCencelButton = document.querySelector(".img-cencel-button");
+
+        imgCencelButton.onclick = () => {
+            if(confirm("정말로 이미지 등록을 취소하시겠습니까?")) {
+                location.reload();
+            }
+        }
+    }
+
 }
+
