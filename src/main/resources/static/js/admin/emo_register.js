@@ -145,11 +145,18 @@ class ComponentEvent {
             }
 
             if(confirm("이미지를 등록하시겠습니까?")) {
-                const imgAddButton = document.querySelector(".img-add-button");
+                const imgAddButtons = document.querySelectorAll(".img-add-button");
                 const imgCancelButton = document.querySelector(".img-cencel-button");
 
-                imgAddButton.disabled = false;
                 imgCancelButton.disabled = false;
+
+                imgAddButtons.forEach((button, index) => {
+                    button.disabled = false;
+                    const imgFiles = document.querySelectorAll(".img-file");
+                    button.onclick = () => {
+                        imgFiles[index].click();
+                    }
+                })
             }else{
                 location.reload();
             }
@@ -158,7 +165,7 @@ class ComponentEvent {
 
     addClickEventImgAddButton() {
         const imgFile = document.querySelector(".img-file")
-        const addButton = document.querySelector(".img-add-button")
+        const addButton = document.querySelectorAll(".img-add-button")
 
         addButton.onclick = () => {
             imgFile.click();
@@ -173,6 +180,7 @@ class ComponentEvent {
             let changeFlag = false;
 
             fileObj.files.pop();
+            
 
             formData.forEach(value => {
                 console.log(value);
