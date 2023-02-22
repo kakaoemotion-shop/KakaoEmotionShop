@@ -42,7 +42,7 @@ class EmoRegisterApi {
             },
             error: error => {
                 console.log(error);
-                // EmoRegisterService.getInstance().setErrors(error.responseJSON.data);
+                EmoRegisterService.getInstance().setErrors(error.responseJSON.data);
             }
         });
 
@@ -146,7 +146,7 @@ class ComponentEvent {
 
             if(confirm("이미지를 등록하시겠습니까?")) {
                 const imgAddButton = document.querySelector(".img-add-button");
-                const imgCancelButton = document.querySelector(".img-cancel-button");
+                const imgCancelButton = document.querySelector(".img-cencel-button");
 
                 imgAddButton.disabled = false;
                 imgCancelButton.disabled = false;
@@ -187,7 +187,7 @@ class ComponentEvent {
                 const imgRegisterButton = document.querySelector(".img-register-button");
                 imgRegisterButton.disabled = false;
 
-                ImgFileService.getInstance().getImgPreview();
+//                ImgFileService.getInstance().getImgPreview();
                 imgFile.value = null;
             }
         }
