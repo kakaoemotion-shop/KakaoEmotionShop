@@ -33,7 +33,7 @@ class EmoRegisterApi {
         $.ajax({
             async: false,
             type: "post",
-            url: "http://127.0.0.1:5500/api/admin/emo",
+            url: "http://127.0.0.1:8000/api/admin/emo",
             contentType: "application/json",
             data: JSON.stringify(emoObj),
             dataType: "json",
@@ -54,7 +54,7 @@ class EmoRegisterApi {
         $.ajax({
             async: false,
             type: "post",
-            url: `http://127.0.0.1:5500/api/admin/emo/${emoObj.emoCode}/images`,
+            url: `http://127.0.0.1:8000/api/admin/emo/${emoObj.emoCode}/images`,
             encType: "multipart/form-data",
             contentType: false,
             processData: false,
