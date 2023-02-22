@@ -11,7 +11,7 @@ window.onload = () => {
 let emoSearchObj = {
     page : 1,
     searchValue : "",
-    order : "emoId",
+    order : "",
     limit: "Y",
     count: 20
 }
@@ -68,9 +68,7 @@ class SearchService{
 
         return returnData
     }
-
-    // /emo/{emoCode}
-    deleteBooks(deleteArray){
+    deleteEmos(deleteArray){
         let returnData = false;
         $.ajax({
             contentType: "application/json",
@@ -80,7 +78,7 @@ class SearchService{
                 {emoId: deleteArray}
             ),
             dataType:"json",
-            url: `http://127.0.0.1:8000/api/admin/emo/${data.emoCode}`,
+            url: "http://localhost:8000/api/admin/emos",
             success: response => {
                 console.log(response)
                 returnData = true
@@ -112,7 +110,7 @@ class SearchApi{
             emoListBody.innerHTML += `
                 <tr>
                     <td><input type="checkbox" class="delete-checkbox"></td>
-                    <td>${data.emoId}</td>
+                    <td class="emo-id">${data.emoId}</td>
                     <td>${data.emoCode}</td>
                     <td>${data.emoName}</td>
                     <td>${data.company}</td>
@@ -226,11 +224,11 @@ class ComponentEvent {
                 deleteCheckboxs.forEach((deleteCheckboxs, index) => {
                     if(deleteCheckboxs.checked){
                         const emoId = document.querySelectorAll(".emo-id")
-                        deleteArray.push(emoId[index])
+                        deleteArray.push(emoId[index].textContent)
                     }
                 })
     
-                BookService.getInstance().removeBooks(deleteArray)
+                SearchService.getInstance().deleteEmos(deleteArray)
             }
         }
 

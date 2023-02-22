@@ -22,4 +22,5 @@ public class KakaoEmoController {
     public String detailpage() {
         return "kakaopage/detailpage";
     }
+
 }
