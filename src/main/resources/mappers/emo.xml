@@ -7,41 +7,47 @@
     <select id="searchEmo" parameterType="com.korit.kakaoemotionshop.web.dto.SearchReqDto"
             resultType="com.korit.kakaoemotionshop.entity.EmoMst">
         select
-            emo_id as emoId,
-            emo_code as emoCode,
-            emo_name as emoName,
-            company,
-            emo_date as emoDate
+            em.emo_id as emoId,
+            em.emo_code as emoCode,
+            em.emo_name as emoName,
+            em.company,
+            em.emo_date as emoDate
+            el.like_id,
+            el.emo_id,
+            el.user_id
+            
         from
             emo_mst
+            left outer join emo_like el on(el.emo_id = em.emo_id and el.user_id = #{userId})
         where
             1 = 1
         <if test = "searchValue != null">
             and (
-                emo_name like concat('%', #{searchValue}, '%')
-                or company like concat('%', #{searchValue}, '%')
+                em.emo_name like concat('%', #{searchValue}, '%')
+            or  em.company like concat('%', #{searchValue}, '%')
             )
         </if>
+        
 
         order by
         <choose>
-             <when test = 'order == "emoName"'>emo_name,</when>
-             <when test = 'order == "company"'>company,</when>
-             <when test = 'order == "dateAsc"'>emo_date,</when>
-             <when test = 'order == "dataDesc"'>emo_date desc,</when>
+             <when test = 'order == "emoName"'>em.emo_name,</when>
+             <when test = 'order == "company"'>em.company,</when>
+             <when test = 'order == "dateAsc"'>em.emo_date,</when>
+             <when test = 'order == "dataDesc"'>em.emo_date desc,</when>
         </choose>
-        emo_id
+        em.emo_id
         <if test = 'limit == "Y"'>
             limit #{index}, #{count}
         </if>
     </select>
     <select id="getEmoTotalCount" parameterType="com.korit.kakaoemotionshop.web.dto.SearchNumberListDto" resultType="integer">
         select
-        count(*)
+            count(*)
         from
-        emo_mst
+            emo_mst
         where
-        1 = 1
+            1 = 1
         <if test='searchValue != null and searchValue !=""'>
             and   (
             emo_name like CONCAT('%', #{searchValue}, '%')
