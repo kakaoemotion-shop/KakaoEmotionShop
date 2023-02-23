@@ -5,11 +5,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>카카오 이모티콘샵</title>
+    <script src="https://code.jquery.com/jquery-latest.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="/static/css/reset.css">
     <link rel="stylesheet" href="/static/css/index.css">
     <link rel="stylesheet" href="/static/css/search.css">
-    <link rel="stylesheet" href="/static/css/search_content.css">
+    <link rel="stylesheet" href="/static/css/search_page.css">
 </head>
 <body>
     <header class="header">
@@ -55,10 +56,10 @@
                 <h2>검색 결과</h2>
                 <p>8</p>
             </div>
-            <ul>
+            <ul class="search-flex">
                 <li>
                     <div class="emotion-tilte">
-                        <a>
+                        <a class="search-link" href="">
                             <h3>이모티콘 이름1</h3>
                             <h4>제작사1</h4>
                             <button class="like-button">
@@ -66,7 +67,7 @@
                             </button>
                         </a>
                     </div>
-                    <a href="">
+                    <a class="emotion-img-link" href="" >
                         <div class="emotion-view-img">
                             <img src="/static/images/noimg.jpg" alt="">
                         </div>
@@ -74,13 +75,15 @@
                 </li>
                 <li>
                     <div class="emotion-tilte">
-                        <h3>이모티콘 이름2</h3>
-                        <h4>제작사2</h4>
-                        <button class="like-button">
-                            <i class="fa-regular fa-heart"></i>
-                        </button>
+                        <a class="search-link" href="">
+                            <h3>이모티콘 이름1</h3>
+                            <h4>제작사1</h4>
+                            <button class="like-button">
+                                <i class="fa-regular fa-heart"></i>
+                            </button>
+                        </a>
                     </div>
-                    <a href="" class="emotion-view">
+                    <a class="emotion-img-link" href="" >
                         <div class="emotion-view-img">
                             <img src="/static/images/noimg.jpg" alt="">
                         </div>
@@ -88,13 +91,15 @@
                 </li>
                 <li>
                     <div class="emotion-tilte">
-                        <h3>이모티콘 이름3</h3>
-                        <h4>제작사3</h4>
-                        <button class="like-button">
-                            <i class="fa-regular fa-heart"></i>
-                        </button>
+                        <a class="search-link" href="">
+                            <h3>이모티콘 이름1</h3>
+                            <h4>제작사1</h4>
+                            <button class="like-button">
+                                <i class="fa-regular fa-heart"></i>
+                            </button>
+                        </a>
                     </div>
-                    <a href="" class="emotion-view">
+                    <a class="emotion-img-link"href="" >
                         <div class="emotion-view-img">
                             <img src="/static/images/noimg.jpg" alt="">
                         </div>
@@ -102,13 +107,15 @@
                 </li>
                 <li>
                     <div class="emotion-tilte">
-                        <h3>이모티콘 이름4</h3>
-                        <h4>제작사4</h4>
-                        <button class="like-button">
-                            <i class="fa-regular fa-heart"></i>
-                        </button>
+                        <a class="search-link" href="">
+                            <h3>이모티콘 이름1</h3>
+                            <h4>제작사1</h4>
+                            <button class="like-button">
+                                <i class="fa-regular fa-heart"></i>
+                            </button>
+                        </a>
                     </div>
-                    <a href="" class="emotion-view">
+                    <a class="emotion-img-link" href="" >
                         <div class="emotion-view-img">
                             <img src="/static/images/noimg.jpg" alt="">
                         </div>
@@ -116,13 +123,15 @@
                 </li>
                 <li>
                     <div class="emotion-tilte">
-                        <h3>이모티콘 이름5</h3>
-                        <h4>제작사5</h4>
-                        <button class="like-button">
-                            <i class="fa-regular fa-heart"></i>
-                        </button>
+                        <a class="search-link" href="">
+                            <h3>이모티콘 이름1</h3>
+                            <h4>제작사1</h4>
+                            <button class="like-button">
+                                <i class="fa-regular fa-heart"></i>
+                            </button>
+                        </a>
                     </div>
-                    <a href="" class="emotion-view">
+                    <a class="emotion-img-link" href="" >
                         <div class="emotion-view-img">
                             <img src="/static/images/noimg.jpg" alt="">
                         </div>
@@ -130,13 +139,15 @@
                 </li>
                 <li>
                     <div class="emotion-tilte">
-                        <h3>이모티콘 이름6</h3>
-                        <h4>제작사6</h4>
-                        <button class="like-button">
-                            <i class="fa-regular fa-heart"></i>
-                        </button>
+                        <a class="search-link" href="">
+                            <h3>이모티콘 이름1</h3>
+                            <h4>제작사1</h4>
+                            <button class="like-button">
+                                <i class="fa-regular fa-heart"></i>
+                            </button>
+                        </a>
                     </div>
-                    <a href="" class="emotion-view">
+                    <a class="emotion-img-link" href="" >
                         <div class="emotion-view-img">
                             <img src="/static/images/noimg.jpg" alt="">
                         </div>
@@ -144,13 +155,15 @@
                 </li>
                 <li>
                     <div class="emotion-tilte">
-                        <h3>이모티콘 이름7</h3>
-                        <h4>제작사7</h4>
-                        <button class="like-button">
-                            <i class="fa-regular fa-heart"></i>
-                        </button>
+                        <a class="search-link" href="">
+                            <h3>이모티콘 이름1</h3>
+                            <h4>제작사1</h4>
+                            <button class="like-button">
+                                <i class="fa-regular fa-heart"></i>
+                            </button>
+                        </a>
                     </div>
-                    <a href="" class="emotion-view">
+                    <a class="emotion-img-link" href="" >
                         <div class="emotion-view-img">
                             <img src="/static/images/noimg.jpg" alt="">
                         </div>
@@ -158,13 +171,15 @@
                 </li>
                 <li>
                     <div class="emotion-tilte">
-                        <h3>이모티콘 이름8</h3>
-                        <h4>제작사8</h4>
-                        <button class="like-button">
-                            <i class="fa-regular fa-heart"></i>
-                        </button>
+                        <a class="search-link" href="">
+                            <h3>이모티콘 이름1</h3>
+                            <h4>제작사1</h4>
+                            <button class="like-button">
+                                <i class="fa-regular fa-heart"></i>
+                            </button>
+                        </a>
                     </div>
-                    <a href="" class="emotion-view">
+                    <a class="emotion-img-link" href="" >
                         <div class="emotion-view-img">
                             <img src="/static/images/noimg.jpg" alt="">
                         </div>
@@ -195,6 +210,6 @@
           </h4>
         </div>
       </footer>
-
+      <script src="/static/js/search/search.js"></script>
 </body>
 </html>

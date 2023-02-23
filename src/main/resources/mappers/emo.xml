@@ -35,20 +35,6 @@
             limit #{index}, #{count}
         </if>
     </select>
-    
-    <select id="userSearchEmo"
-            parameterType="com.korit.kakaoemotionshop.web.dto.SearchEmoReqDto"
-            resultType="com.korit.kakaoemotionshop.entity.EmoMst">
-        select
-            emo_id,
-            emo_code,
-            emo_name,
-            company,
-            emo_date
-        from
-            emo_mst em
-
-    </select>
 
     <select id="findEmoByEmoCode" resultType="com.korit.kakaoemotionshop.entity.EmoMst">
         select
