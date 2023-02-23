@@ -21,7 +21,7 @@ const fileObj = {
 class EmoRegisterApi {
     static #instance = null;
     static getInstance() {
-        if(this.#instance == null) {
+        if (this.#instance == null) {
             this.#instance = new EmoRegisterApi();
         }
         return this.#instance;
@@ -74,8 +74,8 @@ class EmoRegisterApi {
 class EmoRegisterService {
     static #instance = null;
     static getInstance() {
-        if(this.instance == null) {
-        this.#instance = new EmoRegisterService();
+        if (this.instance == null) {
+            this.#instance = new EmoRegisterService();
         }
         return this.#instance;
     }
@@ -94,13 +94,13 @@ class EmoRegisterService {
         this.clearErrors();
 
         Object.keys(errors).forEach(key => {
-            if(key == "emoCode") {
+            if (key == "emoCode") {
                 errorMessages[0].innerHTML = errors[key];
-            }else if(key == "emoName") {
+            } else if (key == "emoName") {
                 errorMessages[1].innerHTML = errors[key];
-            }else if(key == "company") {
+            } else if (key == "company") {
                 errorMessages[2].innerHTML = errors[key];
-            }else if(key == "emoDate") {
+            } else if (key == "emoDate") {
                 errorMessages[3].innerHTML = errors[key];
             }
         })
@@ -117,7 +117,7 @@ class EmoRegisterService {
 class ImgFileService {
     static #instance = null;
     static getInstance() {
-        if(this.#instance == null) {
+        if (this.#instance == null) {
             this.#instance = new ImgFileService();
         }
         return this.#instance;
@@ -127,7 +127,7 @@ class ImgFileService {
 class ComponentEvent {
     static #instance = null;
     static getInstance() {
-        if(this.#instance == null) {
+        if (this.#instance == null) {
             this.#instance = new ComponentEvent();
         }
         return this.#instance;
@@ -140,11 +140,11 @@ class ComponentEvent {
             EmoRegisterService.getInstance().setEmoObjValues();
             const successFlag = EmoRegisterApi.getInstance().registerEmo();
 
-            if(!successFlag) {
+            if (!successFlag) {
                 return;
             }
 
-            if(confirm("이미지를 등록하시겠습니까?")) {
+            if (confirm("이미지를 등록하시겠습니까?")) {
                 const imgAddButtons = document.querySelectorAll(".img-add-button");
                 const imgCancelButton = document.querySelector(".img-cencel-button");
 
@@ -157,7 +157,7 @@ class ComponentEvent {
                         imgFiles[index].click();
                     }
                 })
-            }else{
+            } else {
                 location.reload();
             }
         }
@@ -174,37 +174,46 @@ class ComponentEvent {
 
     addChangeEventImgFile() {
         const imgFile = document.querySelector(".img-file");
-
+      
         imgFile.onchange = () => {
-            const formData = new FormData(document.querySelector(".img-form"));
-            let changeFlag = false;
-
-            fileObj.files.pop();
-
-            formData.forEach(value => {
-                console.log(value);
-
-                if(value.size != 0) {
-                    fileObj.files.push(value);
-                    changeFlag = true;
-                }
-            });
-
-            if(changeFlag) {
-                const imgRegisterButton = document.querySelector(".img-register-button");
-                imgRegisterButton.disabled = false;
-
-//                ImgFileService.getInstance().getImgPreview();
-                imgFile.value = null;
+          const formData = new FormData(document.querySelector(".img-form"));
+          let changeFlag = false;
+      
+          fileObj.files.pop();
+      
+          formData.forEach(value => {
+            console.log(value);
+      
+            if (value.size != 0) {
+              fileObj.files.push(value);
+              changeFlag = true;
             }
+          });
+      
+          if (changeFlag) {
+            const imgRegisterButton = document.querySelector(".img-register-button");
+            imgRegisterButton.disabled = false;
+      
+            // 파일 이미지 미리보기 추가
+            const reader = new FileReader();
+            reader.onload = () => {
+              const imgPreview = document.querySelector(".img-preview");
+              imgPreview.src = reader.result;
+            };
+            reader.readAsDataURL(imgFile.files[0]);
+      
+            // 수정된 부분
+            ImgFileService.getInstance().getImgFile(); 
+            imgFile.value = null;
+          }
         }
-    }
+      }
 
     addClickEventImgRegisterButton() {
         const imgRegisterButton = document.querySelector(".img-register-button");
 
         imgRegisterButton.onclick = () => {
-            fileObj.formData.append("files",fileObj.files[0]);
+            fileObj.formData.append("files", fileObj.files[0]);
 
             EmoRegisterApi.getInstance().registerImg();
         }
@@ -214,7 +223,7 @@ class ComponentEvent {
         const imgCancelButton = document.querySelector(".img-cencel-button");
 
         imgCancelButton.onclick = () => {
-            if(confirm("정말로 이미지 등록을 취소하시겠습니까?")) {
+            if (confirm("정말로 이미지 등록을 취소하시겠습니까?")) {
                 location.reload();
             }
         }

@@ -9,9 +9,8 @@
 .header-top{
   width: 100%;
   height: 55px;
-  
+
   background-color: white;
-  position: fixed;
 }
 
 .toggle-button{
@@ -198,8 +197,7 @@
   box-shadow: 2px 2px 8px 4px #dbdbdb;
 }
 
-.index-link{
-}
+/* .index-link{} */
 .new-list li img{
   display: flex;
   justify-content: center;

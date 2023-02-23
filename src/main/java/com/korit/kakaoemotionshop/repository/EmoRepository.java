@@ -33,4 +33,5 @@ public interface EmoRepository {
     public List<EmoImage> findEmoImageAll(String emoCode);
     public int deleteEmoImage(int emoId);
     public EmoImage findEmoImageByImageId(int imageId);
+
 }
