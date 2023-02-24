@@ -1,6 +1,6 @@
 window.onload = () => {
     ComponentEvent.getInstance().addClickEventRegisterButton();
-    ComponentEvent.getInstance().addClickEventImgAddButton();
+//    ComponentEvent.getInstance().addClickEventImgAddButton();
     ComponentEvent.getInstance().addChangeEventImgFile();
     ComponentEvent.getInstance().addClickEventImgRegisterButton();
     ComponentEvent.getInstance().addClickEventImgCancelButton();
@@ -17,6 +17,13 @@ const fileObj = {
     files: new Array(),
     formData: new FormData()
 }
+
+//const imgObj = {
+//    img01: "",
+//    img02: "",
+//    img03: "",
+//    img04: ""
+//}
 
 class EmoRegisterApi {
     static #instance = null;
@@ -112,17 +119,40 @@ class EmoRegisterService {
             error.innerHTML = "";
         });
     }
+
+//    setImgObjValues() {
+//            const registerImgInputs = document.querySelectorAll(".img-file");
+//
+//            imgObj.img01 = registerImgInputs[0].value;
+//            imgObj.img02 = registerImgInputs[1].value;
+//            imgObj.img03 = registerImgInputs[2].value;
+//            imgObj.img04 = registerImgInputs[3].value;
+//    }
 }
 
-class ImgFileService {
-    static #instance = null;
-    static getInstance() {
-        if(this.#instance == null) {
-            this.#instance = new ImgFileService();
-        }
-        return this.#instance;
-    }
-}
+//class ImgFileService {
+//  static #instance = null;
+//
+//  static getInstance() {
+//    if (this.#instance == null) {
+//      this.#instance = new ImgFileService();
+//    }
+//    return this.#instance;
+//  }
+//
+//  getImgPreview() {
+//    const emoImgs = document.querySelectorAll(".emo-img");
+//    const reader = new FileReader();
+//
+//    emoImgs.forEach((emoImg, index) => {
+//      reader.onload = (e) => {
+//        emoImg.src = e.target.result;
+//      };
+//
+//      reader.readAsDataURL(fileObj.files[index]);
+//    });
+//  }
+//}
 
 class ComponentEvent {
     static #instance = null;
@@ -163,42 +193,15 @@ class ComponentEvent {
         }
     }
 
-    addClickEventImgAddButton() {
-        const imgFile = document.querySelector(".img-file")
-        const addButton = document.querySelectorAll(".img-add-button")
-
-        addButton.onclick = () => {
-            imgFile.click();
-        }
-    }
-
-//    addChangeEventImgFile() {
-//        const imgFiles = document.querySelectorAll(".img-file");
+//    addClickEventImgAddButton() {
+//        const imgFile = document.querySelector(".img-file")
+//        const addButton = document.querySelectorAll(".img-add-button")
 //
-//        imgFiles.onchange = () => {
-//            const formData = new FormData(document.querySelector(".img-form"));
-//            let changeFlag = false;
-//
-//            fileObj.files.pop();
-//
-//
-//            formData.forEach(value => {
-//                console.log(value);
-//
-//                if(value.size != 0) {
-//                    fileObj.files.push(value);
-//                    changeFlag = true;
-//                }
-//            });
-//
-//            if(changeFlag) {
-//                const imgRegisterButton = document.querySelector(".img-register-button");
-//                imgRegisterButton.disabled = false;
-//
-////                ImgFileService.getInstance().getImgPreview();
-//                imgFiles.value = null;
-//            }
+//        addButton.onclick = () => {
+//            imgFile.click();
 //        }
+//    }
+
         addChangeEventImgFile() {
             const imgFiles = document.querySelectorAll(".img-file");
 
@@ -207,11 +210,11 @@ class ComponentEvent {
                     const formData = new FormData(document.querySelector(".img-form"));
                     let changeFlag = false;
 
-                    fileObj.files.pop();
+//                    fileObj.files.pop();
 
                     formData.forEach((value, key) => {
                         console.log(value);
-                        console.log(key)
+                        console.log(key);
 
                         if(value.size != 0) {
                             fileObj.files.push(imgFile.value);
@@ -236,8 +239,15 @@ class ComponentEvent {
         const imgRegisterButton = document.querySelector(".img-register-button");
 
         imgRegisterButton.onclick = () => {
-            fileObj.formData.append("files",fileObj.files[0]);
+//            fileObj.formData.append("files",fileObj.files[0]);
+            for (let i = 0; i < fileObj.files.length; i++) {
+                fileObj.formData.append("files", fileObj.files[i]);
+              }
 
+//              for(let key of formData.keys()) {
+//                 console.log(`{key}: ${formData.get(key)}`);
+//              }
+//            EmoRegisterService.getInstance().setImgObjValues();
             EmoRegisterApi.getInstance().registerImg();
         }
     }

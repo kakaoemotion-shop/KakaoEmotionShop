@@ -13,6 +13,11 @@ spring:
     username: admin
     password: 1q2w3e4r
 
+  servlet:
+    multipart:
+      max-file-size: 200MB
+      max-request-size: 200MB
+
 mybatis:
   mapper-locations:
     - /mappers/*.xml
