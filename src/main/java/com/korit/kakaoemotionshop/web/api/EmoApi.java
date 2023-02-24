@@ -7,7 +7,6 @@ import com.korit.kakaoemotionshop.entity.EmoMst;
 import com.korit.kakaoemotionshop.service.EmoService;
 import com.korit.kakaoemotionshop.web.dto.*;
 import io.swagger.annotations.Api;
-import org.apache.tomcat.jni.File;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,8 +15,9 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
-import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Api(tags = {"관리자 이모티콘 API"})
 @RestController
@@ -26,6 +26,16 @@ public class EmoApi {
 
     @Autowired
     private EmoService emoService;
+
+    @GetMapping("/emo/{emoCode}")
+    public ResponseEntity<CMRespDto<Map<String, Object>>> getEmo(@PathVariable String emoCode){
+
+        Map<String, Object> responseMap = new HashMap<>();
+
+        return ResponseEntity
+                .ok()
+                .body(new CMRespDto<>(HttpStatus.OK.value(), "Successfully", emoService.getEmoAndImage(emoCode)));
+    }
 
     @ParamsAspect
     @ValidAspect
@@ -37,6 +47,13 @@ public class EmoApi {
                 .body(new CMRespDto<>(HttpStatus.OK.value(),
                         "Successfully",
                         emoService.searchEmo(searchReqDto)));
+    }
+
+    @GetMapping("/emos/totalcount")
+    public ResponseEntity<CMRespDto<?>> getEmoTotalCount(SearchNumberListDto searchNumberListDto){
+        return ResponseEntity
+                .ok()
+                .body(new CMRespDto<>(HttpStatus.OK.value(), "Successfully", emoService.getEmoTotalCount(searchNumberListDto)));
     }
 
     @ParamsAspect
@@ -64,13 +81,6 @@ public class EmoApi {
                         "Successfully", true));
     }
 
-    @GetMapping("/emos/totalcount")
-    public ResponseEntity<CMRespDto<?>> getEmoTotalCount(SearchNumberListDto searchNumberListDto){
-        return ResponseEntity
-                .ok()
-                .body(new CMRespDto<>(HttpStatus.OK.value(), "Successfully", emoService.getEmoTotalCount(searchNumberListDto)));
-    }
-
     @ParamsAspect
     @DeleteMapping("/emo/{emoCode}")
     public ResponseEntity<CMRespDto<?>> removeEmo(@PathVariable String emoCode) {
@@ -83,8 +93,8 @@ public class EmoApi {
 
     @ParamsAspect
     @DeleteMapping("/emos")
-    public ResponseEntity<CMRespDto<?>> removeEmos(@RequestBody DeleteEmosReqDto deleteEmosReqDto) {
-        emoService.removeEmos(deleteEmosReqDto);
+    public ResponseEntity<CMRespDto<?>> removeEmos(@RequestBody DeleteReqDto deleteReqDto){
+        emoService.removeEmos(deleteReqDto);
         return ResponseEntity
                 .ok()
                 .body(new CMRespDto<>(HttpStatus.OK.value(), "Successfully", true));

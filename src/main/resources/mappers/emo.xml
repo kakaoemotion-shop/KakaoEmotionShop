@@ -7,40 +7,35 @@
     <select id="searchEmo" parameterType="com.korit.kakaoemotionshop.web.dto.SearchReqDto"
             resultType="com.korit.kakaoemotionshop.entity.EmoMst">
         select
-            em.emo_id as emoId,
-            em.emo_code as emoCode,
-            em.emo_name as emoName,
-            em.company,
-            em.emo_date as emoDate
-            el.like_id,
-            el.emo_id,
-            el.user_id
-            
+            emo_id as emoId,
+            emo_code as emoCode,
+            emo_name as emoName,
+            company,
+            emo_date as emoDate
         from
             emo_mst
-            left outer join emo_like el on(el.emo_id = em.emo_id and el.user_id = #{userId})
         where
             1 = 1
         <if test = "searchValue != null">
             and (
-                em.emo_name like concat('%', #{searchValue}, '%')
-            or  em.company like concat('%', #{searchValue}, '%')
+                emo_name like concat('%', #{searchValue}, '%')
+                or company like concat('%', #{searchValue}, '%')
             )
         </if>
-        
 
         order by
         <choose>
-             <when test = 'order == "emoName"'>em.emo_name,</when>
-             <when test = 'order == "company"'>em.company,</when>
-             <when test = 'order == "dateAsc"'>em.emo_date,</when>
-             <when test = 'order == "dataDesc"'>em.emo_date desc,</when>
+             <when test = 'order == "emoName"'>emo_name,</when>
+             <when test = 'order == "company"'>company,</when>
+             <when test = 'order == "dateAsc"'>emo_date,</when>
+             <when test = 'order == "dataDesc"'>emo_date desc,</when>
         </choose>
-        em.emo_id
+        emo_id
         <if test = 'limit == "Y"'>
             limit #{index}, #{count}
         </if>
     </select>
+
     <select id="getEmoTotalCount" parameterType="com.korit.kakaoemotionshop.web.dto.SearchNumberListDto" resultType="integer">
         select
             count(*)
@@ -49,14 +44,13 @@
         where
             1 = 1
         <if test='searchValue != null and searchValue !=""'>
-            and   (
+            and	(
             emo_name like CONCAT('%', #{searchValue}, '%')
-            or   company like CONCAT('%', #{searchValue}, '%')
+            or	company like CONCAT('%', #{searchValue}, '%')
             )
         </if>
     </select>
 
-    
 
     <select id="findEmoByEmoCode" resultType="com.korit.kakaoemotionshop.entity.EmoMst">
         select
@@ -71,6 +65,17 @@
             emo_code = #{emoCode}
     </select>
 
+    <select id="findEmoImageByEmoCode" resultType="com.korit.kakaoemotionshop.entity.EmoImage">
+        select
+            image_id as imageId,
+            emo_code as emoCode,
+            save_name as saveName,
+            origin_name as originName
+        from
+            emo_image
+        where
+            emo_code = #{emoCode}
+    </select>
     <select id="findEmoImageAll" resultType="com.korit.kakaoemotionshop.entity.EmoImage">
         select
             image_id as imageId,
@@ -94,6 +99,7 @@
         where
             image_id = #{imageId}
     </select>
+
 
     <insert id="saveEmo" parameterType="com.korit.kakaoemotionshop.web.dto.EmoReqDto">
         insert into emo_mst
@@ -119,14 +125,7 @@
             emo_code = #{emoCode}
     </update>
 
-    <delete id="deleteEmo">
-        delete
-        from
-            emo_mst
-        where
-            emo_code = #{emoCode}
-    </delete>
-    <delete id="deleteEmos" parameterType="list">
+    <delete id="deleteEmos" parameterType="List">
         delete
         from
             emo_mst
@@ -135,6 +134,14 @@
         <foreach collection="list" item="emoId" open="(" close=")" separator=",">
             #{emoId}
         </foreach>
+    </delete>
+
+    <delete id="deleteEmo">
+        delete
+        from
+            emo_mst
+        where
+            emo_code = #{emoCode}
     </delete>
 
     <delete id="deleteEmoImage">

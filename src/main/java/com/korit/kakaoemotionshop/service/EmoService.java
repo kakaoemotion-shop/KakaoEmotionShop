@@ -4,7 +4,7 @@ import com.korit.kakaoemotionshop.entity.EmoImage;
 import com.korit.kakaoemotionshop.entity.EmoMst;
 import com.korit.kakaoemotionshop.exception.CustomValidationException;
 import com.korit.kakaoemotionshop.repository.EmoRepository;
-import com.korit.kakaoemotionshop.web.dto.DeleteEmosReqDto;
+import com.korit.kakaoemotionshop.web.dto.DeleteReqDto;
 import com.korit.kakaoemotionshop.web.dto.EmoReqDto;
 import com.korit.kakaoemotionshop.web.dto.SearchNumberListDto;
 import com.korit.kakaoemotionshop.web.dto.SearchReqDto;
@@ -28,12 +28,17 @@ public class EmoService {
     @Autowired
     private EmoRepository emoRepository;
 
+    public Map<String, Object> getEmoAndImage(String emoCode){
+        Map<String, Object> result = new HashMap<>();
+        result.put("emoMst", emoRepository.findEmoByEmoCode(emoCode));
+        result.put("emoImage", emoRepository.findEmoImageByEmoCode(emoCode));
+
+        return result;
+    }
+
     public List<EmoMst> searchEmo(SearchReqDto searchReqDto){
         searchReqDto.setIndex();
         return emoRepository.searchEmo(searchReqDto);
-    }
-    public int getEmoTotalCount(SearchNumberListDto searchNumberListDto){
-        return emoRepository.getEmoTotalCount(searchNumberListDto);
     }
 
     public void registerEmo(EmoReqDto emoReqDto){
@@ -51,6 +56,9 @@ public class EmoService {
         }
     }
 
+    public int getEmoTotalCount(SearchNumberListDto searchNumberListDto){
+        return emoRepository.getEmoTotalCount(searchNumberListDto);
+    }
     public void modifyEmo(EmoReqDto emoReqDto) {
         emoRepository.updateEmoByEmoCode(emoReqDto);
     }
@@ -58,8 +66,9 @@ public class EmoService {
     public void removeEmo(String emoCode) {
         emoRepository.deleteEmo(emoCode);
     }
-    public void removeEmos(DeleteEmosReqDto deleteEmosReqDto) {
-        emoRepository.deleteEmos(deleteEmosReqDto.getEmoId());
+
+    public void removeEmos(DeleteReqDto deleteReqDto){
+        emoRepository.deleteEmos(deleteReqDto.getEmoId());
     }
 
     public void registerEmoImages(String emoCode, List<MultipartFile> files) {
@@ -111,7 +120,7 @@ public class EmoService {
             Map<String,String> errorMap = new HashMap<String,String>();
             errorMap.put("error","존재하지 않는 imageId 입니다");
 
-            throw  new CustomValidationException(errorMap);
+            throw new CustomValidationException(errorMap);
         }
 
         if(emoRepository.deleteEmoImage(imageId) > 0 ) {
@@ -121,4 +130,6 @@ public class EmoService {
             }
         }
     }
+
+
 }

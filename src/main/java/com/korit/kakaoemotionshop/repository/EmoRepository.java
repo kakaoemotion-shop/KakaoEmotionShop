@@ -22,16 +22,15 @@ import java.util.List;
 @Mapper
 public interface EmoRepository {
     public List<EmoMst> searchEmo(SearchReqDto searchReqDto);
-    public int getEmoTotalCount(SearchNumberListDto searchNumberListDto);
-
     public int saveEmo(EmoReqDto emoReqDto);
     public EmoMst findEmoByEmoCode(String emoCode);
+    public EmoImage findEmoImageByEmoCode(String emoCode);
     public int updateEmoByEmoCode(EmoReqDto emoReqDto);
-    public int deleteEmo(String emoCode);
-    public int deleteEmos(List<Integer> emoId);
+    public int deleteEmo(String EmoCode);
     public int registerEmoImages(List<EmoImage> emoImages);
     public List<EmoImage> findEmoImageAll(String emoCode);
     public int deleteEmoImage(int emoId);
     public EmoImage findEmoImageByImageId(int imageId);
-
+    public int getEmoTotalCount(SearchNumberListDto searchNumberListDto);
+    public int deleteEmos(List<Integer> emoId);
 }
