@@ -13,7 +13,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class SearchService {
 
-    private SearchRepository searchRepository;
+    private final SearchRepository searchRepository;
 
     public int getSearchTotalCount(SearchEmoReqDto searchEmoReqDto) {
         return searchRepository.getUserSearchEmoTotalCount(searchEmoReqDto);
@@ -24,22 +24,3 @@ public class SearchService {
         return searchRepository.userSearchEmo(searchEmoReqDto);
     }
 }
-/*
-
-@Service
-@RequiredArgsConstructor
-public class SearchService {
-
-    private final SearchRepository searchRepository;
-
-    public int getSearchTotalCount(SearchBookReqDto searchBookReqDto) {
-        return searchRepository.getUserSearchBookTotalCount(searchBookReqDto);
-    }
-
-    public List<SearchBook> getSearchBooks(SearchBookReqDto searchBookReqDto) {
-        searchBookReqDto.setIndex();
-        return searchRepository.userSearchBook(searchBookReqDto);
-    }
-
-
-*/

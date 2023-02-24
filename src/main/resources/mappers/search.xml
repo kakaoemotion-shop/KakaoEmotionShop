@@ -7,7 +7,7 @@
 
     <select id="getUserSearchEmoTotalCount"
             parameterType="com.korit.kakaoemotionshop.web.dto.SearchEmoReqDto"
-            resultType="Intger">
+            resultType="Integer">
         select
             count(*)
         from

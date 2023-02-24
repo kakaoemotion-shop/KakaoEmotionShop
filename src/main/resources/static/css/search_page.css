@@ -41,17 +41,19 @@
   color: red;
 }
 
-.search-view ul{
+.search-flex{
   display: flex;
-  flex-flow: wrap;
-  justify-content: space-around;
+  flex-wrap: wrap;
+  justify-content: space-between;
 
   margin-top: 15px;
 
-  width: 1124px;
+  width: 1024px;
   height: 100%;
+
+  background-color: rgb(255, 255, 255);
 }
-.search-view ul li{
+.emotion-serch {
   display: flex;
   justify-content: space-around;
 
@@ -59,7 +61,7 @@
   height: 150px;
 
   border-bottom: 2px solid #dbdbdb;
-  background-color: white;
+  background-color: rgb(255, 255, 255);
 }
 .emotion-tilte{
   margin-top: 50px;

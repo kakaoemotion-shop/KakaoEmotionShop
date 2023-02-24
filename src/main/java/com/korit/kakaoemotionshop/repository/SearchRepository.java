@@ -11,5 +11,4 @@ public interface SearchRepository {
 
     public int getUserSearchEmoTotalCount(SearchEmoReqDto searchEmoReqDto);
     public List<SearchEmo> userSearchEmo(SearchEmoReqDto searchEmoReqDto);
-
 }
