@@ -172,34 +172,65 @@ class ComponentEvent {
         }
     }
 
-    addChangeEventImgFile() {
-        const imgFile = document.querySelector(".img-file");
+//    addChangeEventImgFile() {
+//        const imgFiles = document.querySelectorAll(".img-file");
+//
+//        imgFiles.onchange = () => {
+//            const formData = new FormData(document.querySelector(".img-form"));
+//            let changeFlag = false;
+//
+//            fileObj.files.pop();
+//
+//
+//            formData.forEach(value => {
+//                console.log(value);
+//
+//                if(value.size != 0) {
+//                    fileObj.files.push(value);
+//                    changeFlag = true;
+//                }
+//            });
+//
+//            if(changeFlag) {
+//                const imgRegisterButton = document.querySelector(".img-register-button");
+//                imgRegisterButton.disabled = false;
+//
+////                ImgFileService.getInstance().getImgPreview();
+//                imgFiles.value = null;
+//            }
+//        }
+        addChangeEventImgFile() {
+            const imgFiles = document.querySelectorAll(".img-file");
 
-        imgFile.onchange = () => {
-            const formData = new FormData(document.querySelector(".img-form"));
-            let changeFlag = false;
+            imgFiles.forEach((imgFile) => {
+                imgFile.onchange = () => {
+                    const formData = new FormData(document.querySelector(".img-form"));
+                    let changeFlag = false;
 
-            fileObj.files.pop();
-            
+                    fileObj.files.pop();
 
-            formData.forEach(value => {
-                console.log(value);
+                    formData.forEach((value, key) => {
+                        console.log(value);
+                        console.log(key)
 
-                if(value.size != 0) {
-                    fileObj.files.push(value);
-                    changeFlag = true;
-                }
+                        if(value.size != 0) {
+                            fileObj.files.push(imgFile.value);
+                            changeFlag = true;
+                        }
+                    });
+
+                    if(changeFlag) {
+                        const imgRegisterButton = document.querySelector(".img-register-button");
+                        imgRegisterButton.disabled = false;
+
+//                        ImgFileService.getInstance().getImgPreview();
+//                        imgFile.value = null;
+                    }
+                };
             });
-
-            if(changeFlag) {
-                const imgRegisterButton = document.querySelector(".img-register-button");
-                imgRegisterButton.disabled = false;
-
-//                ImgFileService.getInstance().getImgPreview();
-                imgFile.value = null;
-            }
         }
-    }
+
+//    }
 
     addClickEventImgRegisterButton() {
         const imgRegisterButton = document.querySelector(".img-register-button");
