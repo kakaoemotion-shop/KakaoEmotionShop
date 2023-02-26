@@ -4,7 +4,6 @@ import com.korit.kakaoemotionshop.entity.SearchEmo;
 import com.korit.kakaoemotionshop.repository.SearchRepository;
 import com.korit.kakaoemotionshop.web.dto.SearchEmoReqDto;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

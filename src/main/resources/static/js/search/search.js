@@ -9,6 +9,8 @@ window.onload = () => {
 
 }
 
+let maxPage = 0;
+
 const searchObj = {
     page: 1,
     searchValue: null,
@@ -81,9 +83,10 @@ class SearchSearvice {
             if(searchValue == "") {
                 return;
             }
+ 
         }
         const searchInput = document.querySelector(".search-bar-input");
-        searchInput.value = searchValue;
+        searchInput.value = searchObj.searchValue;
 
         const searchButton = document.querySelector(".search-bar-button");
         searchButton.click();
@@ -110,7 +113,7 @@ class SearchSearvice {
             <div class="emotion-serch">
                 <div class="emotion-tilte">
                     <a class="search-link" href="">
-                        <h3>${data.emoId}</h3>
+                        <h3>${data.emoName}</h3>
                         <h4>${data.company}</h4>
                         <button class="like-button">
                             <i class="fa-regular fa-heart"></i>
