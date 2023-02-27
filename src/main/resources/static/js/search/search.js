@@ -1,8 +1,9 @@
 window.onload = () => {
-    SearchSearvice.getInstance().clearEmoList(); //작동안됨
-    SearchSearvice.getInstance().loadSearchEmos(); //작동됨
-    SearchSearvice.getInstance().setMaxPage(); //작동안됨
-    SearchSearvice.getInstance().onLoadSearch(); //작동안됨
+    SearchService.getInstance().clearEmoList();
+    SearchService.getInstance().loadSearchEmos();
+    SearchService.getInstance().setMaxPage();
+    SearchService.getInstance().onLoadSearch();
+    // SearchService.getInstance().loadEmoTotalCount();
     
     ComponentEvent.getInstance().addClickSearchButton(); 
     ComponentEvent.getInstance().addScrollEventPaging(); 
@@ -15,6 +16,14 @@ const searchObj = {
     page: 1,
     searchValue: null,
     count: 8
+}
+
+let emoSearchObj = {
+    page : 1,
+    searchValue : "",
+    order : "",
+    limit: "Y",
+    count: 20
 }
 
 class SearchApi {
@@ -44,6 +53,27 @@ class SearchApi {
         return responseData;
     }
 
+    getEmoticonTotalCount(emoSearchObj){
+        let returnData = null
+        $.ajax({
+            async: false,
+            type: 'get',
+            url: 'http://localhost:8000/api/admin/emos/totalcount',
+            data:{
+                "searchValue" : emoSearchObj.searchValue
+            },
+            dataType: 'json',
+            success: response => {
+                console.log(response);
+                returnData = response.data;
+            },
+            error: error => {
+                console.log(error);
+            }
+        })
+        return returnData
+    }
+
     searchEmo() {
         let responseData = null;
         $.ajax({
@@ -67,11 +97,11 @@ class SearchApi {
 
 
 
-class SearchSearvice {
+class SearchService {
     static #instance = null;
     static getInstance() {
         if(this.#instance == null) {
-            this.#instance = new SearchSearvice();
+            this.#instance = new SearchService();
         }
         return this.#instance;
     }
@@ -94,26 +124,29 @@ class SearchSearvice {
 
     setMaxPage() {
         const totalCount = SearchApi.getInstance().getTotalCount();
-        const searchTitle = document.querySelector(".search-tilte");
 
         maxPage = totalCount % 10 == 0 
             ? totalCount / 10 
-            : Math.floor(totalCount / 10) + 1;
-        
-        // maxPage.forEach((data) => {
-        //     searchTitle.innerHTML = `
-        //     <div class="search-tilte">
-        //         <h2>검색 결과</h2>
-        //         <p>${data.totalCount}</p>
-        //     </div>
-        //     `;
-        // });
+            : Math.floor(totalCount / 10) + 1;        
     }
+
+    // loadEmoTotalCount() {
+    //     const totalCount = SearchApi.getInstance().getTotalCount();
+    //     const searchCounting = document.querySelector(".search-title");
+
+    //     totalCount.forEach((data) => {
+    //         searchCounting.innerHTML = `
+    //             <h2>검색 결과</h2>
+    //             <p>${data.count}</p>
+    //         `;
+    //     });
+    // }
 
     clearEmoList() {
         const searchFlex = document.querySelector(".search-flex");
         searchFlex.innerHTML = "";
     }
+
 
     loadSearchEmos() {
         const responseData = SearchApi.getInstance().searchEmo();
@@ -157,8 +190,17 @@ class ComponentEvent {
         const html = document.querySelector("html");
         const body = document.querySelector("body");
 
+        console.log("html client: " + html.clientHeight);
+        console.log("body offset: " + body.offsetHeight);
+        console.log("html scrollTop: " + html.scrollTop);
+
         body.onscroll = () => {
             const scrollPosition = body.offsetHeight - html.clientHeight - html.scrollTop;
+        
+            if(scrollPosition < 250 && searchObj.page < maxPage) {
+                searchObj.page++;
+                SearchService.getInstance().loadSearchEmos();
+            }
         }
     }
 
@@ -172,9 +214,9 @@ class ComponentEvent {
 
             window.scrollTo(0,0);
 
-            SearchSearvice.getInstance().clearEmoList();
-            SearchSearvice.getInstance().setMaxPage();
-            SearchSearvice.getInstance().loadSearchEmos();
+            SearchService.getInstance().clearEmoList();
+            SearchService.getInstance().setMaxPage();
+            SearchService.getInstance().loadSearchEmos();
         }
         
         searchInput.onkeyup = () => {

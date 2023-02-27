@@ -60,3 +60,22 @@
             }
         });
     }
+
+
+ addScrollEventPaging() {
+        const html = document.querySelector("html");
+        const body = document.querySelector("body");
+
+        console.log("html client: " + html.clientHeight);
+        console.log("body offset: " + body.offsetHeight);
+        console.log("html scrollTop: " + html.scrollTop);
+
+        body.onscroll = () => {
+            const scrollPosition = body.offsetHeight - html.clientHeight - html.scrollTop;
+
+            if(scrollPosition < 250 && searchObj.page < maxPage) {
+                searchObj.page++;
+                HotSearchService.getInstance().loadSearchEmos();
+            }
+        }
+    }

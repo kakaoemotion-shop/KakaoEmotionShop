@@ -13,26 +13,10 @@
   background-color: white;
 }
 
-.toggle-button{
-  position: relative;
-  left: 1%;
-  top: 19px;
-
-  width: 25px;
-  height: 25px;
-
-  font-size: 18px;
-  border: none;
-  outline: none;
-  background-color: white;
-
-  cursor: pointer;
-}
-
 .logo-button{
   position: relative;
   left: 45%;
-  bottom: 14px;
+  top: 9.5px;
 
   width: 190px;
   height: 26px;
@@ -46,44 +30,6 @@
 .logo-button span{
   font-size: 20px;
   font-weight: 600;
-}
-
-.search-button{
-  position: relative;
-  left: 95.3%;
-  bottom: 45px;
-
-  padding: 0px;
-  width: 24px;
-  height: 24px;
-
-  font-size: 18px;
-  border: none;
-  outline-style: none;
-  background-color: white;
-
-  cursor: pointer;
-}
-
-.mypage-button{
-  position: relative;
-  left: 96%;
-  bottom: 40px;
-
-  width: 24px;
-  height: 24px;
-
-  border: none;
-  border-radius: 10px;
-  outline-style: none;
-
-  cursor: pointer;
-}
-
-.mypage-button img{
-  width: 30px;
-  height: 30px;
-  border-radius: 10px;
 }
 
 
@@ -273,6 +219,7 @@
   border: 1px solid #bbbbbb;
   background-color: white;
 }
+
 .img-form{
   display: flex;
   flex-flow: row wrap;
@@ -289,8 +236,8 @@
 
   margin-top: 10px;
   
-  width: 190px;
-  height: 200px;
+  width: 180px;
+  height: 230px;
 }
 .img-file{
   display: none;
@@ -298,14 +245,27 @@
 .emo-img{
   margin-top: 5px;
 
-  width: 170px;
-  height: 150px;
+  width: 180px;
+  height: 180px;
+}
+
+
+
+.button-group{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  width: 100px;
+  height: 40px;
 }
 .img-add-button{
-  margin-top: 5px;
+  width: 40px;
+  height: 40px;
 
-  width: 170px;
-  height: 35px;
+  font-size: 25px;
+  font-weight: 600;
+  color: #4e4e4e;
 
   border: 1px solid #dbdbdb;
   border-radius: 3.5px;
@@ -316,21 +276,39 @@
 .img-add-button:hover{
   background-color: #f2f2f2;
 }
+.img-cancel-button{
+  width: 40px;
+  height: 40px;
 
-.button-group{
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  align-items: center;
+  font-size: 25px;
+  font-weight: 600;
+  color: #df0707;
 
-  width: 480px;
-  height: 50px;
+  border: 1px solid #dbdbdb;
+  border-radius: 3.5px;
+  background-color: white;
+
+  cursor: pointer;
+}
+.img-cancel-button:hover{
+  background-color: #f2f2f2;
+}
+
+.button-container{
+  margin-top: 10px;
 }
 .img-modification-button{
-  margin-bottom: 15px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
 
-  width: 190px;
+  margin-bottom: 15px;
+  padding-top: 10px;
+
+  width: 170px;
   height: 45px;
+
+  color: #373737;
 
   border: 1px solid #dbdbdb;
   border-radius: 5px;
@@ -339,20 +317,5 @@
   cursor: pointer;
 }
 .img-modification-button:hover{
-  background-color: #f2f2f2;
-}
-.img-cencel-button{
-  margin-bottom: 15px;
-
-  width: 190px;
-  height: 45px; 
-
-  border: 1px solid #dbdbdb;
-  border-radius: 5px;
-  background-color: white;
-
-  cursor: pointer;
-}
-.img-cencel-button:hover{
   background-color: #f2f2f2;
 }

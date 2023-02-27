@@ -1,4 +1,4 @@
-package com.korit.kakaoemotionshop.web.api;
+package com.korit.kakaoemotionshop.web.api.admin;
 
 import com.korit.kakaoemotionshop.aop.annotation.ParamsAspect;
 import com.korit.kakaoemotionshop.aop.annotation.ValidAspect;
@@ -7,6 +7,7 @@ import com.korit.kakaoemotionshop.entity.EmoMst;
 import com.korit.kakaoemotionshop.service.EmoService;
 import com.korit.kakaoemotionshop.web.dto.CMRespDto;
 import com.korit.kakaoemotionshop.web.dto.EmoReqDto;
+import com.korit.kakaoemotionshop.web.dto.SearchNumberListDto;
 import com.korit.kakaoemotionshop.web.dto.SearchReqDto;
 import io.swagger.annotations.Api;
 import org.apache.tomcat.jni.File;
@@ -110,6 +111,13 @@ public class EmoApi {
                 .ok()
                 .body(new CMRespDto<>(HttpStatus.OK.value(),
                         "Successfully",null));
+    }
+
+    @GetMapping("/emos/totalcount")
+    public ResponseEntity<CMRespDto<?>> getEmoTotalCount(SearchNumberListDto searchNumberListDto){
+        return ResponseEntity
+                .ok()
+                .body(new CMRespDto<>(HttpStatus.OK.value(), "Successfully", emoService.getEmoTotalCount(searchNumberListDto)));
     }
 
 }
