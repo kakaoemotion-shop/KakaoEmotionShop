@@ -14,6 +14,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 @Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
+//    private final PrincipalOAuth2DetailsService principalOAuth2DetailsService;
+
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
@@ -40,6 +42,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .formLogin()
                 .loginPage("/account/login")
                 .loginProcessingUrl("/account/login")
+                .failureForwardUrl("/account/login/error")
                 .defaultSuccessUrl("/index");
     }
 }

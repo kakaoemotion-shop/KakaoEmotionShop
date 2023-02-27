@@ -3,6 +3,7 @@ package com.korit.kakaoemotionshop.web.api;
 import com.korit.kakaoemotionshop.security.PrincipalDetails;
 import com.korit.kakaoemotionshop.service.LikeService;
 import com.korit.kakaoemotionshop.web.dto.CMRespDto;
+import jdk.dynalink.linker.LinkerServices;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

@@ -30,7 +30,7 @@ class EmoListApi {
         $.ajax({
             async: false,
             type: "get",
-            url: "http://localhost:8000/api/search/totalcount",
+            url: "http://localhost:8000/api/emos/totalcount",
             data: emoSearchObj,
             dataType: "json",
             success: response => {
@@ -88,7 +88,7 @@ class EmoListApi {
 
         $.ajax({
             async: false,
-            type: "delete",
+             type: "delete",
             url: `http://localhost:8000/api/emo/${emoId}/like`,
             dataType: "json",
             success: response => {
@@ -139,7 +139,7 @@ class EmoListService {
     }
 
     loadSearchEmos() {
-        const responseData = EmoListApi.getInstance().searchEmo();
+        const responseData = EmoListApi.getInstance().getTotalCount();
         const content = document.querySelector(".content");
         // const principal = PrincipalApi.getInstance().getPrincipal();
 
