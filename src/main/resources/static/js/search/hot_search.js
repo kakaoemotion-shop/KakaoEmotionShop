@@ -18,6 +18,13 @@ const searchObj = {
     count: 10
 }
 
+const imgObj = {
+    img01: null,
+    img02: null,
+    img03: null,
+    img04: null
+}
+
 class HotSearchApi {
     static #instance = null;
     static getInstance() {
@@ -99,7 +106,7 @@ class HotSearchService {
             contentFlex.innerHTML += `
                 <li>
                     <a class="hot-link" href="/main/detail">
-                    <span class="emo-id">${data.emoCode}</span>
+                    <span class="emo-id"></span>
                     <div class="hot-info-title">
                         <h2 class="emo-name">${data.emoName}</h2>
                     
@@ -108,7 +115,6 @@ class HotSearchService {
                         <i class="fa-regular fa-heart"></i>
                         </button>
                     </div>
-                    <img src="/static/images/noimg.jpg" alt="" class="emo-img">
                     <img src="http://127.0.0.1:8000/image/emo/${data.saveName != null ? data.saveName : "noimg.png"}" class="emo-img">
                     </a>
                 </li>
@@ -130,9 +136,9 @@ class ComponentEvent {
         const html = document.querySelector("html");
         const body = document.querySelector("body");
 
-        console.log("html client: " + html.clientHeight);
-        console.log("body offset: " + body.offsetHeight);
-        console.log("html scrollTop: " + html.scrollTop);
+        // console.log("html client: " + html.clientHeight);
+        // console.log("body offset: " + body.offsetHeight);
+        // console.log("html scrollTop: " + html.scrollTop);
 
         body.onscroll = () => {
             const scrollPosition = body.offsetHeight - html.clientHeight - html.scrollTop;

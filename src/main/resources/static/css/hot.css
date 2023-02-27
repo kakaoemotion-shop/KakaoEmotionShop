@@ -238,3 +238,12 @@ html {
   
   cursor: pointer;
 }
+
+.hot-info {
+  counter-reset: numbering;
+}
+
+.hot-info .emo-id:before{
+  counter-increment: numbering;
+  content: counter(numbering);
+}
