@@ -94,9 +94,20 @@ class SearchSearvice {
 
     setMaxPage() {
         const totalCount = SearchApi.getInstance().getTotalCount();
+        const searchTitle = document.querySelector(".search-tilte");
+
         maxPage = totalCount % 10 == 0 
             ? totalCount / 10 
             : Math.floor(totalCount / 10) + 1;
+        
+        // maxPage.forEach((data) => {
+        //     searchTitle.innerHTML = `
+        //     <div class="search-tilte">
+        //         <h2>검색 결과</h2>
+        //         <p>${data.totalCount}</p>
+        //     </div>
+        //     `;
+        // });
     }
 
     clearEmoList() {
