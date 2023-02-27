@@ -17,7 +17,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Api(tags = {"관리자 이모티콘 API"})
 @RestController
@@ -26,6 +28,25 @@ public class EmoApi {
 
     @Autowired
     private EmoService emoService;
+
+    @GetMapping("/emo/{emoCode}")
+    public ResponseEntity<CMRespDto<Map<String, Object>>> getEmo(@PathVariable String emoCode){
+
+        Map<String, Object> responseMap = new HashMap<>();
+
+        return ResponseEntity
+                .ok()
+                .body(new CMRespDto<>(HttpStatus.OK.value(), "Successfully", emoService.getEmoAndImage(emoCode)));
+    }
+    @GetMapping("/emos/{emoCode}")
+    public ResponseEntity<CMRespDto<Map<String, Object>>> getEmoss(@PathVariable String emoCode){
+
+        Map<String, Object> responseMap = new HashMap<>();
+
+        return ResponseEntity
+                .ok()
+                .body(new CMRespDto<>(HttpStatus.OK.value(), "Successfully", emoService.getEmoAndAllImage(emoCode)));
+    }
 
     @ParamsAspect
     @ValidAspect
@@ -106,15 +127,15 @@ public class EmoApi {
                         "Successfully",true));
     }
 
-    @ParamsAspect
-    @GetMapping("/emo/{emoCode}/images")
-    public ResponseEntity<CMRespDto<?>> getImages(@PathVariable String emoCode) {
-        List<EmoImage> emoImages = emoService.getEmos(emoCode);
-        return ResponseEntity
-                .ok()
-                .body(new CMRespDto<>(HttpStatus.OK.value(),
-                        "Successfully",emoImages));
-    }
+//    @ParamsAspect
+//    @GetMapping("/emo/{emoCode}/images")
+//    public ResponseEntity<CMRespDto<?>> getImages(@PathVariable String emoCode) {
+//        List<EmoImage> emoImages = emoService.getEmos(emoCode);
+//        return ResponseEntity
+//                .ok()
+//                .body(new CMRespDto<>(HttpStatus.OK.value(),
+//                        "Successfully",emoImages));
+//    }
 
     @DeleteMapping("/emo/{emoCode}/image/{imageId}")
     public ResponseEntity<CMRespDto<?>> removeEmoImg(@PathVariable String emoCode,
