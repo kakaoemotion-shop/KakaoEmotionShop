@@ -4,7 +4,13 @@ window.onload = () => {
 
     HotSearchService.getInstance().clearEmoList();
     HotSearchService.getInstance().loadSearchEmos();
+
+    HotSearchService.getInstance().setMaxPage();
+
+    ComponentEvent.getInstance().addScrollEventPaging();
 }
+
+let maxPage = 0;
 
 const searchObj = {
     page: 1,
@@ -71,13 +77,13 @@ class HotSearchService {
         return this.#instance;
     }
 
-    // setMaxPage() {
-    //     const totalCount = SearchApi.getInstance().getTotalCount();
-    //     maxPage = totalCount % 10 == 0 
-    //         ? totalCount / 10 
-    //         : Math.floor(totalCount / 10) + 1;
+     setMaxPage() {
+         const totalCount = HotSearchApi.getInstance().getTotalCount();
+         maxPage = totalCount % 10 == 0
+             ? totalCount / 10
+             : Math.floor(totalCount / 10) + 1;
 
-    // }
+     }
 
     clearEmoList() {
         const contentFlex = document.querySelector(".hot-info");
@@ -108,5 +114,33 @@ class HotSearchService {
                 </li>
             `;
         })
+    }
+}
+
+class ComponentEvent {
+    static #instance = null;
+    static getInstance() {
+        if(this.#instance == null) {
+            this.#instance = new ComponentEvent();
+        }
+        return this.#instance;
+    }
+
+    addScrollEventPaging() {
+        const html = document.querySelector("html");
+        const body = document.querySelector("body");
+
+        console.log("html client: " + html.clientHeight);
+        console.log("body offset: " + body.offsetHeight);
+        console.log("html scrollTop: " + html.scrollTop);
+
+        body.onscroll = () => {
+            const scrollPosition = body.offsetHeight - html.clientHeight - html.scrollTop;
+
+            if(scrollPosition < 250 && searchObj.page < maxPage) {
+                searchObj.page++;
+                HotSearchService.getInstance().loadSearchEmos();
+            }
+        }
     }
 }
