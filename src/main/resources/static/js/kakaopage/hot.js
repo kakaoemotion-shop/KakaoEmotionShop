@@ -1,10 +1,9 @@
 window.onload = () => {
-    ToggleService.getInstance().loadHeader();
+    ToggleService.getInstance().loadlogin();
     EmoListService.getInstance().onLoadSearch();
     EmoListService.getInstance().setMaxPage();
     EmoListService.getInstance().loadSearchEmos();
-
-
+    
 }
 
 let maxPage = 0;

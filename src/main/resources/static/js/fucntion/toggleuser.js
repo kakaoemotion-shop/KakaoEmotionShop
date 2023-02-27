@@ -1,19 +1,20 @@
 class ToggleService {
     static #instance = null;
     static getInstance() {
-        if(this.#instance == null) {
+        if (this.#instance == null) {
             this.#instance = new ToggleService();
         }
         return this.#instance;
     }
+
 
     loadlogin() {
         const menuAside = document.querySelector(".menu-aside");
         const principal = PrincipalApi.getInstance().getPrincipal();
 
         menuAside.innerHTML = `
-                ${principal == null 
-                    ? `
+                ${principal == null
+                ? `
                     <div class="mypage-login">
                 <div class="profile-box">
                     <a href="/account/login" class="link-profile">
@@ -92,7 +93,9 @@ class ToggleService {
                 </div>
             </div>
                     `
-                    : `
+
+
+                : `
                     <div class="mypage-login">
                 <div class="profile-box">
                     <div class="link-profile">
@@ -173,9 +176,35 @@ class ToggleService {
             </div>
                 
                     `
-                }
+            }
             </ul>
         `;
     }
 
+}
+
+class ToggleButton {
+    static #instance = null;
+    static getInstance() {
+        if (this.#instance == null) {
+            this.#instance = new ToggleButton();
+        }
+        return this.#instance;
+    }
+
+    toggleButtonFlag = false;
+
+    toggleButton() {
+        const menuAside = document.querySelector(".menu-aside");
+        const searcPage = document.querySelector(".search-page");
+        const toggleButton = document.querySelector(".toggle-button");
+
+        toggleButton.onclick = () => {
+            menuAside.classList.remove("aside-hide");
+        }
+
+        document.querySelector("body").onclick = (e) => {
+            menuAside.classList.add("aside-hide");
+        }
+    }
 }

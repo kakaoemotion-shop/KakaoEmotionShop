@@ -7,6 +7,7 @@ import com.korit.kakaoemotionshop.entity.EmoMst;
 import com.korit.kakaoemotionshop.service.EmoService;
 import com.korit.kakaoemotionshop.web.dto.*;
 import io.swagger.annotations.Api;
+import org.apache.tomcat.jni.File;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -35,6 +37,15 @@ public class EmoApi {
         return ResponseEntity
                 .ok()
                 .body(new CMRespDto<>(HttpStatus.OK.value(), "Successfully", emoService.getEmoAndImage(emoCode)));
+    }
+    @GetMapping("/emos/{emoCode}")
+    public ResponseEntity<CMRespDto<Map<String, Object>>> getEmos(@PathVariable String emoCode){
+
+        Map<String, Object> responseMap = new HashMap<>();
+
+        return ResponseEntity
+                .ok()
+                .body(new CMRespDto<>(HttpStatus.OK.value(), "Successfully", emoService.getEmoAndAllImage(emoCode)));
     }
 
     @ParamsAspect
@@ -60,7 +71,7 @@ public class EmoApi {
     @ValidAspect
     @PostMapping("/emo")
     public ResponseEntity<CMRespDto<?>> registerEmo(@Valid @RequestBody EmoReqDto emoReqDto,
-                                                               BindingResult bindingResult) {
+                                                    BindingResult bindingResult) {
         emoService.registerEmo(emoReqDto);
         return ResponseEntity
                 .created(null)
@@ -72,8 +83,8 @@ public class EmoApi {
     @ValidAspect
     @PutMapping("/emo/{emoCode}")
     public ResponseEntity<CMRespDto<?>> modifyEmo(@PathVariable String emoCode,
-                                                    @Valid @RequestBody EmoReqDto emoReqDto,
-                                                    BindingResult bindingResult) {
+                                                  @Valid @RequestBody EmoReqDto emoReqDto,
+                                                  BindingResult bindingResult) {
         emoService.modifyEmo(emoReqDto);
         return ResponseEntity
                 .ok()
