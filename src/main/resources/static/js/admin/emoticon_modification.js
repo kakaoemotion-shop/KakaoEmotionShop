@@ -162,6 +162,7 @@ class EmoModificationService {
         modificationInputs[2].value = responseData.emoMst.company
         modificationInputs[3].value = responseData.emoMst.emoDate
 
+        console.log(responseData)
         if (responseData.emoImage != null) {
             imgObj.imageId = responseData.emoImage.imageId
             imgObj.emoCode = responseData.emoImage.emoCode
@@ -171,13 +172,10 @@ class EmoModificationService {
 
             const emoImg = document.querySelectorAll(".emo-img")
             
-            emoImg.forEach(() => {
-                emoImg.onchange = () => {
-                    emoImg.src = `http:localhost:8000/image/book/${responseData.emoImage.saveName}`
-
-                }
-
+            responseData.emoImage.forEach((imgObj, index) => {
+                emoImg[index].src = "http://localhost:8000/image/emo/" + imgObj.saveName;
             })
+
             
         }
     }
