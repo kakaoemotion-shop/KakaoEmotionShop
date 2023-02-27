@@ -1,4 +1,4 @@
-package com.korit.kakaoemotionshop.web.api;
+package com.korit.kakaoemotionshop.web.api.admin;
 
 import com.korit.kakaoemotionshop.aop.annotation.ParamsAspect;
 import com.korit.kakaoemotionshop.aop.annotation.ValidAspect;
@@ -65,6 +65,15 @@ public class EmoApi {
         return ResponseEntity
                 .ok()
                 .body(new CMRespDto<>(HttpStatus.OK.value(), "Successfully", emoService.getEmoTotalCount(searchNumberListDto)));
+    }
+
+    @ParamsAspect
+    @DeleteMapping("/emos")
+    public ResponseEntity<CMRespDto<?>> removeEmos(@RequestBody DeleteReqDto deleteReqDto){
+        emoService.removeEmos(deleteReqDto);
+        return ResponseEntity
+                .ok()
+                .body(new CMRespDto<>(HttpStatus.OK.value(), "Successfully", true));
     }
 
     @ParamsAspect
@@ -147,4 +156,15 @@ public class EmoApi {
                         "Successfully",null));
     }
 
+<<<<<<< HEAD:src/main/java/com/korit/kakaoemotionshop/web/api/EmoApi.java
 }
+=======
+    @GetMapping("/emos/totalcount")
+    public ResponseEntity<CMRespDto<?>> getEmoTotalCount(SearchNumberListDto searchNumberListDto){
+        return ResponseEntity
+                .ok()
+                .body(new CMRespDto<>(HttpStatus.OK.value(), "Successfully", emoService.getEmoTotalCount(searchNumberListDto)));
+    }
+
+}
+>>>>>>> 232f36b439b5274658e6eb6a5cc31d0511db3510:src/main/java/com/korit/kakaoemotionshop/web/api/admin/EmoApi.java

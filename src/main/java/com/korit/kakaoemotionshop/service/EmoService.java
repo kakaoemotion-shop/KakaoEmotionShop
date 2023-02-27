@@ -96,6 +96,7 @@ public class EmoService {
             String extension = originFileName.substring(originFileName.lastIndexOf("."));
             String tempFileName = UUID.randomUUID().toString().replaceAll("-","")+extension;
 
+<<<<<<< HEAD
             Path uploadPath = Paths.get(filePath+"/emo/"+tempFileName);
 
             File f = new File(filePath + "/emo");
@@ -107,6 +108,19 @@ public class EmoService {
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
+=======
+           Path uploadPath = Paths.get(filePath+"emo/"+tempFileName);
+
+           File f = new File(filePath + "emo");
+           if(!f.exists()) {
+               f.mkdirs();
+           }
+           try {
+               Files.write(uploadPath, file.getBytes());
+           } catch (IOException e) {
+               throw new RuntimeException(e);
+           }
+>>>>>>> 232f36b439b5274658e6eb6a5cc31d0511db3510
 
             EmoImage emoImage = EmoImage.builder()
                     .emoCode(emoCode)
@@ -140,5 +154,17 @@ public class EmoService {
         }
     }
 
+<<<<<<< HEAD
 
 }
+=======
+    public int getEmoTotalCount(SearchNumberListDto searchNumberListDto){
+        return emoRepository.getEmoTotalCount(searchNumberListDto);
+    }
+
+    public void removeEmos(DeleteReqDto deleteReqDto){
+        emoRepository.deleteEmos(deleteReqDto.getEmoId());
+    }
+
+}
+>>>>>>> 232f36b439b5274658e6eb6a5cc31d0511db3510

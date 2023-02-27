@@ -17,15 +17,11 @@ public class ExceptionAdvice {
                 "Validation Error", e.getErrorMap()));
     }
 
-    @ExceptionHandler(CustomLikeException .class)
+    @ExceptionHandler(CustomLikeException.class)
     public ResponseEntity<?> LikeError(CustomLikeException e) {
-
-        return ResponseEntity
-                .badRequest()
-                .body(new CMRespDto<>(HttpStatus.BAD_REQUEST.value(),
-                        "Like Error",
-                        e.getErrorMap()));
+        return ResponseEntity.
+                badRequest().body(new CMRespDto<>(HttpStatus.BAD_REQUEST.value(),
+                        "Like Error", e.getErrorMap()));
     }
-
 }
 
