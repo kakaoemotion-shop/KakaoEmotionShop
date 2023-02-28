@@ -150,11 +150,11 @@ class EmoModificationService {
     loadEmoAndImageData() {
         const responseData = EmoModificationApi.getInstance().getEmoAndImage()
 
-        if (responseData.emoMst == null) {
-            alert("해당 도서코드는 등록되지 않은 코드입니다")
-            history.back()
-            return
-        }
+        // if (responseData.emoMst == null) {
+        //     alert("해당 도서코드는 등록되지 않은 코드입니다")
+        //     history.back()
+        //     return
+        // }
 
         const modificationInputs = document.querySelectorAll(".modification-input")
         modificationInputs[0].value = responseData.emoMst.emoCode

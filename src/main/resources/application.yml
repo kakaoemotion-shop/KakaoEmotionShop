@@ -12,7 +12,6 @@ spring:
     url: jdbc:mysql://pkh.cksewrsk3guy.ap-northeast-2.rds.amazonaws.com:3306/emoticonshop
     username: admin
     password: 1q2w3e4r
-
   servlet:
     multipart:
       max-file-size: 200MB
@@ -23,4 +22,4 @@ mybatis:
     - /mappers/*.xml
 
 file:
-  path: C:\project\KakaoEmotionShop\upload\
+  path: C:/project/KakaoEmotionShop/upload
