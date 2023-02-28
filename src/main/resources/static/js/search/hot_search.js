@@ -145,41 +145,49 @@ class HotSearchService {
 
         const _Buttons = document.querySelectorAll(".buttons");
         const ButtonsLength = _Buttons == null ? 0 : _Buttons.length;
-
+        
         console.log(responseData)
         responseData.forEach((data, index) => {
             contentFlex.innerHTML += `
-                <li>
-                    <input type="hidden" class="emo-id" value="${data.emoId}">
-                    <span class="number"></span>
-                    <div class="hot-info-title">
-                        <h2 class="emo-name">${data.emoName}</h2>
-                    
-                        <p class="author">${data.company}</p>
-                        <p class="buttons">
-                            
-                        </p>
-                    </div>
-                    <img src="http://127.0.0.1:8000/image/emo/${data.saveName != null ? data.saveName : "noimg.png"}" class="emo-img">
-                
-                </li>
+            <li>
+            <input type="hidden" class="emo-id" value="${data.emoId}">
+            <input type="hidden" class="like-count" value="${data.likeCount}">
+            <span class="number"></span>
+            <div class="hot-info-title">
+            
+          
+            <h2 class="emo-name">${data.emoName}</h2>
+            
+            
+            <p class="author">${data.company}</p>
+            <p class="buttons">
+            
+            </p>
+            </div>
+            <img src="http://127.0.0.1:8000/image/emo/${data.saveName != null ? data.saveName : "noimg.png"}" class="emo-img">
+            
+            </li>
             `;
+
             const Buttons = document.querySelectorAll(".buttons");
-
+            
             if(principal == null) {
-
+                
                 Buttons[ButtonsLength + index].innerHTML += `
-                    <button type="button" class="like-button" disabled>
-                    <i class="fa-regular fa-heart"></i>
-                    </button>
+                <button type="button" class="no-login-like like-button">
+                <i class="fa-regular fa-heart"></i>
+                </button>
                 `;
-            }else {
-               
+
+                ComponentEvent.getInstance().addClickEventLikeButtonsNoLogin();
+
+            }else {              
                 if(data.likeId != 0){
+                    console.log("ButtonLength : " + ButtonsLength);
                     Buttons[ButtonsLength + index].innerHTML += `
-                        <button type="button" class="like-buttons dislike-button">
-                        <i class="fa-solid fa-heart"></i>
-                        </button>
+                    <button type="button" class="like-buttons dislike-button">
+                    <i class="fa-solid fa-heart"></i>
+                    </button>
                     `;
                 }else {
                     Buttons[ButtonsLength + index].innerHTML += `
@@ -188,6 +196,7 @@ class HotSearchService {
                         </button>
                     `;
                 }
+                ComponentEvent.getInstance().addClickEventLikeButtons();
             }
         })
     }
@@ -206,10 +215,6 @@ class ComponentEvent {
         const html = document.querySelector("html");
         const body = document.querySelector("body");
 
-        // console.log("html client: " + html.clientHeight);
-        // console.log("body offset: " + body.offsetHeight);
-        // console.log("html scrollTop: " + html.scrollTop);
-
         body.onscroll = () => {
             const scrollPosition = body.offsetHeight - html.clientHeight - html.scrollTop;
 
@@ -223,7 +228,6 @@ class ComponentEvent {
     addClickEventLikeButtons() {
         const likeButtons = document.querySelectorAll(".like-buttons");
         const emoIds = document.querySelectorAll(".emo-id");
-        const likeCounts = document.querySelectorAll(".like-count");
 
         likeButtons.forEach((button, index) => {
             button.onclick = () => {
@@ -232,18 +236,33 @@ class ComponentEvent {
                     if(likeCount != -1){
                         button.classList.remove("like-button");
                         button.classList.add("dislike-button");
-                        // button.textContent = "추천취소";
                     }
                     
                 }else {
-                    const likeCount = HotSearchApi.getInstance().setLike(emoIds[index].value);
+                    const likeCount = HotSearchApi.getInstance().setDisLike(emoIds[index].value);
                     if(likeCount != -1){
                         button.classList.remove("dislike-button");
                         button.classList.add("like-button");
-                        // button.textContent = "추천";
                     }
                 }
             }
         });
     }
+
+    // addClickEventLikeButtonsNoLogin() {
+    //     const likeButtonError = document.querySelectorAll(".no-login-like");
+    //     const emoIds = document.querySelectorAll(".emo-id");
+
+    //     likeButtonError.forEach((button, index) => {
+    //         button.onclick = () => {
+    //             const Flag = emoIds[index].value;
+    //             if(Flag != 1){
+    //                 alert("로그인 후 사용")
+    //                 location.replace("/account/login");
+    //             }
+    //         }
+
+    //     });
+    // }
+      
 }

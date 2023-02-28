@@ -24,7 +24,7 @@
             parameterType="com.korit.kakaoemotionshop.web.dto.HotSearchReqDto"
             resultType="com.korit.kakaoemotionshop.entity.HotSearchEmo">
         select
-            em.emo_id as emoImd,
+            em.emo_id as emoId,
             em.emo_code as emoCode,
             em.emo_name as emoName,
             em.company,
@@ -37,7 +37,7 @@
             left outer join emo_image ei
                 on(em.emo_code = ei.emo_code)
             left outer join emo_like el
-                on( el.emo_id = em.emo_id and el.user_id = '2')
+                on( el.emo_id = em.emo_id and el.user_id = #{userId})
             left outer join (select
                                 emo_id,
                                 count(emo_id) as like_count
@@ -48,7 +48,7 @@
         where
             1 = 1
         <if test='searchValue != null and searchValue != ""'>
-            and (emo_name like cocat('%', #{searchValue}, '%')
+            and (emo_name like concat('%', #{searchValue}, '%')
             or company like concat('%', #{searchValue}, '%')
         </if>
 
