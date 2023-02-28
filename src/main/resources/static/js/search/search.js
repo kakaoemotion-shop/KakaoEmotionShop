@@ -3,28 +3,23 @@ window.onload = () => {
     SearchService.getInstance().loadSearchEmos();
     SearchService.getInstance().setMaxPage();
     SearchService.getInstance().onLoadSearch();
-    // SearchService.getInstance().loadEmoTotalCount();
+    // SearchService.getInstance().searchTotalCount();
     
     ComponentEvent.getInstance().addClickSearchButton(); 
     ComponentEvent.getInstance().addScrollEventPaging(); 
-
 }
 
 let maxPage = 0;
 
+// let searchCount = 0;
+
 const searchObj = {
     page: 1,
     searchValue: null,
-    count: 8
-}
-
-let emoSearchObj = {
-    page : 1,
-    searchValue : "",
-    order : "",
-    limit: "Y",
     count: 20
 }
+
+
 
 class SearchApi {
     static #instance = null;
@@ -51,27 +46,6 @@ class SearchApi {
             }
         });
         return responseData;
-    }
-
-    getEmoticonTotalCount(emoSearchObj){
-        let returnData = null
-        $.ajax({
-            async: false,
-            type: 'get',
-            url: 'http://localhost:8000/api/admin/emos/totalcount',
-            data:{
-                "searchValue" : emoSearchObj.searchValue
-            },
-            dataType: 'json',
-            success: response => {
-                console.log(response);
-                returnData = response.data;
-            },
-            error: error => {
-                console.log(error);
-            }
-        })
-        return returnData
     }
 
     searchEmo() {
@@ -113,7 +87,6 @@ class SearchService {
             if(searchValue == "") {
                 return;
             }
- 
         }
         const searchInput = document.querySelector(".search-bar-input");
         searchInput.value = searchObj.searchValue;
@@ -130,16 +103,10 @@ class SearchService {
             : Math.floor(totalCount / 10) + 1;        
     }
 
-    // loadEmoTotalCount() {
-    //     const totalCount = SearchApi.getInstance().getTotalCount();
-    //     const searchCounting = document.querySelector(".search-title");
-
-    //     totalCount.forEach((data) => {
-    //         searchCounting.innerHTML = `
-    //             <h2>검색 결과</h2>
-    //             <p>${data.count}</p>
-    //         `;
-    //     });
+    // setSearchCount() {
+    //     const searchTotalCount = SearchApi.getInstance().getTotalCount();
+        
+    //     searchCount = searchTotalCount 
     // }
 
     clearEmoList() {
