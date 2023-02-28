@@ -9,4 +9,6 @@ public interface LikeRepository {
     public int addLike(EmoLike emoLike);
     public int deleteLike(EmoLike emoLike);
     public int getLikeStatus(EmoLike emoLike);
+
+    public int getLikeCount(int emoId);
 }

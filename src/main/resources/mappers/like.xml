@@ -28,4 +28,12 @@
             emo_id = #{emoId}
         and user_id = #{userId}
     </delete>
+    <select id="getLikeCount" resultType="Integer">
+        select
+            count(*)
+        from
+            emo_like
+        where
+            emo_id = #{emoId}
+    </select>
 </mapper>

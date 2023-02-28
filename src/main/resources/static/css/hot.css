@@ -165,7 +165,7 @@ html {
   display: flex;
   align-items: center;
 }
-.emo-id{
+.number{
   display: flex;
   justify-content: center;
 
@@ -243,7 +243,7 @@ html {
   counter-reset: numbering;
 }
 
-.hot-info .emo-id:before{
+.hot-info .number:before{
   counter-increment: numbering;
   content: counter(numbering);
 }

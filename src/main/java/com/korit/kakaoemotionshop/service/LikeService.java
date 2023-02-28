@@ -15,7 +15,7 @@ public class LikeService {
     @Autowired
     private LikeRepository likeRepository;
 
-    public void like(int emoId, int userId) {
+    public int like(int emoId, int userId) {
         EmoLike emoLike = EmoLike.builder()
                 .emoId(emoId)
                 .userId(userId)
@@ -26,9 +26,10 @@ public class LikeService {
             throw new CustomLikeException(errorMap);
         }
         likeRepository.addLike(emoLike);
+        return likeRepository.getLikeCount(emoId);
     }
 
-    public void dislike(int emoId, int userId) {
+    public int dislike(int emoId, int userId) {
         EmoLike emoLike = EmoLike.builder()
                 .emoId(emoId)
                 .userId(userId)
@@ -38,5 +39,6 @@ public class LikeService {
             errorMap.put("likeError","좋아요를 눌러주세요 ( 취소할 사항 없음 )");
         }
         likeRepository.deleteLike(emoLike);
+        return likeRepository.getLikeCount(emoId);
     }
 }
