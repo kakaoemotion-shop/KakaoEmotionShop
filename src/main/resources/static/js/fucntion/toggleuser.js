@@ -208,18 +208,5 @@ class ToggleButton {
         }
     }
     
-    searchButton(){
-        const searchPage = document.querySelector(".search-page")
-        const searchBlank = document.querySelector(".search-blank");
-        const searchButton = document.querySelector(".searc-button");
-        
-        searchButton.onclick = () =>{
-            searchPage.classList.remove("search-hide");
-        }
-        
-        searchBlank.onclick = () =>{
-            searchPage.classList.add("search-hide");
-        }
-
-    }
+    
 }

@@ -28,7 +28,7 @@ public class LikeApi {
 
     @DeleteMapping("/emo/{emoId}/like")
     public ResponseEntity<CMRespDto<?>> dislike(@PathVariable int emoId,
-                                             @AuthenticationPrincipal PrincipalDetails principalDetails){
+                                                @AuthenticationPrincipal PrincipalDetails principalDetails){
         likeService.dislike(emoId, principalDetails.getUser().getUserId());
         return ResponseEntity
                 .ok()

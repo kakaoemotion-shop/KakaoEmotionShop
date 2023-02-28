@@ -22,6 +22,4 @@ public class EmoMst {
     private String company;
     @ApiModelProperty(value = "출시일", example = "2023-02-18")
     private String emoDate;
-
-    private EmoLike emoLike;
 }
