@@ -1,24 +1,23 @@
 window.onload = () => {
     SearchService.getInstance().clearEmoList();
     SearchService.getInstance().loadSearchEmos();
+    SearchService.getInstance().clearEmoCount();
+    SearchService.getInstance().loadSearchCounts();
     SearchService.getInstance().setMaxPage();
     SearchService.getInstance().onLoadSearch();
-    // SearchService.getInstance().searchTotalCount();
     
     ComponentEvent.getInstance().addClickSearchButton(); 
     ComponentEvent.getInstance().addScrollEventPaging(); 
+    console.log(SearchApi.getInstance().getTotalCount());
 }
 
 let maxPage = 0;
 
-// let searchCount = 0;
-
 const searchObj = {
     page: 1,
     searchValue: null,
-    count: 20
+    count: 10
 }
-
 
 
 class SearchApi {
@@ -100,20 +99,31 @@ class SearchService {
 
         maxPage = totalCount % 10 == 0 
             ? totalCount / 10 
-            : Math.floor(totalCount / 10) + 1;        
+            : Math.floor(totalCount / 10) + 1;
     }
 
-    // setSearchCount() {
-    //     const searchTotalCount = SearchApi.getInstance().getTotalCount();
-        
-    //     searchCount = searchTotalCount 
-    // }
 
+    clearEmoCount() {
+        const searchTitle = document.querySelector(".search-title");
+        searchTitle.innerHTML = "";
+    }
+
+    loadSearchCounts() {
+        const responseData = SearchApi.getInstance().getTotalCount();
+        const searchTitle = document.querySelector('.search-title');
+        console.log(responseData)
+        searchTitle.innerHTML += `
+                <h2>검색 결과</h2>
+                <p>${responseData}</p>
+        `;
+        // console.log(responseData);
+    }
+
+    
     clearEmoList() {
         const searchFlex = document.querySelector(".search-flex");
         searchFlex.innerHTML = "";
     }
-
 
     loadSearchEmos() {
         const responseData = SearchApi.getInstance().searchEmo();
@@ -122,7 +132,7 @@ class SearchService {
         responseData.forEach((data) => {
             searchFlex.innerHTML += `
             <div class="emotion-serch">
-                <div class="emotion-tilte">
+                <div class="emotion-title">
                     <a class="search-link" href="">
                         <h3>${data.emoName}</h3>
                         <h4>${data.company}</h4>
@@ -157,10 +167,6 @@ class ComponentEvent {
         const html = document.querySelector("html");
         const body = document.querySelector("body");
 
-        console.log("html client: " + html.clientHeight);
-        console.log("body offset: " + body.offsetHeight);
-        console.log("html scrollTop: " + html.scrollTop);
-
         body.onscroll = () => {
             const scrollPosition = body.offsetHeight - html.clientHeight - html.scrollTop;
         
@@ -179,11 +185,11 @@ class ComponentEvent {
             searchObj.searchValue = searchInput.value;
             searchObj.page = 1;
 
-            window.scrollTo(0,0);
-
             SearchService.getInstance().clearEmoList();
             SearchService.getInstance().setMaxPage();
             SearchService.getInstance().loadSearchEmos();
+            SearchService.getInstance().clearEmoCount();
+            SearchService.getInstance().loadSearchCounts();
         }
         
         searchInput.onkeyup = () => {
@@ -192,9 +198,5 @@ class ComponentEvent {
             }
         }
     }
-
-    // addclikLikeButtons() {
-    //     const likeButtons = 
-    // }
 
 }

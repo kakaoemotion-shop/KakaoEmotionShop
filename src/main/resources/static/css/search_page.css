@@ -16,7 +16,7 @@
 
   background-color: white;
 }
-.search-tilte{
+.search-title{
   display: flex;
   justify-content: center;
 
@@ -25,13 +25,13 @@
 
   background-color: white;
 }
-.search-tilte h2{
+.search-title h2{
   margin-top: 20px;
 
   font-size: 20px;
   font-weight: 400;
 }
-.search-tilte p{
+.search-title p{
   margin-top: 20px;
   margin-left: 10px;
 
@@ -63,7 +63,7 @@
   border-bottom: 2px solid #dbdbdb;
   background-color: rgb(255, 255, 255);
 }
-.emotion-tilte{
+.emotion-title{
   margin-top: 50px;
 
   width: 300px;
@@ -71,17 +71,17 @@
 
   background-color:  white;
 }
-.emotion-tilte h3{
+.emotion-title h3{
   font-size: 18px;
   font-weight: 800;
   text-align: left;
 
   cursor: pointer;
 }
-.emotion-tilte h3:hover{
+.emotion-title h3:hover{
   text-decoration: underline;
 }
-.emotion-tilte h4{
+.emotion-title h4{
   font-size: 15px;
   font-weight: 500;
   text-align: left;

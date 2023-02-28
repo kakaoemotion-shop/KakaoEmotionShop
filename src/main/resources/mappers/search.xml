@@ -15,8 +15,8 @@
         where
             1 = 1
         <if test="searchValue != null and searchValue != ''">
-            and em.emo_name like concat('%', #{searchValue}, '%')
-            or em.company like concat('%', #{searchValue}, '%')
+            and emo_name like concat('%', #{searchValue}, '%')
+            or company like concat('%', #{searchValue}, '%')
         </if>
 
     </select>
