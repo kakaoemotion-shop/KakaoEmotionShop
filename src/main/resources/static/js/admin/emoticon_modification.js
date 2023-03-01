@@ -171,12 +171,12 @@ class EmoModificationService {
 
 
             const emoImg = document.querySelectorAll(".emo-img")
-            
+
             responseData.emoImage.forEach((imgObj, index) => {
                 emoImg[index].src = "http://localhost:8000/image/emo/" + imgObj.saveName;
             })
 
-            
+
         }
     }
 
@@ -220,8 +220,9 @@ class ComponentEvent {
         return this.#instance
     }
 
-
+    // 이미지 수정
     addClickEventModificationButton() {
+        const imgAddButtons = document.querySelectorAll(".img-add-button")
         const modificationButton = document.querySelector(".modification-btn")
 
         modificationButton.onclick = () => {
@@ -234,7 +235,6 @@ class ComponentEvent {
             }
 
             if (confirm("이모티콘 이미지를 수정하시겠습니까?")) {
-                const imgAddButtons = document.querySelectorAll(".all-img-button")
                 const imgcancelButton = document.querySelector(".img-cencel-button")
 
                 imgcancelButton.disabled = false
@@ -254,7 +254,7 @@ class ComponentEvent {
     }
 
 
-    //도서 코드등 변경하고 이미지 버튼 활성화 
+    //이모 코드등 변경하고 이미지 버튼 활성화 
     addClickEventImgAddButton() {
         const imgFile = document.querySelector(".img-file")
         const addButton = document.querySelector(".img-add-button")
@@ -285,6 +285,7 @@ class ComponentEvent {
                         changeFlag = true;
                     }
                 });
+
 
                 if (changeFlag) {
                     const imgRegisterButton = document.querySelector(".img-modification-button");

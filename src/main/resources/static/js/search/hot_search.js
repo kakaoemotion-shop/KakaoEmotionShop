@@ -3,9 +3,9 @@ window.onload = () => {
     ToggleButton.getInstance().toggleButton();
     HotSearchService.getInstance().clearEmoList();
     HotSearchService.getInstance().loadSearchEmos();
-
+    
     HotSearchService.getInstance().setMaxPage();
-
+    
     ComponentEvent.getInstance().addScrollEventPaging();
 }
 
