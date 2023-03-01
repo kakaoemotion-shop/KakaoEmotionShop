@@ -4,6 +4,5 @@ import lombok.Data;
 
 @Data
 public class SearchNumberListDto {
-    private String category;
     private String searchValue;
 }

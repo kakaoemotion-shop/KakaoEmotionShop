@@ -25,7 +25,7 @@ public interface EmoRepository {
     public int saveEmo(EmoReqDto emoReqDto);
     public EmoMst findEmoByEmoCode(String emoCode);
 
-    public EmoImage findEmoImageByEmoCode(String emoCode);
+//    public EmoImage findEmoImageByEmoCode(String emoCode);
     public int updateEmoByEmoCode(EmoReqDto emoReqDto);
     public int deleteEmo(String EmoCode);
     public int registerEmoImages(List<EmoImage> emoImages);

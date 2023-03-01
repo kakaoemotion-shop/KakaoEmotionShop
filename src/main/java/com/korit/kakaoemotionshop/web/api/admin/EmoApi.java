@@ -130,15 +130,15 @@ public class EmoApi {
                 .body(new CMRespDto<>(HttpStatus.OK.value(), "Successfully", emoService.getEmoTotalCount(searchNumberListDto)));
     }
 
-    @GetMapping("/emo/{emoCode}")
-    public ResponseEntity<CMRespDto<Map<String, Object>>> getEmo(@PathVariable String emoCode){
-
-        Map<String, Object> responseMap = new HashMap<>();
-
-        return ResponseEntity
-                .ok()
-                .body(new CMRespDto<>(HttpStatus.OK.value(), "Successfully", emoService.getEmoAndImage(emoCode)));
-    }
+//    @GetMapping("/emo/{emoCode}")
+//    public ResponseEntity<CMRespDto<Map<String, Object>>> getEmo(@PathVariable String emoCode){
+//
+//        Map<String, Object> responseMap = new HashMap<>();
+//
+//        return ResponseEntity
+//                .ok()
+//                .body(new CMRespDto<>(HttpStatus.OK.value(), "Successfully", emoService.getEmoAndImage(emoCode)));
+//    }
 
     @GetMapping("/emos/{emoCode}")
     public ResponseEntity<CMRespDto<Map<String, Object>>> getEmoss(@PathVariable String emoCode){
