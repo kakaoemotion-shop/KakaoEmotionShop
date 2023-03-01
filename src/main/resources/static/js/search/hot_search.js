@@ -2,6 +2,9 @@ window.onload = () => {
     // console.log(HotSearchApi.getInstance().getTotalCount());
     // console.log(HotSearchApi.getInstance().searchEmo());
 
+    ToggleService.getInstance().loadlogin();
+    toggleButton.getInstance().toggleButton();
+
     HotSearchService.getInstance().clearEmoList();
     HotSearchService.getInstance().loadSearchEmos();
 
@@ -179,7 +182,7 @@ class HotSearchService {
                 </button>
                 `;
 
-                ComponentEvent.getInstance().addClickEventLikeButtonsNoLogin();
+                // ComponentEvent.getInstance().addClickEventLikeButtonsNoLogin();
 
             }else {              
                 if(data.likeId != 0){
