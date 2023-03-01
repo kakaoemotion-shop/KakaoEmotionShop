@@ -28,6 +28,21 @@ public class EmoService {
     @Autowired
     private EmoRepository emoRepository;
 
+    public Map<String, Object> getEmoAndImage(String emoCode){
+        Map<String, Object> result = new HashMap<>();
+        result.put("emoMst", emoRepository.findEmoByEmoCode(emoCode));
+        result.put("emoImage", emoRepository.findEmoImageByEmoCode(emoCode));
+
+        return result;
+    }
+
+    public Map<String, Object> getEmoAndAllImage(String emoCode){
+        Map<String, Object> resultAll = new HashMap<>();
+        resultAll.put("emoMst", emoRepository.findEmoByEmoCode(emoCode));
+        resultAll.put("emoImage", emoRepository.findEmoImageAll(emoCode));
+        return resultAll;
+    }
+
     public List<EmoMst> searchEmo(SearchReqDto searchReqDto){
         searchReqDto.setIndex();
         return emoRepository.searchEmo(searchReqDto);
@@ -48,12 +63,20 @@ public class EmoService {
         }
     }
 
+    public int getEmoTotalCount(SearchNumberListDto searchNumberListDto){
+        return emoRepository.getEmoTotalCount(searchNumberListDto);
+    }
+
     public void modifyEmo(EmoReqDto emoReqDto) {
         emoRepository.updateEmoByEmoCode(emoReqDto);
     }
 
     public void removeEmo(String emoCode) {
         emoRepository.deleteEmo(emoCode);
+    }
+
+    public void removeEmos(DeleteReqDto deleteReqDto){
+        emoRepository.deleteEmos(deleteReqDto.getEmoId());
     }
 
     public void registerEmoImages(String emoCode, List<MultipartFile> files) {
@@ -114,13 +137,5 @@ public class EmoService {
                 file.delete();
             }
         }
-    }
-
-    public int getEmoTotalCount(SearchNumberListDto searchNumberListDto){
-        return emoRepository.getEmoTotalCount(searchNumberListDto);
-    }
-
-    public void removeEmos(DeleteReqDto deleteReqDto){
-        emoRepository.deleteEmos(deleteReqDto.getEmoId());
     }
 }
