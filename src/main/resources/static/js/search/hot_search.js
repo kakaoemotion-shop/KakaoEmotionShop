@@ -22,12 +22,12 @@ const searchObj = {
     count: 10
 }
 
-const imgObj = {
-    img01: null,
-    img02: null,
-    img03: null,
-    img04: null
-}
+// const imgObj = {
+//     img01: null,
+//     img02: null,
+//     img03: null,
+//     img04: null
+// }
 
 class HotSearchApi {
     static #instance = null;
@@ -38,25 +38,25 @@ class HotSearchApi {
         return this.#instance;
     }
 
-    getTotalCount() {
-        let responseData = null;
+    // getTotalCount() {
+    //     let responseData = null;
 
-        $.ajax({
-            async: false,
-            type: "get",
-            url: "http://127.0.0.1:8000/api/hot/search/totalcount",
-            data: searchObj,
-            dataType: "json",
-            success: response => {
-                responseData = response.data;
-            },
-            error: error => {
-                console.log(error);
-            }
-        })
+    //     $.ajax({
+    //         async: false,
+    //         type: "get",
+    //         url: "http://127.0.0.1:8000/api/hot/search/totalcount",
+    //         data: searchObj,
+    //         dataType: "json",
+    //         success: response => {
+    //             responseData = response.data;
+    //         },
+    //         error: error => {
+    //             console.log(error);
+    //         }
+    //     })
 
-        return responseData;
-    }
+    //     return responseData;
+    // }
 
     searchEmo() {
         let responseData = null;
@@ -163,9 +163,10 @@ class HotSearchService {
             
             
             <p class="author">${data.company}</p>
-            <p class="buttons">
+            <div class="buttons">
+                <span class="like-count">${data.likeCount != null ? data.likeCount : 0}</span>
             
-            </p>
+            </div>
             </div>
             <img src="http://127.0.0.1:8000/image/emo/${data.saveName != null ? data.saveName : "noimg.png"}" class="emo-img">
             
@@ -177,7 +178,7 @@ class HotSearchService {
             if(principal == null) {
                 
                 Buttons[ButtonsLength + index].innerHTML += `
-                <button type="button" class="no-login-like like-button">
+                <button type="button" class="no-login-like like-button disabled">
                 <i class="fa-regular fa-heart"></i>
                 </button>
                 `;
@@ -231,12 +232,14 @@ class ComponentEvent {
     addClickEventLikeButtons() {
         const likeButtons = document.querySelectorAll(".like-buttons");
         const emoIds = document.querySelectorAll(".emo-id");
+        const likeCounts = document.querySelectorAll(".like-count")
 
         likeButtons.forEach((button, index) => {
             button.onclick = () => {
                 if(button.classList.contains("like-button")){
                     const likeCount = HotSearchApi.getInstance().setLike(emoIds[index].value);
                     if(likeCount != -1){
+                        likeCounts[index].textContent = likeCount;
                         button.classList.remove("like-button");
                         button.classList.add("dislike-button");
                     }
@@ -244,6 +247,7 @@ class ComponentEvent {
                 }else {
                     const likeCount = HotSearchApi.getInstance().setDisLike(emoIds[index].value);
                     if(likeCount != -1){
+                        likeCounts[index].textContent = likeCount;
                         button.classList.remove("dislike-button");
                         button.classList.add("like-button");
                     }
