@@ -28,6 +28,25 @@ public class EmoService {
     @Autowired
     private EmoRepository emoRepository;
 
+    public Map<String, Object> getEmoAndImage(String emoCode){
+        Map<String, Object> result = new HashMap<>();
+        result.put("emoMst", emoRepository.findEmoByEmoCode(emoCode));
+        result.put("emoImage", emoRepository.findEmoImageByEmoCode(emoCode));
+
+        return result;
+    }
+
+//    public List<EmoImage> getEmos(String emoCode) {
+//        return emoRepository.findEmoImageAll(emoCode);
+//    }
+
+    public Map<String, Object> getEmoAndAllImage(String emoCode){
+        Map<String, Object> resultAll = new HashMap<>();
+        resultAll.put("emoMst", emoRepository.findEmoByEmoCode(emoCode));
+        resultAll.put("emoImage", emoRepository.findEmoImageAll(emoCode));
+        return resultAll;
+    }
+
     public List<EmoMst> searchEmo(SearchReqDto searchReqDto){
         searchReqDto.setIndex();
         return emoRepository.searchEmo(searchReqDto);
