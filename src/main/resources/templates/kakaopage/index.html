@@ -57,15 +57,17 @@
         </nav>
 
     </header>
-    <div class="search-page">
+
+    <div class="search-page" style="display: none;">
         <div class="search-bar">
-            <input class="search-bar-input" type="text" placeholder="이모티콘을 검색해보세요!">
+            <input class="search-bar-input" type="text" placeholder="이모티콘을 검색해보세요!" 
+            onkeyup="addSearchInputEvent()">
             <button class="search-bar-button">
                 <i class="fa-solid fa-magnifying-glass"></i>
             </button>
         </div>
-        <!-- <div class="backboard"></div> -->
     </div>
+
     <div class="main">
         <img src="/static/images/main.gif" alt="" class="main-img">
     </div>
@@ -131,8 +133,27 @@
             </h4>
         </div>
     </footer>
+    
+    <script>
+        $(function() {
+            $('.search-button').click(function(){
+                if($('.search-page').css('display') == "none") {
+                    $('.search-page').show();
+                } else {
+                    $('.search-page').hide();
+                }
+            });
+        });
+    </script>
 
-
+    <script>
+        const searchInput = document.querySelector(".search-bar-input");
+        function addSearchInputEvent() {
+            if(window.event.keyCode == 13) {
+                location.href = 'http://localhost:8000/kakaopage/search';
+            }
+        }
+    </script>
 
     <script src="/static/js/account/principal.js"></script>
     <script src="/static/js/function/toggleuser.js"></script>

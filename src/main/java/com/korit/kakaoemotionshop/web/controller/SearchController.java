@@ -12,5 +12,8 @@ public class SearchController {
         return "/kakaopage/main_search";
     }
 
-
+    @GetMapping("/totalcount")
+    public String loadTotalcount() {
+        return "/kakaopage/main_search";
+    }
 }

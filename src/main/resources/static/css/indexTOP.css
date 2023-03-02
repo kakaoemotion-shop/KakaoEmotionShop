@@ -55,6 +55,8 @@
   border: none;
   outline-style: none;
   background-color: white;
+
+  cursor: pointer;
 }
 
 .mypage-button{

@@ -12,4 +12,5 @@ public class HotSearchController {
     public String loadSearch() {
         return "kakaopage/hot";
     }
+
 }
