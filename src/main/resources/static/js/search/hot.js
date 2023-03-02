@@ -19,7 +19,7 @@ let maxPage = 0;
 const searchObj = {
     page: 1,
     searchValue: null,
-    count: 10
+    count: 8
 }
 
 // const imgObj = {
@@ -38,25 +38,25 @@ class HotSearchApi {
         return this.#instance;
     }
 
-    // getTotalCount() {
-    //     let responseData = null;
+    getTotalCount() {
+        let responseData = null;
 
-    //     $.ajax({
-    //         async: false,
-    //         type: "get",
-    //         url: "http://127.0.0.1:8000/api/hot/search/totalcount",
-    //         data: searchObj,
-    //         dataType: "json",
-    //         success: response => {
-    //             responseData = response.data;
-    //         },
-    //         error: error => {
-    //             console.log(error);
-    //         }
-    //     })
+        $.ajax({
+            async: false,
+            type: "get",
+            url: "http://127.0.0.1:8000/api/hot/search/totalcount",
+            data: searchObj,
+            dataType: "json",
+            success: response => {
+                responseData = response.data;
+            },
+            error: error => {
+                console.log(error);
+            }
+        })
 
-    //     return responseData;
-    // }
+        return responseData;
+    }
 
     searchEmo() {
         let responseData = null;
@@ -130,9 +130,9 @@ class HotSearchService {
 
      setMaxPage() {
          const totalCount = HotSearchApi.getInstance().getTotalCount();
-         maxPage = totalCount % 10 == 0
-             ? totalCount / 10
-             : Math.floor(totalCount / 10) + 1;
+         maxPage = totalCount % 8 == 0
+             ? totalCount / 8
+             : Math.floor(totalCount / 8) + 1;
 
      }
 
@@ -143,65 +143,72 @@ class HotSearchService {
 
     loadSearchEmos() {
         const responseData = HotSearchApi.getInstance().searchEmo();
+        const responseData2 = HotSearchApi.getInstance().getTotalCount();
         const contentFlex = document.querySelector(".hot-info");
         const principal = PrincipalApi.getInstance().getPrincipal();
 
         const _Buttons = document.querySelectorAll(".buttons");
         const ButtonsLength = _Buttons == null ? 0 : _Buttons.length;
+        console.log(_Buttons.length)
         
         console.log(responseData)
         responseData.forEach((data, index) => {
-            contentFlex.innerHTML += `
-            <li>
-            <input type="hidden" class="emo-id" value="${data.emoId}">
-            <input type="hidden" class="like-count" value="${data.likeCount}">
-            <span class="number"></span>
-            <div class="hot-info-title">
-            
-          
-            <h2 class="emo-name">${data.emoName}</h2>
-            
-            
-            <p class="author">${data.company}</p>
-            <div class="buttons">
-                <span class="like-count">${data.likeCount != null ? data.likeCount : 0}</span>
-            
-            </div>
-            </div>
-            <img src="http://127.0.0.1:8000/image/emo/${data.saveName != null ? data.saveName : "noimg.png"}" class="emo-img">
-            
-            </li>
-            `;
-
-            const Buttons = document.querySelectorAll(".buttons");
-            
-            if(principal == null) {
+            // if (index == 3 || index == 7){
+                // console.log(index);
+                // console.log(index.key);
+                contentFlex.innerHTML += 
+                `
+                <li>
+                <input type="hidden" class="emo-id" value="${data.emoId}">
+                <input type="hidden" class="like-count" value="${data.likeCount}">
+                <span class="number"></span>
+                <div class="hot-info-title">
                 
-                Buttons[ButtonsLength + index].innerHTML += `
-                <button type="button" class="no-login-like like-button disabled">
-                <i class="fa-regular fa-heart"></i>
-                </button>
+            
+                <h2 class="emo-name">${data.emoName}</h2>
+                
+                
+                <p class="author">${data.company}</p>
+                <div class="buttons">
+                    <span class="like-count">${data.likeCount != null ? data.likeCount : 0}</span>
+                
+                </div>
+                </div>
+                <img src="http://127.0.0.1:8000/image/emo/${data.saveName != null ? data.saveName : "noimg.png"}" class="emo-img">
+                
+                </li>
                 `;
 
-                // ComponentEvent.getInstance().addClickEventLikeButtonsNoLogin();
-
-            }else {              
-                if(data.likeId != 0){
-                    console.log("ButtonLength : " + ButtonsLength);
+                const Buttons = document.querySelectorAll(".buttons");
+                
+                if(principal == null) {
+                    
                     Buttons[ButtonsLength + index].innerHTML += `
-                    <button type="button" class="like-buttons dislike-button">
-                    <i class="fa-solid fa-heart"></i>
+                    <button type="button" class="no-login-like like-button disabled">
+                    <i class="fa-regular fa-heart"></i>
                     </button>
                     `;
-                }else {
-                    Buttons[ButtonsLength + index].innerHTML += `
-                        <button type="button" class="like-buttons like-button">
-                        <i class="fa-regular fa-heart"></i>
+
+                    // ComponentEvent.getInstance().addClickEventLikeButtonsNoLogin();
+
+                }else if(principal != null ) {              
+                    if(data.likeId != 0){
+                        console.log("ButtonLength : " + ButtonsLength);
+                        Buttons[ButtonsLength + index].innerHTML += `
+                        <button type="button" class="like-buttons dislike-button">
+                        <i class="fa-solid fa-heart"></i>
                         </button>
-                    `;
+                        `;
+                    }else {
+                        Buttons[ButtonsLength + index].innerHTML += `
+                            <button type="button" class="like-buttons like-button">
+                            <i class="fa-regular fa-heart"></i>
+                            </button>
+                        `;
+                    }
+                    ComponentEvent.getInstance().addClickEventLikeButtons();
                 }
-                ComponentEvent.getInstance().addClickEventLikeButtons();
-            }
+        // }
         })
     }
 }
