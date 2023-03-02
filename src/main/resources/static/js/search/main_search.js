@@ -8,7 +8,6 @@ window.onload = () => {
     
     ComponentEvent.getInstance().addClickSearchButton(); 
     ComponentEvent.getInstance().addScrollEventPaging(); 
-    console.log(SearchApi.getInstance().getTotalCount());
 }
 
 let maxPage = 0;
@@ -131,7 +130,7 @@ class SearchService {
 
         responseData.forEach((data) => {
             searchFlex.innerHTML += `
-            <div class="emotion-serch">
+            <div class="emotion-search">
                 <div class="emotion-title">
                     <a class="search-link" href="">
                         <h3>${data.emoName}</h3>

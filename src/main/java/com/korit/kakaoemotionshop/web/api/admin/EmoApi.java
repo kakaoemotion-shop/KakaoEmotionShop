@@ -5,10 +5,7 @@ import com.korit.kakaoemotionshop.aop.annotation.ValidAspect;
 import com.korit.kakaoemotionshop.entity.EmoImage;
 import com.korit.kakaoemotionshop.entity.EmoMst;
 import com.korit.kakaoemotionshop.service.EmoService;
-import com.korit.kakaoemotionshop.web.dto.CMRespDto;
-import com.korit.kakaoemotionshop.web.dto.EmoReqDto;
-import com.korit.kakaoemotionshop.web.dto.SearchNumberListDto;
-import com.korit.kakaoemotionshop.web.dto.SearchReqDto;
+import com.korit.kakaoemotionshop.web.dto.*;
 import io.swagger.annotations.Api;
 import org.apache.tomcat.jni.File;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +17,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Api(tags = {"관리자 이모티콘 API"})
 @RestController
@@ -43,10 +42,19 @@ public class EmoApi {
     }
 
     @ParamsAspect
+    @DeleteMapping("/emos")
+    public ResponseEntity<CMRespDto<?>> removeEmos(@RequestBody DeleteReqDto deleteReqDto){
+        emoService.removeEmos(deleteReqDto);
+        return ResponseEntity
+                .ok()
+                .body(new CMRespDto<>(HttpStatus.OK.value(), "Successfully", true));
+    }
+
+    @ParamsAspect
     @ValidAspect
     @PostMapping("/emo")
     public ResponseEntity<CMRespDto<?>> registerEmo(@Valid @RequestBody EmoReqDto emoReqDto,
-                                                               BindingResult bindingResult) {
+                                                    BindingResult bindingResult) {
         emoService.registerEmo(emoReqDto);
         return ResponseEntity
                 .created(null)
@@ -54,12 +62,14 @@ public class EmoApi {
                         "Successfully", true));
     }
 
+
+
     @ParamsAspect
     @ValidAspect
     @PutMapping("/emo/{emoCode}")
     public ResponseEntity<CMRespDto<?>> modifyEmo(@PathVariable String emoCode,
-                                                    @Valid @RequestBody EmoReqDto emoReqDto,
-                                                    BindingResult bindingResult) {
+                                                  @Valid @RequestBody EmoReqDto emoReqDto,
+                                                  BindingResult bindingResult) {
         emoService.modifyEmo(emoReqDto);
         return ResponseEntity
                 .ok()
@@ -93,15 +103,15 @@ public class EmoApi {
                         "Successfully",true));
     }
 
-    @ParamsAspect
-    @GetMapping("/emo/{emoCode}/images")
-    public ResponseEntity<CMRespDto<?>> getImages(@PathVariable String emoCode) {
-        List<EmoImage> emoImages = emoService.getEmos(emoCode);
-        return ResponseEntity
-                .ok()
-                .body(new CMRespDto<>(HttpStatus.OK.value(),
-                        "Successfully",emoImages));
-    }
+//    @ParamsAspect
+//    @GetMapping("/emo/{emoCode}/images")
+//    public ResponseEntity<CMRespDto<?>> getImages(@PathVariable String emoCode) {
+//        List<EmoImage> emoImages = emoService.getEmos(emoCode);
+//        return ResponseEntity
+//                .ok()
+//                .body(new CMRespDto<>(HttpStatus.OK.value(),
+//                        "Successfully",emoImages));
+//    }
 
     @DeleteMapping("/emo/{emoCode}/image/{imageId}")
     public ResponseEntity<CMRespDto<?>> removeEmoImg(@PathVariable String emoCode,
@@ -118,6 +128,26 @@ public class EmoApi {
         return ResponseEntity
                 .ok()
                 .body(new CMRespDto<>(HttpStatus.OK.value(), "Successfully", emoService.getEmoTotalCount(searchNumberListDto)));
+    }
+
+//    @GetMapping("/emo/{emoCode}")
+//    public ResponseEntity<CMRespDto<Map<String, Object>>> getEmo(@PathVariable String emoCode){
+//
+//        Map<String, Object> responseMap = new HashMap<>();
+//
+//        return ResponseEntity
+//                .ok()
+//                .body(new CMRespDto<>(HttpStatus.OK.value(), "Successfully", emoService.getEmoAndImage(emoCode)));
+//    }
+
+    @GetMapping("/emos/{emoCode}")
+    public ResponseEntity<CMRespDto<Map<String, Object>>> getEmoss(@PathVariable String emoCode){
+
+        Map<String, Object> responseMap = new HashMap<>();
+
+        return ResponseEntity
+                .ok()
+                .body(new CMRespDto<>(HttpStatus.OK.value(), "Successfully", emoService.getEmoAndAllImage(emoCode)));
     }
 
 }

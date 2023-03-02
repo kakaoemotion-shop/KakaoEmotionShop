@@ -22,19 +22,22 @@ import java.util.*;
 
 @Service
 public class EmoService {
-
     @Value("${file.path}")
     private String filePath;
     @Autowired
     private EmoRepository emoRepository;
 
-    public Map<String, Object> getEmoAndImage(String emoCode){
-        Map<String, Object> result = new HashMap<>();
-        result.put("emoMst", emoRepository.findEmoByEmoCode(emoCode));
-        result.put("emoImage", emoRepository.findEmoImageByEmoCode(emoCode));
+//    public Map<String, Object> getEmoAndImage(String emoCode){
+//        Map<String, Object> result = new HashMap<>();
+//        result.put("emoMst", emoRepository.findEmoByEmoCode(emoCode));
+//        result.put("emoImage", emoRepository.findEmoImageByEmoCode(emoCode));
+//
+//        return result;
+//    }
 
-        return result;
-    }
+//    public List<EmoImage> getEmos(String emoCode) {
+//        return emoRepository.findEmoImageAll(emoCode);
+//    }
 
     public Map<String, Object> getEmoAndAllImage(String emoCode){
         Map<String, Object> resultAll = new HashMap<>();
@@ -63,20 +66,12 @@ public class EmoService {
         }
     }
 
-    public int getEmoTotalCount(SearchNumberListDto searchNumberListDto){
-        return emoRepository.getEmoTotalCount(searchNumberListDto);
-    }
-
     public void modifyEmo(EmoReqDto emoReqDto) {
         emoRepository.updateEmoByEmoCode(emoReqDto);
     }
 
     public void removeEmo(String emoCode) {
         emoRepository.deleteEmo(emoCode);
-    }
-
-    public void removeEmos(DeleteReqDto deleteReqDto){
-        emoRepository.deleteEmos(deleteReqDto.getEmoId());
     }
 
     public void registerEmoImages(String emoCode, List<MultipartFile> files) {
@@ -138,4 +133,13 @@ public class EmoService {
             }
         }
     }
+
+    public int getEmoTotalCount(SearchNumberListDto searchNumberListDto){
+        return emoRepository.getEmoTotalCount(searchNumberListDto);
+    }
+
+    public void removeEmos(DeleteReqDto deleteReqDto){
+        emoRepository.deleteEmos(deleteReqDto.getEmoId());
+    }
+
 }

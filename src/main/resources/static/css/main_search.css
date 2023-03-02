@@ -15,6 +15,7 @@
   width: 1124px;
 
   background-color: white;
+  /* background-color: red; */
 }
 .search-title{
   display: flex;
@@ -53,7 +54,7 @@
 
   background-color: rgb(255, 255, 255);
 }
-.emotion-serch {
+.emotion-search {
   display: flex;
   justify-content: space-around;
 

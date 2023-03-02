@@ -8,7 +8,6 @@ import java.util.List;
 
 @Mapper
 public interface SearchRepository {
-
     public int getUserSearchEmoTotalCount(SearchEmoReqDto searchEmoReqDto);
     public List<SearchEmo> userSearchEmo(SearchEmoReqDto searchEmoReqDto);
 }

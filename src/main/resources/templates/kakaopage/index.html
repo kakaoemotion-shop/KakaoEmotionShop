@@ -1,112 +1,46 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>카카오 이모티콘샵</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+        integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="/static/css/reset.css">
     <link rel="stylesheet" href="/static/css/emoimg.css">
     <link rel="stylesheet" href="/static/css/search.css">
+    <link rel="stylesheet" href="/static/css/indexTOP.css">
     <link rel="stylesheet" href="/static/css/index.css">
-    <link rel="stylesheet" href="/css/togglemenu.css">
     <link rel="stylesheet" href="/static/css/togglemenu.css">
 </head>
+
 <body>
     <div id="container">
-        <aside class="menu-aside">
-            <div class="mypage-login">
-                <div class="profile-box">
-                    <a href="" class="link-profile">
-                        <div class="profile-img">
-                            <img class="user-profile" src="https://t1.kakaocdn.net/estoreweb/images/20220905161229/profile_default.png" alt="사용자">
-                        </div>
-                        <span class="login">로그인></span>
-                    </a>
-                </div>
-                <div class="mypage-info">
-                    <ul class="mypage-box">
-                        <li class="mypage-home">
-                            <a href="" class="mypage-link">
-                                <i class="fa-regular fa-face-smile"></i>
-                                <p class="mypage-chart">구매내역</p>
-                            </a>
-                        </li>
-                        <li class="mypage-new">
-                            <a href="" class="mypage-link">
-                                <i class="fa-solid fa-gift"></i>
-                                <p class="mypage-chart">선물함</p>
-                            </a>
-                        </li>
-                        <li mypage="mypage-popularity">
-                            <a href="" class="mypage-link">
-                                <i class="fa-solid fa-ticket-simple"></i>
-                                <p class="mypage-chart">쿠폰함</p>
-                            </a>
-                        </li>
-                        <li class="mypage-style">
-                            <a href="" class="mypage-link">
-                                <i class="fa-regular fa-heart"></i>
-                                <p class="mypage-chart">좋아요</p>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <div>
-                <ul class="abc">
-                    <li class="abc-li">
-                        <a href="/index" class="mypage-buttons">홈</a>
-                    </li>
-                    <li class="abc-li">
-                        <a href="/main/newemoticon" class="mypage-buttons">신규</a>
-                    </li>
-                    <li class="abc-li">
-                        <a href="/main/hot" class="mypage-buttons">인기</a>
-                    </li>
-                    <li class="abc-li">
-                        <a href="" class="mypage-buttons">스타일</a>
-                    </li>
-                </ul>
-            </div>
-            <div>
-                <ul class="abcd">
-                    <li class="nqp-inform">
-                        <a href="https://e.kakao.com/notices" class="nqp-link">새소식</a>
-                    </li>
-                    <li class="abcd-a">
-                        <a href="https://e.kakao.com/faq" class="nqp-link">자주묻는 질문</a>
-                    </li>
-                    <li class="abcd-a">
-                        <a href="https://e.kakao.com/number" class="nqp-link">이모티콘 일련번호 입력하기</a>
-                    </li>
-                </ul>
-            </div>
-            <div class="company-footer">
-                <div>
-                    <a href="" class="company-link">
-                        <span class="company-kakao">kakao</span><span class="company-emoticon">emoticon</span><span class="company-shop">shop</span>
-                    </a>
-                </div>
-                <div>
-                    <a href="https://www.kakaocorp.com" class="company-link2">@ kakao Corp</a>
-                </div>
-            </div>
-        </aside>
+        <div class="aside-container aside-hide">
+            <aside class="menu-aside">
+            </aside>
+            <div class="aside-blank"></div>
+        </div>
     </div>
     <header class="header">
         <div class="header-top">
-            <button class="toggle-button">
-              <i class="fa-solid fa-bars"></i>
-            </button>
+            <div>
+                <button class="toggle-button">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+            </div>
 
             <a class="logo-button">
                 <h1>kakao<span>emoticon</span> shop</h1>
             </a>
 
             <button class="search-button">
-              <i class="fa-solid fa-magnifying-glass"></i>
+                <i class="fa-solid fa-magnifying-glass"></i>
             </button>
 
             <button class="mypage-button">
@@ -119,7 +53,7 @@
                 <li class="menu-list-button"><a href="/index">홈</a></li>
                 <li class="menu-list-button"><a href="/main/newemoticon">신규</a></liu>
                 <li class="menu-list-button"><a href="/main/hot">인기</a></li>
-              </ul>
+            </ul>
         </nav>
 
     </header>
@@ -130,13 +64,14 @@
                 <i class="fa-solid fa-magnifying-glass"></i>
             </button>
         </div>
+        <!-- <div class="backboard"></div> -->
     </div>
     <div class="main">
         <img src="/static/images/main.gif" alt="" class="main-img">
     </div>
 
     <div class="content">
-    
+
         <div class="new">
             <a href="/main/newemoticon">
                 <h1 class="new-title"><a href="">신규 이모티콘<i class="fa-solid fa-chevron-right"></i></a></h1>
@@ -149,182 +84,27 @@
                             <h2 class="emo-name">이모티콘 이름1</h2>
                         </a>
                     </li>
-                    <li>
-                        <a class="index-link" href="">
-                            <img src="/static/images/noimg.jpg" alt="" class="emo-img">
-                            <h2 class="emo-name">이모티콘 이름1</h2>
-                        </a>
-                    </li>
-                    <li>
-                        <a class="index-link" href="">
-                            <img src="/static/images/noimg.jpg" alt="" class="emo-img">
-                            <h2 class="emo-name">이모티콘 이름1</h2>
-                        </a>
-                    </li>
-                    <li>
-                        <a class="index-link" href="">
-                            <img src="/static/images/noimg.jpg" alt="" class="emo-img">
-                            <h2 class="emo-name">이모티콘 이름1</h2>
-                        </a>
-                    </li>
-                    <li>
-                        <a class="index-link" href="">
-                            <img src="/static/images/noimg.jpg" alt="" class="emo-img">
-                            <h2 class="emo-name">이모티콘 이름1</h2>
-                        </a>
-                    </li>
-                    <li>
-                        <a class="index-link" href="">
-                            <img src="/static/images/noimg.jpg" alt="" class="emo-img">
-                            <h2 class="emo-name">이모티콘 이름1</h2>
-                        </a>
-                    </li>
-                    <li>
-                        <a class="index-link" href="">
-                            <img src="/static/images/noimg.jpg" alt="" class="emo-img">
-                            <h2 class="emo-name">이모티콘 이름1</h2>
-                        </a>
-                    </li>
-                    <li>
-                        <a class="index-link" href="">
-                            <img src="/static/images/noimg.jpg" alt="" class="emo-img">
-                            <h2 class="emo-name">이모티콘 이름1</h2>
-                        </a>
-                    </li>
-                    <li>
-                        <a class="index-link" href="">
-                            <img src="/static/images/noimg.jpg" alt="" class="emo-img">
-                            <h2 class="emo-name">이모티콘 이름1</h2>
-                        </a>
-                    </li>
-                    <li>
-                        <a class="index-link" href="">
-                            <img src="/static/images/noimg.jpg" alt="" class="emo-img">
-                            <h2 class="emo-name">이모티콘 이름1</h2>
-                        </a>
-                    </li>
-                    
                 </ul>
             </div>
         </div>
-    
+
         <div class="hot">
             <a href="/main/hot">
                 <h1 class="hot-title"><a href="">인기 이모티콘<i class="fa-solid fa-chevron-right"></i></a></h1>
             </a>
             <div class="hot-emotion">
                 <ul class="hot-list">
-                  <li>
-                      <a class="index-hot-link" href="/main/detail">
-                          <span class="emo-id">1</span>
-                          <div class="hot-sub-list">
-                            <h2 class="emo-name">이모티콘 이름1</h2>
-                            <p class="author">작가 이름1</p>
-                          </div>
-                          <img src="/static/images/noimg.jpg" alt="" class="emo-img">
+                    <li>
+                        <a class="index-hot-link" href="/main/detail">
+                            <span class="emo-id">1</span>
+                            <div class="hot-sub-list">
+                                <h2 class="emo-name">이모티콘 이름1</h2>
+                                <p class="author">작가 이름1</p>
+                            </div>
+                            <img src="/static/images/noimg.jpg" alt="" class="emo-img">
 
-                      </a>
-                  </li>
-                  <li>
-                      <a class="index-hot-link" href="/main/detail">
-                          <span class="emo-id">1</span>
-                          <div class="hot-sub-list">
-                            <h2 class="emo-name">이모티콘 이름1</h2>
-                            <p class="author">작가 이름1</p>
-                          </div>
-                          <img src="/static/images/noimg.jpg" alt="" class="emo-img">
-
-                      </a>
-                  </li>
-                  <li>
-                      <a class="index-hot-link" href="/main/detail">
-                          <span class="emo-id">1</span>
-                          <div class="hot-sub-list">
-                            <h2 class="emo-name">이모티콘 이름1</h2>
-                            <p class="author">작가 이름1</p>
-                          </div>
-                          <img src="/static/images/noimg.jpg" alt="" class="emo-img">
-
-                      </a>
-                  </li>
-                  <li>
-                      <a class="index-hot-link" href="/main/detail">
-                          <span class="emo-id">1</span>
-                          <div class="hot-sub-list">
-                            <h2 class="emo-name">이모티콘 이름1</h2>
-                            <p class="author">작가 이름1</p>
-                          </div>
-                          <img src="/static/images/noimg.jpg" alt="" class="emo-img">
-
-                      </a>
-                  </li>
-                  <li>
-                      <a class="index-hot-link" href="/main/detail">
-                          <span class="emo-id">1</span>
-                          <div class="hot-sub-list">
-                            <h2 class="emo-name">이모티콘 이름1</h2>
-                            <p class="author">작가 이름1</p>
-                          </div>
-                          <img src="/static/images/noimg.jpg" alt="" class="emo-img">
-
-                      </a>
-                  </li>
-                  <li>
-                      <a class="index-hot-link" href="/main/detail">
-                          <span class="emo-id">1</span>
-                          <div class="hot-sub-list">
-                            <h2 class="emo-name">이모티콘 이름1</h2>
-                            <p class="author">작가 이름1</p>
-                          </div>
-                          <img src="/static/images/noimg.jpg" alt="" class="emo-img">
-
-                      </a>
-                  </li>
-                  <li>
-                      <a class="index-hot-link" href="/main/detail">
-                          <span class="emo-id">1</span>
-                          <div class="hot-sub-list">
-                            <h2 class="emo-name">이모티콘 이름1</h2>
-                            <p class="author">작가 이름1</p>
-                          </div>
-                          <img src="/static/images/noimg.jpg" alt="" class="emo-img">
-
-                      </a>
-                  </li>
-                  <li>
-                      <a class="index-hot-link" href="/main/detail">
-                          <span class="emo-id">1</span>
-                          <div class="hot-sub-list">
-                            <h2 class="emo-name">이모티콘 이름1</h2>
-                            <p class="author">작가 이름1</p>
-                          </div>
-                          <img src="/static/images/noimg.jpg" alt="" class="emo-img">
-
-                      </a>
-                  </li>
-                  <li>
-                      <a class="index-hot-link" href="/main/detail">
-                          <span class="emo-id">1</span>
-                          <div class="hot-sub-list">
-                            <h2 class="emo-name">이모티콘 이름1</h2>
-                            <p class="author">작가 이름1</p>
-                          </div>
-                          <img src="/static/images/noimg.jpg" alt="" class="emo-img">
-
-                      </a>
-                  </li>
-                  <li>
-                      <a class="index-hot-link" href="/main/detail">
-                          <span class="emo-id">1</span>
-                          <div class="hot-sub-list">
-                            <h2 class="emo-name">이모티콘 이름1</h2>
-                            <p class="author">작가 이름1</p>
-                          </div>
-                          <img src="/static/images/noimg.jpg" alt="" class="emo-img">
-
-                      </a>
-                  </li>
-                  
+                        </a>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -332,27 +112,31 @@
 
     <footer class="footer">
         <div class="info">
-          <h3 class="searvice-info">
-            <a href="">이용약관</a>
-            <a href="">유료이용안내</a>
-            <a href="">개인정보처리방침</a>
-            <a href="">기업고객</a>
-            <a href="">문의하기</a>
-            <a href="">공정위사업자정보</a>
-            <a href="">(주) 카카오</a>
-          </h3>
-          <h4 class="warp-info">
-            카카오 이모티콘샵에서 판매되는 콘텐츠의 저작권은 콘텐츠 제공자에게 있으며, 이를 무단 이용하는 경우 저작권법 등에 따라 처벌될 수 있습니다.
-            <br/>
-            <br/>
-            대표: 홍은택 사업자등록번호: 120-81-47521 통신판매업신고번호: 제2015-제주아라-0032호
-            <br/>
-            주소: 제주특별자치도 제주시 첨단로 242(영평동) 호스팅사업자: (주)카카오고객센터 1577-3754 메일: help.notice@kakaocorp.com
-          </h4>
+            <h3 class="searvice-info">
+                <a href="">이용약관</a>
+                <a href="">유료이용안내</a>
+                <a href="">개인정보처리방침</a>
+                <a href="">기업고객</a>
+                <a href="">문의하기</a>
+                <a href="">공정위사업자정보</a>
+                <a href="">(주) 카카오</a>
+            </h3>
+            <h4 class="warp-info">
+                카카오 이모티콘샵에서 판매되는 콘텐츠의 저작권은 콘텐츠 제공자에게 있으며, 이를 무단 이용하는 경우 저작권법 등에 따라 처벌될 수 있습니다.
+                <br />
+                <br />
+                대표: 홍은택 사업자등록번호: 120-81-47521 통신판매업신고번호: 제2015-제주아라-0032호
+                <br />
+                주소: 제주특별자치도 제주시 첨단로 242(영평동) 호스팅사업자: (주)카카오고객센터 1577-3754 메일: help.notice@kakaocorp.com
+            </h4>
         </div>
     </footer>
 
 
 
+    <script src="/static/js/account/principal.js"></script>
+    <script src="/static/js/function/toggleuser.js"></script>
+    <script src="/static/js/function/index.js"></script>
 </body>
+
 </html>

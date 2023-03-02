@@ -5,9 +5,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/admin")
-public class AdminController {
+@RequestMapping("/hot/search")
+public class HotSearchController {
 
-    @GetMapping("/emo")
-    public String registerEmo() { return "admin/emotion_register"; }
+    @GetMapping("")
+    public String loadSearch() {
+        return "kakaopage/hot";
+    }
 }
