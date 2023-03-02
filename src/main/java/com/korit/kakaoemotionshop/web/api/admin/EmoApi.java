@@ -29,15 +29,15 @@ public class EmoApi {
     @Autowired
     private EmoService emoService;
 
-    @GetMapping("/emo/{emoCode}")
-    public ResponseEntity<CMRespDto<Map<String, Object>>> getEmo(@PathVariable String emoCode){
-
-        Map<String, Object> responseMap = new HashMap<>();
-
-        return ResponseEntity
-                .ok()
-                .body(new CMRespDto<>(HttpStatus.OK.value(), "Successfully", emoService.getEmoAndImage(emoCode)));
-    }
+//    @GetMapping("/emo/{emoCode}")
+//    public ResponseEntity<CMRespDto<Map<String, Object>>> getEmo(@PathVariable String emoCode){
+//
+//        Map<String, Object> responseMap = new HashMap<>();
+//
+//        return ResponseEntity
+//                .ok()
+//                .body(new CMRespDto<>(HttpStatus.OK.value(), "Successfully", emoService.getEmoAndImage(emoCode)));
+//    }
     @GetMapping("/emos/{emoCode}")
     public ResponseEntity<CMRespDto<Map<String, Object>>> getEmos(@PathVariable String emoCode){
 

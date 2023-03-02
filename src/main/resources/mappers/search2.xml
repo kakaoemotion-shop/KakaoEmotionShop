@@ -3,10 +3,10 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.korit.kakaoemotionshop.repository.HotSearchRepository">
+<mapper namespace="com.korit.kakaoemotionshop.repository.SearchRepository">
 
     <select id="getUserSearchEmoTotalCount"
-            parameterType="com.korit.kakaoemotionshop.web.dto.HotSearchReqDto"
+            parameterType="com.korit.kakaoemotionshop.web.dto.SearchEmoReqDto"
             resultType="Integer">
         select
             count(*)
@@ -14,15 +14,16 @@
             emo_mst
         where
             1 = 1
-        <if test='searchValue != null and searchValue != ""'>
-            and (emo_name like concat('%', #{searchValue}, '%')
-            or company like concat('%', #{searchValue}, '%'))
+        <if test="searchValue != null and searchValue != ''">
+            and emo_name like concat('%', #{searchValue}, '%')
+            or company like concat('%', #{searchValue}, '%')
         </if>
+
     </select>
 
     <select id="userSearchEmo"
-            parameterType="com.korit.kakaoemotionshop.web.dto.HotSearchReqDto"
-            resultType="com.korit.kakaoemotionshop.entity.HotSearchEmo">
+            parameterType="com.korit.kakaoemotionshop.web.dto.SearchEmoReqDto"
+            resultType="com.korit.kakaoemotionshop.entity.SearchEmo">
         select
             em.emo_id as emoId,
             em.emo_code as emoCode,
@@ -35,26 +36,23 @@
         from
             emo_mst em
             left outer join emo_image ei
-                on(em.emo_code = ei.emo_code)
+                on(ei.emo_code = em.emo_code)
             left outer join emo_like el
-                on( el.emo_id = em.emo_id and el.user_id = #{userId})
+                on(el.emo_id = em.emo_id and el.user_id = #{userId})
             left outer join (select
                                 emo_id,
                                 count(emo_id) as like_count
                             from
                                 emo_like
                             group by
-                                emo_id) lc on (lc.emo_id = em.emo_id)
+                                emo_id) lc on(lc.emo_id = em.emo_id)
         where
             1 = 1
-        <if test='searchValue != null and searchValue != ""'>
-            and (emo_name like concat('%', #{searchValue}, '%')
+        <if test="searchValue != null and searchValue != ''">
+            and emo_name like concat('%', #{searchValue}, '%')
             or company like concat('%', #{searchValue}, '%')
         </if>
-
-        limit #{index}, #{count}
-
+        limit #{index}, #{count};
     </select>
-
 
 </mapper>

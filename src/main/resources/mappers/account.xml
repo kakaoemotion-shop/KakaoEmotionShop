@@ -87,4 +87,6 @@
         values (0, #{userId}, 1, now(), now())
     </insert>
 
+
 </mapper>
+

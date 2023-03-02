@@ -27,14 +27,14 @@ public class EmoService {
     private String filePath;
     @Autowired
     private EmoRepository emoRepository;
-
-    public Map<String, Object> getEmoAndImage(String emoCode){
-        Map<String, Object> result = new HashMap<>();
-        result.put("emoMst", emoRepository.findEmoByEmoCode(emoCode));
-        result.put("emoImage", emoRepository.findEmoImageByEmoCode(emoCode));
-
-        return result;
-    }
+//
+//    public Map<String, Object> getEmoAndImage(String emoCode){
+//        Map<String, Object> result = new HashMap<>();
+//        result.put("emoMst", emoRepository.findEmoByEmoCode(emoCode));
+//        result.put("emoImage", emoRepository.findEmoImageByEmoCode(emoCode));
+//
+//        return result;
+//    }
 
     public List<EmoImage> getEmos(String emoCode) {
         return emoRepository.findEmoImageAll(emoCode);

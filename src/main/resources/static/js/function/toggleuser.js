@@ -175,9 +175,9 @@ class ToggleService {
                         </div>
                     </div>
                 
-                `
+                    `
             }
-            </ul>
+                </ul>
         `;
     }
 
@@ -207,6 +207,33 @@ class ToggleButton {
             asideContainer.classList.add("aside-hide");
         }
     }
-    
-    
+
+    logoutButton() {
+        const mypageButton = document.querySelector(".mypage-button");
+        const principal = PrincipalApi.getInstance().getPrincipal();
+
+        mypageButton.onclick = () => {
+            if (principal != null) {
+                if (confirm("로그아웃하시겠습니까?")) {
+                    location.href = "/logout"
+                }
+            } else {
+                location.href = "/account/login"
+            }
+        }
+        mypageButton.innerHTML = `
+        ${principal == null
+                ? `
+                <a href="/account/login" class = "login">
+                <img src="/static/images/profile_default.png" alt="">
+                </a>
+                `
+                : `
+                <a href= "/index" class="logout">ㅃ2</a>
+                
+        `
+
+            }
+    `
+    }
 }

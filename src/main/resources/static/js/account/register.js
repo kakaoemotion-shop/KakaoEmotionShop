@@ -112,3 +112,16 @@ class User {
         this.email = email;
     }
 }
+
+class LogoutApi {
+    static #instance = null;
+    static getInstance() {
+        if(this.#instance == null) {
+            this.#instance = new LogoutApi();
+        }
+        return this.#instance;
+    }
+
+  
+}
+
