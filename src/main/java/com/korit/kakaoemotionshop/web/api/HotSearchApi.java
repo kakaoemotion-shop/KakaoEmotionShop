@@ -43,4 +43,18 @@ public class HotSearchApi {
                         "Successfully",hotSearchService.getSearchTotalCount(hotSearchReqDto)));
 
     }
+
+    @GetMapping("/mypage/like")
+    public ResponseEntity<CMRespDto<?>> getUerLike(HotSearchReqDto hotSearchReqDto,
+                                               @AuthenticationPrincipal PrincipalDetails principalDetails) {
+        if(principalDetails != null) {
+            hotSearchReqDto.setUserId(principalDetails.getUser().getUserId());
+        }
+
+        return ResponseEntity
+                .ok()
+                .body(new CMRespDto<>(HttpStatus.OK.value(),
+                        "Successfully",hotSearchService.getLikeEmos(hotSearchReqDto)));
+
+    }
 }

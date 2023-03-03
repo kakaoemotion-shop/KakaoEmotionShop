@@ -11,4 +11,5 @@ public interface LikeRepository {
     public int getLikeStatus(EmoLike emoLike);
 
     public int getLikeCount(int emoId);
+
 }
