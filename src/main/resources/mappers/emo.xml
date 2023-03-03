@@ -65,9 +65,10 @@
             emo_code = #{emoCode}
     </select>
 
-    <select id="findEmoImageAll" resultType="com.korit.kakaoemotionshop.entity.EmoImage">
+    <select id="findEmoImageOne" resultType="com.korit.kakaoemotionshop.entity.EmoImage">
         select
-            image_id as imageId,
+            min(cast(ei.image_id as unsigned)) as imageId,
+            image_seq as imageSeq,
             emo_code as emoCode,
             save_name as saveName,
             origin_name as originName
@@ -75,11 +76,46 @@
             emo_image
         where
             emo_code = #{emoCode}
+        order by
+            emoCode,
+            imageSeq
+    </select>
+
+    <select id="findEmoImageByEmoCode" resultType="com.korit.kakaoemotionshop.entity.EmoImage">
+        select
+            image_id as imageId,
+            image_seq as imageSeq,
+            emo_code as emoCode,
+            save_name as saveName,
+            origin_name as originName
+        from
+            emo_image
+        where
+            emo_code = #{emoCode}
+        order by
+            emoCode,
+            imageSeq
+    </select>
+    <select id="findEmoImageAll" resultType="com.korit.kakaoemotionshop.entity.EmoImage">
+        select
+            image_id as imageId,
+            image_seq as imageSeq,
+            emo_code as emoCode,
+            save_name as saveName,
+            origin_name as originName
+        from
+            emo_image
+        where
+            emo_code = #{emoCode}
+        order by
+            emoCode,
+            imageSeq
     </select>
 
     <select id="findEmoImageByImageId" resultType="com.korit.kakaoemotionshop.entity.EmoImage">
         select
             image_id as imageId,
+            image_seq as imageSeq,
             emo_code as emoCode,
             save_name as saveName,
             origin_name as originName
@@ -87,7 +123,11 @@
             emo_image
         where
             image_id = #{imageId}
+        order by
+            emoCode,
+            imageSeq
     </select>
+
 
     <insert id="saveEmo" parameterType="com.korit.kakaoemotionshop.web.dto.EmoReqDto">
         insert into emo_mst
@@ -98,8 +138,8 @@
     <insert id="registerEmoImages" parameterType="list">
         insert into emo_image
         values
-        <foreach collection="list" item="file" separator=",">
-            (0, #{file.emoCode}, #{file.saveName}, #{file.originName})
+        <foreach collection="list" index="index" item="file" separator=",">
+            (0, 1 + #{index}, #{file.emoCode}, #{file.saveName}, #{file.originName})
         </foreach>
     </insert>
 

@@ -31,7 +31,7 @@ class SearchService{
         $.ajax({
             async: false,
             type: 'get',
-            url: 'http://localhost:8000/api/admin/emos',
+            url: 'http://127.0.0.1:8000/api/admin/emos',
             data: emoSearchObj,
             dataType: 'json',
             success: response => {
@@ -52,7 +52,7 @@ class SearchService{
         $.ajax({
             async: false,
             type: 'get',
-            url: 'http://localhost:8000/api/admin/emos/totalcount',
+            url: 'http://127.0.0.1:8000/api/admin/emos/totalcount',
             data:{
                 "searchValue" : emoSearchObj.searchValue
             },
@@ -78,7 +78,7 @@ class SearchService{
                 {emoId: deleteArray}
             ),
             dataType:"json",
-            url: "http://localhost:8000/api/admin/emos",
+            url: "http://127.0.0.1:8000/api/admin/emos",
             success: response => {
                 console.log(response)
                 returnData = true
@@ -115,7 +115,7 @@ class SearchApi{
                     <td>${data.emoName}</td>
                     <td>${data.company}</td>
                     <td>${data.emoDate}</td>
-                    <td><a></a><i class="fa-solid fa-square-pen"></i></td>
+                    <td><a href="/templates/admin/emotion_modification.html?emoCode=${data.emoCode}"><i class="fa-solid fa-square-pen"></i></td>
                 </tr>
             `
         })    

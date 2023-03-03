@@ -22,5 +22,9 @@ public class KakaoEmoController {
     public String detailpage() {
         return "kakaopage/detailpage";
     }
+    @GetMapping("/search")
+    public String searchPage() {
+        return "kakaopage/search_page";
+    }
 
 }

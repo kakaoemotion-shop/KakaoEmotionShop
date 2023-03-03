@@ -29,15 +29,6 @@ public class EmoApi {
     @Autowired
     private EmoService emoService;
 
-    @GetMapping("/emo/{emoCode}")
-    public ResponseEntity<CMRespDto<Map<String, Object>>> getEmo(@PathVariable String emoCode){
-
-        Map<String, Object> responseMap = new HashMap<>();
-
-        return ResponseEntity
-                .ok()
-                .body(new CMRespDto<>(HttpStatus.OK.value(), "Successfully", emoService.getEmoAndImage(emoCode)));
-    }
     @GetMapping("/emos/{emoCode}")
     public ResponseEntity<CMRespDto<Map<String, Object>>> getEmoss(@PathVariable String emoCode){
 
@@ -115,6 +106,9 @@ public class EmoApi {
     @PostMapping("/emo/{emoCode}/images")
     public ResponseEntity<CMRespDto<?>> registerEmoImg(@PathVariable String emoCode,
                                                        @RequestPart List<MultipartFile> files) {
+        files.forEach(file -> {
+            System.out.println(file.getOriginalFilename());
+        });
         emoService.registerEmoImages(emoCode, files);
 
 //        for (MultipartFile file : files) {
@@ -127,15 +121,15 @@ public class EmoApi {
                         "Successfully",true));
     }
 
-//    @ParamsAspect
-//    @GetMapping("/emo/{emoCode}/images")
-//    public ResponseEntity<CMRespDto<?>> getImages(@PathVariable String emoCode) {
-//        List<EmoImage> emoImages = emoService.getEmos(emoCode);
-//        return ResponseEntity
-//                .ok()
-//                .body(new CMRespDto<>(HttpStatus.OK.value(),
-//                        "Successfully",emoImages));
-//    }
+    @ParamsAspect
+    @GetMapping("/emo/{emoCode}/images")
+    public ResponseEntity<CMRespDto<?>> getImages(@PathVariable String emoCode) {
+        List<EmoImage> emoImages = emoService.getEmos(emoCode);
+        return ResponseEntity
+                .ok()
+                .body(new CMRespDto<>(HttpStatus.OK.value(),
+                        "Successfully",emoImages));
+    }
 
     @DeleteMapping("/emo/{emoCode}/image/{imageId}")
     public ResponseEntity<CMRespDto<?>> removeEmoImg(@PathVariable String emoCode,

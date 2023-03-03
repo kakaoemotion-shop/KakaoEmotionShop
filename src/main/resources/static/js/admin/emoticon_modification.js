@@ -1,13 +1,9 @@
 window.onload = () => {
     EmoModificationService.getInstance().setEmoCode()
     EmoModificationService.getInstance().loadEmoAndImageData()
-
     ComponentEvent.getInstance().addClickEventModificationButton()
-    ComponentEvent.getInstance().addClickEventImgAddButton()
     ComponentEvent.getInstance().addChangeEventImgFile()
     ComponentEvent.getInstance().addClickEventImgModificationButton()
-    ComponentEvent.getInstance().addClickEventImgCancelButton()
-
 }
 
 const emoObj = {
@@ -17,14 +13,10 @@ const emoObj = {
     emoDate: ""
 }
 
-const imgObj = {
-    imageId: null,
-    emoCode: null,
-    saveName: null,
-    originName: null
-}
+let imgList = null;
 
 const fileObj = {
+    imageSeqs: new Array(),
     files: new Array(),
     formData: new FormData()
 }
@@ -37,7 +29,7 @@ class EmoModificationApi {
         }
         return this.#instance
     }
-
+    //이미지, 이모티콘 정보 들고오기 
     getEmoAndImage() {
         let responseData = null
 
@@ -57,7 +49,7 @@ class EmoModificationApi {
     }
 
 
-
+    //emoticon 정보변경 (이미지x)
     modifyEmo() {
         let successFlag = false
 
@@ -79,7 +71,7 @@ class EmoModificationApi {
 
         return successFlag
     }
-
+    //이미지 제거
     removeImg() {
         let successFlag = false
 
@@ -98,7 +90,7 @@ class EmoModificationApi {
         })
         return successFlag
     }
-
+    //이미지 등록
     registerImg() {
 
         $.ajax({
@@ -162,20 +154,15 @@ class EmoModificationService {
         modificationInputs[2].value = responseData.emoMst.company
         modificationInputs[3].value = responseData.emoMst.emoDate
 
-        console.log(responseData)
         if (responseData.emoImage != null) {
-            imgObj.imageId = responseData.emoImage.imageId
-            imgObj.emoCode = responseData.emoImage.emoCode
-            imgObj.saveName = responseData.emoImage.saveName
-            imgObj.originName = responseData.emoImage.originName
-
-
+            imgList = responseData.emoImage;
+            console.log(imgList)
             const emoImg = document.querySelectorAll(".emo-img")
             
             responseData.emoImage.forEach((imgObj, index) => {
                 emoImg[index].src = "http://localhost:8000/image/emo/" + imgObj.saveName;
             })
-
+            
             
         }
     }
@@ -226,62 +213,30 @@ class ComponentEvent {
 
         modificationButton.onclick = () => {
 
-            EmoModificationService.getInstance().setEmoObjValues()
-            const successFlag = EmoModificationApi.getInstance().modifyEmo()
-
-            if (!successFlag) {
-                return
-            }
-
-            if (confirm("이모티콘 이미지를 수정하시겠습니까?")) {
-                const imgAddButtons = document.querySelectorAll(".all-img-button")
-                const imgcancelButton = document.querySelector(".img-cencel-button")
-
-                imgcancelButton.disabled = false
-
-                imgAddButtons.forEach((button, index) => {
-                    button.disabled = false;
-                    const imgFiles = document.querySelectorAll(".img-file");
-                    button.onclick = () => {
-                        imgFiles[index].click();
-                    }
-                })
-
-            } else {
-                location.reload()
-            }
+            EmoModificationService.getInstance().setEmoObjValues();
+            const successFlag = EmoModificationApi.getInstance().modifyEmo();
         }
     }
 
-
-    //도서 코드등 변경하고 이미지 버튼 활성화 
-    addClickEventImgAddButton() {
-        const imgFile = document.querySelector(".img-file")
-        const addButton = document.querySelector(".img-add-button")
-
-        addButton.onclick = () => {
-            imgFile.click()
-        }
-    }
-
-    //이미지 불러오기 
     addChangeEventImgFile() {
-        const imgFiles = document.querySelectorAll(".img-file")
+        const imgAddButtons = document.querySelectorAll(".img-add-button");
+        const imgFiles = document.querySelectorAll(".img-file");
 
 
-        imgFiles.forEach((imgFile) => {
+        imgAddButtons.forEach((button, index) => {
+            button.onclick = () => {
+                imgFiles[index].click();
+            }
+        });
+
+        imgFiles.forEach((imgFile, index) => {
             imgFile.onchange = () => {
                 const formData = new FormData(document.querySelector(".img-form"));
                 let changeFlag = false;
 
-                fileObj.files.pop();
-
                 formData.forEach((value, key) => {
-                    console.log(value)
-                    console.log(key)
-
-                    if (value.size != 0) {
-                        fileObj.files.push(value);
+                    if (imgFile.getAttribute("name") == key && value.size != 0) {
+                        
                         changeFlag = true;
                     }
                 });
@@ -295,10 +250,28 @@ class ComponentEvent {
             };
         });
     }
-    //이지미 객체는 json 형태로 보내지 못하며 무조건 formData 객체로 보낼수 있으며 java 에서 MultipartFile이 받는다  
 
+    
+    addClickEventImgOnChangeButton() {
+        const imgModificationButton = document.querySelector(".img-modification-button");
 
-    //이미지 수정작업 
+        imgModificationButton.onclick = () => {
+            fileObj.formData.append("files", fileObj.files[0]);
+            
+            let successFlag = true;
+
+            if(imgObj.imageId != null) {
+                successFlag = EmoModificationApi.getInstance().removeImg();
+            }
+
+            if(successFlag) {
+                EmoModificationApi.getInstance().registerImg();
+            }
+            
+        }
+    }
+ 
+
     addClickEventImgModificationButton() {
         const imgModificationButton = document.querySelector(".img-modification-button")
 
@@ -306,18 +279,7 @@ class ComponentEvent {
             for (let i = 0; i < fileObj.files.length; i++) {
                 fileObj.formData.append("files", fileObj.files[i]);
             }
-            EmoRegisterApi.getInstance().registerImg();
-        }
-    }
-
-    // 이미지 수정 Alert 
-    addClickEventImgCancelButton() {
-        const imgCancelButton = document.querySelector(".img-cencel-button")
-
-        imgCancelButton.onclick = () => {
-            if (confirm("정말로 이미지 수정을 취소하시겠습니까?")) {
-                location.reload()
-            }
+            EmoModificationApi.getInstance().registerImg();
         }
     }
 }

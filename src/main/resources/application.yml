@@ -2,6 +2,10 @@ server:
   port: 8000
 
 spring:
+  servlet:
+    multipart:
+      max-request-size: 200MB
+      max-file-size: 200MB
   mvc:
     static-path-pattern: /static/**
     pathmatch:
@@ -18,4 +22,4 @@ mybatis:
     - /mappers/*.xml
 
 file:
-  path: C:\project\KakaoEmotionShop\upload\
+  path: C:/project/KakaoEmotionShop/upload/
