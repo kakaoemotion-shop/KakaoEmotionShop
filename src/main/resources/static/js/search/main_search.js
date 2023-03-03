@@ -1,8 +1,10 @@
 window.onload = () => {
     SearchService.getInstance().clearEmoList();
     SearchService.getInstance().loadSearchEmos();
+
     SearchService.getInstance().clearEmoCount();
     SearchService.getInstance().loadSearchCounts();
+    
     SearchService.getInstance().setMaxPage();
     SearchService.getInstance().onLoadSearch();
     

@@ -58,14 +58,17 @@
 
     </header>
 
-    <div class="search-page" style="display: none;">
+    <div class="search-page" style="display: none;"> <!--//-> 검색창 온오프  -->
         <div class="search-bar">
             <input class="search-bar-input" type="text" placeholder="이모티콘을 검색해보세요!" 
             onkeyup="addSearchInputEvent()">
+            <!--//-> 결과창 이동 함수 onkeyup="addSearchEvent()" -->
             <button class="search-bar-button">
                 <i class="fa-solid fa-magnifying-glass"></i>
             </button>
         </div>
+        <div class="backboard"></div> 
+        <!-- -> 반투명 배경 -->
     </div>
 
     <div class="main">
@@ -134,7 +137,7 @@
         </div>
     </footer>
     
-    <script>
+    <script> // -> 검색창 온오프 버튼
         $(function() {
             $('.search-button').click(function(){
                 if($('.search-page').css('display') == "none") {
@@ -146,7 +149,7 @@
         });
     </script>
 
-    <script>
+    <script> // -> 검색결과 입력 후 결과창으로 이동
         const searchInput = document.querySelector(".search-bar-input");
         function addSearchInputEvent() {
             if(window.event.keyCode == 13) {
@@ -155,9 +158,17 @@
         }
     </script>
 
+    <!-- <script>
+        function addSearchEvent(keyword) {
+            const searchUrl = `http://localhost:8000/kakaopage/search?q=${encodeURIComponent(keyword)}`;
+            window.location.href = searchUrl;
+        }
+    </script> -->
+
     <script src="/static/js/account/principal.js"></script>
     <script src="/static/js/function/toggleuser.js"></script>
     <script src="/static/js/function/index.js"></script>
+
 </body>
 
 </html>
