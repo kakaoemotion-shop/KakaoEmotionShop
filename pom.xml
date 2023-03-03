@@ -82,6 +82,12 @@
 			<artifactId>spring-boot-starter-validation</artifactId>
 		</dependency>
 
+<!--		+> oauth2 추가 (외부 로그인)-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-oauth2-client</artifactId>
+		</dependency>
+
 	</dependencies>
 
 	<build>

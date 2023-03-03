@@ -5,11 +5,16 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/hot/search")
+@RequestMapping("/kakaopage/search")
 public class SearchController {
-
     @GetMapping("")
-    public String loadSearch() {
-        return "kakaopage/hot";
+    public String loadMainSearch() {
+        return "/kakaopage/main_search";
     }
+
+    @GetMapping("/totalcount")
+    public String loadTotalcount() {
+        return "/kakaopage/main_search";
+    }
+
 }

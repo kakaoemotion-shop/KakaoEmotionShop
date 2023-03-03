@@ -6,7 +6,6 @@ spring:
     static-path-pattern: /static/**
     pathmatch:
       matching-strategy: ant_path_matcher
-
   datasource:
     driver-class-name:
     url: jdbc:mysql://pkh.cksewrsk3guy.ap-northeast-2.rds.amazonaws.com:3306/emoticonshop
@@ -16,6 +15,27 @@ spring:
     multipart:
       max-file-size: 200MB
       max-request-size: 200MB
+  security:
+    oauth2:
+      client:
+        registration:
+          kakao:
+            client-id: eaf928c18333bedd46eaed41613512cb
+            redirect-uri: http://localhost:8000/login/oauth2/code/kakao
+            client-authentication-method: POST
+            client-secret: aTK4Fd1TVhokptNa295Yvbp6GkCvSupG
+            authorization-grant-type: authorization_code
+            scope:
+              - profile_nickname
+              - account_email
+              - gender
+            client_name: kakao
+        provider:
+          kakao:
+            authorization-uri: https://kauth.kakao.com/oauth/authorize
+            token-uri: https://kauth.kakao.com/oauth/token
+            user-info-uri: https://kapi.kakao.com/v2/user/me
+            user-name-attribute: id
 
 mybatis:
   mapper-locations:
