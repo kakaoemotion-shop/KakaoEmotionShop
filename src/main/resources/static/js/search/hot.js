@@ -22,13 +22,6 @@ const searchObj = {
     count: 10
 }
 
-// const imgObj = {
-//     img01: null,
-//     img02: null,
-//     img03: null,
-//     img04: null
-// }
-
 class HotSearchApi {
     static #instance = null;
     static getInstance() {

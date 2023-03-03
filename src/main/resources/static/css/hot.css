@@ -150,6 +150,7 @@ html {
   width: 1024px;
 }
 .hot-info li{
+
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -220,6 +221,18 @@ html {
 
   cursor: pointer;
 }
+.like-buttons {
+  margin-top: 5px;
+
+  width: 36px;
+  height: 36px;
+
+  border: 1px solid #dbdbdb;
+  border-radius: 50px;
+  background-color: white;
+
+  cursor: pointer;
+}
 .fa-heart{
   margin-top: 5px;
 
@@ -227,6 +240,7 @@ html {
   height: 16px;
 
   font-size: 13px;
+  color: deeppink;
 }
 
 .emo-img{
