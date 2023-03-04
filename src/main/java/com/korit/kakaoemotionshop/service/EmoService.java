@@ -36,9 +36,9 @@ public class EmoService {
 //        return result;
 //    }
 
-//    public List<EmoImage> getEmos(String emoCode) {
-//        return emoRepository.findEmoImageAll(emoCode);
-//    }
+    public List<EmoImage> getEmos(String emoCode) {
+        return emoRepository.findEmoImageAll(emoCode);
+    }
 
     public Map<String, Object> getEmoAndAllImage(String emoCode){
         Map<String, Object> resultAll = new HashMap<>();
@@ -113,9 +113,9 @@ public class EmoService {
         emoRepository.registerEmoImages(emoImages);
     }
 
-    public List<EmoImage> getEmos(String emoCode) {
-        return emoRepository.findEmoImageAll(emoCode);
-    }
+//    public List<EmoImage> getEmos(String emoCode) {
+//        return emoRepository.findEmoImageAll(emoCode);
+//    }
 
     public void removeEmoImage(int imageId) {
         EmoImage emoImage = emoRepository.findEmoImageByImageId(imageId);

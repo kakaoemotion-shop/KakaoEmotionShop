@@ -91,11 +91,12 @@ public class EmoApi {
     @PostMapping("/emo/{emoCode}/images")
     public ResponseEntity<CMRespDto<?>> registerEmoImg(@PathVariable String emoCode,
                                                        @RequestPart List<MultipartFile> files) {
+
         emoService.registerEmoImages(emoCode, files);
 
-//        for (MultipartFile file : files) {
-//            System.out.println(file.getOriginalFilename());
-//        }
+        for (MultipartFile file : files) {
+            System.out.println(file.getOriginalFilename());
+        }
 
         return ResponseEntity
                 .ok()
