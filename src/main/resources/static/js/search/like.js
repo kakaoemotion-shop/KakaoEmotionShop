@@ -59,26 +59,31 @@ class LikeService {
         const principal = PrincipalApi.getInstance().getPrincipal();
         
         console.log(responseData)
-        responseData.forEach((data, index) => {
-            if(principal == null){
-            contentFlex.innerHTML += `
-                <h4 class="tit_mypage">
-                    <span class="txt_tit">좋아요<span class="tit_num"></span></span>
-                </h4>
-                <strong class="screen_out">좋아요 본문</strong>
-
-                <div class="area_empty">
-                    <div class="inner_area">
-                        <img class="img_empty" src="https://t1.kakaocdn.net/estoreweb/images/20220905161229/empty_like.png" alt="좋아하는 이모티콘 없음 이미지">
-                        <strong class="tit_empty">좋아하는 이모티콘이 없습니다.</strong>
-                        <p class="desc_empty">마음에 드는 이모티콘에 하트를 눌러보세요!</p>
+                responseData.forEach((data, index) => {
+                    contentFlex.innerHTML += `
+                    <li>
+                    <input type="hidden" class="emo-id" value="${data.emoId}">
+                    <input type="hidden" class="like-count" value="${data.likeCount}">
+                    <span class="number"></span>
+                    <div class="hot-info-title">
+                    
+                  
+                    <h2 class="emo-name">${data.emoName}</h2>
+                    
+                    
+                    <p class="author">${data.company}</p>
+                    <div class="buttons">
+                        <span class="like-count">${data.likeCount != null ? data.likeCount : 0}</span>
+                    
                     </div>
-                </div>
-                <div>
-                </div>
-            `;
-            }
-        })
+                    </div>
+                    <img src="http://127.0.0.1:8000/image/emo/${data.saveName != null ? data.saveName : "noimg.png"}" class="emo-img">
+                    
+                    </li>
+                    `;
+                })
+            
     }
+    
 }
 
