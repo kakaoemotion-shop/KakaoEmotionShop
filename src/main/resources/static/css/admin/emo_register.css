@@ -1,4 +1,3 @@
-/* =============== 상단 부분 ================ */
 .header{
   width: 100%;
   height: 110px;
@@ -13,10 +12,26 @@
   background-color: white;
 }
 
+.toggle-button{
+  position: relative;
+  left: 1%;
+  top: 19px;
+
+  width: 25px;
+  height: 25px;
+
+  font-size: 18px;
+  border: none;
+  outline: none;
+  background-color: white;
+
+  cursor: pointer;
+}
+
 .logo-button{
   position: relative;
   left: 45%;
-  top: 9.5px;
+  bottom: 14px;
 
   width: 190px;
   height: 26px;
@@ -32,6 +47,43 @@
   font-weight: 600;
 }
 
+.search-button{
+  position: relative;
+  left: 95.3%;
+  bottom: 45px;
+
+  padding: 0px;
+  width: 24px;
+  height: 24px;
+
+  font-size: 18px;
+  border: none;
+  outline-style: none;
+  background-color: white;
+
+  cursor: pointer;
+}
+
+.mypage-button{
+  position: relative;
+  left: 96%;
+  bottom: 40px;
+
+  width: 24px;
+  height: 24px;
+
+  border: none;
+  border-radius: 10px;
+  outline-style: none;
+
+  cursor: pointer;
+}
+
+.mypage-button img{
+  width: 30px;
+  height: 30px;
+  border-radius: 10px;
+}
 
 
 .header-menu{
@@ -49,7 +101,7 @@
   margin-top: 20px;
   width: 154px;
   height: 30px;
-  
+
   font-size: 16px;
   font-weight: 600;
   text-align: center;
@@ -236,9 +288,9 @@
   align-items: center;
 
   margin-top: 10px;
-  
-  width: 180px;
-  height: 230px;
+
+  width: 190px;
+  height: 200px;
 }
 .img-file{
   display: none;
@@ -246,25 +298,14 @@
 .emo-img{
   margin-top: 5px;
 
-  width: 180px;
-  height: 180px;
-}
-
-.button-group{
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-
-  width: 100px;
-  height: 40px;
+  width: 170px;
+  height: 150px;
 }
 .img-add-button{
-  width: 40px;
-  height: 40px;
+  margin-top: 5px;
 
-  font-size: 25px;
-  font-weight: 600;
-  color: #4e4e4e;
+  width: 170px;
+  height: 35px;
 
   border: 1px solid #dbdbdb;
   border-radius: 3.5px;
@@ -275,39 +316,21 @@
 .img-add-button:hover{
   background-color: #f2f2f2;
 }
-.img-cancel-button{
-  width: 40px;
-  height: 40px;
 
-  font-size: 25px;
-  font-weight: 600;
-  color: #df0707;
-
-  border: 1px solid #dbdbdb;
-  border-radius: 3.5px;
-  background-color: white;
-
-  cursor: pointer;
-}
-.img-cancel-button:hover{
-  background-color: #f2f2f2;
-}
-
-.button-container{
-  margin-top: 10px;
-}
-.img-register-button{
+.button-group{
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content: space-around;
+  align-items: center;
 
+  width: 480px;
+  height: 50px;
+}
+.img-register-button{
   margin-bottom: 15px;
-  padding-top: 10px;
 
-  width: 170px;
+  width: 190px;
   height: 45px;
-
-  color: #373737;
 
   border: 1px solid #dbdbdb;
   border-radius: 5px;
@@ -316,5 +339,20 @@
   cursor: pointer;
 }
 .img-register-button:hover{
+  background-color: #f2f2f2;
+}
+.img-cencel-button{
+  margin-bottom: 15px;
+
+  width: 190px;
+  height: 45px;
+
+  border: 1px solid #dbdbdb;
+  border-radius: 5px;
+  background-color: white;
+
+  cursor: pointer;
+}
+.img-cencel-button:hover{
   background-color: #f2f2f2;
 }

@@ -1,6 +1,5 @@
 window.onload = () => {
     ComponentEvent.getInstance().addClickEventRegisterButton();
-    ComponentEvent.getInstance().addClickEventImgAddButton();
     ComponentEvent.getInstance().addChangeEventImgFile();
     ComponentEvent.getInstance().addClickEventImgRegisterButton();
     ComponentEvent.getInstance().addClickEventImgCancelButton();
@@ -179,15 +178,6 @@ class ComponentEvent {
         }
     }
 
-    addClickEventImgAddButton() {
-        const imgFile = document.querySelector(".img-file")
-        const addButton = document.querySelectorAll(".img-add-button")
-
-        addButton.onclick = () => {
-            imgFile.click();
-        }
-    }
-
     addChangeEventImgFile() {
             const imgFiles = document.querySelectorAll(".img-file");
 
@@ -195,14 +185,8 @@ class ComponentEvent {
                 imgFile.onchange = () => {
                     const formData = new FormData(document.querySelector(".img-form"));
                     let changeFlag = false;
-
-                    fileObj.files.pop();
-
                     formData.forEach((value, key) => {
-                        console.log(value);
-                        console.log(key)
-
-                        if(value.size != 0) {
+                        if(key == imgFile.getAttribute("name") && value.size != 0) {
                             fileObj.files.push(value);
                             changeFlag = true;
                         }
@@ -213,7 +197,7 @@ class ComponentEvent {
                         imgRegisterButton.disabled = false;
 
                         ImgFileService.getInstance().getImgPreview();
-//                        imgFile.value = null;
+                        imgFile.value = null;
                     }
                 };
             });
