@@ -27,4 +27,9 @@ public class HotSearchService {
         hotSearchReqDto.setIndex();
         return hotSearchRepository.userLikeEmo(hotSearchReqDto);
     }
+
+    public List<HotSearchEmo> getNewEmos(HotSearchReqDto hotSearchReqDto) {
+        hotSearchReqDto.setIndex();
+        return hotSearchRepository.searchNewEmo(hotSearchReqDto);
+    }
 }

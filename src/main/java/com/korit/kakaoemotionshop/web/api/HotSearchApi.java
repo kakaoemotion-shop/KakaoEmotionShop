@@ -57,4 +57,18 @@ public class HotSearchApi {
                         "Successfully",hotSearchService.getLikeEmos(hotSearchReqDto)));
 
     }
+
+    @GetMapping("/new/search")
+    public ResponseEntity<CMRespDto<?>> getNewEmo(HotSearchReqDto hotSearchReqDto,
+                                                   @AuthenticationPrincipal PrincipalDetails principalDetails) {
+        if(principalDetails != null) {
+            hotSearchReqDto.setUserId(principalDetails.getUser().getUserId());
+        }
+
+        return ResponseEntity
+                .ok()
+                .body(new CMRespDto<>(HttpStatus.OK.value(),
+                        "Successfully",hotSearchService.getNewEmos(hotSearchReqDto)));
+
+    }
 }

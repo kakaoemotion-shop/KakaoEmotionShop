@@ -5,12 +5,11 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDate;
-
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
 @Builder
+
 public class HotSearchEmo {
     private int emoId;
     private String emoCode;
@@ -22,4 +21,11 @@ public class HotSearchEmo {
     private int likeCount;
 
     private int imageId;
+    private int imageSeq;
+
+    private String newImage1;
+    private String newImage2;
+    private String newImage3;
+    private String newImage4;
+
 }
