@@ -31,8 +31,8 @@ body {
 }
 
 .register-content-start {
-    width: 480px;
-    margin: 10px auto 42px
+    width: 100%;
+    margin: 10px auto 42px;
 }
 
 .register-content-start h2 {
@@ -65,11 +65,10 @@ body {
 .register-btn-n {
     margin-top: 7px;
     border: 0px;
-    /* background-color: #f0f0f0; */
     background-color: #FEE500;
     border-radius: 5px;
     height: 45px;
-    width: 100%;
+    width: 70%;
     font-size: 16px;
     cursor: pointer;
 }
