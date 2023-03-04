@@ -3,6 +3,8 @@ window.onload = () => {
     // console.log(HotSearchApi.getInstance().searchEmo());
 
     ToggleService.getInstance().loadlogin();
+
+    ToggleButton.getInstance().logoutButton();
     ToggleButton.getInstance().toggleButton();
 
     HotSearchService.getInstance().clearEmoList();
