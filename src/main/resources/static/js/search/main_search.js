@@ -1,14 +1,15 @@
 window.onload = () => {
     SearchService.getInstance().clearEmoList();
     SearchService.getInstance().loadSearchEmos();
+
     SearchService.getInstance().clearEmoCount();
     SearchService.getInstance().loadSearchCounts();
+    
     SearchService.getInstance().setMaxPage();
     SearchService.getInstance().onLoadSearch();
-
+    
     ComponentEvent.getInstance().addClickSearchButton(); 
     ComponentEvent.getInstance().addScrollEventPaging(); 
-    console.log(SearchApi.getInstance().getTotalCount());
 }
 
 let maxPage = 0;
@@ -119,7 +120,7 @@ class SearchService {
         // console.log(responseData);
     }
 
-
+    
     clearEmoList() {
         const searchFlex = document.querySelector(".search-flex");
         searchFlex.innerHTML = "";
@@ -131,7 +132,7 @@ class SearchService {
 
         responseData.forEach((data) => {
             searchFlex.innerHTML += `
-            <div class="emotion-serch">
+            <div class="emotion-search">
                 <div class="emotion-title">
                     <a class="search-link" href="">
                         <h3>${data.emoName}</h3>
@@ -169,7 +170,7 @@ class ComponentEvent {
 
         body.onscroll = () => {
             const scrollPosition = body.offsetHeight - html.clientHeight - html.scrollTop;
-
+        
             if(scrollPosition < 250 && searchObj.page < maxPage) {
                 searchObj.page++;
                 SearchService.getInstance().loadSearchEmos();
@@ -191,7 +192,7 @@ class ComponentEvent {
             SearchService.getInstance().clearEmoCount();
             SearchService.getInstance().loadSearchCounts();
         }
-
+        
         searchInput.onkeyup = () => {
             if(window.event.keyCode == 13) {
                 searchButton.click();

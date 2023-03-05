@@ -22,4 +22,9 @@ public class KakaoEmoController {
     public String detailpage() {
         return "kakaopage/detailpage";
     }
+
+    @GetMapping("/mypage/like")
+    public String like() {
+        return "kakaopage/like";
+    }
 }

@@ -13,16 +13,18 @@
 </head>
 
 <body class="type_responsive">
-   
+
     <div id="__next" data-reactroot="">
         <div class="container-doc">
             <div class="inner_container">
                 <main class="doc-main">
                     <div class="doc-title">
                         <h1 class="tit_service">
-                            <span class="logo_kakao">
-                                <span class="ir_wa">Kakao</span>
-                            </span>
+                            <a href="/index">
+                                <span class="logo_kakao">
+                                    <span class="ir_wa">Kakao</span>
+                                </span>
+                            </a>
                         </h1>
                     </div>
                     <article id="mainContent" class="content-article">
@@ -60,15 +62,17 @@
                                     <div class="confirm_btn">
                                         <button type="submit" class="btn_g highlight submit">일반 로그인</button>
                                         <span class="line_or"><span class="txt_or">또는</span></span>
-                                        <!-- <button type="button" class="btn_g" onclick="location.href = '/oauth2/authorization/kakao'"><a href="javascript:kakaoLogin();">카카오 로그인</a> -->
-                                            <button type="button" class="btn_g"><a href="javascript:kakaoLogin();">카카오 로그인</a>
-                                            <!-- <a href="javascript:kakaoLogin();">카카오 로그인</a> -->
+                                        <button type="button" class="btn_g kakaoLogin">
+                                            <!-- <a href="/static/images/kakao_login.png"></a> -->
+                                            <a href="javascript:kakaoLogin();">카카오 로그인</a>
+                                            <!-- <a href="/oauth2/authorization/kakao">카카오 로그인</a> -->
                                         </button>
-                                        <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+                                         <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
                                         <script>
                                             // e2e4eea6e90b6aff3e7151d67c0337cb
                                             window.Kakao.init("e2e4eea6e90b6aff3e7151d67c0337cb");
-                                    
+
+                                            const req = Request;
                                             function kakaoLogin() {
                                                 window.Kakao.Auth.login({
                                                     scope: 'profile_nickname, account_email, gender',
@@ -78,13 +82,37 @@
                                                             url: '/v2/user/me',
                                                             success: res => {
                                                                 const kakao_account = res.kakao_account;
-                                                                console.log(kakao_account)
+                                                                console.log(kakao_account);
+
+                                                                // 로그인한 사용자 정보를 서버로 전송
+                                                                fetch('/user/{userId}', {
+                                                                    method: 'POST',
+                                                                    headers: {
+                                                                        'Content-Type': 'application/json'
+                                                                    },
+                                                                    body: JSON.stringify({
+                                                                        nickname: kakao_account.profile.nickname,
+                                                                        email: kakao_account.email,
+                                                                        gender: kakao_account.gender
+                                                                    })
+                                                                })
+                                                                    .then(response => {
+                                                                        if (response.ok) {
+                                                                            // 서버에서 로그인 처리 후, 페이지 이동 등을 수행
+                                                                            window.location.href = '/index';
+                                                                        } else {
+                                                                            throw new Error('로그인 실패');
+                                                                        }
+                                                                    })
+                                                                    .catch(error => {
+                                                                        console.error(error);
+                                                                    });
                                                             }
                                                         });
                                                     }
-                                                })
+                                                });
                                             }
-                                        </script>
+                                        </script> 
                                     </div>
 
                                 </form>

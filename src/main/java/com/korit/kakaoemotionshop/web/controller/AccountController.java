@@ -27,9 +27,6 @@ public class AccountController {
     @GetMapping("/register")
     public String register() { return "account/register_sign"; }
 
-//    @PostMapping("/logout")
-//    public String logout(HttpSession session) {
-//        session.invalidate();
-//        return "redirect:/  "; //주소 요청으로 변경
-//    }
+
+
 }

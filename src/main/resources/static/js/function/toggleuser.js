@@ -159,7 +159,7 @@ class ToggleService {
                                     </a>
                                 </li>
                                 <li class="mypage-style">
-                                    <a href="" class="mypage-link">
+                                    <a href="/mypage/like" class="mypage-link">
                                         <i class="fa-regular fa-heart"></i>
                                         <p class="mypage-chart">좋아요</p>
                                     </a>
@@ -274,7 +274,12 @@ class ToggleButton {
         mypageButton.onclick = () => {
             if (principal != null) {
                 if (confirm("로그아웃하시겠습니까?")) {
+                    // 취소 클릭
                     location.href = "/logout"
+                } else {
+                    // 예 클릭
+                    //     console.log("예 클릭됨")
+                    // location.reload();
                 }
             } else {
                 location.href = "/account/login"
@@ -289,7 +294,7 @@ class ToggleButton {
                 </a>
                 `
                 : `
-                <a href= "/index" class="logout"><img src = "https://www.iconpacks.net/icons/2/free-user-logout-icon-3056-thumb.png"></a>
+                <a href="" class="logout"><img src = "https://www.iconpacks.net/icons/2/free-user-logout-icon-3056-thumb.png"></a>
                 
         `
 

@@ -29,6 +29,7 @@
             em.emo_name as emoName,
             em.company,
             em.emo_date as emoDate,
+            min(cast(ei.image_id as unsigned)) as imageId,
             ei.save_name as saveName,
             el.like_id as likeId,
             lc.like_count as likeCount
@@ -51,7 +52,14 @@
             and (emo_name like concat('%', #{searchValue}, '%')
             or company like concat('%', #{searchValue}, '%')
         </if>
-
+        group by
+            em.emo_id,
+            em.emo_code,
+            em.emo_name,
+            em.company,
+            em.emo_date,
+            el.like_id,
+            lc.like_count
         limit #{index}, #{count}
 
     </select>

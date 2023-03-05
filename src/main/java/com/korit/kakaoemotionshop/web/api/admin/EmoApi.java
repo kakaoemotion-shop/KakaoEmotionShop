@@ -1,4 +1,4 @@
-package com.korit.kakaoemotionshop.web.api.admin;
+package com.korit.kakaoemotionshop.web.api;
 
 import com.korit.kakaoemotionshop.aop.annotation.ParamsAspect;
 import com.korit.kakaoemotionshop.aop.annotation.ValidAspect;
@@ -29,17 +29,8 @@ public class EmoApi {
     @Autowired
     private EmoService emoService;
 
-//    @GetMapping("/emo/{emoCode}")
-//    public ResponseEntity<CMRespDto<Map<String, Object>>> getEmo(@PathVariable String emoCode){
-//
-//        Map<String, Object> responseMap = new HashMap<>();
-//
-//        return ResponseEntity
-//                .ok()
-//                .body(new CMRespDto<>(HttpStatus.OK.value(), "Successfully", emoService.getEmoAndImage(emoCode)));
-//    }
     @GetMapping("/emos/{emoCode}")
-    public ResponseEntity<CMRespDto<Map<String, Object>>> getEmos(@PathVariable String emoCode){
+    public ResponseEntity<CMRespDto<Map<String, Object>>> getEmoss(@PathVariable String emoCode){
 
         Map<String, Object> responseMap = new HashMap<>();
 
@@ -59,21 +50,13 @@ public class EmoApi {
                         "Successfully",
                         emoService.searchEmo(searchReqDto)));
     }
+
     @GetMapping("/emos/totalcount")
     public ResponseEntity<CMRespDto<?>> getEmoTotalCount(SearchNumberListDto searchNumberListDto){
         return ResponseEntity
                 .ok()
                 .body(new CMRespDto<>(HttpStatus.OK.value(), "Successfully", emoService.getEmoTotalCount(searchNumberListDto)));
     }
-
-//    @ParamsAspect
-//    @DeleteMapping("/emos")
-//    public ResponseEntity<CMRespDto<?>> removeEmos(@RequestBody DeleteReqDto deleteReqDto){
-//        emoService.removeEmos(deleteReqDto);
-//        return ResponseEntity
-//                .ok()
-//                .body(new CMRespDto<>(HttpStatus.OK.value(), "Successfully", true));
-//    }
 
     @ParamsAspect
     @ValidAspect
@@ -123,6 +106,9 @@ public class EmoApi {
     @PostMapping("/emo/{emoCode}/images")
     public ResponseEntity<CMRespDto<?>> registerEmoImg(@PathVariable String emoCode,
                                                        @RequestPart List<MultipartFile> files) {
+        files.forEach(file -> {
+            System.out.println(file.getOriginalFilename());
+        });
         emoService.registerEmoImages(emoCode, files);
 
 //        for (MultipartFile file : files) {
@@ -153,5 +139,6 @@ public class EmoApi {
                 .ok()
                 .body(new CMRespDto<>(HttpStatus.OK.value(),
                         "Successfully",null));
-    }}
+    }
 
+}

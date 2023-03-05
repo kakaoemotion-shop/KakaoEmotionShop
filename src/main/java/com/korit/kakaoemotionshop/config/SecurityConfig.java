@@ -49,9 +49,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .loginPage("/account/login")
                 .loginProcessingUrl("/account/login")
                 .and()
-                .oauth2Login()
-                .userInfoEndpoint()
-                .userService(principalOAuth2DetailsService)
+                .oauth2Login() //oauth2 로그인 성공 후 가져올 때의 설정들
+                .userInfoEndpoint() // 소셜로그인 성공 시 후속 조치를 진행할 UserService 인터페이스 구현체 등록
+                .userService(principalOAuth2DetailsService) // 리소스 서버에서 사용자 정보를 가져온 상태에서 추가로 진행하고자 하는 기능 명시
                 .and()
                 .defaultSuccessUrl("/index");
 

@@ -20,4 +20,5 @@ public class HotSearchEmo {
     private String saveName;
     private int likeId;
     private int likeCount;
+    private int imageId;
 }
