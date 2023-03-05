@@ -29,6 +29,8 @@ public interface EmoRepository {
     public int deleteEmo(String EmoCode);
     public int registerEmoImages(List<EmoImage> emoImages);
     public List<EmoImage> findEmoImageAll(String emoCode);
+
+    public List<EmoImage> findEmoImageOne(String emoCode);
     public int deleteEmoImage(int emoId);
     public EmoImage findEmoImageByImageId(int imageId);
     public int getEmoTotalCount(SearchNumberListDto searchNumberListDto);

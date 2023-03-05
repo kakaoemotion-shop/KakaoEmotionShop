@@ -190,6 +190,10 @@ html {
   width: 294px;
   height: 80px;
 }
+
+.emo-tag{
+  display: flex;
+}
 .emo-name{
   font-size: 16px;
   font-weight: 400;

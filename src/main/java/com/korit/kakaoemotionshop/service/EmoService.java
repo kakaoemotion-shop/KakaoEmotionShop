@@ -47,6 +47,13 @@ public class EmoService {
         return resultAll;
     }
 
+    public Map<String, Object> getEmoAndImageOne(String emoCode){
+        Map<String, Object> resultAll = new HashMap<>();
+        resultAll.put("emoMst", emoRepository.findEmoByEmoCode(emoCode));
+        resultAll.put("emoImage", emoRepository.findEmoImageOne(emoCode));
+        return resultAll;
+    }
+
     public List<EmoMst> searchEmo(SearchReqDto searchReqDto){
         searchReqDto.setIndex();
         return emoRepository.searchEmo(searchReqDto);
