@@ -14,6 +14,6 @@ public class AccountController {
     @GetMapping("/register")
     public String register() { return "account/register-sign"; }
 
-    @GetMapping("/mypage/like")
-    public String mypage() { return "kakaopage/like"; }
+    @GetMapping("/mypage")
+    public String mypage() { return "account/mypage"; }
 }
