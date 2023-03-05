@@ -35,4 +35,6 @@ public interface EmoRepository {
 
     public int getEmoTotalCount(SearchNumberListDto searchNumberListDto);
     public int deleteEmos(List<Integer> emoId);
+
+    public List<EmoImage> findEmoImageOne(String emoCode);
 }

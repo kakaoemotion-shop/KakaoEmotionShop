@@ -139,6 +139,12 @@ public class EmoService {
         return emoRepository.getEmoTotalCount(searchNumberListDto);
     }
 
+    public Map<String, Object> getEmoAndImageOne(String emoCode){
+        Map<String, Object> resultAll = new HashMap<>();
+        resultAll.put("emoMst", emoRepository.findEmoByEmoCode(emoCode));
+        resultAll.put("emoImage", emoRepository.findEmoImageOne(emoCode));
+        return resultAll;
+    }
     public void removeEmos(DeleteReqDto deleteReqDto){
         emoRepository.deleteEmos(deleteReqDto.getEmoId());
     }
