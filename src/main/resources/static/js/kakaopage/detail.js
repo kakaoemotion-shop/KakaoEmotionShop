@@ -80,6 +80,46 @@ class DetailApi {
         return responseData
     }
 
+    setLike(emoId) {
+        let likeCount = -1;
+        
+        $.ajax({
+            async: false,
+            type: "post",
+            url: `http://127.0.0.1:8000/api/emo/${emoId}/like`,
+            dataType: "json",
+            success: response => {
+                likeCount = response.data;
+                console.log(response);
+            },
+            error: error => {
+                console.log(error);
+            }
+        });
+
+        return likeCount;
+    }
+
+    setDisLike(emoId) {
+        let likeCount = -1;
+        
+        $.ajax({
+            async: false,
+            type: "delete",
+            url: `http://127.0.0.1:8000/api/emo/${emoId}/like`,
+            dataType: "json",
+            success: response => {
+                likeCount = response.data;
+                console.log(response);
+            },
+            error: error => {
+                console.log(error);
+            }
+        });
+
+        return likeCount;
+    }
+
 }
 
 
@@ -108,9 +148,15 @@ class DetailService {
     loadEmoImageOne() {
         const responseData = DetailApi.getInstance().getEmoAndImageOne()
         const emoticonArea = document.querySelector(".emoticon-area")
+        const principal = PrincipalApi.getInstance().getPrincipal();
+
+        const Buttons = document.querySelectorAll(".right-like-box");
+        const ButtonsLength = Buttons == null ? 0 : Buttons.length;
+        
 
         emoticonArea.innerHTML = `
             <div class="emoticon-product">
+            <input type="hidden" class="emo-id" value="${responseData.emoId}">
                 <div class="emoticon-box">
                     <div class="emoticon-thumb">
                         <img class="main-emoticon"
@@ -136,16 +182,37 @@ class DetailService {
                     <button class="purchase-button">구매하기</button>
                 </div>
             </div>
-        `
+        `;
+
+        if(principal == null) {
+                
+            Buttons[ButtonsLength + index].innerHTML += `
+            <button type="button" class="no-login-like like-button disabled">
+            <i class="fa-regular fa-heart"></i>
+            </button>
+            `;
+
+        }else {              
+            if(responseData.likeId != 0){
+                console.log("ButtonLength : " + ButtonsLength);
+                Buttons[ButtonsLength + index].innerHTML += `
+                <button type="button" class="like-buttons dislike-button">
+                <i class="fa-solid fa-heart"></i>
+                </button>
+                `;
+            }else {
+                Buttons[ButtonsLength + index].innerHTML += `
+                    <button type="button" class="like-buttons like-button">
+                    <i class="fa-regular fa-heart"></i>
+                    </button>
+                `;
+            }
+            ComponentEvent.getInstance().addClickEventLikeButtons();
+        }
     }
 
     loadEmoAndImageData() {
         const responseData = DetailApi.getInstance().getEmoAndImage()
-
-        // const emoticonName = document.querySelector(".emoticon-name")
-        // const txtAuthor = document.querySelector(".txt-author")
-        // emoticonName.value = responseData.emoMst.emoName
-        // txtAuthor.value = responseData.emoMst.company
 
         console.log(responseData)
         if (responseData.emoImage != null) {
@@ -204,7 +271,27 @@ class ComponentEvent {
         return this.#instance
     }
 
+    addClickEventLikeButtons() {
+        const likeButtons = document.querySelectorAll(".like-buttons");
+        const emoIds = document.querySelectorAll(".emo-id");
 
-
-
+        likeButtons.forEach((button, index) => {
+            button.onclick = () => {
+                if(button.classList.contains("like-button")){
+                    const likeCount = DetailApi.getInstance().setLike(emoIds[index].value);
+                    if(likeCount != -1){
+                        button.classList.remove("like-button");
+                        button.classList.add("dislike-button");
+                    }
+                    
+                }else {
+                    const likeCount = DetailApi.getInstance().setDisLike(emoIds[index].value);
+                    if(likeCount != -1){
+                        button.classList.remove("dislike-button");
+                        button.classList.add("like-button");
+                    }
+                }
+            }
+        });
+    }
 }

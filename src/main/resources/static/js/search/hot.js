@@ -148,7 +148,7 @@ class HotSearchService {
         responseData.forEach((data, index) => {
             contentFlex.innerHTML += `
             <li>
-            <a href="/templates/kakaopage/detailpage.html?emoCode=${data.emoCode}" class="emo-tag">
+            <a href="http://127.0.0.1:8000/main/detail/?emoCode=${data.emoCode}" class="emo-tag">
             <input type="hidden" class="emo-id" value="${data.emoId}">
             <input type="hidden" class="like-count" value="${data.likeCount}">
             <span class="number"></span>
@@ -164,7 +164,7 @@ class HotSearchService {
             
             </div>
             </div>
-            <img src="http://127.0.0.1:8000/image/emo/${data.saveName != null ? data.saveName : "/static/images/noimg.jpg"}" class="emo-img">
+            <img src="http://127.0.0.1:8000/image/emo/${data.saveName != null ? data.saveName : "noimg.jpg"}" class="emo-img">
             </a>
             </li>
             `;
