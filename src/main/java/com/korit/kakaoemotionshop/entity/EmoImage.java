@@ -15,4 +15,6 @@ public class EmoImage {
     private String emoCode;
     private String saveName;
     private String originName;
+    private int emoId;
+    private int likeId;
 }

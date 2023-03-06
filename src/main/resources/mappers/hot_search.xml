@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.korit.kakaoemotionshop.repository.HotSearchRepository">
+
+    <select id="getUserSearchEmoTotalCount"
+            parameterType="com.korit.kakaoemotionshop.web.dto.HotSearchReqDto"
+            resultType="Integer">
+        select
+            count(*)
+        from
+            emo_mst
+        where
+            1 = 1
+        <if test='searchValue != null and searchValue != ""'>
+            and (emo_name like concat('%', #{searchValue}, '%')
+            or company like concat('%', #{searchValue}, '%'))
+        </if>
+    </select>
+
+    <select id="userSearchEmo"
+            parameterType="com.korit.kakaoemotionshop.web.dto.HotSearchReqDto"
+            resultType="com.korit.kakaoemotionshop.entity.HotSearchEmo">
+        select
+            em.emo_id as emoId,
+            em.emo_code as emoCode,
+            em.emo_name as emoName,
+            em.company,
+            em.emo_date as emoDate,
+            min(cast(ei.image_id as unsigned)) as imageId,
+            ei.save_name as saveName,
+            el.like_id as likeId,
+            lc.like_count as likeCount
+        from
+            emo_mst em
+            left outer join emo_image ei
+                on(em.emo_code = ei.emo_code)
+            left outer join emo_like el
+                on( el.emo_id = em.emo_id and el.user_id = #{userId})
+            left outer join (select
+                                emo_id,
+                                count(emo_id) as like_count
+                            from
+                                emo_like
+                            group by
+                                emo_id) lc on (lc.emo_id = em.emo_id)
+        where
+            1 = 1
+        <if test='searchValue != null and searchValue != ""'>
+            and (emo_name like concat('%', #{searchValue}, '%')
+            or company like concat('%', #{searchValue}, '%')
+        </if>
+        group by
+            em.emo_id,
+            em.emo_code,
+            em.emo_name,
+            em.company,
+            em.emo_date,
+            el.like_id,
+            lc.like_count
+
+        limit #{index}, #{count}
+    </select>
+
+    <select id="userLikeEmo"
+            parameterType="com.korit.kakaoemotionshop.web.dto.HotSearchReqDto"
+            resultType="com.korit.kakaoemotionshop.entity.HotSearchEmo">
+        select
+            em.emo_id as emoId,
+            em.emo_code as emoCode,
+            em.emo_name as emoName,
+            em.company,
+            em.emo_date as emoDate,
+            min(cast(ei.image_id as unsigned)) as imageId,
+            ei.save_name as saveName,
+            el.user_id as userId,
+            el.like_id as likeId,
+            lc.like_count as likeCount
+        from
+            emo_mst em
+            left outer join emo_image ei
+                on(em.emo_code = ei.emo_code)
+            left outer join emo_like el
+                on( el.emo_id = em.emo_id and el.user_id = #{userId})
+            left outer join (select
+                                emo_id,
+                                count(emo_id) as like_count
+                            from
+                                emo_like
+                            group by
+                                emo_id) lc on (lc.emo_id = em.emo_id)
+        where
+            el.user_id = #{userId}
+        <if test='searchValue != null and searchValue != ""'>
+            and (emo_name like concat('%', #{searchValue}, '%')
+            or company like concat('%', #{searchValue}, '%'))
+        </if>
+        group by
+            em.emo_id,
+            em.emo_code,
+            em.emo_name,
+            em.company,
+            em.emo_date,
+            lc.like_count
+
+        limit #{index}, #{count}
+    </select>
+
+    <select id="searchNewEmo"
+            parameterType="com.korit.kakaoemotionshop.web.dto.HotSearchReqDto"
+            resultType="com.korit.kakaoemotionshop.entity.HotSearchEmo">
+        select
+            em.emo_id as emoId,
+            em.emo_code as emoCode,
+            em.emo_name as emoName,
+            em.company,
+            em.emo_date as emoDate,
+            MAX(CASE WHEN ei.image_seq = 1 THEN ei.save_name ELSE NULL END) as newImage1,
+            MAX(CASE WHEN ei.image_seq = 2 THEN ei.save_name ELSE NULL END) as newImage2,
+            MAX(CASE WHEN ei.image_seq = 3 THEN ei.save_name ELSE NULL END) as newImage3,
+            MAX(CASE WHEN ei.image_seq = 4 THEN ei.save_name ELSE NULL END) as newImage4,
+            el.like_id as likeId,
+            lc.like_count as likeCount
+        from
+            emo_mst em
+            LEFT OUTER JOIN
+                emo_image ei on(em.emo_code = ei.emo_code)
+            LEFT OUTER JOIN emo_like el ON (em.emo_id = el.emo_id AND el.user_id = #{userId})
+            LEFT OUTER JOIN (
+                SELECT emo_id, COUNT(emo_id) AS like_count
+                FROM emo_like
+                GROUP BY emo_id
+                ) lc ON (lc.emo_id = em.emo_id)
+        WHERE
+        1=1
+        <if test='searchValue != null and searchValue != ""'>
+            and (emo_name like concat('%', #{searchValue}, '%')
+            or company like concat('%', #{searchValue}, '%'))
+        </if>
+        group by
+            em.emo_id,
+            em.emo_code,
+            em.emo_name,
+            em.company,
+            em.emo_date,
+            el.like_id,
+            lc.like_count
+        order by
+            em.emo_date desc
+        limit #{index}, #{count}
+    </select>
+
+</mapper>

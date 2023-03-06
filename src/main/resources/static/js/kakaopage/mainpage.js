@@ -1,11 +1,3 @@
-window.onload = () => {
-    MainPageService.getInstance().setMaxPage()
-    MainPageService.getInstance().clearNewEmoList()
-    MainPageService.getInstance().clearHotEmoList()
-    MainPageService.getInstance().loadNewEmos()
-    MainPageService.getInstance().loadHotEmos()
-}
-
 let maxPage = 0;
 
 const searchObj = {

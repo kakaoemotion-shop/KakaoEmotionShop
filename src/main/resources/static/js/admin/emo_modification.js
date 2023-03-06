@@ -3,6 +3,7 @@ window.onload = () => {
     EmoModificationService.getInstance().loadEmoAndImageData()
     ComponentEvent.getInstance().addClickEventModificationButton()
     ComponentEvent.getInstance().addChangeEventImgFile()
+    ComponentEvent.getInstance().addClickEventImgOnChangeButton()
     ComponentEvent.getInstance().addClickEventImgModificationButton()
 }
 
@@ -11,6 +12,13 @@ const emoObj = {
     emoName: "",
     company: "",
     emoDate: ""
+}
+
+const imgObj = {
+    imageId: null,
+    bookCode: null,
+    saveName: null,
+    originName: null
 }
 
 let imgList = null;
@@ -49,7 +57,6 @@ class EmoModificationApi {
     }
 
 
-    //emoticon 정보변경 (이미지x)
     modifyEmo() {
         let successFlag = false
 
@@ -71,7 +78,7 @@ class EmoModificationApi {
 
         return successFlag
     }
-    //이미지 제거
+
     removeImg() {
         let successFlag = false
 
@@ -90,7 +97,7 @@ class EmoModificationApi {
         })
         return successFlag
     }
-    //이미지 등록
+
     registerImg() {
 
         $.ajax({
@@ -143,7 +150,7 @@ class EmoModificationService {
         const responseData = EmoModificationApi.getInstance().getEmoAndImage()
 
         if (responseData.emoMst == null) {
-            alert("해당 도서코드는 등록되지 않은 코드입니다")
+            alert("해당 이모티콘은 등록되지 않은 코드입니다")
             history.back()
             return
         }
@@ -178,8 +185,7 @@ class ImgFileService {
         }
         return this.#instance
     }
-
-    //파일 이미지 src 경로 넣어준다 
+ 
     getImgPreview() {
         const emoImgs = document.querySelectorAll(".emo-img");
         console.log(fileObj.files)
@@ -216,61 +222,70 @@ class ComponentEvent {
             EmoModificationService.getInstance().setEmoObjValues();
             const successFlag = EmoModificationApi.getInstance().modifyEmo();
         }
-    }
-
+    } 
+    
     addChangeEventImgFile() {
         const imgAddButtons = document.querySelectorAll(".img-add-button");
         const imgFiles = document.querySelectorAll(".img-file");
-
-
+    
         imgAddButtons.forEach((button, index) => {
             button.onclick = () => {
                 imgFiles[index].click();
             }
         });
-
+    
         imgFiles.forEach((imgFile, index) => {
             imgFile.onchange = () => {
                 const formData = new FormData(document.querySelector(".img-form"));
                 let changeFlag = false;
-
+    
                 formData.forEach((value, key) => {
                     if (imgFile.getAttribute("name") == key && value.size != 0) {
-                        
                         changeFlag = true;
+                        fileObj.files[index] = value; // fileObj.files 배열에 파일 추가
                     }
                 });
-
+    
                 if (changeFlag) {
                     const imgRegisterButton = document.querySelector(".img-modification-button");
                     imgRegisterButton.disabled = false;
-
+    
                     ImgFileService.getInstance().getImgPreview();
+                    imgFile.value = null;
                 }
             };
         });
     }
+    
 
     
     addClickEventImgOnChangeButton() {
         const imgModificationButton = document.querySelector(".img-modification-button");
 
         imgModificationButton.onclick = () => {
-            fileObj.formData.append("files", fileObj.files[0]);
+            fileObj.formData.append("files", fileObj.files[index]);
             
             let successFlag = true;
 
-            if(imgObj.imageId != null) {
+            if(imgObj != null && imgObj.imageId != null) {
                 successFlag = EmoModificationApi.getInstance().removeImg();
+                console.log(successFlag)
+                
+                fileObj.files = [];
+                fileObj.formData = new FormData()
+                if(!successFlag) {
+                    return;
+                }
+                
             }
-
+    
             if(successFlag) {
                 EmoModificationApi.getInstance().registerImg();
             }
             
+            
         }
     }
- 
 
     addClickEventImgModificationButton() {
         const imgModificationButton = document.querySelector(".img-modification-button")
@@ -282,4 +297,9 @@ class ComponentEvent {
             EmoModificationApi.getInstance().registerImg();
         }
     }
+
+
+    
+
+    
 }

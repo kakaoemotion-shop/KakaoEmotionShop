@@ -11,4 +11,7 @@ public interface AccountRepository {
     public int saveUser(UserMst user);
 
     public int saveRole(UserMst user);
+
+    public int setUserProvider(UserMst user);
+
 }

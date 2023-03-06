@@ -7,6 +7,38 @@ class ToggleService {
         return this.#instance;
     }
 
+    header() {
+        const header = document.querySelector(".header")
+
+        header.innerHTML = `
+        <div class="header-top">
+            <div>
+                <button class="toggle-button">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+            </div>
+
+            <a href="/index" class="logo-button">
+                <h1>kakao<span>emoticon</span> shop</h1>
+            </a>
+
+            <button class="search-button">
+                <i class="fa-solid fa-magnifying-glass"></i>
+            </button>
+
+            <button class="mypage-button">
+            </button>
+        </div>
+
+        <nav class="header-menu">
+            <ul class="menu-list">
+                <li class="menu-list-button"><a href="/index">홈</a></li>
+                <li class="menu-list-button"><a href="/main/newemoticon">신규</a></liu>
+                <li class="menu-list-button"><a href="/main/hot">인기</a></li>
+            </ul>
+        </nav>
+        `
+    }
 
     loadlogin() {
         const menuAside = document.querySelector(".menu-aside");
@@ -26,29 +58,12 @@ class ToggleService {
                         </div>
                         <div class="mypage-info">
                             <ul class="mypage-box">
-                                <li class="mypage-home">
-                                    <a href="" class="mypage-link">
-                                        <i class="fa-regular fa-face-smile"></i>
-                                        <p class="mypage-chart">구매내역</p>
-                                    </a>
-                                </li>
-                                <li class="mypage-new">
-                                    <a href="" class="mypage-link">
-                                        <i class="fa-solid fa-gift"></i>
-                                        <p class="mypage-chart">선물함</p>
-                                    </a>
-                                </li>
-                                <li mypage="mypage-popularity">
-                                    <a href="" class="mypage-link">
-                                        <i class="fa-solid fa-ticket-simple"></i>
-                                        <p class="mypage-chart">쿠폰함</p>
-                                    </a>
-                                </li>
+                            
                                 <li class="mypage-style">
-                                    <a href="" class="mypage-link">
+                                    <a href="" class="mypage-link"></a>
                                         <i class="fa-regular fa-heart"></i>
                                         <p class="mypage-chart">좋아요</p>
-                                    </a>
+                                    
                                 </li>
                             </ul>
                         </div>
@@ -108,26 +123,9 @@ class ToggleService {
                         </div>
                         <div class="mypage-info">
                             <ul class="mypage-box">
-                                <li class="mypage-home">
-                                    <a href="" class="mypage-link">
-                                        <i class="fa-regular fa-face-smile"></i>
-                                        <p class="mypage-chart">구매내역</p>
-                                    </a>
-                                </li>
-                                <li class="mypage-new">
-                                    <a href="" class="mypage-link">
-                                        <i class="fa-solid fa-gift"></i>
-                                        <p class="mypage-chart">선물함</p>
-                                    </a>
-                                </li>
-                                <li mypage="mypage-popularity">
-                                    <a href="" class="mypage-link">
-                                        <i class="fa-solid fa-ticket-simple"></i>
-                                        <p class="mypage-chart">쿠폰함</p>
-                                    </a>
-                                </li>
+       
                                 <li class="mypage-style">
-                                    <a href="" class="mypage-link">
+                                    <a href="/account/mypage" class="mypage-link">
                                         <i class="fa-regular fa-heart"></i>
                                         <p class="mypage-chart">좋아요</p>
                                     </a>
@@ -181,6 +179,32 @@ class ToggleService {
         `;
     }
 
+    footer() {
+        const footer = document.querySelector(".footer");
+
+        footer.innerHTML = `
+        <div class="info">
+            <h3 class="searvice-info">
+                <a href="">이용약관</a>
+                <a href="">유료이용안내</a>
+                <a href="">개인정보처리방침</a>
+                <a href="">기업고객</a>
+                <a href="">문의하기</a>
+                <a href="">공정위사업자정보</a>
+                <a href="">(주) 카카오</a>
+            </h3>
+            <h4 class="warp-info">
+                카카오 이모티콘샵에서 판매되는 콘텐츠의 저작권은 콘텐츠 제공자에게 있으며, 이를 무단 이용하는 경우 저작권법 등에 따라 처벌될 수 있습니다.
+                <br />
+                <br />
+                대표: 홍은택 사업자등록번호: 120-81-47521 통신판매업신고번호: 제2015-제주아라-0032호
+                <br />
+                주소: 제주특별자치도 제주시 첨단로 242(영평동) 호스팅사업자: (주)카카오고객센터 1577-3754 메일: help.notice@kakaocorp.com
+            </h4>
+        </div>
+        `
+    }
+
 }
 
 class ToggleButton {
@@ -192,7 +216,6 @@ class ToggleButton {
         return this.#instance;
     }
 
-    toggleButtonFlag = false;
 
     toggleButton() {
         const asideBlank = document.querySelector(".aside-blank");
@@ -208,32 +231,51 @@ class ToggleButton {
         }
     }
 
+
     logoutButton() {
         const mypageButton = document.querySelector(".mypage-button");
         const principal = PrincipalApi.getInstance().getPrincipal();
-        
+
         mypageButton.onclick = () => {
-            if(principal != null){
-                if(confirm("로그아웃하시겠습니까?")){
-                    location.href="/logout"
+            if (principal != null) {
+                if (confirm("로그아웃하시겠습니까?")) {
+                    // 취소 클릭
+                    location.href = "/logout"
+                } else {
+                    // 예 클릭
+                    //     console.log("예 클릭됨")
+                    // location.reload();
                 }
-            }else{
-                location.href="/account/login"
+            } else {
+                location.href = "/account/login"
             }
         }
+
         mypageButton.innerHTML = `
         ${principal == null
                 ? `
-                <a href="/account/login" class = "login">
+                <a href="/account/login">
                 <img src="/static/images/profile_default.png" alt="">
                 </a>
                 `
                 : `
-                <a href= "/index" class="logout">ㅃ2</a>
+                <a href="" class="logout"><img src = "https://www.iconpacks.net/icons/2/free-user-logout-icon-3056-thumb.png"></a>
                 
         `
-    
+
             }
     `
+    }
+    mypagLinkButton() {
+        const mypageLink = document.querySelector(".fa-heart");
+        const principal = PrincipalApi.getInstance().getPrincipal();
+
+        mypageLink.onclick = () => {
+            if (principal == null) {
+                if (confirm("로그인 후 사용 가능합니다")) {
+                    location.href = "/account/login"
+                }
+            }
+        }
     }
 }

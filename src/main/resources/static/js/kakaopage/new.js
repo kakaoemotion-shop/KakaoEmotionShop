@@ -1,62 +1,29 @@
 window.onload = () => {
-    EmoNewPageService.getInstance().onLoadSearch()
-    EmoNewPageMaxPage.getInstance().setMaxPage()
-    EmoNewPageMaxPage.getInstance().addScrollEventPaging()
+    NewService.getInstance().clearNewEmoList();
+    NewService.getInstance().loadNewEmos();
+
+    NewService.getInstance().setMaxPage();
+
+    ComponentEvent.getInstance().addScrollEventPaging();
+    ComponentEvent.getInstance().addClickEventLikeButtons();
 }
-
-
 
 let maxPage = 0;
 
 const searchObj = {
     page: 1,
     searchValue: null,
-    count: 6
+    count: 10
 }
 
-const emoObj = {
-    emoCode: "",
-    emoName: "",
-    company: ""
-}
-
-const imgObj = {
-    imageId: null,
-    emoCode: null,
-    saveName: null,
-    originName: null
-}
-
-class EmoNewPageApi{
-    static #instance = null
+class NewApi {
+    static #instance = null;
     static getInstance() {
-        if (this.#instance == null) {
-            this.#instance = new EmoNewPageApi()
+        if(this.#instance == null) {
+            this.#instance = new NewApi();
         }
-        return this.#instance
+        return this.#instance;
     }
-
-    searchEmo() {
-        let responseData = null;
-
-        $.ajax({
-            async: false,
-            type: "get",
-            url: "http://127.0.0.1:8000/api/hot/search",
-            data: searchObj,
-            dataType: "json",
-            success: response => {
-                responseData = response.data;
-            },
-            error: error => {
-                console.log(error);
-            }
-        })
-
-        return responseData;
-    }
-
-    
 
     getTotalCount() {
         let responseData = null;
@@ -77,6 +44,27 @@ class EmoNewPageApi{
 
         return responseData;
     }
+
+    getNewEmo() {
+        let responseData = null;
+
+        $.ajax({
+            async: false,
+            type: "get",
+            url: "http://127.0.0.1:8000/api/new/search",
+            data: searchObj,
+            dataType: "json",
+            success: response => {
+                responseData = response.data;
+            },
+            error: error => {
+                console.log(error);
+            }
+        })
+
+        return responseData;
+    }
+
     setLike(emoId) {
         let likeCount = -1;
         
@@ -116,91 +104,160 @@ class EmoNewPageApi{
 
         return likeCount;
     }
+
 }
 
-class EmoNewPageService {
-    static #instance = null
+class NewService {
+    static #instance = null;
     static getInstance() {
-        if (this.#instance == null) {
-            this.#instance = new EmoNewPageService();
+        if(this.#instance == null) {
+            this.#instance = new NewService();
         }
-        return this.#instance
+        return this.#instance;
     }
 
-    clearEmoList() {
+    setMaxPage() {
+        const totalCount = NewApi.getInstance().getTotalCount();
+        maxPage = totalCount % 10 == 0
+            ? totalCount / 10
+            : Math.floor(totalCount / 10) + 1;
+
+    }
+
+    clearNewEmoList() {
         const contentFlex = document.querySelector(".new-info");
         contentFlex.innerHTML = "";
     }
 
-    onLoadSearch(){
-        const responseData = EmoNewPageApi.getInstance().searchEmo()
-        const emoImg = document.querySelectorAll(".new-info-img")
-        imgObj.saveName = responseData.emoImage.saveName
-        imgObj.originName = responseData.emoImage.originName
-        const emoListBody = document.querySelector(".new-info")
+    loadNewEmos() {
+        const responseData = NewApi.getInstance().getNewEmo();
+        const contentFlex = document.querySelector(".new-info");
+        const principal = PrincipalApi.getInstance().getPrincipal();
+
+        const _Buttons = document.querySelectorAll(".buttons");
+        const ButtonsLength = _Buttons == null ? 0 : _Buttons.length;
+        
         console.log(responseData)
-        emoListBody.innerHTML =''
         responseData.forEach((data, index) => {
+            contentFlex.innerHTML += `
+            <li>
+            <a class="new-link" href="">
+                <div class="new-info-title">
+                <input type="hidden" class="emo-id" value="${data.emoId}">
+                <input type="hidden" class="like-count" value="${data.likeCount}">
+                <h2 class="emo-name">${data.emoName}</h2>
+                <p class="author">${data.company}</p>
+                <div class="buttons">
+                <span class="like-count">${data.likeCount != null ? data.likeCount : 0}</span>
             
+                </div>
+                </div>
+                <div class="new-info-img">
+                <img src="http://127.0.0.1:8000/image/emo/${data.newImage1 != null ? data.newImage1 : "noimg.jpg"}" class="emo-img">
+                <img src="http://127.0.0.1:8000/image/emo/${data.newImage2 != null ? data.newImage2 : "noimg.jpg"}" class="emo-img">
+                <img src="http://127.0.0.1:8000/image/emo/${data.newImage3 != null ? data.newImage3 : "noimg.jpg"}" class="emo-img">
+                <img src="http://127.0.0.1:8000/image/emo/${data.newImage4 != null ? data.newImage4 : "noimg.jpg"}" class="emo-img">
+                </div>
+            </a>
+            </li>
+            `;
+
+            const Buttons = document.querySelectorAll(".buttons");
+            
+            if(principal == null) {         
                 
-            responseData.emoImage.forEach((imgObj, index) => {
-                emoImg[index].src = "http://localhost:8000/image/emo/" + imgObj.saveName;
-            })
-            emoListBody.innerHTML += `
-                <li>
-                    <a class="new-link" href="/main/detail">
-                        <div class="new-info-title">
-                            <h2 class="emo-name">${data.emoName}</h2>
-                            <p class="author">${data.company}</p>
-                            <button class="like-button">
-                                <i class="fa-regular fa-heart"></i>
-                            </button>
-                        </div>
-                        <img src="${emoImg}" class="emo-img">
-                        <img src="${emoImg}" class="emo-img">
-                        <img src="${emoImg}" class="emo-img">
-                        <img src="${emoImg}" class="emo-img">
-                    </a>
-                </li>
-            `
+                Buttons[ButtonsLength + index].innerHTML += `
+                <button type="button" class="no-login-like like-button">
+                <i class="fa-regular fa-heart"></i>
+                </button>
+                `;
+
+                ComponentEvent.getInstance().addClickEventLikeButtonsNoLogin();
+
+            }else {              
+                if(data.likeId != 0){
+                    console.log("ButtonLength : " + ButtonsLength);
+                    Buttons[ButtonsLength + index].innerHTML += `
+                    <button type="button" class="like-buttons dislike-button">
+                    <i class="fa-solid fa-heart"></i>
+                    </button>
+                    `;
+                }else {
+                    Buttons[ButtonsLength + index].innerHTML += `
+                        <button type="button" class="like-buttons like-button">
+                        <i class="fa-regular fa-heart"></i>
+                        </button>
+                    `;
+                }
+                ComponentEvent.getInstance().addClickEventLikeButtons();
+            }
             
-        })    
+        })
     }
-
     
-
-
 }
 
-class EmoNewPageMaxPage{
+class ComponentEvent {
     static #instance = null;
     static getInstance() {
         if(this.#instance == null) {
-            this.#instance = new EmoNewPageMaxPage();
+            this.#instance = new ComponentEvent();
         }
         return this.#instance;
     }
-    setMaxPage() {
-        const totalCount = EmoNewPageApi.getInstance().getTotalCount();
-        maxPage = totalCount % 6 == 0
-            ? totalCount / 6
-            : Math.floor(totalCount / 6) + 1;
 
-    }
     addScrollEventPaging() {
         const html = document.querySelector("html");
         const body = document.querySelector("body");
-        console.log(body.offsetHeight)
-        console.log(html.clientHeight)
-        console.log(html.scrollTop)
 
         body.onscroll = () => {
             const scrollPosition = body.offsetHeight - html.clientHeight - html.scrollTop;
-            
+
             if(scrollPosition < 250 && searchObj.page < maxPage) {
                 searchObj.page++;
-                EmoNewPageService.getInstance().onLoadSearch();
+                NewService.getInstance().loadNewEmos();
             }
         }
     }
+
+    addClickEventLikeButtons() {
+        const likeButtons = document.querySelectorAll(".like-buttons");
+        const emoIds = document.querySelectorAll(".emo-id");
+        const likeCounts = document.querySelectorAll(".like-count")
+
+        likeButtons.forEach((button, index) => {
+            button.onclick = () => {
+                if(button.classList.contains("like-button")){
+                    const likeCount = NewApi.getInstance().setLike(emoIds[index].value);
+                    if(likeCount != -1){
+                        likeCounts[index].textContent = likeCount;
+                        button.classList.remove("like-button");
+                        button.classList.add("dislike-button");
+                    }
+                    
+                }else {
+                    const likeCount = NewApi.getInstance().setDisLike(emoIds[index].value);
+                    if(likeCount != -1){
+                        likeCounts[index].textContent = likeCount;
+                        button.classList.remove("dislike-button");
+                        button.classList.add("like-button");
+                    }
+                }
+            }
+        });
+
+    }
+    addClickEventLikeButtonsNoLogin() {
+        const likeButtonError = document.querySelectorAll(".no-login-like");
+        const emoIds = document.querySelectorAll(".emo-id");
+
+        likeButtonError.forEach((button, index) => {
+            button.onclick = () => {
+                
+                if (confirm("로그인 후 사용 가능합니다")) {
+                    location.href = "/account/login"
+                }   
+            }
+        });
+    } 
 }

@@ -11,4 +11,6 @@ public interface HotSearchRepository {
 
     public int getUserSearchEmoTotalCount(HotSearchReqDto hotSearchReqDto);
     public List<HotSearchEmo> userSearchEmo(HotSearchReqDto hotSearchReqDto);
+    public List<HotSearchEmo> userLikeEmo(HotSearchReqDto hotSearchReqDto);
+    public List<HotSearchEmo> searchNewEmo(HotSearchReqDto hotSearchReqDto);
 }

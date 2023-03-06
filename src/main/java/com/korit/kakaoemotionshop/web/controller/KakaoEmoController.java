@@ -12,19 +12,17 @@ public class KakaoEmoController {
     public String newEmoticon() {
         return "kakaopage/new";
     }
-
     @GetMapping("/hot")
     public String hot() {
         return "kakaopage/hot";
     }
-
     @GetMapping("/detail")
     public String detailpage() {
         return "kakaopage/detailpage";
     }
-    @GetMapping("/search")
-    public String searchPage() {
-        return "kakaopage/search_page";
+    @GetMapping("/mypage/like")
+    public String like() {
+        return "kakaopage/like";
     }
 
 }
