@@ -239,11 +239,11 @@ html {
     display: flex;
     width: 40px;
     height: 40px;
-
+  
     border: 1px solid #dbdbdb;
     border-radius: 55px;
     background-color: white;
-
+  
     cursor: pointer;
 }
 .fa-heart {
@@ -259,43 +259,43 @@ html {
 .footer{
     display: flex;
     justify-content: center;
-
+  
     width: 100%;
     height: 231px;
-
+  
     padding: 0;
     margin: 0 auto;
-
+  
     background-color: white;
   }
   .info{
     width: 1024px;
     height: 231px;
-
+  
     background-color: white;
   }
   .searvice-info{
     margin-top: 30px;
     margin-left: 20px;
-
+  
     width: 1024px;
     height: 30px;
   }
   .searvice-info a{
     font-size: 13px;
     font-weight: 200;
-
+  
     color: #181818;
   }
   .warp-info{
     margin-top: 20px;
     margin-left: 20px;
-
+  
     width: 1024px;
     height: 30px;
-
+  
     font-size: 13px;
     font-weight: 200;
-
+  
     color: #393939;
   }

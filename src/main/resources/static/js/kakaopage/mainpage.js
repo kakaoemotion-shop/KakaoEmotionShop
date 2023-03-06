@@ -1,5 +1,3 @@
-
-
 let maxPage = 0;
 
 const searchObj = {

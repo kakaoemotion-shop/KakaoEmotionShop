@@ -150,8 +150,8 @@ class DetailService {
         const emoticonArea = document.querySelector(".emoticon-area")
         const principal = PrincipalApi.getInstance().getPrincipal();
 
-        const Buttons = document.querySelectorAll(".right-like-box");
-        const ButtonsLength = Buttons == null ? 0 : Buttons.length;
+        // const Buttons = document.querySelectorAll(".right-like-box");
+        // const ButtonsLength = Buttons == null ? 0 : Buttons.length;
 
 
         emoticonArea.innerHTML = `
@@ -184,31 +184,31 @@ class DetailService {
             </div>
         `;
 
-        if (principal == null) {
+        // if (principal == null) {
 
-            Buttons[ButtonsLength + index].innerHTML += `
-            <button type="button" class="no-login-like like-button disabled">
-            <i class="fa-regular fa-heart"></i>
-            </button>
-            `;
+        //     Buttons[ButtonsLength + index].innerHTML += `
+        //     <button type="button" class="no-login-like like-button disabled">
+        //     <i class="fa-regular fa-heart"></i>
+        //     </button>
+        //     `;
 
-        } else {
-            if (responseData.likeId != 0) {
-                console.log("ButtonLength : " + ButtonsLength);
-                Buttons[ButtonsLength + index].innerHTML += `
-                <button type="button" class="like-buttons dislike-button">
-                <i class="fa-solid fa-heart"></i>
-                </button>
-                `;
-            } else {
-                Buttons[ButtonsLength + index].innerHTML += `
-                    <button type="button" class="like-buttons like-button">
-                    <i class="fa-regular fa-heart"></i>
-                    </button>
-                `;
-            }
-            ComponentEvent.getInstance().addClickEventLikeButtons();
-        }
+        // } else {
+        //     if (responseData.likeId != 0) {
+        //         console.log("ButtonLength : " + ButtonsLength);
+        //         Buttons[ButtonsLength + index].innerHTML += `
+        //         <button type="button" class="like-buttons dislike-button">
+        //         <i class="fa-solid fa-heart"></i>
+        //         </button>
+        //         `;
+        //     } else {
+        //         Buttons[ButtonsLength + index].innerHTML += `
+        //             <button type="button" class="like-buttons like-button">
+        //             <i class="fa-regular fa-heart"></i>
+        //             </button>
+        //         `;
+        //     }
+        //     ComponentEvent.getInstance().addClickEventLikeButtons();
+        // }
     }
 
     loadEmoAndImageData() {

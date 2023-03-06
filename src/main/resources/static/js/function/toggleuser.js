@@ -7,10 +7,10 @@ class ToggleService {
         return this.#instance;
     }
 
-    header(){
+    header() {
         const header = document.querySelector(".header")
 
-        header.innerHTML=`
+        header.innerHTML = `
         <div class="header-top">
             <div>
                 <button class="toggle-button">
@@ -60,10 +60,10 @@ class ToggleService {
                             <ul class="mypage-box">
                             
                                 <li class="mypage-style">
-                                    <a href="/account/mypage" class="mypage-link">
+                                    <a href="" class="mypage-link"></a>
                                         <i class="fa-regular fa-heart"></i>
                                         <p class="mypage-chart">좋아요</p>
-                                    </a>
+                                    
                                 </li>
                             </ul>
                         </div>
@@ -178,8 +178,8 @@ class ToggleService {
                 </ul>
         `;
     }
-    
-    footer(){
+
+    footer() {
         const footer = document.querySelector(".footer");
 
         footer.innerHTML = `
@@ -216,7 +216,6 @@ class ToggleButton {
         return this.#instance;
     }
 
-    toggleButtonFlag = false;
 
     toggleButton() {
         const asideBlank = document.querySelector(".aside-blank");
@@ -231,7 +230,7 @@ class ToggleButton {
             asideContainer.classList.add("aside-hide");
         }
     }
-    
+
 
     logoutButton() {
         const mypageButton = document.querySelector(".mypage-button");
@@ -266,5 +265,17 @@ class ToggleButton {
 
             }
     `
+    }
+    mypagLinkButton() {
+        const mypageLink = document.querySelector(".fa-heart");
+        const principal = PrincipalApi.getInstance().getPrincipal();
+
+        mypageLink.onclick = () => {
+            if (principal == null) {
+                if (confirm("로그인 후 사용 가능합니다")) {
+                    location.href = "/account/login"
+                }
+            }
+        }
     }
 }

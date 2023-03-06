@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class AdminController {
 
     @GetMapping("/emo")
-    public String registerEmo() { return "admin/emotion_register"; }
+    public String registerEmo() { return "admin/emo_register"; }
 
 }
 
