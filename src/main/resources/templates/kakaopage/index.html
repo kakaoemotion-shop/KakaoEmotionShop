@@ -1,11 +1,9 @@
 <!DOCTYPE html>
 <html lang="ko">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>카카오 이모티콘샵</title>
     <script src="https://code.jquery.com/jquery-latest.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
@@ -26,8 +24,9 @@
             <div class="aside-blank"></div>
         </div>
     </div>
+
     <header class="header">
-        <div class="header-top">
+         <div class="header-top">
             <div>
                 <button class="toggle-button">
                     <i class="fa-solid fa-bars"></i>
@@ -43,7 +42,6 @@
             </button>
 
             <button class="mypage-button">
-                <img src="/static/images/profile_default.png" alt="">
             </button>
         </div>
 
@@ -54,16 +52,20 @@
                 <li class="menu-list-button"><a href="/main/hot">인기</a></li>
             </ul>
         </nav>
-
     </header>
-    <div class="search-page">
+
+    <div class="search-page" style="display: none;"> <!--//-> 검색창 온오프  -->
         <div class="search-bar">
-            <input class="search-bar-input" type="text" placeholder="이모티콘을 검색해보세요!">
+            <input class="search-bar-input" type="text" placeholder="이모티콘을 검색해보세요!" onkeyup="addSearchInputEvent()">
+            <!--//-> 결과창 이동 함수 onkeyup="addSearchEvent()" -->
             <button class="search-bar-button">
                 <i class="fa-solid fa-magnifying-glass"></i>
             </button>
         </div>
+        <div class="backboard"></div>
+        <!-- -> 반투명 배경 -->
     </div>
+
     <div class="main">
         <img src="/static/images/main.gif" alt="" class="main-img">
     </div>
@@ -71,9 +73,7 @@
     <div class="content">
 
         <div class="new">
-            <a href="/main/newemoticon">
-                <h1 class="new-title"><a href="">신규 이모티콘<i class="fa-solid fa-chevron-right"></i></a></h1>
-            </a>
+            <h1 class="new-title"><a href="/main/newemoticon">신규 이모티콘<i class="fa-solid fa-chevron-right"></i></a></h1>
             <div class="new-emotion">
                 <ul class="new-list">
                     <li>
@@ -87,9 +87,7 @@
         </div>
 
         <div class="hot">
-            <a href="/main/hot">
-                <h1 class="hot-title"><a href="">인기 이모티콘<i class="fa-solid fa-chevron-right"></i></a></h1>
-            </a>
+            <h1 class="hot-title"><a href="/main/hot">인기 이모티콘<i class="fa-solid fa-chevron-right"></i></a></h1>
             <div class="hot-emotion">
                 <ul class="hot-list">
                     <li>
@@ -99,8 +97,9 @@
                                 <h2 class="emo-name">이모티콘 이름1</h2>
                                 <p class="author">작가 이름1</p>
                             </div>
-                            <img src="/static/images/noimg.jpg" alt="" class="emo-img">
-
+                            <div class=".index-img-box">
+                                <img src="/static/images/noimg.jpg" alt="" class="emo-img">
+                            </div>
                         </a>
                     </li>
                 </ul>
@@ -109,32 +108,35 @@
     </div>
 
     <footer class="footer">
-        <div class="info">
-            <h3 class="searvice-info">
-                <a href="">이용약관</a>
-                <a href="">유료이용안내</a>
-                <a href="">개인정보처리방침</a>
-                <a href="">기업고객</a>
-                <a href="">문의하기</a>
-                <a href="">공정위사업자정보</a>
-                <a href="">(주) 카카오</a>
-            </h3>
-            <h4 class="warp-info">
-                카카오 이모티콘샵에서 판매되는 콘텐츠의 저작권은 콘텐츠 제공자에게 있으며, 이를 무단 이용하는 경우 저작권법 등에 따라 처벌될 수 있습니다.
-                <br />
-                <br />
-                대표: 홍은택 사업자등록번호: 120-81-47521 통신판매업신고번호: 제2015-제주아라-0032호
-                <br />
-                주소: 제주특별자치도 제주시 첨단로 242(영평동) 호스팅사업자: (주)카카오고객센터 1577-3754 메일: help.notice@kakaocorp.com
-            </h4>
-        </div>
+
     </footer>
 
 
 
+    <script> // -> 검색창 온오프 버튼
+        $(function () {
+            $('.search-button').click(function () {
+                if ($('.search-page').css('display') == "none") {
+                    $('.search-page').show();
+                } else {
+                    $('.search-page').hide();
+                } a
+            });
+        });
+    </script>
+
+    <script> // -> 검색결과 입력 후 결과창으로 이동
+        const searchInput = document.querySelector(".search-bar-input");
+        function addSearchInputEvent() {
+            if (window.event.keyCode == 13) {
+                location.href = 'http://localhost:8000/kakaopage/search';
+            }
+        }
+    </script>
     <script src="/static/js/account/principal.js"></script>
     <script src="/static/js/function/toggleuser.js"></script>
     <script src="/static/js/function/index.js"></script>
+    <script src="/static/js/kakaopage/mainpage.js"></script>
 </body>
 
 </html>
