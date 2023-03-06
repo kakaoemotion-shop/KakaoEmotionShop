@@ -226,19 +226,6 @@ html {
     height: 50px;
 }
 
-.like-button {
-    margin-left: 10px;
-    margin-top: 5px;
-
-    width: 40px;
-    height: 40px;
-
-    border: 1px solid #dbdbdb;
-    border-radius: 50%;
-    background-color: white;
-  
-    cursor: pointer;
-}
 .like-buttons {
     margin-left: 10px;
     margin-top: 5px;

@@ -212,6 +212,10 @@ html {
 
   cursor: pointer;
 }
+
+.buttons{
+  margin-right: 10px;
+}
 .like-button{
   margin-top: 5px;
 

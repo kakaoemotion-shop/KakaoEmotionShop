@@ -176,7 +176,7 @@ class HotSearchService {
                 
                 Buttons[ButtonsLength + index].innerHTML += `
                 <button type="button" class="no-login-like like-button disabled">
-                    <i class="fa-regular fa-heart"></i>
+                    <i class="fa-regular fa-heart" ></i>
                 </button>
                 `;
 
