@@ -5,7 +5,6 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>카카오 이모티콘샵</title>
     <script src="https://code.jquery.com/jquery-latest.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
@@ -28,7 +27,7 @@
     </div>
 
     <header class="header">
-         <div class="header-top">
+        <div class="header-top">
             <div>
                 <button class="toggle-button">
                     <i class="fa-solid fa-bars"></i>
@@ -99,8 +98,9 @@
                                 <h2 class="emo-name">이모티콘 이름1</h2>
                                 <p class="author">작가 이름1</p>
                             </div>
-                            <img src="/static/images/noimg.jpg" alt="" class="emo-img">
-
+                            <div class="index-img-box">
+                                <img src="/static/images/noimg.jpg" alt="" class="emo-img">
+                            </div>
                         </a>
                     </li>
                 </ul>
@@ -130,7 +130,7 @@
         const searchInput = document.querySelector(".search-bar-input");
         function addSearchInputEvent() {
             if (window.event.keyCode == 13) {
-                location.href = 'http://localhost:8000/kakaopage/search';
+                location.href = 'http://127.0.0.1:8000/kakaopage/search';
             }
         }
     </script>

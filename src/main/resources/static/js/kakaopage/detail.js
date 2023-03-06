@@ -49,7 +49,7 @@ class DetailApi {
         $.ajax({
             async: false,
             type: "get",
-            url: `http://localhost:8000/api/admin/emo/image/one/${emoObj2.emoCode}`,
+            url: `http://127.0.0.1:8000/api/admin/emo/image/one/${emoObj2.emoCode}`,
             dataType: "json",
             success: response => {
                 responseData = response.data
@@ -59,7 +59,7 @@ class DetailApi {
             }
         })
         return responseData
-        
+
     }
 
     getEmoAndImage() {
@@ -68,7 +68,7 @@ class DetailApi {
         $.ajax({
             async: false,
             type: "get",
-            url: `http://localhost:8000/api/admin/emos/${emoObj.emoCode}`,
+            url: `http://127.0.0.1:8000/api/admin/emos/${emoObj.emoCode}`,
             dataType: "json",
             success: response => {
                 responseData = response.data
@@ -82,7 +82,7 @@ class DetailApi {
 
     setLike(emoId) {
         let likeCount = -1;
-        
+
         $.ajax({
             async: false,
             type: "post",
@@ -102,7 +102,7 @@ class DetailApi {
 
     setDisLike(emoId) {
         let likeCount = -1;
-        
+
         $.ajax({
             async: false,
             type: "delete",
@@ -138,7 +138,7 @@ class DetailService {
         emoObj.emoCode = URLSearch.get("emoCode")
         emoObj2.emoCode = URLSearch.get("emoCode")
     }
-    
+
     clearEmoList() {
         const contentFlex = document.querySelector(".emoticon-area");
         contentFlex.innerHTML = "";
@@ -152,7 +152,7 @@ class DetailService {
 
         const Buttons = document.querySelectorAll(".right-like-box");
         const ButtonsLength = Buttons == null ? 0 : Buttons.length;
-        
+
 
         emoticonArea.innerHTML = `
             <div class="emoticon-product">
@@ -160,7 +160,7 @@ class DetailService {
                 <div class="emoticon-box">
                     <div class="emoticon-thumb">
                         <img class="main-emoticon"
-                            src="http://127.0.0.1:8000/image/emo/${responseData.emoImage[0].saveName!= null ? responseData.emoImage[0].saveName :"noimg.png"}"
+                            src="http://127.0.0.1:8000/image/emo/${responseData.emoImage[0].saveName != null ? responseData.emoImage[0].saveName : "noimg.png"}"
                             alt="">
                     </div>
                 </div>
@@ -184,23 +184,23 @@ class DetailService {
             </div>
         `;
 
-        if(principal == null) {
-                
+        if (principal == null) {
+
             Buttons[ButtonsLength + index].innerHTML += `
             <button type="button" class="no-login-like like-button disabled">
             <i class="fa-regular fa-heart"></i>
             </button>
             `;
 
-        }else {              
-            if(responseData.likeId != 0){
+        } else {
+            if (responseData.likeId != 0) {
                 console.log("ButtonLength : " + ButtonsLength);
                 Buttons[ButtonsLength + index].innerHTML += `
                 <button type="button" class="like-buttons dislike-button">
                 <i class="fa-solid fa-heart"></i>
                 </button>
                 `;
-            }else {
+            } else {
                 Buttons[ButtonsLength + index].innerHTML += `
                     <button type="button" class="like-buttons like-button">
                     <i class="fa-regular fa-heart"></i>
@@ -224,7 +224,7 @@ class DetailService {
             const emoImg = document.querySelectorAll(".subemoticon-number")
 
             responseData.emoImage.forEach((imgObj, index) => {
-                emoImg[index].src = "http://localhost:8000/image/emo/" + imgObj.saveName;
+                emoImg[index].src = "http://127.0.0.1:8000/image/emo/" + imgObj.saveName;
             })
 
         }
@@ -277,16 +277,16 @@ class ComponentEvent {
 
         likeButtons.forEach((button, index) => {
             button.onclick = () => {
-                if(button.classList.contains("like-button")){
+                if (button.classList.contains("like-button")) {
                     const likeCount = DetailApi.getInstance().setLike(emoIds[index].value);
-                    if(likeCount != -1){
+                    if (likeCount != -1) {
                         button.classList.remove("like-button");
                         button.classList.add("dislike-button");
                     }
-                    
-                }else {
+
+                } else {
                     const likeCount = DetailApi.getInstance().setDisLike(emoIds[index].value);
-                    if(likeCount != -1){
+                    if (likeCount != -1) {
                         button.classList.remove("dislike-button");
                         button.classList.add("like-button");
                     }

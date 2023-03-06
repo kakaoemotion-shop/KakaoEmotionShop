@@ -31,7 +31,7 @@ class SearchService {
         $.ajax({
             async: false,
             type: 'get',
-            url: 'http://localhost:8000/api/admin/emos',
+            url: 'http://127.0.0.1:8000/api/admin/emos',
             data: emoSearchObj,
             dataType: 'json',
             success: response => {
@@ -52,7 +52,7 @@ class SearchService {
         $.ajax({
             async: false,
             type: 'get',
-            url: 'http://localhost:8000/api/admin/emos/totalcount',
+            url: 'http://127.0.0.1:8000/api/admin/emos/totalcount',
             data: {
                 "searchValue": emoSearchObj.searchValue
             },
@@ -80,7 +80,7 @@ class SearchService {
                 { emoId: deleteArray }
             ),
             dataType: "json",
-            url: "http://localhost:8000/api/admin/emos",
+            url: "http://127.0.0.1:8000/api/admin/emos",
             success: response => {
                 console.log(response)
                 returnData = true
@@ -191,7 +191,7 @@ class SearchApi {
         $.ajax({
             async: false,
             type: "post",
-            url: `http://localhost:8000/api/emo/${emoId}/like`,
+            url: `http://127.0.0.1:8000/api/emo/${emoId}/like`,
             dataType: "json",
             success: response => {
                 likeCount = response.data;
@@ -210,7 +210,7 @@ class SearchApi {
         $.ajax({
             async: false,
             type: "delete",
-            url: `http://localhost:8000/api/emo/${emoId}/like`,
+            url: `http://127.0.0.1:8000/api/emo/${emoId}/like`,
             dataType: "json",
             success: response => {
                 likeCount = response.data;

@@ -1,5 +1,10 @@
-
+.index-img-box{
+  display: flex;
+  width: 90px;
+  height: 90px;
+}
 .emo-img{
+  display: flex;
   width: 90px;
   height: 90px;
 }

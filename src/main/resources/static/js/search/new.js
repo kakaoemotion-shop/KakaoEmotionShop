@@ -1,4 +1,9 @@
 window.onload = () => {
+    ToggleService.getInstance().loadlogin();
+
+    ToggleButton.getInstance().logoutButton();
+    ToggleButton.getInstance().toggleButton();
+    
     NewService.getInstance().clearNewEmoList();
     NewService.getInstance().loadNewEmos();
 

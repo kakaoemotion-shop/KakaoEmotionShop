@@ -58,24 +58,7 @@ class ToggleService {
                         </div>
                         <div class="mypage-info">
                             <ul class="mypage-box">
-                                <li class="mypage-home">
-                                    <a href="" class="mypage-link">
-                                        <i class="fa-regular fa-face-smile"></i>
-                                        <p class="mypage-chart">구매내역</p>
-                                    </a>
-                                </li>
-                                <li class="mypage-new">
-                                    <a href="" class="mypage-link">
-                                        <i class="fa-solid fa-gift"></i>
-                                        <p class="mypage-chart">선물함</p>
-                                    </a>
-                                </li>
-                                <li mypage="mypage-popularity">
-                                    <a href="" class="mypage-link">
-                                        <i class="fa-solid fa-ticket-simple"></i>
-                                        <p class="mypage-chart">쿠폰함</p>
-                                    </a>
-                                </li>
+                            
                                 <li class="mypage-style">
                                     <a href="/account/mypage" class="mypage-link">
                                         <i class="fa-regular fa-heart"></i>
@@ -140,24 +123,7 @@ class ToggleService {
                         </div>
                         <div class="mypage-info">
                             <ul class="mypage-box">
-                                <li class="mypage-home">
-                                    <a href="" class="mypage-link">
-                                        <i class="fa-regular fa-face-smile"></i>
-                                        <p class="mypage-chart">구매내역</p>
-                                    </a>
-                                </li>
-                                <li class="mypage-new">
-                                    <a href="" class="mypage-link">
-                                        <i class="fa-solid fa-gift"></i>
-                                        <p class="mypage-chart">선물함</p>
-                                    </a>
-                                </li>
-                                <li mypage="mypage-popularity">
-                                    <a href="" class="mypage-link">
-                                        <i class="fa-solid fa-ticket-simple"></i>
-                                        <p class="mypage-chart">쿠폰함</p>
-                                    </a>
-                                </li>
+       
                                 <li class="mypage-style">
                                     <a href="/account/mypage" class="mypage-link">
                                         <i class="fa-regular fa-heart"></i>

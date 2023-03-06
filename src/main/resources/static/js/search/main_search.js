@@ -1,15 +1,17 @@
 window.onload = () => {
+
+
     SearchService.getInstance().clearEmoList();
     SearchService.getInstance().loadSearchEmos();
 
     SearchService.getInstance().clearEmoCount();
     SearchService.getInstance().loadSearchCounts();
-    
+
     SearchService.getInstance().setMaxPage();
     SearchService.getInstance().onLoadSearch();
-    
-    ComponentEvent.getInstance().addClickSearchButton(); 
-    ComponentEvent.getInstance().addScrollEventPaging(); 
+
+    ComponentEvent.getInstance().addClickSearchButton();
+    ComponentEvent.getInstance().addScrollEventPaging();
 }
 
 let maxPage = 0;
@@ -24,7 +26,7 @@ const searchObj = {
 class SearchApi {
     static #instance = null;
     static getInstance() {
-        if(this.#instance == null) {
+        if (this.#instance == null) {
             this.#instance = new SearchApi();
         }
         return this.#instance;
@@ -35,7 +37,7 @@ class SearchApi {
         $.ajax({
             async: false,
             type: "get",
-            url: "http://localhost:8000/api/search/totalcount",
+            url: "http://127.0.0.1:8000/api/search/totalcount",
             data: searchObj,
             dataType: "json",
             success: response => {
@@ -53,7 +55,7 @@ class SearchApi {
         $.ajax({
             async: false,
             type: "get",
-            url: "http://localhost:8000/api/search",
+            url: "http://127.0.0.1:8000/api/search",
             data: searchObj,
             dataType: "json",
             success: response => {
@@ -61,7 +63,7 @@ class SearchApi {
                 responseData = response.data;
             },
             error: error => {
-                console.log(error);    
+                console.log(error);
             }
         });
         return responseData;
@@ -74,7 +76,7 @@ class SearchApi {
 class SearchService {
     static #instance = null;
     static getInstance() {
-        if(this.#instance == null) {
+        if (this.#instance == null) {
             this.#instance = new SearchService();
         }
         return this.#instance;
@@ -82,9 +84,9 @@ class SearchService {
 
     onLoadSearch() {
         const URLSearch = new URLSearchParams(location.search);
-        if(URLSearch.has("sarchValue")) {
+        if (URLSearch.has("sarchValue")) {
             const searchValue = URLSearch.get("searchValue");
-            if(searchValue == "") {
+            if (searchValue == "") {
                 return;
             }
         }
@@ -98,8 +100,8 @@ class SearchService {
     setMaxPage() {
         const totalCount = SearchApi.getInstance().getTotalCount();
 
-        maxPage = totalCount % 10 == 0 
-            ? totalCount / 10 
+        maxPage = totalCount % 10 == 0
+            ? totalCount / 10
             : Math.floor(totalCount / 10) + 1;
     }
 
@@ -120,7 +122,7 @@ class SearchService {
         // console.log(responseData);
     }
 
-    
+
     clearEmoList() {
         const searchFlex = document.querySelector(".search-flex");
         searchFlex.innerHTML = "";
@@ -144,7 +146,7 @@ class SearchService {
                 </div>
                 <a class="emotion-img-link" href="" >
                     <div class="emotion-view-img">
-                        <img src="http://localhost:8000/image/emo/${data.saveName != null ? data.saveName : 'noimg.jpg'}" alt="">
+                        <img src="http://127.0.0.1:8000/image/emo/${data.saveName != null ? data.saveName : 'noimg.jpg'}" alt="">
                     </div>
                 </a>
             </div>
@@ -158,7 +160,7 @@ class SearchService {
 class ComponentEvent {
     static #instance = null;
     static getInstance() {
-        if(this.#instance == null) {
+        if (this.#instance == null) {
             this.#instance = new ComponentEvent();
         }
         return this.#instance;
@@ -170,8 +172,8 @@ class ComponentEvent {
 
         body.onscroll = () => {
             const scrollPosition = body.offsetHeight - html.clientHeight - html.scrollTop;
-        
-            if(scrollPosition < 250 && searchObj.page < maxPage) {
+
+            if (scrollPosition < 250 && searchObj.page < maxPage) {
                 searchObj.page++;
                 SearchService.getInstance().loadSearchEmos();
             }
@@ -192,9 +194,9 @@ class ComponentEvent {
             SearchService.getInstance().clearEmoCount();
             SearchService.getInstance().loadSearchCounts();
         }
-        
+
         searchInput.onkeyup = () => {
-            if(window.event.keyCode == 13) {
+            if (window.event.keyCode == 13) {
                 searchButton.click();
             }
         }

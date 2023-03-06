@@ -28,43 +28,43 @@
   <header class="header">
     <div class="header-top">
       <div>
-          <button class="toggle-button">
-              <i class="fa-solid fa-bars"></i>
-          </button>
+        <button class="toggle-button">
+          <i class="fa-solid fa-bars"></i>
+        </button>
       </div>
 
       <a href="/index" class="logo-button">
-          <h1>kakao<span>emoticon</span> shop</h1>
+        <h1>kakao<span>emoticon</span> shop</h1>
       </a>
 
       <button class="search-button">
-          <i class="fa-solid fa-magnifying-glass"></i>
+        <i class="fa-solid fa-magnifying-glass"></i>
       </button>
 
       <button class="mypage-button">
       </button>
-  </div>
+    </div>
 
-  <nav class="header-menu">
+    <nav class="header-menu">
       <ul class="menu-list">
-          <li class="menu-list-button"><a href="/index">홈</a></li>
-          <li class="menu-list-button"><a href="/main/newemoticon">신규</a></liu>
-          <li class="menu-list-button"><a href="/main/hot">인기</a></li>
+        <li class="menu-list-button"><a href="/index">홈</a></li>
+        <li class="menu-list-button"><a href="/main/newemoticon">신규</a></liu>
+        <li class="menu-list-button"><a href="/main/hot">인기</a></li>
       </ul>
-  </nav>
+    </nav>
   </header>
 
   <div class="search-page" style="display: none;"> <!--//-> 검색창 온오프  -->
     <div class="search-bar">
-        <input class="search-bar-input" type="text" placeholder="이모티콘을 검색해보세요!" onkeyup="addSearchInputEvent()">
-        <!--//-> 결과창 이동 함수 onkeyup="addSearchEvent()" -->
-        <button class="search-bar-button">
-            <i class="fa-solid fa-magnifying-glass"></i>
-        </button>
+      <input class="search-bar-input" type="text" placeholder="이모티콘을 검색해보세요!" onkeyup="addSearchInputEvent()">
+      <!--//-> 결과창 이동 함수 onkeyup="addSearchEvent()" -->
+      <button class="search-bar-button">
+        <i class="fa-solid fa-magnifying-glass"></i>
+      </button>
     </div>
     <div class="backboard"></div>
     <!-- -> 반투명 배경 -->
-</div>
+  </div>
 
   <div class="banner">
     <img src="/static/images/kakapMain_hot01.png" alt="" class="br-left-img">
@@ -78,28 +78,30 @@
     </div>
   </div>
   <script> // -> 검색창 온오프 버튼
-  $(function () {
+    $(function () {
       $('.search-button').click(function () {
-          if ($('.search-page').css('display') == "none") {
-              $('.search-page').show();
-          } else {
-              $('.search-page').hide();
-          } a
+        if ($('.search-page').css('display') == "none") {
+          $('.search-page').show();
+        } else {
+          $('.search-page').hide();
+        } a
       });
-  });
-</script>
+    });
+  </script>
 
-<script> // -> 검색결과 입력 후 결과창으로 이동
-  const searchInput = document.querySelector(".search-bar-input");
-  function addSearchInputEvent() {
+  <script> // -> 검색결과 입력 후 결과창으로 이동
+    const searchInput = document.querySelector(".search-bar-input");
+    function addSearchInputEvent() {
       if (window.event.keyCode == 13) {
-          location.href = 'http://localhost:8000/kakaopage/search';
+        location.href = 'http://127.0.0.1:8000/kakaopage/search';
       }
-  }
-</script>
-<script src="/static/js/account/principal.js"></script>
-<script src="/static/js/function/toggleuser.js"></script>
-<script src="/static/js/search/hot.js"></script>
+    }
+  </script>
+  <script src="/static/js/account/principal.js"></script>
+  <script src="/static/js/function/toggleuser.js"></script>
+  <script src="/static/js/search/hot.js"></script>
+  <script src="/static/js/kakaopage/mainpage.js"></script>
 
 </body>
+
 </html>
