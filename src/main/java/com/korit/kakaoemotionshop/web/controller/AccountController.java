@@ -12,7 +12,7 @@ public class AccountController {
     public String login() { return "account/login"; }
 
     @GetMapping("/register")
-    public String register() { return "account/register-sign"; }
+    public String register() { return "account/register_sign"; }
 
     @GetMapping("/mypage")
     public String mypage() { return "account/mypage"; }
