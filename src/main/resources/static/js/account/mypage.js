@@ -173,9 +173,9 @@ class LikeService {
             <input type="hidden" class="emo-id" value="${data.emoId}">
             <img src="http://127.0.0.1:8000/image/emo/${data.saveName != null ? data.saveName : "noimg.png"}" class="like-img">
             <div class="like-names">
-                <button type="button" class="like-button">
+                <div class="like-button">
 
-                </button>
+                </div>
                 <div class="like-name">
                     <h3>${data.emoName}</h3>
                     <p>>${data.company}</p>
@@ -189,11 +189,15 @@ class LikeService {
             if(data.likeId != 0){
                 console.log("ButtonLength : " + ButtonsLength);
                 Buttons[ButtonsLength + index].innerHTML += `
+                <button type="button" class="like-buttons dislike-button">
                     <i class="fa-solid fa-heart"></i>
+                </button>
                 `;
             }else {
                 Buttons[ButtonsLength + index].innerHTML += `
+                <button type="button" class="like-buttons like-button" >
                     <i class="fa-regular fa-heart"></i>
+                </button>
                 `;
             }
             ComponentEvent.getInstance().addClickEventLikeButtons()
@@ -228,9 +232,8 @@ class ComponentEvent {
     addClickEventLikeButtons() {
         const likeButtons = document.querySelectorAll(".like-buttons");
         const emoIds = document.querySelectorAll(".emo-id");
-        const likeCounts = document.querySelectorAll(".like-count")
 
-        likeButtons.forEach((button, index) => {
+        likeButtons.forEach((button, index, i) => {
             button.onclick = () => {
                 if(button.classList.contains("like-button")){
                     const likeCount = LikeApi.getInstance().setLike(emoIds[index].value);
@@ -238,7 +241,6 @@ class ComponentEvent {
                         button.classList.remove("like-button");
                         button.classList.add("dislike-button");
                     }
-                    
                 }else {
                     const likeCount = LikeApi.getInstance().setDisLike(emoIds[index].value);
                     if(likeCount != -1){

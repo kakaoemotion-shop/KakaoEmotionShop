@@ -148,25 +148,25 @@ class HotSearchService {
         responseData.forEach((data, index) => {
             contentFlex.innerHTML += `
             <li>
-            <a href="http://127.0.0.1:8000/main/detail/?emoCode=${data.emoCode}" class="emo-tag">
-            <input type="hidden" class="emo-id" value="${data.emoId}">
-            <input type="hidden" class="like-count" value="${data.likeCount}">
-            <span class="number"></span>
-            <div class="hot-info-title">
-            
-          
-            <h2 class="emo-name">${data.emoName}</h2>
-            
-            
-            <p class="author">${data.company}</p>
+                <a href="http://127.0.0.1:8000/main/detail/?emoCode=${data.emoCode}" class="emo-tag">
+                    <input type="hidden" class="emo-id" value="${data.emoId}">
+                    <input type="hidden" class="like-count" value="${data.likeCount}">
+                    <span class="number"></span>
+                    <div class="hot-info-title">
+                    
+                
+                        <h2 class="emo-name">${data.emoName}</h2>
+                        
+                        
+                        <p class="author">${data.company}</p>
 
-            </a>
-            <div class="buttons">
-            <span class="like-count">${data.likeCount != null ? data.likeCount : 0}</span>
-            
-            </div>
-            </div>
-            <img src="http://127.0.0.1:8000/image/emo/${data.saveName != null ? data.saveName : "noimg.jpg"}" class="emo-img">
+                    </div>
+                </a>
+                    <div class="buttons">
+                        <span class="like-count">${data.likeCount != null ? data.likeCount : 0}</span>
+                
+                    </div>
+                <img src="http://127.0.0.1:8000/image/emo/${data.saveName != null ? data.saveName : "noimg.jpg"}" class="emo-img">
             </li>
             `;
 
