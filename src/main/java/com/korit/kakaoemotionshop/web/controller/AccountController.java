@@ -27,6 +27,7 @@ public class AccountController {
     @GetMapping("/register")
     public String register() { return "account/register_sign"; }
 
-
+    @GetMapping("/mypage")
+    public String mypage() { return "account/mypage"; }
 
 }

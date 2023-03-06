@@ -140,5 +140,11 @@ public class EmoService {
         }
     }
 
+    public Map<String, Object> getEmoAndImageOne(String emoCode){
+        Map<String, Object> resultAll = new HashMap<>();
+        resultAll.put("emoMst", emoRepository.findEmoByEmoCode(emoCode));
+        resultAll.put("emoImage", emoRepository.findEmoImageOne(emoCode));
+        return resultAll;
+    }
 
 }

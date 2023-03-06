@@ -247,3 +247,6 @@ html {
   counter-increment: numbering;
   content: counter(numbering);
 }
+.emo-tag{
+  display: flex;
+}
