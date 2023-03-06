@@ -62,10 +62,12 @@
                                     <div class="confirm_btn">
                                         <button type="submit" class="btn_g highlight submit">일반 로그인</button>
                                         <span class="line_or"><span class="txt_or">또는</span></span>
-                                        <button type="button" class="btn_g kakaoLogin">
-                                            <a href="javascript:kakaoLogin();">카카오 로그인</a>
+                                        <button type="button" class="btn_g kakaoLogin"
+                                            onclick="location.href='/oauth2/authorization/kakao'">
+                                            카카오 로그인
+                                            <!-- <a href="javascript:kakaoLogin();">카카오 로그인</a> -->
                                         </button>
-                                        <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+                                        <!-- <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
                                         <script>
                                             // e2e4eea6e90b6aff3e7151d67c0337cb
                                             window.Kakao.init("e2e4eea6e90b6aff3e7151d67c0337cb");
@@ -89,7 +91,7 @@
                                                                     },
                                                                     body: JSON.stringify({
                                                                         nickname: kakao_account.profile_nickname,
-                                                                        email: kakao_account.account_email,
+                                                                        email: kakao_account.email,
                                                                         gender: kakao_account.gender
                                                                     })
                                                                 })
@@ -109,7 +111,7 @@
                                                     }
                                                 });
                                             }
-                                        </script>
+                                        </script> -->
                                     </div>
 
                                 </form>
