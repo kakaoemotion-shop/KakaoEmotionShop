@@ -159,13 +159,14 @@ class HotSearchService {
             
             
             <p class="author">${data.company}</p>
+
+            </a>
             <div class="buttons">
-                <span class="like-count">${data.likeCount != null ? data.likeCount : 0}</span>
+            <span class="like-count">${data.likeCount != null ? data.likeCount : 0}</span>
             
             </div>
             </div>
             <img src="http://127.0.0.1:8000/image/emo/${data.saveName != null ? data.saveName : "noimg.jpg"}" class="emo-img">
-            </a>
             </li>
             `;
 
@@ -178,8 +179,6 @@ class HotSearchService {
                 <i class="fa-regular fa-heart"></i>
                 </button>
                 `;
-
-                // ComponentEvent.getInstance().addClickEventLikeButtonsNoLogin();
 
             }else {              
                 if(data.likeId != 0){
