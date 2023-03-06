@@ -15,6 +15,6 @@
 // const searchInput = document.querySelector(".search-bar-input");
 // function addSearchInputEvent() {
 //     if(window.event.keyCode == 13) {
-//         location.href = `http://localhost:8000/kakaopage/search?searchValue=${searchInput.value}}`;
+//         location.href = `http://127.0.0.1:8000/kakaopage/search?searchValue=${searchInput.value}}`;
 //     }
 // }

@@ -35,7 +35,7 @@ class SearchApi {
         $.ajax({
             async: false,
             type: "get",
-            url: "http://localhost:8000/api/search/totalcount",
+            url: "http://127.0.0.1:8000/api/search/totalcount",
             data: searchObj,
             dataType: "json",
             success: response => {
@@ -53,7 +53,7 @@ class SearchApi {
         $.ajax({
             async: false,
             type: "get",
-            url: "http://localhost:8000/api/search",
+            url: "http://127.0.0.1:8000/api/search",
             data: searchObj,
             dataType: "json",
             success: response => {
@@ -144,7 +144,7 @@ class SearchService {
                 </div>
                 <a class="emotion-img-link" href="" >
                     <div class="emotion-view-img">
-                        <img src="http://localhost:8000/image/emo/${data.saveName != null ? data.saveName : 'noimg.jpg'}" alt="">
+                        <img src="http://127.0.0.1:8000/image/emo/${data.saveName != null ? data.saveName : 'noimg.jpg'}" alt="">
                     </div>
                 </a>
             </div>

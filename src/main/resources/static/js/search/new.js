@@ -1,16 +1,8 @@
 window.onload = () => {
-    // console.log(HotSearchApi.getInstance().getTotalCount());
-    // console.log(HotSearchApi.getInstance().searchEmo());
+    NewService.getInstance().clearNewEmoList();
+    NewService.getInstance().loadNewEmos();
 
-    ToggleService.getInstance().loadlogin();
-
-    ToggleButton.getInstance().logoutButton();
-    ToggleButton.getInstance().toggleButton();
-
-    HotSearchService.getInstance().clearEmoList();
-    HotSearchService.getInstance().loadSearchEmos();
-
-    HotSearchService.getInstance().setMaxPage();
+    NewService.getInstance().setMaxPage();
 
     ComponentEvent.getInstance().addScrollEventPaging();
     ComponentEvent.getInstance().addClickEventLikeButtons();
@@ -24,11 +16,11 @@ const searchObj = {
     count: 10
 }
 
-class HotSearchApi {
+class NewApi {
     static #instance = null;
     static getInstance() {
         if(this.#instance == null) {
-            this.#instance = new HotSearchApi();
+            this.#instance = new NewApi();
         }
         return this.#instance;
     }
@@ -53,13 +45,13 @@ class HotSearchApi {
         return responseData;
     }
 
-    searchEmo() {
+    getNewEmo() {
         let responseData = null;
 
         $.ajax({
             async: false,
             type: "get",
-            url: "http://127.0.0.1:8000/api/hot/search",
+            url: "http://127.0.0.1:8000/api/new/search",
             data: searchObj,
             dataType: "json",
             success: response => {
@@ -112,33 +104,34 @@ class HotSearchApi {
 
         return likeCount;
     }
+
 }
 
-class HotSearchService {
+class NewService {
     static #instance = null;
     static getInstance() {
         if(this.#instance == null) {
-            this.#instance = new HotSearchService();
+            this.#instance = new NewService();
         }
         return this.#instance;
     }
 
-     setMaxPage() {
-         const totalCount = HotSearchApi.getInstance().getTotalCount();
-         maxPage = totalCount % 10 == 0
-             ? totalCount / 10
-             : Math.floor(totalCount / 10) + 1;
+    setMaxPage() {
+        const totalCount = NewApi.getInstance().getTotalCount();
+        maxPage = totalCount % 10 == 0
+            ? totalCount / 10
+            : Math.floor(totalCount / 10) + 1;
 
-     }
+    }
 
-    clearEmoList() {
-        const contentFlex = document.querySelector(".hot-info");
+    clearNewEmoList() {
+        const contentFlex = document.querySelector(".new-info");
         contentFlex.innerHTML = "";
     }
 
-    loadSearchEmos() {
-        const responseData = HotSearchApi.getInstance().searchEmo();
-        const contentFlex = document.querySelector(".hot-info");
+    loadNewEmos() {
+        const responseData = NewApi.getInstance().getNewEmo();
+        const contentFlex = document.querySelector(".new-info");
         const principal = PrincipalApi.getInstance().getPrincipal();
 
         const _Buttons = document.querySelectorAll(".buttons");
@@ -148,57 +141,48 @@ class HotSearchService {
         responseData.forEach((data, index) => {
             contentFlex.innerHTML += `
             <li>
-            <a href="http://127.0.0.1:8000/main/detail/?emoCode=${data.emoCode}" class="emo-tag">
-            <input type="hidden" class="emo-id" value="${data.emoId}">
-            <input type="hidden" class="like-count" value="${data.likeCount}">
-            <span class="number"></span>
-            <div class="hot-info-title">
+            <a class="new-link" href="">
+                <div class="new-info-title">
+                <input type="hidden" class="emo-id" value="${data.emoId}">
+                <input type="hidden" class="like-count" value="${data.likeCount}">
+                <h2 class="emo-name">${data.emoName}</h2>
+                <p class="author">${data.company}</p>
+                <div class="buttons">
+                <span class="like-count">${data.likeCount != null ? data.likeCount : 0}</span>
             
-          
-            <h2 class="emo-name">${data.emoName}</h2>
-            
-            
-            <p class="author">${data.company}</p>
-
+                </div>
+                </div>
+                <div class="new-info-img">
+                <img src="http://127.0.0.1:8000/image/emo/${data.newImage1 != null ? data.newImage1 : "noimg.jpg"}" class="emo-img">
+                <img src="http://127.0.0.1:8000/image/emo/${data.newImage2 != null ? data.newImage2 : "noimg.jpg"}" class="emo-img">
+                <img src="http://127.0.0.1:8000/image/emo/${data.newImage3 != null ? data.newImage3 : "noimg.jpg"}" class="emo-img">
+                <img src="http://127.0.0.1:8000/image/emo/${data.newImage4 != null ? data.newImage4 : "noimg.jpg"}" class="emo-img">
+                </div>
             </a>
-            <div class="buttons">
-            <span class="like-count">${data.likeCount != null ? data.likeCount : 0}</span>
-            
-            </div>
-            </div>
-            <img src="http://127.0.0.1:8000/image/emo/${data.saveName != null ? data.saveName : "noimg.jpg"}" class="emo-img">
             </li>
             `;
 
             const Buttons = document.querySelectorAll(".buttons");
-            
-            if(principal == null) {
-                
-                Buttons[ButtonsLength + index].innerHTML += `
-                <button type="button" class="no-login-like like-button disabled">
-                    <i class="fa-regular fa-heart"></i>
-                </button>
-                `;
-
-            }else {              
+                          
                 if(data.likeId != 0){
                     console.log("ButtonLength : " + ButtonsLength);
                     Buttons[ButtonsLength + index].innerHTML += `
-                        <button type="button" class="like-buttons dislike-button">
-                            <i class="fa-solid fa-heart"></i>
-                        </button>
+                    <button type="button" class="like-buttons dislike-button">
+                    <i class="fa-solid fa-heart"></i>
+                    </button>
                     `;
                 }else {
                     Buttons[ButtonsLength + index].innerHTML += `
                         <button type="button" class="like-buttons like-button">
-                            <i class="fa-regular fa-heart"></i>
+                        <i class="fa-regular fa-heart"></i>
                         </button>
                     `;
                 }
                 ComponentEvent.getInstance().addClickEventLikeButtons();
-            }
+            
         })
     }
+    
 }
 
 class ComponentEvent {
@@ -219,7 +203,7 @@ class ComponentEvent {
 
             if(scrollPosition < 250 && searchObj.page < maxPage) {
                 searchObj.page++;
-                HotSearchService.getInstance().loadSearchEmos();
+                NewService.getInstance().loadNewEmos();
             }
         }
     }
@@ -232,7 +216,7 @@ class ComponentEvent {
         likeButtons.forEach((button, index) => {
             button.onclick = () => {
                 if(button.classList.contains("like-button")){
-                    const likeCount = HotSearchApi.getInstance().setLike(emoIds[index].value);
+                    const likeCount = NewApi.getInstance().setLike(emoIds[index].value);
                     if(likeCount != -1){
                         likeCounts[index].textContent = likeCount;
                         button.classList.remove("like-button");
@@ -240,7 +224,7 @@ class ComponentEvent {
                     }
                     
                 }else {
-                    const likeCount = HotSearchApi.getInstance().setDisLike(emoIds[index].value);
+                    const likeCount = NewApi.getInstance().setDisLike(emoIds[index].value);
                     if(likeCount != -1){
                         likeCounts[index].textContent = likeCount;
                         button.classList.remove("dislike-button");
@@ -249,22 +233,5 @@ class ComponentEvent {
                 }
             }
         });
-    }
-
-    // addClickEventLikeButtonsNoLogin() {
-    //     const likeButtonError = document.querySelectorAll(".no-login-like");
-    //     const emoIds = document.querySelectorAll(".emo-id");
-
-    //     likeButtonError.forEach((button, index) => {
-    //         button.onclick = () => {
-    //             const Flag = emoIds[index].value;
-    //             if(Flag != 1){
-    //                 alert("로그인 후 사용")
-    //                 location.replace("/account/login");
-    //             }
-    //         }
-
-    //     });
-    // }
-      
+    } 
 }

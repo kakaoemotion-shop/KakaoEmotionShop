@@ -9,5 +9,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class AdminController {
 
     @GetMapping("/emo")
-    public String registerEmo() { return "admin/emotion_register"; }
+    public String registerEmo() { return "admin/emo_register"; }
+
+    @GetMapping("/search")
+    public String searchEmo() { return "admin/emo_search"; }
+
+    @GetMapping("/modify")
+    public String modifyEmo() { return "admin/emo_modification"; }
 }

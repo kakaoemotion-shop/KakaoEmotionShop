@@ -58,26 +58,9 @@ class ToggleService {
                         </div>
                         <div class="mypage-info">
                             <ul class="mypage-box">
-                                <li class="mypage-home">
-                                    <a href="" class="mypage-link">
-                                        <i class="fa-regular fa-face-smile"></i>
-                                        <p class="mypage-chart">구매내역</p>
-                                    </a>
-                                </li>
-                                <li class="mypage-new">
-                                    <a href="" class="mypage-link">
-                                        <i class="fa-solid fa-gift"></i>
-                                        <p class="mypage-chart">선물함</p>
-                                    </a>
-                                </li>
-                                <li mypage="mypage-popularity">
-                                    <a href="" class="mypage-link">
-                                        <i class="fa-solid fa-ticket-simple"></i>
-                                        <p class="mypage-chart">쿠폰함</p>
-                                    </a>
-                                </li>
+                            
                                 <li class="mypage-style">
-                                    <a href="" class="mypage-link">
+                                    <a href="/account/mypage" class="mypage-link">
                                         <i class="fa-regular fa-heart"></i>
                                         <p class="mypage-chart">좋아요</p>
                                     </a>
@@ -140,26 +123,9 @@ class ToggleService {
                         </div>
                         <div class="mypage-info">
                             <ul class="mypage-box">
-                                <li class="mypage-home">
-                                    <a href="" class="mypage-link">
-                                        <i class="fa-regular fa-face-smile"></i>
-                                        <p class="mypage-chart">구매내역</p>
-                                    </a>
-                                </li>
-                                <li class="mypage-new">
-                                    <a href="" class="mypage-link">
-                                        <i class="fa-solid fa-gift"></i>
-                                        <p class="mypage-chart">선물함</p>
-                                    </a>
-                                </li>
-                                <li mypage="mypage-popularity">
-                                    <a href="" class="mypage-link">
-                                        <i class="fa-solid fa-ticket-simple"></i>
-                                        <p class="mypage-chart">쿠폰함</p>
-                                    </a>
-                                </li>
+       
                                 <li class="mypage-style">
-                                    <a href="/account/mypage/like" class="mypage-link">
+                                    <a href="/account/mypage" class="mypage-link">
                                         <i class="fa-regular fa-heart"></i>
                                         <p class="mypage-chart">좋아요</p>
                                     </a>
@@ -274,7 +240,12 @@ class ToggleButton {
         mypageButton.onclick = () => {
             if (principal != null) {
                 if (confirm("로그아웃하시겠습니까?")) {
+                    // 취소 클릭
                     location.href = "/logout"
+                } else {
+                    // 예 클릭
+                    //     console.log("예 클릭됨")
+                    // location.reload();
                 }
             } else {
                 location.href = "/account/login"
@@ -289,8 +260,8 @@ class ToggleButton {
                 </a>
                 `
                 : `
-                <a href= "/index" class="logout"></a>
-                <i class="fa-regular fa-arrow-up-left-from-circle"></i>
+                <a href="" class="logout"><img src = "https://www.iconpacks.net/icons/2/free-user-logout-icon-3056-thumb.png"></a>
+                
         `
 
             }

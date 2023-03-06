@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/api")
@@ -40,6 +41,34 @@ public class HotSearchApi {
                 .ok()
                 .body(new CMRespDto<>(HttpStatus.OK.value(),
                         "Successfully",hotSearchService.getSearchTotalCount(hotSearchReqDto)));
+
+    }
+
+    @GetMapping("/mypage/like")
+    public ResponseEntity<CMRespDto<?>> getUerLike(HotSearchReqDto hotSearchReqDto,
+                                                   @AuthenticationPrincipal PrincipalDetails principalDetails) {
+        if(principalDetails != null) {
+            hotSearchReqDto.setUserId(principalDetails.getUser().getUserId());
+        }
+
+        return ResponseEntity
+                .ok()
+                .body(new CMRespDto<>(HttpStatus.OK.value(),
+                        "Successfully",hotSearchService.getLikeEmos(hotSearchReqDto)));
+
+    }
+
+    @GetMapping("/new/search")
+    public ResponseEntity<CMRespDto<?>> getNewEmo(HotSearchReqDto hotSearchReqDto,
+                                                  @AuthenticationPrincipal PrincipalDetails principalDetails) {
+        if(principalDetails != null) {
+            hotSearchReqDto.setUserId(principalDetails.getUser().getUserId());
+        }
+
+        return ResponseEntity
+                .ok()
+                .body(new CMRespDto<>(HttpStatus.OK.value(),
+                        "Successfully",hotSearchService.getNewEmos(hotSearchReqDto)));
 
     }
 }

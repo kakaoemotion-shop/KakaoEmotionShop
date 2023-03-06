@@ -28,7 +28,7 @@
     </div>
 
     <header class="header">
-        <div class="header-top">
+         <div class="header-top">
             <div>
                 <button class="toggle-button">
                     <i class="fa-solid fa-bars"></i>
@@ -121,7 +121,7 @@
                     $('.search-page').show();
                 } else {
                     $('.search-page').hide();
-                }
+                } a
             });
         });
     </script>
@@ -130,12 +130,13 @@
         const searchInput = document.querySelector(".search-bar-input");
         function addSearchInputEvent() {
             if (window.event.keyCode == 13) {
-                location.href = 'http://localhost:8000/kakaopage/search';
+                location.href = 'http://127.0.0.1:8000/kakaopage/search';
             }
         }
     </script>
     <script src="/static/js/account/principal.js"></script>
     <script src="/static/js/function/toggleuser.js"></script>
+    <script src="/static/js/kakaopage/mainpage.js"></script>
     <script src="/static/js/function/index.js"></script>
 </body>
 
