@@ -60,8 +60,6 @@
             em.emo_date,
             el.like_id,
             lc.like_count
-        order by
-            lc.like_count desc
 
         limit #{index}, #{count}
     </select>
