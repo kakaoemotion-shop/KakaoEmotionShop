@@ -44,7 +44,7 @@ class EmoModificationApi {
         $.ajax({
             async: false,
             type: "get",
-            url: `http://localhost:8000/api/admin/emos/${emoObj.emoCode}`,
+            url: `http://127.0.0.1:8000/api/admin/emos/${emoObj.emoCode}`,
             dataType: "json",
             success: response => {
                 responseData = response.data
@@ -64,7 +64,7 @@ class EmoModificationApi {
         $.ajax({
             async: false,
             type: "put",
-            url: `http://localhost:8000/api/admin/emo/${emoObj.emoCode}`,
+            url: `http://127.0.0.1:8000/api/admin/emo/${emoObj.emoCode}`,
             contentType: "application/json",
             data: JSON.stringify(emoObj),
             dataType: "json",
@@ -86,7 +86,7 @@ class EmoModificationApi {
         $.ajax({
             async: false,
             type: "delete",
-            url: `http://localhost:8000/api/admin/emo/${emoObj.emoCode}/image/${imgObj.imageId}`,
+            url: `http://127.0.0.1:8000/api/admin/emo/${emoObj.emoCode}/image/${imgObj.imageId}`,
             dataType: "json",
             success: response => {
                 successFlag = true
@@ -104,7 +104,7 @@ class EmoModificationApi {
         $.ajax({
             async: false,
             type: "post",
-            url: `http://localhost:8000/api/admin/emo/${emoObj.emoCode}/images`,
+            url: `http://127.0.0.1:8000/api/admin/emo/${emoObj.emoCode}/images`,
             encType: "multipart/form-data",
             contentType: false,
             processData: false,
@@ -173,7 +173,7 @@ class EmoModificationService {
             const emoImg = document.querySelectorAll(".emo-img")
 
             responseData.emoImage.forEach((imgObj, index) => {
-                emoImg[index].src = "http://localhost:8000/image/emo/" + imgObj.saveName;
+                emoImg[index].src = "http://127.0.0.1:8000/image/emo/" + imgObj.saveName;
             })
 
 

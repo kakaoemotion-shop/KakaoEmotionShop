@@ -49,7 +49,7 @@ class DetailApi {
         $.ajax({
             async: false,
             type: "get",
-            url: `http://localhost:8000/api/admin/emo/image/one/${emoObj2.emoCode}`,
+            url: `http://127.0.0.1:8000/api/admin/emo/image/one/${emoObj2.emoCode}`,
             dataType: "json",
             success: response => {
                 responseData = response.data
@@ -68,7 +68,7 @@ class DetailApi {
         $.ajax({
             async: false,
             type: "get",
-            url: `http://localhost:8000/api/admin/emos/${emoObj.emoCode}`,
+            url: `http://127.0.0.1:8000/api/admin/emos/${emoObj.emoCode}`,
             dataType: "json",
             success: response => {
                 responseData = response.data
@@ -148,12 +148,10 @@ class DetailService {
     loadEmoImageOne() {
         const responseData = DetailApi.getInstance().getEmoAndImageOne()
         const emoticonArea = document.querySelector(".emoticon-area")
-        const principal = PrincipalApi.getInstance().getPrincipal();
-
-        const Buttons = document.querySelectorAll(".right-like-box");
-        const ButtonsLength = Buttons == null ? 0 : Buttons.length;
-        
-
+        const principal = PrincipalApi.getInstance().getPrincipal()
+        const likeData = DetailApi.getInstance().setLike()
+        const disLikeData = DetailApi.getInstance().setDisLike()
+    
         emoticonArea.innerHTML = `
             <div class="emoticon-product">
             <input type="hidden" class="emo-id" value="${responseData.emoId}">
@@ -175,7 +173,7 @@ class DetailService {
                             <span class="txt-price">2,000</span>
                             <span class="txt-price-won">원</span>
                             <div class="right-like-box">
-                                <i class="fa-regular fa-heart heart-detail"></i>
+                        
                             </div>
                         </div>
                     </div>
@@ -184,24 +182,26 @@ class DetailService {
             </div>
         `;
 
+        const Buttons = document.querySelectorAll(".right-like-box")
+
         if(principal == null) {
+            console.log(Buttons.length)
                 
-            Buttons[ButtonsLength + index].innerHTML += `
+            Buttons.innerHTML += `
             <button type="button" class="no-login-like like-button disabled">
             <i class="fa-regular fa-heart"></i>
             </button>
             `;
 
         }else {              
-            if(responseData.likeId != 0){
-                console.log("ButtonLength : " + ButtonsLength);
-                Buttons[ButtonsLength + index].innerHTML += `
+            if(likeData.likeId != 0){
+                Buttons[1].innerHTML += `
                 <button type="button" class="like-buttons dislike-button">
                 <i class="fa-solid fa-heart"></i>
                 </button>
                 `;
             }else {
-                Buttons[ButtonsLength + index].innerHTML += `
+                Buttons[1].innerHTML += `
                     <button type="button" class="like-buttons like-button">
                     <i class="fa-regular fa-heart"></i>
                     </button>
@@ -224,7 +224,7 @@ class DetailService {
             const emoImg = document.querySelectorAll(".subemoticon-number")
 
             responseData.emoImage.forEach((imgObj, index) => {
-                emoImg[index].src = "http://localhost:8000/image/emo/" + imgObj.saveName;
+                emoImg[index].src = "http://127.0.0.1:8000/image/emo/" + imgObj.saveName;
             })
 
         }

@@ -8,4 +8,7 @@ public class IndexController {
 
     @GetMapping({"","/index"})
     public String index() { return "/kakaopage/index"; }
+
+    @GetMapping("/search")
+    public String searchResult() { return "/kakaopage/main_search"; }
 }
