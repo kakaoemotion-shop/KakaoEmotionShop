@@ -61,9 +61,8 @@ class ToggleService {
                             
                                 <li class="mypage-style">
                                     <a href="" class="mypage-link"></a>
-                                        <i class="fa-regular fa-heart"></i>
-                                        <p class="mypage-chart">좋아요</p>
-                                    
+                                    <i class="fa-regular fa-heart toggle-heart"></i>
+                                    <p class="mypage-chart">좋아요</p>
                                 </li>
                             </ul>
                         </div>
@@ -126,7 +125,7 @@ class ToggleService {
        
                                 <li class="mypage-style">
                                     <a href="/account/mypage" class="mypage-link">
-                                        <i class="fa-regular fa-heart"></i>
+                                        <i class="fa-regular fa-heart toggle-heart"></i>
                                         <p class="mypage-chart">좋아요</p>
                                     </a>
                                 </li>

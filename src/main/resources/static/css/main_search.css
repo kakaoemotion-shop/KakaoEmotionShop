@@ -116,3 +116,13 @@
     width: 125px;
     height: 125px;
   }
+
+  .emo-img{
+    margin-top: 20px;
+    margin-bottom: 10px;
+  
+    width: 90px;
+    height: 90px;
+    
+    cursor: pointer;
+  }

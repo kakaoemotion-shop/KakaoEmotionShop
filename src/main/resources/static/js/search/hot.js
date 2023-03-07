@@ -1,6 +1,4 @@
 window.onload = () => {
-    // console.log(HotSearchApi.getInstance().getTotalCount());
-    // console.log(HotSearchApi.getInstance().searchEmo());
 
     ToggleService.getInstance().loadlogin();
 
