@@ -39,7 +39,7 @@ class HotSearchApi {
         $.ajax({
             async: false,
             type: "get",
-            url: "http://127.0.0.1:8000/api/hot/search/totalcount",
+            url: "http://127.0.0.1:8000/api/search/totalcount",
             data: searchObj,
             dataType: "json",
             success: response => {

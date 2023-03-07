@@ -5,11 +5,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/hot/search")
+@RequestMapping("/search")
 public class SearchController {
 
     @GetMapping("")
     public String loadSearch() {
-        return "kakaopage/hot";
+        return "kakaopage/main_search";
     }
 }

@@ -129,7 +129,7 @@ class SearchService {
         const responseData = SearchApi.getInstance().searchEmo();
         const searchFlex = document.querySelector(".search-flex");
 
-        responseData.forEach((data) => {
+        responseData.forEach((data,index) => {
             searchFlex.innerHTML += `
             <div class="emotion-serch">
                 <div class="emotion-title">
