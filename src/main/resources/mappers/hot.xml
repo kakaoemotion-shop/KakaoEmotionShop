@@ -5,7 +5,7 @@
 
 <mapper namespace="com.korit.kakaoemotionshop.repository.HotRepository">
 
-    <select id="userSearchEmo"
+    <select id="searchHotEmo"
             parameterType="com.korit.kakaoemotionshop.web.dto.SearchEmoReqDto"
             resultType="com.korit.kakaoemotionshop.entity.HotEmo">
         select
@@ -35,7 +35,7 @@
             1 = 1
         <if test='searchValue != null and searchValue != ""'>
             and (emo_name like concat('%', #{searchValue}, '%')
-            or company like concat('%', #{searchValue}, '%')
+            or company like concat('%', #{searchValue}, '%'))
         </if>
         group by
             em.emo_id,

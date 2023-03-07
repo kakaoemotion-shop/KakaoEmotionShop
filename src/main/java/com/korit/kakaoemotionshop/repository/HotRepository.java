@@ -8,5 +8,5 @@ import java.util.List;
 
 @Mapper
 public interface HotRepository {
-    public List<HotEmo> userSearchEmo(SearchEmoReqDto searchEmoReqDto);
+    public List<HotEmo> searchHotEmo(SearchEmoReqDto searchEmoReqDto);
 }

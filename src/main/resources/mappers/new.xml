@@ -24,10 +24,10 @@
             emo_mst em
             left outer join
             emo_image ei on(em.emo_code = ei.emo_code)
-            left outer joi emo_like el ON (em.emo_id = el.emo_id AND el.user_id = #{userId})
-            left outer joi (
+            left outer join emo_like el on (em.emo_id = el.emo_id AND el.user_id = #{userId})
+            left outer join (
                 select
-                    emo_id, COUNT(emo_id) AS like_count
+                    emo_id, COUNT(emo_id) as like_count
                 from
                     emo_like
                 group by

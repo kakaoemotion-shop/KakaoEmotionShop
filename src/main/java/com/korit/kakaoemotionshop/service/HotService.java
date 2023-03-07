@@ -15,7 +15,7 @@ public class HotService {
     private final HotRepository hotRepository;
     public List<HotEmo> getHotEmos(SearchEmoReqDto searchEmoReqDto) {
         searchEmoReqDto.setIndex();
-        return hotRepository.userSearchEmo(searchEmoReqDto);
+        return hotRepository.searchHotEmo(searchEmoReqDto);
     }
 
 }
