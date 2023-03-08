@@ -235,17 +235,7 @@ html {
     color: #929292;
 }
 
-.like-button {
-    display: flex;
-    width: 40px;
-    height: 40px;
-  
-    border: 1px solid #dbdbdb;
-    border-radius: 55px;
-    background-color: white;
-  
-    cursor: pointer;
-}
+
 .fa-heart {
     margin-top: 13px;
     margin-left: 10px;

@@ -11,6 +11,9 @@ public class AccountController {
     @GetMapping("/login")
     public String login() { return "account/login"; }
 
+    @GetMapping("/login/error")
+    public String loginerror() { return "account/login_error"; }
+
     @GetMapping("/register")
     public String register() { return "account/register_sign"; }
 

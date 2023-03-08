@@ -126,7 +126,7 @@ class MypageService {
     }
 
     setMaxPage() {
-        const totalCount = LikeApi.getInstance().getTotalCount();
+        const totalCount = MypageApi.getInstance().getTotalCount();
         maxPage = totalCount % 10 == 0
             ? totalCount / 10
             : Math.floor(totalCount / 10) + 1;
@@ -174,13 +174,12 @@ class MypageService {
             <input type="hidden" class="emo-id" value="${data.emoId}">
             <img src="http://127.0.0.1:8000/image/emo/${data.saveName != null ? data.saveName : "noimg.png"}" class="like-img">
             <div class="like-names">
+                <div class="like-button">
+                </div>
                 <div class="like-name">
                     <h3>${data.emoName}</h3>
                     <p>>${data.company}</p>
                 </div>
-                <button type="button" class="like-button">
-
-                </button>
             </div>
             </li>
             `;
