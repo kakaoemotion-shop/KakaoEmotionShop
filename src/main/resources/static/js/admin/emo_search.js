@@ -107,6 +107,7 @@ class EmoService {
 
     loadEmoList() {
         const responseData = EmoSearchApi.getInstance().getEmoList(SearchObj);
+        const totalCount = EmoSearchApi.getInstance().getEmoTotalCount(SearchObj);
 
         const emoListBody = document.querySelector(".search-table tbody");
         emoListBody.innerHTML = "";
@@ -124,6 +125,14 @@ class EmoService {
                 </tr>
             `;
         });
+
+        if(totalCount == 0){
+            emoListBody.innerHTML += `
+            <img src="/static/images/no_search_result.png" class="emo-img"> 
+            검색결과가 없습니다.
+            다른검색어로 다시 시도해주세요
+            `;
+        }
 
         this.loadSearchNumberList();
 
@@ -164,7 +173,6 @@ class EmoService {
                 this.loadEmoList();
             }
         }
-        console.log("현재 페이지 : "+SearchObj.page);
 
         const startIndex = SearchObj.page % 5 == 0
                         ? SearchObj.page - 4
@@ -189,7 +197,8 @@ class EmoService {
                     this.loadEmoList();
                 }
             }
-        });
+        })
+        
     }
 }
 
