@@ -1,6 +1,7 @@
 window.onload = () => {
-    SearchApi.getInstance().onLoadSearch()
-    SearchApi.getInstance().loadSearchNumberList()
+    
+    EmoService.getInstance().loadEmoList();
+
     ComponentEvent.getInstance().addClickEventSearchButton()
     ComponentEvent.getInstance().addClickEventDeleteCheckAll()
     ComponentEvent.getInstance().addClickEventDeleteButton()
@@ -8,7 +9,7 @@ window.onload = () => {
 }
 
 
-let emoSearchObj = {
+let SearchObj = {
     page: 1,
     searchValue: "",
     order: "emoId",
@@ -16,24 +17,24 @@ let emoSearchObj = {
     count: 20
 }
 
-class SearchService {
+class EmoSearchApi {
     static #instance = null;
     static getInstance() {
         if (this.#instance == null) {
-            this.#instance = new SearchService();
+            this.#instance = new EmoSearchApi();
         }
         return this.#instance;
     }
 
-    getEmoticons(emoSearchObj) {
+    getEmoList(SearchObj) {
         let returnData = null;
 
         $.ajax({
             async: false,
-            type: 'get',
-            url: 'http://127.0.0.1:8000/api/admin/emos',
-            data: emoSearchObj,
-            dataType: 'json',
+            type: "get",
+            url: "http://127.0.0.1:8000/api/admin/emos",
+            data: SearchObj,
+            dataType: "json",
             success: response => {
                 console.log(response);
                 returnData = response.data;
@@ -43,33 +44,33 @@ class SearchService {
             }
         })
 
-        return returnData
+        return returnData;
     }
 
-    getEmoticonTotalCount(emoSearchObj) {
+    getEmoTotalCount(SearchObj) {
         let returnData = null
 
         $.ajax({
             async: false,
-            type: 'get',
-            url: 'http://127.0.0.1:8000/api/admin/emos/totalcount',
+            type: "get",
+            url: "http://127.0.0.1:8000/api/admin/emos/totalcount",
             data: {
-                "searchValue": emoSearchObj.searchValue
+                "searchValue": SearchObj.searchValue
             },
-            dataType: 'json',
+            dataType: "json",
             success: response => {
-                console.log(response)
-                returnData = response.data
+                console.log(response);
+                returnData = response.data;
             },
             error: error => {
                 console.log(error);
             }
-        })
+        });
 
-        return returnData
+        return returnData;
     }
 
-    // /emo/{emoCode}
+
     deleteEmos(deleteArray) {
         let returnData = false;
         $.ajax({
@@ -82,32 +83,34 @@ class SearchService {
             dataType: "json",
             url: "http://127.0.0.1:8000/api/admin/emos",
             success: response => {
-                console.log(response)
-                returnData = true
+                console.log(response);
+                returnData = true;
             },
             error: error => {
-                console.log(error)
+                console.log(error);
             }
 
         })
-        return returnData
+        return returnData;
     }
 
 }
 
-class SearchApi {
+class EmoService {
     static #instance = null;
     static getInstance() {
         if (this.#instance == null) {
-            this.#instance = new SearchApi();
+            this.#instance = new EmoService();
         }
         return this.#instance;
     }
 
-    onLoadSearch() {
-        const responseData = SearchService.getInstance().getEmoticons(emoSearchObj)
-        const emoListBody = document.querySelector(".search-table tbody")
-        emoListBody.innerHTML = ''
+    loadEmoList() {
+        const responseData = EmoSearchApi.getInstance().getEmoList(SearchObj);
+
+        const emoListBody = document.querySelector(".search-table tbody");
+        emoListBody.innerHTML = "";
+
         responseData.forEach((data) => {
             emoListBody.innerHTML += `
                 <tr>
@@ -119,110 +122,75 @@ class SearchApi {
                     <td>${data.emoDate}</td>
                     <td><a href="/templates/admin/emo_modification.html?emoCode=${data.emoCode}"><i class="fa-solid fa-square-pen"></i></td>
                 </tr>
-            `
-        })
-        this.loadSearchNumberList
-        ComponentEvent.getInstance().addClickEventDeleteCheckbox()
+            `;
+        });
+
+        this.loadSearchNumberList();
+
+        ComponentEvent.getInstance().addClickEventDeleteCheckbox();
     }
 
     loadSearchNumberList() {
-        const pageController = document.querySelector(".page-controller")
-        pageController.innerHTML = ""
+        const pageController = document.querySelector(".page-controller");
 
-        const totalCount = SearchService.getInstance().getEmoticonTotalCount(emoSearchObj)
-        const maxPageNumber = totalCount % emoSearchObj.count == 0
-            ? Math.floor(totalCount / emoSearchObj.count)
-            : Math.floor(totalCount / emoSearchObj.count) + 1
+        const totalCount = EmoSearchApi.getInstance().getEmoTotalCount(SearchObj);
+        const maxPageNumber = totalCount % SearchObj.count == 0
+                            ? Math.floor(totalCount / SearchObj.count)
+                            : Math.floor(totalCount / SearchObj.count) + 1
 
         pageController.innerHTML = `
             <a href="javascript:void(0)" class="pre-button disabled">이전</a>
             <ul class="page-numbers">
             </ul>
             <a href="javascript:void(0)" class="next-button disabled">다음</a>
-        `
+        `;
 
-        if (emoSearchObj.page != 1) {
-            const preButton = pageController.querySelector(".pre-button")
-            preButton.classList.remove("disabled")
+        if (SearchObj.page != 1) {
+            const preButton = pageController.querySelector(".pre-button");
+            preButton.classList.remove("disabled");
+            
             preButton.onclick = () => {
-                emoSearchObj.page--
-
-                this.onLoadSearch()
+                SearchObj.page--;
+                this.loadEmoList();
             }
         }
 
-        if (emoSearchObj.page != maxPageNumber) {
-            const nextButton = pageController.querySelector(".next-button")
-            nextButton.classList.remove("disabled")
+        if (SearchObj.page != maxPageNumber) {
+            const nextButton = pageController.querySelector(".next-button");
+            nextButton.classList.remove("disabled");
+
             nextButton.onclick = () => {
-                emoSearchObj.page++
-
-                this.onLoadSearch()
+                SearchObj.page++;
+                this.loadEmoList();
             }
         }
+        console.log("현재 페이지 : "+SearchObj.page);
 
-        const startIndex = emoSearchObj.page % 5 == 0
-            ? emoSearchObj.page - 4
-            : emoSearchObj.page - (emoSearchObj.page % 5) + 1
-        const endIndex = startIndex + 4 <= maxPageNumber ? startIndex + 4 : maxPageNumber
-        const pageNumbers = document.querySelector(".page-numbers")
+        const startIndex = SearchObj.page % 5 == 0
+                        ? SearchObj.page - 4
+                        : SearchObj.page - (SearchObj.page % 5) + 1;
+
+        const endIndex = startIndex + 4 <= maxPageNumber ? startIndex + 4 : maxPageNumber;
+        const pageNumbers = document.querySelector(".page-numbers");
 
         for (let i = startIndex; i <= endIndex; i++) {
             pageNumbers.innerHTML += `
-                <a href="javascript:void(0)"class="page-button ${i == emoSearchObj.page ? "disabled" : ""}"><li>${i}</li></a>
-            `
+                <a href="javascript:void(0)" class="page-button ${i == SearchObj.page ? "disabled" : ""}"><li>${i}</li></a>
+            `;
         }
 
-        const pageButtons = document.querySelectorAll(".page-button")
+        const pageButtons = document.querySelectorAll(".page-button");
         pageButtons.forEach(button => {
-            const pageNumber = button.textContent
-            if (pageNumber != emoSearchObj.page) {
+
+            const pageNumber = button.textContent;
+            if (pageNumber != SearchObj.page) {
                 button.onclick = () => {
-                    emoSearchObj.page = pageNumber
-                    this.onLoadSearch()
+                    SearchObj.page = pageNumber;
+                    this.loadEmoList();
                 }
             }
-        })
-    }
-
-    setLike(emoId) {
-        let likeCount = -1;
-
-        $.ajax({
-            async: false,
-            type: "post",
-            url: `http://127.0.0.1:8000/api/emo/${emoId}/like`,
-            dataType: "json",
-            success: response => {
-                likeCount = response.data;
-            },
-            error: error => {
-                console.log(error);
-            }
         });
-
-        return likeCount;
     }
-
-    setDisLike(emoId) {
-        let likeCount = -1;
-
-        $.ajax({
-            async: false,
-            type: "delete",
-            url: `http://127.0.0.1:8000/api/emo/${emoId}/like`,
-            dataType: "json",
-            success: response => {
-                likeCount = response.data;
-            },
-            error: error => {
-                console.log(error);
-            }
-        });
-
-        return likeCount;
-    }
-
 }
 
 class ComponentEvent {
@@ -239,10 +207,9 @@ class ComponentEvent {
         const searchButton = document.querySelector(".search-icon-btn")
 
         searchButton.onclick = () => {
-            emoSearchObj.searchValue = searchInput.value
-            emoSearchObj.page = 1
-
-            SearchApi.getInstance().onLoadSearch()
+            SearchObj.searchValue = searchInput.value;
+            SearchObj.page = 1;
+            EmoService.getInstance().loadEmoList();
         }
 
         searchInput.onkeyup = () => {
@@ -266,13 +233,11 @@ class ComponentEvent {
                         const emoId = document.querySelectorAll(".emo-id")
                         deleteArray.push(emoId[index].textContent)
                     }
-                })
+                });
 
-                SearchService.getInstance().deleteEmos(deleteArray)
+                EmoService.getInstance().deleteEmos(deleteArray)
             }
         }
-
-
     }
 
 
@@ -281,9 +246,9 @@ class ComponentEvent {
         checkAll.onclick = () => {
             const deleteCheckboxs = document.querySelectorAll(".delete-checkbox")
             deleteCheckboxs.forEach(deleteCheckboxs => {
-                deleteCheckboxs.checked = checkAll.checked
+                deleteCheckboxs.checked = checkAll.checked;
 
-            })
+            });
         }
     }
 
@@ -296,13 +261,11 @@ class ComponentEvent {
             deleteCheckbox.onclick = () => {
                 const deleteCheckedcheckboxs = document.querySelectorAll(".delete-checkbox:checked")
                 if (deleteCheckedcheckboxs.length == deleteCheckboxs.length) {
-                    checkAll.checked = true
+                    checkAll.checked = true;
                 } else {
-                    checkAll.checked = false
+                    checkAll.checked = false;
                 }
             }
-        })
+        });
     }
-
-
 }   
