@@ -126,7 +126,7 @@ class MypageService {
     }
 
     setMaxPage() {
-        const totalCount = MypageApi.getInstance().getTotalCount();
+        const totalCount = LikeApi.getInstance().getTotalCount();
         maxPage = totalCount % 10 == 0
             ? totalCount / 10
             : Math.floor(totalCount / 10) + 1;
@@ -175,11 +175,14 @@ class MypageService {
             <img src="http://127.0.0.1:8000/image/emo/${data.saveName != null ? data.saveName : "noimg.png"}" class="like-img">
             <div class="like-names">
                 <div class="like-button">
+
                 </div>
-                <div class="like-name">
-                    <h3>${data.emoName}</h3>
-                    <p>>${data.company}</p>
-                </div>
+                <a href="http://127.0.0.1:8000/main/detail/?emoCode=${data.emoCode}">
+                    <div class="like-name">
+                        <h3>${data.emoName}</h3>
+                        <p>>${data.company}</p>
+                    </div>
+                </a>
             </div>
             </li>
             `;
@@ -190,13 +193,13 @@ class MypageService {
                 console.log("ButtonLength : " + ButtonsLength);
                 Buttons[ButtonsLength + index].innerHTML += `
                 <button type="button" class="like-buttons dislike-button">
-                <i class="fa-solid fa-heart"></i>
+                    <i class="fa-solid fa-heart"></i>
                 </button>
                 `;
             }else {
                 Buttons[ButtonsLength + index].innerHTML += `
                     <button type="button" class="like-buttons like-button">
-                    <i class="fa-regular fa-heart"></i>
+                        <i class="fa-regular fa-heart"></i>
                     </button>
                 `;
             }
@@ -237,14 +240,14 @@ class ComponentEvent {
         likeButtons.forEach((button, index) => {
             button.onclick = () => {
                 if(button.classList.contains("like-button")){
-                    const likeCount = LikeApi.getInstance().setLike(emoIds[index].value);
+                    const likeCount = MypageApi.getInstance().setLike(emoIds[index].value);
                     if(likeCount != -1){
                         button.classList.remove("like-button");
                         button.classList.add("dislike-button");
                     }
                     
                 }else {
-                    const likeCount = LikeApi.getInstance().setDisLike(emoIds[index].value);
+                    const likeCount = MypageApi.getInstance().setDisLike(emoIds[index].value);
                     if(likeCount != -1){
                         button.classList.remove("dislike-button");
                         button.classList.add("like-button");
@@ -255,4 +258,3 @@ class ComponentEvent {
     }
    
 }
-
