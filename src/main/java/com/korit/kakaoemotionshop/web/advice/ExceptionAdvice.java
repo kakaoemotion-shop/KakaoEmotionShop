@@ -24,4 +24,3 @@ public class ExceptionAdvice {
                         "Like Error", e.getErrorMap()));
     }
 }
-

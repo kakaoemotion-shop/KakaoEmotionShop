@@ -6,35 +6,34 @@
 <mapper namespace="com.korit.kakaoemotionshop.repository.LikeRepository">
     <select id="getLikeStatus" resultType="Integer" parameterType="com.korit.kakaoemotionshop.entity.EmoLike">
         select
-        count(*)
+            count(*)
         from
-        emo_like
+            emo_like
         where
-        emo_id = #{emoId}
+            emo_id = #{emoId}
         and user_id = #{userId}
     </select>
 
     <insert id="addLike" parameterType="com.korit.kakaoemotionshop.entity.EmoLike">
         insert into emo_like
         value
-        (0,#{userId},#{emoId})
+            (0,#{userId},#{emoId})
     </insert>
 
     <delete id="deleteLike" parameterType="com.korit.kakaoemotionshop.entity.EmoLike">
         delete
         from
-        emo_like
+            emo_like
         where
-        emo_id = #{emoId}
+            emo_id = #{emoId}
         and user_id = #{userId}
     </delete>
-
     <select id="getLikeCount" resultType="Integer">
         select
-        count(*)
+            count(*)
         from
-        emo_like
+            emo_like
         where
-        emo_id = #{emoId}
+            emo_id = #{emoId}
     </select>
 </mapper>

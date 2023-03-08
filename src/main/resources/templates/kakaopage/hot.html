@@ -5,15 +5,14 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>카카오 이모티콘샵</title>
   <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+  <title>카카오 이모티콘샵</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
     integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link rel="stylesheet" href="/static/css/reset.css">
   <link rel="stylesheet" href="/static/css/togglemenu.css">
   <link rel="stylesheet" href="/static/css/hot.css">
-  <link rel="stylesheet" href="/static/css/search.css">
 </head>
 
 <body>
@@ -25,83 +24,60 @@
     </div>
   </div>
 
-  <header class="header">
+   <header class="header">
     <div class="header-top">
-      <div>
-        <button class="toggle-button">
-          <i class="fa-solid fa-bars"></i>
-        </button>
-      </div>
+      <button class="toggle-button">
+        <i class="fa-solid fa-bars"></i>
+      </button>
 
-      <a href="/index" class="logo-button">
-        <h1>kakao<span>emoticon</span> shop</h1>
+      <a class="logo-button">
+          <h1>kakao<span>emoticon</span> shop</h1>
       </a>
 
-      <button class="search-button">
+      <button class="search-button" onclick="goToSearchPageButton()">
         <i class="fa-solid fa-magnifying-glass"></i>
       </button>
 
       <button class="mypage-button">
+          <img src="/static/images/profile_default.png" alt="">
       </button>
-    </div>
+  </div>
 
-    <nav class="header-menu">
-      <ul class="menu-list">
-        <li class="menu-list-button"><a href="/index">홈</a></li>
-        <li class="menu-list-button"><a href="/main/newemoticon">신규</a></liu>
-        <li class="menu-list-button"><a href="/main/hot">인기</a></li>
-      </ul>
-    </nav>
+  <nav class="header-menu">
+    <ul class="menu-list">
+      <li class="menu-list-button"><a href="/index">홈</a></li>
+      <li class="menu-list-button"><a href="/main/new">신규</a></liu>
+      <li class="menu-list-button"><a href="/main/hot">인기</a></li>
+    </ul>
+  </nav>
   </header>
 
-  <div class="search-page" style="display: none;"> <!--//-> 검색창 온오프  -->
-    <div class="search-bar">
-      <input class="search-bar-input" type="text" placeholder="이모티콘을 검색해보세요!" onkeyup="addSearchInputEvent()">
-      <!--//-> 결과창 이동 함수 onkeyup="addSearchEvent()" -->
-      <button class="search-bar-button">
-        <i class="fa-solid fa-magnifying-glass"></i>
-      </button>
+  
+
+    <div class="banner">
+      <img src="/static/images/kakapMain_hot01.png" alt="" class="br-left-img">
+      <img src="/static/images/kakapMain_hot02.png" alt="" class="br-right-img">
     </div>
-    <div class="backboard"></div>
-    <!-- -> 반투명 배경 -->
-  </div>
 
-  <div class="banner">
-    <img src="/static/images/kakapMain_hot01.png" alt="" class="br-left-img">
-    <img src="/static/images/kakapMain_hot02.png" alt="" class="br-right-img">
-  </div>
-
-  <div class="content">
-    <div>
-      <ul class="hot-info">
-      </ul>
+    <div class="content">
+      <div>
+        <ul class="hot-info">
+        </ul>
+      </div>
     </div>
-  </div>
-  <script> // -> 검색창 온오프 버튼
-    $(function () {
-      $('.search-button').click(function () {
-        if ($('.search-page').css('display') == "none") {
-          $('.search-page').show();
-        } else {
-          $('.search-page').hide();
-        } a
-      });
-    });
-  </script>
 
-  <script> // -> 검색결과 입력 후 결과창으로 이동
-    const searchInput = document.querySelector(".search-bar-input");
-    function addSearchInputEvent() {
-      if (window.event.keyCode == 13) {
-        location.href = 'http://127.0.0.1:8000/kakaopage/search';
+    
+    <script>
+      function goToSearchPageButton() {
+          const searchPageButton = document.querySelector(".search-button");
+          searchPageButton.onclick(
+              location.href = 'http://127.0.0.1:8000/search'
+          )
       }
-    }
-  </script>
-  <script src="/static/js/account/principal.js"></script>
-  <script src="/static/js/function/toggleuser.js"></script>
-  <script src="/static/js/search/hot.js"></script>
-  <script src="/static/js/kakaopage/mainpage.js"></script>
-
+</script>
+<script src="/static/js/account/principal.js"></script>
+<script src="/static/js/function/toggleuser.js"></script>
+<script src="/static/js/search/hot.js"></script>
 </body>
 
 </html>

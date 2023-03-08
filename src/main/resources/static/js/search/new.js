@@ -3,7 +3,7 @@ window.onload = () => {
 
     ToggleButton.getInstance().logoutButton();
     ToggleButton.getInstance().toggleButton();
-    
+
     NewService.getInstance().clearNewEmoList();
     NewService.getInstance().loadNewEmos();
 
@@ -36,7 +36,7 @@ class NewApi {
         $.ajax({
             async: false,
             type: "get",
-            url: "http://127.0.0.1:8000/api/hot/search/totalcount",
+            url: "http://127.0.0.1:8000/api/search/totalcount",
             data: searchObj,
             dataType: "json",
             success: response => {
@@ -146,16 +146,17 @@ class NewService {
         responseData.forEach((data, index) => {
             contentFlex.innerHTML += `
             <li>
-            <a class="new-link" href="">
+            <a class="new-link" href="http://127.0.0.1:8000/main/detail/?emoCode=${data.emoCode}">
                 <div class="new-info-title">
                 <input type="hidden" class="emo-id" value="${data.emoId}">
                 <input type="hidden" class="like-count" value="${data.likeCount}">
                 <h2 class="emo-name">${data.emoName}</h2>
                 <p class="author">${data.company}</p>
+                </div>
+            </a>
                 <div class="buttons">
                 <span class="like-count">${data.likeCount != null ? data.likeCount : 0}</span>
-            
-                </div>
+                
                 </div>
                 <div class="new-info-img">
                 <img src="http://127.0.0.1:8000/image/emo/${data.newImage1 != null ? data.newImage1 : "noimg.jpg"}" class="emo-img">
@@ -163,12 +164,22 @@ class NewService {
                 <img src="http://127.0.0.1:8000/image/emo/${data.newImage3 != null ? data.newImage3 : "noimg.jpg"}" class="emo-img">
                 <img src="http://127.0.0.1:8000/image/emo/${data.newImage4 != null ? data.newImage4 : "noimg.jpg"}" class="emo-img">
                 </div>
-            </a>
             </li>
             `;
 
             const Buttons = document.querySelectorAll(".buttons");
-                          
+            
+            if(principal == null) {         
+                
+                Buttons[ButtonsLength + index].innerHTML += `
+                <button type="button" class="no-login-like like-button">
+                <i class="fa-regular fa-heart"></i>
+                </button>
+                `;
+
+                ComponentEvent.getInstance().addClickEventLikeButtonsNoLogin();
+
+            }else {              
                 if(data.likeId != 0){
                     console.log("ButtonLength : " + ButtonsLength);
                     Buttons[ButtonsLength + index].innerHTML += `
@@ -184,6 +195,7 @@ class NewService {
                     `;
                 }
                 ComponentEvent.getInstance().addClickEventLikeButtons();
+            }
             
         })
     }
@@ -236,6 +248,20 @@ class ComponentEvent {
                         button.classList.add("like-button");
                     }
                 }
+            }
+        });
+
+    }
+    addClickEventLikeButtonsNoLogin() {
+        const likeButtonError = document.querySelectorAll(".no-login-like");
+        const emoIds = document.querySelectorAll(".emo-id");
+
+        likeButtonError.forEach((button, index) => {
+            button.onclick = () => {
+                
+                if (confirm("로그인 후 사용 가능합니다")) {
+                    location.href = "/account/login"
+                }   
             }
         });
     } 

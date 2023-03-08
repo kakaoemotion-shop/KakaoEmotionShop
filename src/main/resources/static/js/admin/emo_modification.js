@@ -3,6 +3,7 @@ window.onload = () => {
     EmoModificationService.getInstance().loadEmoAndImageData()
     ComponentEvent.getInstance().addClickEventModificationButton()
     ComponentEvent.getInstance().addChangeEventImgFile()
+    // ComponentEvent.getInstance().abcdefg()
     ComponentEvent.getInstance().addClickEventImgModificationButton()
 }
 
@@ -13,7 +14,16 @@ const emoObj = {
     emoDate: ""
 }
 
+const imgObj = {
+    imageId: null,
+    emoCode: null,
+    saveName: null,
+    originName: null
+}
+
 let imgList = null;
+
+const deleteImgIdList = new Array();
 
 const fileObj = {
     imageSeqs: new Array(),
@@ -49,7 +59,6 @@ class EmoModificationApi {
     }
 
 
-    //emoticon 정보변경 (이미지x)
     modifyEmo() {
         let successFlag = false
 
@@ -71,16 +80,17 @@ class EmoModificationApi {
 
         return successFlag
     }
-    //이미지 제거
-    removeImg() {
+
+    removeImg(imageId) {
         let successFlag = false
 
         $.ajax({
             async: false,
             type: "delete",
-            url: `http://127.0.0.1:8000/api/admin/emo/${emoObj.emoCode}/image/${imgObj.imageId}`,
+            url: `http://127.0.0.1:8000/api/admin/emo/${emoObj.emoCode}/image/${imageId}`,
             dataType: "json",
             success: response => {
+                console.log(imageId + "삭제완료")
                 successFlag = true
             },
             error: error => {
@@ -90,7 +100,7 @@ class EmoModificationApi {
         })
         return successFlag
     }
-    //이미지 등록
+
     registerImg() {
 
         $.ajax({
@@ -143,7 +153,7 @@ class EmoModificationService {
         const responseData = EmoModificationApi.getInstance().getEmoAndImage()
 
         if (responseData.emoMst == null) {
-            alert("해당 도서코드는 등록되지 않은 코드입니다")
+            alert("해당 이모티콘은 등록되지 않은 코드입니다")
             history.back()
             return
         }
@@ -158,12 +168,12 @@ class EmoModificationService {
             imgList = responseData.emoImage;
             console.log(imgList)
             const emoImg = document.querySelectorAll(".emo-img")
-
+            
             responseData.emoImage.forEach((imgObj, index) => {
                 emoImg[index].src = "http://127.0.0.1:8000/image/emo/" + imgObj.saveName;
             })
-
-
+            
+            
         }
     }
 
@@ -178,8 +188,7 @@ class ImgFileService {
         }
         return this.#instance
     }
-
-    //파일 이미지 src 경로 넣어준다 
+ 
     getImgPreview() {
         const emoImgs = document.querySelectorAll(".emo-img");
         console.log(fileObj.files)
@@ -216,59 +225,44 @@ class ComponentEvent {
             EmoModificationService.getInstance().setEmoObjValues();
             const successFlag = EmoModificationApi.getInstance().modifyEmo();
         }
-    }
-
+    } 
+    
     addChangeEventImgFile() {
         const imgAddButtons = document.querySelectorAll(".img-add-button");
         const imgFiles = document.querySelectorAll(".img-file");
-
-
+    
         imgAddButtons.forEach((button, index) => {
             button.onclick = () => {
                 imgFiles[index].click();
             }
         });
-
+    
         imgFiles.forEach((imgFile, index) => {
             imgFile.onchange = () => {
                 const formData = new FormData(document.querySelector(".img-form"));
                 let changeFlag = false;
-
+    
                 formData.forEach((value, key) => {
                     if (imgFile.getAttribute("name") == key && value.size != 0) {
-
                         changeFlag = true;
+                        fileObj.files[index] = value; // fileObj.files 배열에 파일 추가
                     }
                 });
-
+    
                 if (changeFlag) {
+                    if(!deleteImgIdList.includes(imgList[index].imageId)){
+                        deleteImgIdList.push(imgList[index].imageId);
+                    }
+                    console.log(deleteImgIdList)
                     const imgRegisterButton = document.querySelector(".img-modification-button");
                     imgRegisterButton.disabled = false;
-
+    
                     ImgFileService.getInstance().getImgPreview();
+                    imgFile.value = null;
                 }
+
             };
         });
-    }
-
-
-    addClickEventImgOnChangeButton() {
-        const imgModificationButton = document.querySelector(".img-modification-button");
-
-        imgModificationButton.onclick = () => {
-            fileObj.formData.append("files", fileObj.files[0]);
-
-            let successFlag = true;
-
-            if (imgObj.imageId != null) {
-                successFlag = EmoModificationApi.getInstance().removeImg();
-            }
-
-            if (successFlag) {
-                EmoModificationApi.getInstance().registerImg();
-            }
-
-        }
     }
 
 
@@ -276,10 +270,19 @@ class ComponentEvent {
         const imgModificationButton = document.querySelector(".img-modification-button")
 
         imgModificationButton.onclick = () => {
+            deleteImgIdList.forEach(imgId => {
+                if(!EmoModificationApi.getInstance().removeImg(imgId)) {
+                    alert("이미지 삭제 오류.");
+                    location.reload();
+                }
+            });
+
             for (let i = 0; i < fileObj.files.length; i++) {
                 fileObj.formData.append("files", fileObj.files[i]);
             }
             EmoModificationApi.getInstance().registerImg();
         }
     }
+    
+
 }

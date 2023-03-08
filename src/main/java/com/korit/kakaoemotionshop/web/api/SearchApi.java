@@ -1,4 +1,5 @@
 package com.korit.kakaoemotionshop.web.api;
+
 import com.korit.kakaoemotionshop.aop.annotation.ParamsAspect;
 import com.korit.kakaoemotionshop.security.PrincipalDetails;
 import com.korit.kakaoemotionshop.service.SearchService;
@@ -25,13 +26,13 @@ public class SearchApi {
         if(principalDetails != null) {
             searchEmoReqDto.setUserId(principalDetails.getUser().getUserId());
         }
+
         return ResponseEntity
                 .ok()
                 .body(new CMRespDto<>(HttpStatus.OK.value(), "Successfully", searchService.getSearchEmos(searchEmoReqDto)));
     }
 
     @ParamsAspect
-
     @GetMapping("/search/totalcount")
     public ResponseEntity<CMRespDto<Integer>> getSearchEmoTotalCount(SearchEmoReqDto searchEmoReqDto) {
         return ResponseEntity
@@ -40,4 +41,5 @@ public class SearchApi {
                         "Successfully",
                         searchService.getSearchTotalCount(searchEmoReqDto)));
     }
+
 }

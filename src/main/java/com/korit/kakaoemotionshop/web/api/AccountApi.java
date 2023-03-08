@@ -5,14 +5,14 @@ import com.korit.kakaoemotionshop.entity.UserMst;
 import com.korit.kakaoemotionshop.security.PrincipalDetails;
 import com.korit.kakaoemotionshop.service.AccountService;
 import com.korit.kakaoemotionshop.web.dto.CMRespDto;
-import io.swagger.annotations.*;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
@@ -44,22 +44,6 @@ public class AccountApi {
                 .body(new CMRespDto<>(HttpStatus.CREATED.value(), "Create a new User", user));
     }
 
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "userId", value = "사용자 식별 코드", required = true, dataType = "int"),
-    })
-    @ApiResponses({
-            @ApiResponse(code = 400, message = "클라이언트가 잘못했음"),
-            @ApiResponse(code = 401, message = "클라이언트가 잘못했음2")
-    })
-    @GetMapping("/user/{userId}")
-    public ResponseEntity<? extends CMRespDto<? extends UserMst>> getUser(
-//            @ApiParam(value = "사용자 식별 코드")
-            @PathVariable int userId) {
-        return ResponseEntity
-                .ok()
-                .body(new CMRespDto<>(HttpStatus.OK.value(), "Success", accountService.getUser(userId)));
-    }
-
     @ApiOperation(value = "Get Principal", notes = "로그인된 사용자 정보 가져오기")
     @GetMapping("/principal")
     public ResponseEntity<CMRespDto<? extends PrincipalDetails>> getPrincipalDetails(@ApiParam(name = "principalDetails", hidden = true) @AuthenticationPrincipal PrincipalDetails principalDetails) {
@@ -73,7 +57,4 @@ public class AccountApi {
                 .ok()
                 .body(new CMRespDto<>(HttpStatus.OK.value(), "Success", principalDetails));
     }
-
-
-
 }

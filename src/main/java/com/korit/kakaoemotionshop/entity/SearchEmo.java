@@ -12,9 +12,8 @@ public class SearchEmo {
     private String emoCode;
     private String emoName;
     private String company;
-    private String emoDate;
     private String saveName;
-    private int userId;
-    private int likeId;
-    private int likeCount;
+
+    private int imageId;
+    private int imageSeq;
 }

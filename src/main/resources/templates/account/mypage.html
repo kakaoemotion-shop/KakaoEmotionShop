@@ -34,7 +34,7 @@
                 <h1>kakao<span>emoticon</span> shop</h1>
             </a>
 
-            <button class="search-button">
+            <button class="search-button" onclick="goToSearchPageButton()">
                 <i class="fa-solid fa-magnifying-glass"></i>
             </button>
 
@@ -51,16 +51,7 @@
             </ul>
         </nav>
     </header>
-    <div class="search-page" style="display: none;"> <!-- //-> 검색창 온오프  -->
-        <div class="search-bar">
-            <input class="search-bar-input" type="text" placeholder="이모티콘을 검색해보세요!" 
-            onkeyup="addSearchInputEvent()"> <!-- //-> 결과창 이동 함수 -->
-            <button class="search-bar-button">
-                <i class="fa-solid fa-magnifying-glass"></i>
-            </button>
-        </div>
-        <div class="backboard"></div> <!-- // -> 반투명 배경 -->
-    </div>
+    
 
     <div class="banner">
         <div class="banner-content">
@@ -79,17 +70,12 @@
         </div>
 
         <div class="like-box">
-            <ul class="like-list">
-                
+            <ul class="like-list" onclick="">
+               
             </ul>
         </div>
     </div>
 
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
     <footer class="footer">
         <div class="info">
             <h3 class="searvice-info">
@@ -114,26 +100,14 @@
 
 
 <!-- 자바스크립트 -->
-    <script> // -> 검색창 온오프 버튼
-        $(function() {
-            $('.search-button').click(function(){
-                if($('.search-page').css('display') == "none") {
-                    $('.search-page').show();
-                } else {
-                    $('.search-page').hide();
-                }
-            });
-        });
-    </script>
-        
-     <script> // -> 검색결과 입력 후 결과창으로 이동
-        const searchInput = document.querySelector(".search-bar-input");
-        function addSearchInputEvent() {
-            if(window.event.keyCode == 13) {
-                location.href = 'http://127.0.0.1:8000/kakaopage/search';
-            }
+  <script>
+        function goToSearchPageButton() {
+            const searchPageButton = document.querySelector(".search-button");
+            searchPageButton.onclick(
+                location.href = 'http://127.0.0.1:8000/search'
+            )
         }
-    </script>
+</script>
 
 
 </body>

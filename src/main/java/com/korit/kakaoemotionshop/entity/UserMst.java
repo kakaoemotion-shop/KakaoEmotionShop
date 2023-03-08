@@ -47,6 +47,7 @@ public class UserMst {
     @ApiModelProperty(name = "provider", value = "OAuth데이터출처", example = "Kakao", required = false)
     private String provider;
 
+
     @ApiModelProperty(hidden = true)
     private LocalDateTime createDate;
     @ApiModelProperty(hidden = true)

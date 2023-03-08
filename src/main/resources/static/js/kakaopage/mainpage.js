@@ -1,4 +1,4 @@
-let maxPage = 0;
+let maxPage = null;
 
 const searchObj = {
     page: 1,

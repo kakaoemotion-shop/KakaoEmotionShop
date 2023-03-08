@@ -19,7 +19,7 @@ public class LikeApi {
 
     @PostMapping("/emo/{emoId}/like")
     public ResponseEntity<CMRespDto<Integer>> like(@PathVariable int emoId,
-                                                   @AuthenticationPrincipal PrincipalDetails principalDetails){
+                                             @AuthenticationPrincipal PrincipalDetails principalDetails){
         int likeCount = likeService.like(emoId, principalDetails.getUser().getUserId());
         return ResponseEntity
                 .ok()
@@ -28,7 +28,7 @@ public class LikeApi {
 
     @DeleteMapping("/emo/{emoId}/like")
     public ResponseEntity<CMRespDto<Integer>> dislike(@PathVariable int emoId,
-                                                      @AuthenticationPrincipal PrincipalDetails principalDetails){
+                                             @AuthenticationPrincipal PrincipalDetails principalDetails){
         int likeCount = likeService.dislike(emoId, principalDetails.getUser().getUserId());
         return ResponseEntity
                 .ok()

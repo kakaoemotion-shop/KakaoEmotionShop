@@ -25,9 +25,9 @@ public class PrincipalOAuth2DetailsService extends DefaultOAuth2UserService {
         PrincipalDetails principalDetails = null;
 
         System.out.println("ClientRegistration  >>> " + userRequest.getClientRegistration());
-        System.out.println("Attributes  >>> " + oAuth2User.getAttributes());
+        System.out.println("Attributes  >>> " + oAuth2User.getAttributes().get("kakao_account"));
 
-        Map<String, Object> attributes = oAuth2User.getAttributes();
+        Map<String, Object> attributes = (Map<String, Object>) oAuth2User.getAttributes().get("kakao_account");
         String email = (String) attributes.get("email");
         String username =  email.substring(0, email.indexOf("@"));
         String provider = userRequest.getClientRegistration().getClientName();
@@ -35,7 +35,7 @@ public class PrincipalOAuth2DetailsService extends DefaultOAuth2UserService {
         UserMst userMst = accountRepository.findUserByUsername(username);
 
         if(userMst == null) {
-            String name = (String) attributes.get("name");
+            String name = (String) ((Map<String, Object>) attributes.get("profile")).get("nickname");
             String password = new BCryptPasswordEncoder().encode(UUID.randomUUID().toString());
 
             userMst = UserMst.builder()

@@ -15,18 +15,19 @@ import java.nio.charset.StandardCharsets;
 
 @Configuration
 public class WebMvcConfig implements WebMvcConfigurer {
+
     @Value("${file.path}")
     private String filePath;
+
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**").allowedMethods("*").allowedOrigins("*");
     }
-
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         WebMvcConfigurer.super.addResourceHandlers(registry);
         registry.addResourceHandler("/image/**")
-                .addResourceLocations("file:///" + filePath)
+                .addResourceLocations("file:///"+filePath)
                 .resourceChain(true)
                 .addResolver(new PathResourceResolver() {
                     @Override

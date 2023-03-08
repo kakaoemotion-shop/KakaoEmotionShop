@@ -1,6 +1,4 @@
 window.onload = () => {
-    // console.log(HotSearchApi.getInstance().getTotalCount());
-    // console.log(HotSearchApi.getInstance().searchEmo());
 
     ToggleService.getInstance().loadlogin();
 
@@ -39,7 +37,7 @@ class HotSearchApi {
         $.ajax({
             async: false,
             type: "get",
-            url: "http://127.0.0.1:8000/api/hot/search/totalcount",
+            url: "http://127.0.0.1:8000/api/search/totalcount",
             data: searchObj,
             dataType: "json",
             success: response => {
@@ -258,7 +256,8 @@ class ComponentEvent {
         const emoIds = document.querySelectorAll(".emo-id");
 
         likeButtonError.forEach((button, index) => {
-            button.onclick = () => {               
+            button.onclick = () => {
+                
                 if (confirm("로그인 후 사용 가능합니다")) {
                     location.href = "/account/login"
                 }   

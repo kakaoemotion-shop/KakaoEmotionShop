@@ -34,45 +34,45 @@
 
     <select id="findUserByUserId" parameterType="Integer" resultMap="userMst">
         select
-        um.user_id,
-        um.username,
-        um.password,
-        um.name,
-        um.email,
-        um.provider,
-        rd.role_id,
-        rm.role_name,
+            um.user_id,
+            um.username,
+            um.password,
+            um.name,
+            um.email,
+            um.provider,
+            rd.role_id,
+            rm.role_name,
 
-        um.create_date,
-        um.update_date
+            um.create_date,
+            um.update_date
         from
-        user_mst um
-        left outer join role_dtl rd on(rd.user_id = um.user_id)
-        left outer join role_mst rm on(rm.role_id = rd.role_id)
+            user_mst um
+            left outer join role_dtl rd on(rd.user_id = um.user_id)
+            left outer join role_mst rm on(rm.role_id = rd.role_id)
         where
-        um.user_id = #{userId}
+            um.user_id = #{userId}
     </select>
 
     <select id="findUserByUsername" parameterType="String" resultMap="userMst">
         select
-        um.user_id,
-        um.username,
-        um.password,
-        um.name,
-        um.email,
-        um.provider,
+            um.user_id,
+            um.username,
+            um.password,
+            um.name,
+            um.email,
+            um.provider,
 
-        rd.role_id,
-        rm.role_name,
+            rd.role_id,
+            rm.role_name,
 
-        um.create_date,
-        um.update_date
+            um.create_date,
+            um.update_date
         from
-        user_mst um
-        left outer join role_dtl rd on(rd.user_id = um.user_id)
-        left outer join role_mst rm on(rm.role_id = rd.role_id)
+            user_mst um
+            left outer join role_dtl rd on(rd.user_id = um.user_id)
+            left outer join role_mst rm on(rm.role_id = rd.role_id)
         where
-        um.username = #{username}
+            um.username = #{username}
     </select>
 
     <insert id="saveUser"
@@ -87,14 +87,15 @@
         insert into role_dtl
         values (0, #{userId}, 1, now(), now())
     </insert>
+
     <update id="setUserProvider" parameterType="com.korit.kakaoemotionshop.entity.UserMst">
         update
-        user_mst
+            user_mst
         set
-        provider = #{provider}
+            provider = #{provider}
         where
-        user_id = #{userId}
+            user_id = #{userId}
     </update>
 
-</mapper>
 
+</mapper>

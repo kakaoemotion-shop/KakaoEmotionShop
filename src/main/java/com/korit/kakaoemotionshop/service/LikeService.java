@@ -14,6 +14,7 @@ public class LikeService {
 
     @Autowired
     private LikeRepository likeRepository;
+
     public int like(int emoId, int userId) {
         EmoLike emoLike = EmoLike.builder()
                 .emoId(emoId)

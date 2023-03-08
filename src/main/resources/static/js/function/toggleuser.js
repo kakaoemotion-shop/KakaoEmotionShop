@@ -33,7 +33,7 @@ class ToggleService {
         <nav class="header-menu">
             <ul class="menu-list">
                 <li class="menu-list-button"><a href="/index">홈</a></li>
-                <li class="menu-list-button"><a href="/main/newemoticon">신규</a></liu>
+                <li class="menu-list-button"><a href="/main/new">신규</a></liu>
                 <li class="menu-list-button"><a href="/main/hot">인기</a></li>
             </ul>
         </nav>
@@ -74,7 +74,7 @@ class ToggleService {
                                 <a href="/index" class="mypage-buttons">홈</a>
                             </li>
                             <li class="abc-li">
-                                <a href="/main/newemoticon" class="mypage-buttons">신규</a>
+                                <a href="/main/new" class="mypage-buttons">신규</a>
                             </li>
                             <li class="abc-li">
                                 <a href="/main/hot" class="mypage-buttons">인기</a>
@@ -139,7 +139,7 @@ class ToggleService {
                                 <a href="/index" class="mypage-buttons">홈</a>
                             </li>
                             <li class="abc-li">
-                                <a href="/main/newemoticon" class="mypage-buttons">신규</a>
+                                <a href="/main/new" class="mypage-buttons">신규</a>
                             </li>
                             <li class="abc-li">
                                 <a href="/main/hot" class="mypage-buttons">인기</a>
