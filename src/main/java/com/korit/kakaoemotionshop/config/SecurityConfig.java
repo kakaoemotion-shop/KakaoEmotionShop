@@ -48,14 +48,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .formLogin()
                 .loginPage("/account/login")
                 .loginProcessingUrl("/account/login")
-                .failureForwardUrl("/account/login/error") // 로그인 실패시 이동
+                .failureForwardUrl("/account/login/error")
                 .successHandler(adminLoginHandler()) // ADMIN 로그인 핸들러 지정
                 .and()
                 .oauth2Login() //oauth2 로그인 성공 후 가져올 때의 설정들
                 .userInfoEndpoint() // 소셜로그인 성공 시 후속 조치를 진행할 UserService 인터페이스 구현체 등록
                 .userService(principalOAuth2DetailsService); // 리소스 서버에서 사용자 정보를 가져온 상태에서 추가로 진행하고자 하는 기능 명시
     }
-
     private AuthenticationSuccessHandler adminLoginHandler() {
         return (request, response, authentication) -> {
             Set<String> roles = AuthorityUtils.authorityListToSet(authentication.getAuthorities());
