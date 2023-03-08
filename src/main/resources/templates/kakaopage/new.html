@@ -9,7 +9,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="/static/css/reset.css">
     <link rel="stylesheet" href="/static/css/togglemenu.css">
-    <link rel="stylesheet" href="/static/css/search.css">
     <link rel="stylesheet" href="/static/css/new.css">
 </head>
 <body>
@@ -27,11 +26,11 @@
         <i class="fa-solid fa-bars"></i>
       </button>
 
-      <a class="logo-button">
+      <a class="logo-button" href="/index">
           <h1>kakao<span>emoticon</span> shop</h1>
       </a>
 
-      <button class="search-button">
+      <button class="search-button" onclick="goToSearchPageButton()">
         <i class="fa-solid fa-magnifying-glass"></i>
       </button>
 
@@ -48,19 +47,6 @@
     </ul>
   </nav>
   </header>
-
-
-  <div class="search-page" style="display: none;"> <!--//-> 검색창 온오프  -->
-    <div class="search-bar">
-        <input class="search-bar-input" type="text" placeholder="이모티콘을 검색해보세요!" onkeyup="addSearchInputEvent()">
-        <!--//-> 결과창 이동 함수 onkeyup="addSearchEvent()" -->
-        <button class="search-bar-button">
-            <i class="fa-solid fa-magnifying-glass"></i>
-        </button>
-    </div>
-    <div class="backboard"></div>
-    <!-- -> 반투명 배경 -->
-</div>
 
   <div class="banner">
     <div class="banner-box">
@@ -94,26 +80,15 @@
   </div>
   
 </body>
-<script> // -> 검색창 온오프 버튼
-  $(function () {
-      $('.search-button').click(function () {
-          if ($('.search-page').css('display') == "none") {
-              $('.search-page').show();
-          } else {
-              $('.search-page').hide();
-          } a
-      });
-  });
-</script>
-
-<script> // -> 검색결과 입력 후 결과창으로 이동
-  const searchInput = document.querySelector(".search-bar-input");
-  function addSearchInputEvent() {
-      if (window.event.keyCode == 13) {
-          location.href = '/search';
-      }
+<script>
+  function goToSearchPageButton() {
+      const searchPageButton = document.querySelector(".search-button");
+      searchPageButton.onclick(
+          location.href = 'http://127.0.0.1:8000/search'
+      )
   }
 </script>
+
 <script src="/static/js/account/principal.js"></script>
 <script src="/static/js/function/toggleuser.js"></script>
 <script src="/static/js/search/new.js"></script>

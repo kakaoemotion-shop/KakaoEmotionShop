@@ -7,8 +7,12 @@ window.onload = () => {
     SearchService.getInstance().onLoadSearch();
     
     ComponentEvent.getInstance().addClickSearchButton(); 
-    ComponentEvent.getInstance().addScrollEventPaging(); 
-    console.log(SearchApi.getInstance().getTotalCount());
+    ComponentEvent.getInstance().addScrollEventPaging();
+
+    ToggleService.getInstance().loadlogin();
+    
+    ToggleButton.getInstance().logoutButton();
+    ToggleButton.getInstance().toggleButton();
 }
 
 let maxPage = 0;
@@ -116,7 +120,6 @@ class SearchService {
                 <h2>검색 결과</h2>
                 <p>${responseData}</p>
         `;
-        // console.log(responseData);
     }
 
     
@@ -133,7 +136,7 @@ class SearchService {
             searchFlex.innerHTML += `
             <div class="emotion-serch">
                 <div class="emotion-title">
-                    <a class="search-link" href="">
+                    <a class="search-link" href="http://127.0.0.1:8000/main/detail/?emoCode=${data.emoCode}">
                         <h3>${data.emoName}</h3>
                         <h4>${data.company}</h4>
                         <button class="like-button">

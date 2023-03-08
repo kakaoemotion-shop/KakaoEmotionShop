@@ -30,7 +30,7 @@
         <a href="/index" class="logo-button">
             <h1>kakao<span>emoticon</span> shop</h1>
         </a>
-        <button class="search-button">
+        <button class="search-button" onclick="goToSearchPageButton()">
             <i class="fa-solid fa-magnifying-glass"></i>
         </button>
 
@@ -145,24 +145,14 @@
     });
 });
 </script>
-<script> // -> 검색창 온오프 버튼
-        $(function () {
-            $('.search-button').click(function () {
-                if ($('.search-page').css('display') == "none") {
-                    $('.search-page').show();
-                } else {
-                    $('.search-page').hide();
-                }
-            });
-        });
-</script>
-<script> // -> 검색결과 입력 후 결과창으로 이동
-        const searchInput = document.querySelector(".search-bar-input");
-        function addSearchInputEvent() {
-            if (window.event.keyCode == 13) {
-                location.href = '/search';
-            }
-        }
+
+<script>
+    function goToSearchPageButton() {
+        const searchPageButton = document.querySelector(".search-button");
+        searchPageButton.onclick(
+            location.href = 'http://127.0.0.1:8000/search'
+        )
+    }
 </script>
 
 <body>
