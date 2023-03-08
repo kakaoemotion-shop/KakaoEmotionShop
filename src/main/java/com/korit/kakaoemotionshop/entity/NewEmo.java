@@ -1,6 +1,5 @@
 package com.korit.kakaoemotionshop.entity;
 
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -10,7 +9,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Data
 @Builder
-public class HotSearchEmo {
+public class NewEmo {
+
     private int emoId;
     private String emoCode;
     private String emoName;
@@ -19,7 +19,9 @@ public class HotSearchEmo {
     private String saveName;
     private int likeId;
     private int likeCount;
+
     private int imageId;
+    private int imageSeq;
 
     private String newImage1;
     private String newImage2;

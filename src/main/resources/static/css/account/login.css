@@ -196,12 +196,13 @@ body,html {
     font-weight: 400;
     font-size: 16px;
     line-height: 51px;
+    background-color: #fee500;
     color: #191919;
-    background-color: #f0f0f0
 }
 
 .btn_g:hover {
-    background-color: #ebebeb
+    background-color: #f2d00f
+
 }
 
 .btn_g:active {
@@ -216,21 +217,25 @@ body,html {
 }
 
 .btn_g.highlight {
-    background-color: #fee500
+    margin-top: 25px;
+    background-color: #f0f0f0
+
 }
 
 .btn_g.highlight:hover {
-    background-color: #fada0a
+    background-color: #ebebeb
+
 }
 
 .btn_g.highlight:active {
-    background-color: #f2d00f
+    background-color: #fada0a
+
 }
 
 .btn_g.highlight:disabled {
     background-color: #eee
 }
-
+z
 .confirm_btn {
     padding-top: 40px;
     text-align: center
@@ -272,7 +277,7 @@ body,html {
 .item_choice {
     display: block;
     position: relative;
-    vertical-align: top;
+    vertical-align: top
 }
 
 .item_choice .inp_choice {
@@ -350,12 +355,12 @@ body,html {
     font-size: 19px;
     line-height: 27px;
     text-align: center;
-    vertical-align: top;
+    vertical-align: top
 }
 
 .bg_dark .doc-title .tit_service .logo_kakao {
     background-color: #121212;
-    background-position: 0 -40px;
+    background-position: 0 -40px
 }
 
 .doc-footer {
@@ -550,32 +555,10 @@ body,html {
     background-position: -120px -110px
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+.login-error {
+    width: 100%;
+    text-align: center;
+    margin-top: 10px;
+    color: red;
+    font-size: 15px;
+}

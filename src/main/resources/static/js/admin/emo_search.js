@@ -141,7 +141,7 @@ class SearchApi {
             <a href="javascript:void(0)" class="next-button disabled">다음</a>
         `
 
-        if (emoSearchObj.page != 1) {
+        if (emoSearchObj.page != 0) {
             const preButton = pageController.querySelector(".pre-button")
             preButton.classList.remove("disabled")
             preButton.onclick = () => {

@@ -2,6 +2,7 @@ window.onload = () => {
     DetailService.getInstance().setEmoCode()
     DetailService.getInstance().loadEmoImageOne()
     DetailService.getInstance().loadEmoAndImageData()
+    DetailService.getInstance().addAsideToggleButtonEvent()
 
 
 }
@@ -294,4 +295,6 @@ class ComponentEvent {
             }
         });
     }
+
+    
 }

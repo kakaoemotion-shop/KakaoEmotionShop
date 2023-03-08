@@ -7,10 +7,10 @@ class ToggleService {
         return this.#instance;
     }
 
-    header() {
+    header(){
         const header = document.querySelector(".header")
 
-        header.innerHTML = `
+        header.innerHTML=`
         <div class="header-top">
             <div>
                 <button class="toggle-button">
@@ -60,10 +60,10 @@ class ToggleService {
                             <ul class="mypage-box">
                             
                                 <li class="mypage-style">
-                                    <a href="" class="mypage-link"></a>
-                                        <i class="fa-regular fa-heart"></i>
+                                    <a href="/account/mypage" class="mypage-link">
+                                        <i class="fa-regular fa-heart toggle-heart"></i>
                                         <p class="mypage-chart">좋아요</p>
-                                    
+                                    </a>
                                 </li>
                             </ul>
                         </div>
@@ -178,8 +178,8 @@ class ToggleService {
                 </ul>
         `;
     }
-
-    footer() {
+    
+    footer(){
         const footer = document.querySelector(".footer");
 
         footer.innerHTML = `
@@ -216,6 +216,7 @@ class ToggleButton {
         return this.#instance;
     }
 
+    toggleButtonFlag = false;
 
     toggleButton() {
         const asideBlank = document.querySelector(".aside-blank");
@@ -230,7 +231,7 @@ class ToggleButton {
             asideContainer.classList.add("aside-hide");
         }
     }
-
+    
 
     logoutButton() {
         const mypageButton = document.querySelector(".mypage-button");
@@ -252,7 +253,7 @@ class ToggleButton {
         }
 
         mypageButton.innerHTML = `
-        ${principal == null
+            ${principal == null
                 ? `
                 <a href="/account/login">
                 <img src="/static/images/profile_default.png" alt="">
@@ -261,11 +262,11 @@ class ToggleButton {
                 : `
                 <a href="" class="logout"><img src = "https://www.iconpacks.net/icons/2/free-user-logout-icon-3056-thumb.png"></a>
                 
-        `
-
+                `
             }
-    `
+        `
     }
+    
     mypagLinkButton() {
         const mypageLink = document.querySelector(".fa-heart");
         const principal = PrincipalApi.getInstance().getPrincipal();
