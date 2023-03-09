@@ -232,10 +232,45 @@
   text-align: center;
   background-color: #bbbbbb;
 }
-.search-table td{
+.search-table tr{
   height: 20px;
   text-align: center;
+  background-color: #fff;
 }
+
+.no-search {
+  position: absolute;
+  left: 650px;
+  top: 350px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  width: 400px;
+  height: 300px;
+
+  background-color: #fff;
+}
+.no-search img {
+  margin-left: 100px;
+  width: 200px;
+  height: 200px;
+}
+.no-search h2 {
+  font-size: 20px;
+  font-weight: 600;
+  text-align: center;
+}
+.no-search h3 {
+  font-size: 17px;
+  font-weight: 500;
+  text-align: center;
+  color: #373737;
+}
+
+
+
 .delete-checkall{
   cursor: pointer;
 }

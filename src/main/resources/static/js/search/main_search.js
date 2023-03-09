@@ -1,15 +1,18 @@
 window.onload = () => {
     SearchService.getInstance().clearEmoList();
     SearchService.getInstance().loadSearchEmos();
-
     SearchService.getInstance().clearEmoCount();
     SearchService.getInstance().loadSearchCounts();
-    
     SearchService.getInstance().setMaxPage();
     SearchService.getInstance().onLoadSearch();
     
     ComponentEvent.getInstance().addClickSearchButton(); 
-    ComponentEvent.getInstance().addScrollEventPaging(); 
+    ComponentEvent.getInstance().addScrollEventPaging();
+
+    ToggleService.getInstance().loadlogin();
+    
+    ToggleButton.getInstance().logoutButton();
+    ToggleButton.getInstance().toggleButton();
 }
 
 let maxPage = 0;
@@ -128,13 +131,15 @@ class SearchService {
 
     loadSearchEmos() {
         const responseData = SearchApi.getInstance().searchEmo();
+        const totalCount = SearchApi.getInstance().getTotalCount();
+
         const searchFlex = document.querySelector(".search-flex");
 
-        responseData.forEach((data) => {
+        responseData.forEach((data,index) => {
             searchFlex.innerHTML += `
-            <div class="emotion-search">
+            <div class="emotion-serch">
                 <div class="emotion-title">
-                    <a class="search-link" href="">
+                    <a class="search-link" href="http://127.0.0.1:8000/main/detail/?emoCode=${data.emoCode}">
                         <h3>${data.emoName}</h3>
                         <h4>${data.company}</h4>
                         <button class="like-button">
@@ -150,6 +155,18 @@ class SearchService {
             </div>
             `;
         });
+
+        const noEmotionReult = document.querySelector(".search-flex");
+
+        if(totalCount == 0) {
+            noEmotionReult.innerHTML += `
+            <div class="no-emotion">
+                <img src="/static/images/no_search_result.png" alt="">
+                <h2>검색결과가 없습니다.</h2>
+                <h3>다른검색어로 다시 시도해주세요</h3>
+            </div>
+            `;
+        }
     }
 }
 
