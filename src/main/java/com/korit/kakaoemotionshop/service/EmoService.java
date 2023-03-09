@@ -2,6 +2,7 @@ package com.korit.kakaoemotionshop.service;
 
 import com.korit.kakaoemotionshop.entity.EmoImage;
 import com.korit.kakaoemotionshop.entity.EmoMst;
+import com.korit.kakaoemotionshop.entity.EmoRegisterImage;
 import com.korit.kakaoemotionshop.exception.CustomValidationException;
 import com.korit.kakaoemotionshop.repository.EmoRepository;
 import com.korit.kakaoemotionshop.web.dto.DeleteReqDto;
@@ -47,12 +48,6 @@ public class EmoService {
         return resultAll;
     }
 
-    public Map<String, Object> getEmoAndImageOne(String emoCode){
-        Map<String, Object> resultAll = new HashMap<>();
-        resultAll.put("emoMst", emoRepository.findEmoByEmoCode(emoCode));
-        resultAll.put("emoImage", emoRepository.findEmoImageOne(emoCode));
-        return resultAll;
-    }
 
     public List<EmoMst> searchEmo(SearchReqDto searchReqDto){
         searchReqDto.setIndex();
