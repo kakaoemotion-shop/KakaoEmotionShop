@@ -11,13 +11,13 @@
             emo_like
         where
             emo_id = #{emoId}
-            and user_id = #{userId}
+        and user_id = #{userId}
     </select>
 
     <insert id="addLike" parameterType="com.korit.kakaoemotionshop.entity.EmoLike">
         insert into emo_like
         value
-        (0,#{userId},#{emoId})
+            (0,#{userId},#{emoId})
     </insert>
 
     <delete id="deleteLike" parameterType="com.korit.kakaoemotionshop.entity.EmoLike">
@@ -26,9 +26,8 @@
             emo_like
         where
             emo_id = #{emoId}
-            and user_id = #{userId}
+        and user_id = #{userId}
     </delete>
-
     <select id="getLikeCount" resultType="Integer">
         select
             count(*)

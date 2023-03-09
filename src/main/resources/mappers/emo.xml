@@ -20,15 +20,15 @@
             and (
                 emo_name like concat('%', #{searchValue}, '%')
                 or company like concat('%', #{searchValue}, '%')
-                )
+            )
         </if>
 
         order by
         <choose>
-            <when test = 'order == "emoName"'>emo_name,</when>
-            <when test = 'order == "company"'>company,</when>
-            <when test = 'order == "dateAsc"'>emo_date,</when>
-            <when test = 'order == "dataDesc"'>emo_date desc,</when>
+             <when test = 'order == "emoName"'>emo_name,</when>
+             <when test = 'order == "company"'>company,</when>
+             <when test = 'order == "dateAsc"'>emo_date,</when>
+             <when test = 'order == "dataDesc"'>emo_date desc,</when>
         </choose>
         emo_id
         <if test = 'limit == "Y"'>
@@ -119,16 +119,16 @@
             1 = 1
         <if test='searchValue != null and searchValue !=""'>
             and	(
-                emo_name like CONCAT('%', #{searchValue}, '%')
-                or	company like CONCAT('%', #{searchValue}, '%')
-                )
+            emo_name like CONCAT('%', #{searchValue}, '%')
+            or	company like CONCAT('%', #{searchValue}, '%')
+            )
         </if>
     </select>
 
     <insert id="saveEmo" parameterType="com.korit.kakaoemotionshop.web.dto.EmoReqDto">
         insert into emo_mst
         values
-        (0, #{emoCode},#{emoName}, #{company}, #{emoDate})
+            (0, #{emoCode},#{emoName}, #{company}, #{emoDate})
     </insert>
 
     <insert id="registerEmoImages" parameterType="list">

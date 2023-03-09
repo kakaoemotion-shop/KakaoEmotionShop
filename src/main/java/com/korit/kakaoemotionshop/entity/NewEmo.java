@@ -9,8 +9,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Data
 @Builder
+public class NewEmo {
 
-public class HotSearchEmo {
     private int emoId;
     private String emoCode;
     private String emoName;
@@ -27,5 +27,4 @@ public class HotSearchEmo {
     private String newImage2;
     private String newImage3;
     private String newImage4;
-
 }

@@ -76,12 +76,12 @@ public class PrincipalDetails implements UserDetails, OAuth2User {
     }
 
     @Override
-    public String getName() {
-        return user.getName();
-    }
+    public String getName() {return user.getName();}
+
 
     @Override
     public Map<String, Object> getAttributes() {
         return response;
     }
+
 }
