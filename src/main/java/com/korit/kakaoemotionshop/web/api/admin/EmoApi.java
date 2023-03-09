@@ -142,7 +142,7 @@ public class EmoApi {
 //    }
 
     @GetMapping("/emos/{emoCode}")
-    public ResponseEntity<CMRespDto<Map<String, Object>>> getEmoss(@PathVariable String emoCode){
+    public ResponseEntity<CMRespDto<Map<String, Object>>> getEmos(@PathVariable String emoCode){
 
         Map<String, Object> responseMap = new HashMap<>();
 

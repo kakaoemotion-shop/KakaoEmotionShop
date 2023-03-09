@@ -40,6 +40,9 @@ public class EmoService {
         return emoRepository.findEmoImageAll(emoCode);
     }
 
+    public EmoMst getEmoByEmoCode(String emoCode) {
+        return emoRepository.findEmoByEmoCode(emoCode);
+    }
     public Map<String, Object> getEmoAndAllImage(String emoCode){
         Map<String, Object> resultAll = new HashMap<>();
         resultAll.put("emoMst", emoRepository.findEmoByEmoCode(emoCode));

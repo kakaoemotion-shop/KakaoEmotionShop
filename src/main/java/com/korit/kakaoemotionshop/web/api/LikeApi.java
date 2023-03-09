@@ -1,5 +1,6 @@
 package com.korit.kakaoemotionshop.web.api;
 
+import com.korit.kakaoemotionshop.entity.EmoLike;
 import com.korit.kakaoemotionshop.security.PrincipalDetails;
 import com.korit.kakaoemotionshop.service.LikeService;
 import com.korit.kakaoemotionshop.web.dto.CMRespDto;
@@ -16,6 +17,17 @@ public class LikeApi {
 
     @Autowired
     private LikeService likeService;
+
+    @GetMapping("/like/{emoId}/status")
+    public ResponseEntity<CMRespDto<Integer>> getLikeStatus(@PathVariable int emoId,
+                                                            @AuthenticationPrincipal PrincipalDetails principalDetails) {
+
+        int likeStatus = likeService.getLikeStatus(emoId, principalDetails.getUser().getUserId());
+
+        return ResponseEntity
+                .ok()
+                .body(new CMRespDto<>(HttpStatus.OK.value(), "Successfully",likeStatus));
+    }
 
     @PostMapping("/emo/{emoId}/like")
     public ResponseEntity<CMRespDto<Integer>> like(@PathVariable int emoId,
