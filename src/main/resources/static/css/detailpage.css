@@ -1,4 +1,4 @@
-.emoticon-area {
+.emoticon-area{
     display: flex;
     padding: 0;
     position: relative;
@@ -11,12 +11,11 @@
 
 }
 
-.emoticon-product {
+.emoticon-product{
     display: flex;
     justify-content: flex-start;
 }
-
-.emoticon-box {
+.emoticon-box{
     margin: auto 0;
     position: relative;
     padding-right: 40px;
@@ -25,8 +24,7 @@
     width: 386px;
     height: 207px;
 }
-
-.emoticon-thumb {
+.emoticon-thumb{
     display: flex;
     justify-content: center;
     padding: 0;
@@ -34,61 +32,50 @@
     width: 100%;
     height: 100%;
 }
-
-.main-emoticon {
+.main-emoticon{
     position: absolute;
     height: 100%;
 
 }
-
-.txt-area {
+.txt-area{
     margin: auto 0;
     width: 100%;
-    height: 207px;
-    ;
+    height: 207px;;
 }
-
-.txt-box {
+.txt-box{
     width: 100%;
     height: 207px;
 }
-
-.emoticon-name {
+.emoticon-name{
     font-size: 30px;
     color: #191919;
 }
-
-.txt-author {
+.txt-author{
     font-size: 14px;
     color: #999999;
     margin-top: 4px;
 
 }
-
-.price-box {
+.price-box{
     padding: 22px 0px 23px;
     height: 51px;
 }
-
-.txt-promotion {
+.txt-promotion{
     font-size: 14px;
     color: #191919;
 }
-
-.txt-price {
+.txt-price{
     margin-left: 2px;
     font-size: 24px;
     color: #FA4637;
     font-weight: 600;
 }
-
-.txt-price-won {
+.txt-price-won{
     font-size: 14px;
     color: #FA4637;
     font-weight: 600;
 }
-
-.right-like-box {
+.right-like-box{
     display: flex;
     float: right;
     width: 30px;
@@ -97,7 +84,7 @@
     border-radius: 50%;
 }
 
-.heart-detail {
+.heart-detail{
     margin-left: 4px;
     display: flex;
     align-items: center;
@@ -107,11 +94,7 @@
     padding-right: 0;
 }
 
-.charge {
-    display: none;
-}
-
-.purchase-button {
+.purchase-button{
     margin-top: 4px;
     border: none;
     border-radius: 10px;
@@ -119,46 +102,38 @@
     height: 44px;
     font-size: 15px;
     background-color: #FEE500;
-    cursor: pointer;
 }
-
-.subemoticon-area {
+.subemoticon-area{
     display: flex;
     width: 100%;
     height: 100%;
     background-color: #fafafa;
 }
-
-.subemoticon-box {
+.subemoticon-box{
     display: flex;
     padding: 40px 0;
     margin: 0 auto;
     width: 1025px;
     height: 320px;
 }
-
-.subemoticon-img {
+.subemoticon-img{
     display: flex;
     justify-content: space-between;
 
 }
-
-.subemoticon-number {
+.subemoticon-number{
     width: 240px;
     height: 240px;
 }
-
-.precautions {
+.precautions{
     background-color: #fafafa;
 }
-
-.precautions-box {
+.precautions-box{
     margin: 0 auto;
     width: 1025px;
     height: 100%;
 }
-
-.product-btn {
+.product-btn{
     margin-bottom: 10px;
     padding: 18px 0px;
     width: 100%;
@@ -169,8 +144,7 @@
     background-color: #fafafa;
     cursor: pointer;
 }
-
-.refund-btn {
+.refund-btn{
     margin-bottom: 10px;
     padding: 18px 0px;
     width: 100%;
@@ -180,28 +154,23 @@
     background-color: #fafafa;
     cursor: pointer;
 }
-
-.product-guide {
+.product-guide{
     font-size: 16px;
     font-weight: 600;
     text-align: left;
 }
-
-.fa-caret-up,
-.fa-caret-down {
+.fa-caret-up, .fa-caret-down{
     float: right;
     font-size: 25px;
     padding-bottom: 3px;
 }
-
-dd {
+dd{
     position: relative;
     font-size: 14px;
     color: #7f7f7f;
     padding: 0 0 15px 11px
 }
-
-dd::before {
+dd::before{
     position: absolute;
     margin-left: -2px;
     left: 0px;
@@ -209,3 +178,6 @@ dd::before {
     color: #ccc;
     content: "•";
 }
+
+.charge{
+display: none;}

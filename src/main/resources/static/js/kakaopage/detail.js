@@ -191,7 +191,7 @@ class DetailService {
             </div>
 
         `;
-      
+
     }
 
     loadEmoAndImageData() {
@@ -334,10 +334,19 @@ class ImportApi {
 
     purchaseButton() {
         const purchaseButton = document.querySelector(".purchase-button");
+        const principal = PrincipalApi.getInstance().getPrincipal();
+        const inputs = document.querySelectorAll(".product-input");
+
+
         purchaseButton.onclick = () => {
-            const inputs = document.querySelectorAll(".product-input");
-            ImportApi.getInstance().importPayParams.name = inputs[0].value;
-            ImportApi.getInstance().requestPay();
+            if (principal == null) {
+                if (confirm("로그인 후 사용 가능합니다")) {
+                    location.href = "/account/login"
+                }
+            }else{
+                ImportApi.getInstance().importPayParams.name = inputs[0].value;
+                ImportApi.getInstance().requestPay();
+            }
         }
         console.log(purchaseButton);
     }

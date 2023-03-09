@@ -1,6 +1,9 @@
 html {
     height: 100%;
 }
+
+
+
 /* =============== 상단 부분 ================ */
 .header{
     width: 100%;
@@ -107,6 +110,9 @@ html {
     border-bottom: 2px solid #000;
 }
 
+
+
+
 /* =============== 베너 부분 ================ */
 .banner {
     display: flex;
@@ -156,7 +162,9 @@ html {
     height: 190px;
 }
 
-/* =============== 베너 부분 ================ */
+
+
+/* =============== 콘텐츠 부분 ================ */
 .content {
     display: flex;
     flex-direction: column;
@@ -176,12 +184,12 @@ html {
     font-weight: 600;
     text-align: left;
 }
-.like-title p {
+/* .like-title p {
     margin-left: 4px;
     font-size: 20px;
     font-weight: 600;
     color: red;
-}
+} */
 
 .like-box {
     display: flex;
@@ -249,8 +257,7 @@ html {
     cursor: pointer;
 }
 .fa-heart {
-
-    padding-right: 8px;
+    margin: 0 auto;
 
     font-size: 16px;
     color: deeppink;
@@ -276,6 +283,9 @@ html {
     font-weight: 400;
     color: #929292;
 }
+
+
+
 
 
 /* =============== 하단 부분 ================ */

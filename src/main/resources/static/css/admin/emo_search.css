@@ -39,12 +39,10 @@
 
   cursor: pointer;
 }
-
 .logo-button h1{
   font-size: 20px;
   font-weight: 400;
 }
-
 .logo-button span{
   font-size: 20px;
   font-weight: 600;
@@ -88,19 +86,18 @@
   border-radius: 10px;
 }
 
+
 .header-menu{
   width: 100%;
   height: 55px;
   background-color: white;
 }
-
 .menu-list{
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-content: center;
 }
-
 .menu-list-button{
   margin-top: 20px;
   width: 154px;
@@ -113,7 +110,6 @@
 
   cursor: pointer;
 }
-
 .menu-list-button:hover{
   border-bottom: 2px solid #000;
 }
@@ -123,7 +119,6 @@
 .content{
   background-color: #373737;
 }
-
 .search{
   margin-top: 15px;
   margin-bottom: 15px;
@@ -134,14 +129,12 @@
   border: 1px solid #dbdbdb;
   background-color: white;
 }
-
 .search-head{
   display: flex;
 
   width: 1024px;
   height: 80px;
 }
-
 .search-left{
   margin-top: 30px;
   margin-left: 13px;
@@ -151,7 +144,6 @@
 
   background-color: white;
 }
-
 .delete-button{
   margin-right: 8px;
 
@@ -164,13 +156,11 @@
 
   cursor: pointer;
 }
-
 .delete-button:hover{
   color: white;
   font-weight: 600;
   background-color: rgb(165, 16, 16);
 }
-
 .search-bar{
   margin-right: 2px;
   margin-top: 10px;
@@ -182,11 +172,9 @@
   border-radius: 5px;
   cursor: pointer;
 }
-
 .search-bar:focus{
   outline: none;
 }
-
 .search-icon-btn{
   width: 30px;
   height: 30px;
@@ -196,11 +184,9 @@
   background-color: white;
   cursor: pointer;
 }
-
 .search-icon-btn:hover{
   background-color: #f2f2f2;
 }
-
 .fa-magnifying-glass{
   font-size: 15px;
 }
@@ -213,7 +199,6 @@
 
   background-color: white;
 }
-
 .search-main-title{
   padding-top: 10px;
 
@@ -221,12 +206,12 @@
   font-weight: 600;
   color: #000;
 }
-
 .search-sub-title{
   font-size: 15px;
   font-weight: 500;
   color: rgb(92, 92, 92);
 }
+
 
 .search-group{
   width: 1024px;
@@ -234,7 +219,6 @@
 
   background-color: white;
 }
-
 .search-table{
   margin-left: 12px;
 
@@ -243,40 +227,70 @@
 
   border: 1px solid #bbbbbb;
 }
-
 .search-table th{
   height: 30px;
   text-align: center;
   background-color: #bbbbbb;
 }
-
-.search-table td{
+.search-table tr{
   height: 20px;
   text-align: center;
+  background-color: #fff;
 }
+
+.no-search {
+  position: absolute;
+  left: 650px;
+  top: 350px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  width: 400px;
+  height: 300px;
+
+  background-color: #fff;
+}
+.no-search img {
+  margin-left: 100px;
+  width: 200px;
+  height: 200px;
+}
+.no-search h2 {
+  font-size: 20px;
+  font-weight: 600;
+  text-align: center;
+}
+.no-search h3 {
+  font-size: 17px;
+  font-weight: 500;
+  text-align: center;
+  color: #373737;
+}
+
+
 
 .delete-checkall{
   cursor: pointer;
 }
-
 .delete-checkbox{
   cursor: pointer;
 }
-
 .fa-square-pen{
   font-size: 20px;
   cursor: pointer;
 }
 
+
+
 .page-controller{
   display: flex;
   justify-content: center;
 }
-
 .page-numbers{
   display: flex;
 }
-
 .page-controller a{
   display: flex;
   justify-content: center;
@@ -293,25 +307,4 @@
   font-weight: 600;
 
   background-color: white;
-}
-
-.page-controller a:hover {
-  background-color: #202020;
-  color: white;
-}
-
-.page-controller .disabled {
-  background-color: #202020;
-  color: white;
-  cursor: default;
-}
-
-.emo-img{
-margin-top: 20px;
-margin-bottom: 10px;
-
-width: 90px;
-height: 90px;
-
-cursor: pointer;
 }

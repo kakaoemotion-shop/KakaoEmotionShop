@@ -1,9 +1,4 @@
 window.onload = () => {
-    ToggleService.getInstance().loadlogin();
-    
-    ToggleButton.getInstance().logoutButton();
-    ToggleButton.getInstance().toggleButton();
-    
     SearchService.getInstance().clearEmoList();
     SearchService.getInstance().loadSearchEmos();
     SearchService.getInstance().clearEmoCount();
@@ -136,6 +131,8 @@ class SearchService {
 
     loadSearchEmos() {
         const responseData = SearchApi.getInstance().searchEmo();
+        const totalCount = SearchApi.getInstance().getTotalCount();
+
         const searchFlex = document.querySelector(".search-flex");
 
         responseData.forEach((data,index) => {
@@ -158,6 +155,18 @@ class SearchService {
             </div>
             `;
         });
+
+        const noEmotionReult = document.querySelector(".search-flex");
+
+        if(totalCount == 0) {
+            noEmotionReult.innerHTML += `
+            <div class="no-emotion">
+                <img src="/static/images/no_search_result.png" alt="">
+                <h2>검색결과가 없습니다.</h2>
+                <h3>다른검색어로 다시 시도해주세요</h3>
+            </div>
+            `;
+        }
     }
 }
 

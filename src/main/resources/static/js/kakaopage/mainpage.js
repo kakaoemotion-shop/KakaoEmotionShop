@@ -1,4 +1,4 @@
-let maxPage = null;
+let maxPage = 0;
 
 const searchObj = {
     page: 1,
@@ -70,7 +70,6 @@ class MainPageService {
         maxPage = totalCount % 10 == 0
             ? totalCount / 10
             :Math.floor(totalCount / 10) + 1;
-
     }
 
     clearHotEmoList() {
