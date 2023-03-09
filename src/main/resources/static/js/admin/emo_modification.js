@@ -3,7 +3,7 @@ window.onload = () => {
     EmoModificationService.getInstance().loadEmoAndImageData()
     ComponentEvent.getInstance().addClickEventModificationButton()
     ComponentEvent.getInstance().addChangeEventImgFile()
-    ComponentEvent.getInstance().addClickEventImgOnChangeButton()
+    // ComponentEvent.getInstance().abcdefg()
     ComponentEvent.getInstance().addClickEventImgModificationButton()
 }
 
@@ -22,6 +22,8 @@ const imgObj = {
 }
 
 let imgList = null;
+
+const deleteImgIdList = new Array();
 
 const fileObj = {
     imageSeqs: new Array(),
@@ -79,15 +81,16 @@ class EmoModificationApi {
         return successFlag
     }
 
-    removeImg() {
+    removeImg(imageId) {
         let successFlag = false
 
         $.ajax({
             async: false,
             type: "delete",
-            url: `http://127.0.0.1:8000/api/admin/emo/${emoObj.emoCode}/image/${imgObj.imageId}`,
+            url: `http://127.0.0.1:8000/api/admin/emo/${emoObj.emoCode}/image/${imageId}`,
             dataType: "json",
             success: response => {
+                console.log(imageId + "삭제완료")
                 successFlag = true
             },
             error: error => {
@@ -247,52 +250,39 @@ class ComponentEvent {
                 });
     
                 if (changeFlag) {
+                    if(!deleteImgIdList.includes(imgList[index].imageId)){
+                        deleteImgIdList.push(imgList[index].imageId);
+                    }
+                    console.log(deleteImgIdList)
                     const imgRegisterButton = document.querySelector(".img-modification-button");
                     imgRegisterButton.disabled = false;
     
                     ImgFileService.getInstance().getImgPreview();
                     imgFile.value = null;
                 }
+
             };
         });
     }
-    
 
-    
-    addClickEventImgOnChangeButton() {
-        const imgModificationButton = document.querySelector(".img-modification-button");
-
-        imgModificationButton.onclick = () => {
-            fileObj.formData.append("files", fileObj.files[index]);
-            
-            let successFlag = true;
-
-            if(imgObj != null && imgObj.imageId != null) {
-                EmoModificationApi.getInstance().removeImg();
-                
-                if(!successFlag) {
-                    return;
-                }
-                
-            }
-    
-            if(successFlag) {
-                EmoModificationApi.getInstance().registerImg();
-            }
-            
-            
-        }
-    }
 
     addClickEventImgModificationButton() {
         const imgModificationButton = document.querySelector(".img-modification-button")
 
         imgModificationButton.onclick = () => {
+            deleteImgIdList.forEach(imgId => {
+                if(!EmoModificationApi.getInstance().removeImg(imgId)) {
+                    alert("이미지 삭제 오류.");
+                    location.reload();
+                }
+            });
+
             for (let i = 0; i < fileObj.files.length; i++) {
                 fileObj.formData.append("files", fileObj.files[i]);
             }
             EmoModificationApi.getInstance().registerImg();
         }
     }
+    
 
 }
