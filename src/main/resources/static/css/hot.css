@@ -2,6 +2,7 @@ html {
   height: 100%;
 }
 
+
 /* =============== 상단 부분 ================ */
 .header{
   width: 100%;
@@ -108,6 +109,8 @@ html {
   border-bottom: 2px solid #000;
 }
 
+
+
 /* =============== 베너 부분 ================ */
 .banner{
   display: flex;
@@ -136,6 +139,7 @@ html {
   width: 424px;
   height: 210px;
 }
+
 
 
 /* =============== 콘텐츠 부분 ================ */
@@ -214,7 +218,7 @@ html {
 }
 
 .buttons{
-  margin-right: 10px;
+  /* margin-right: 10px; */
 }
 .like-button{
   margin-top: 5px;
@@ -241,7 +245,7 @@ html {
   cursor: pointer;
 }
 .fa-heart{
-  margin-top: 5px;
+  margin: 0 auto;
 
   width: 16px;
   height: 16px;
@@ -249,7 +253,15 @@ html {
   font-size: 13px;
   color: deeppink;
 }
+.hot-like-heart {
+  margin: 0 auto;
 
+  width: 16px;
+  height: 16px;
+
+  font-size: 13px;
+  color: deeppink;
+}
 .emo-img{
   margin-top: 20px;
   margin-bottom: 10px;

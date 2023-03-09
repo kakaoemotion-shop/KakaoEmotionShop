@@ -5,17 +5,18 @@ window.onload = () => {
     ToggleButton.getInstance().logoutButton();
     ToggleButton.getInstance().toggleButton();
 
-    LikeService.getInstance().clearLikeCount();
-    LikeService.getInstance().loadLikeCount();
+    MypageService.getInstance().clearLikeCount();
+    MypageService.getInstance().loadLikeCount();
 
-    LikeService.getInstance().clearEmoLikeList();
-    LikeService.getInstance().loadLikeEmos();
+    MypageService.getInstance().clearEmoLikeList();
+    MypageService.getInstance().loadLikeEmos();
 
-    LikeService.getInstance().setMaxPage();
+    MypageService.getInstance().setMaxPage();
 
     ComponentEvent.getInstance().addScrollEventPaging();
     ComponentEvent.getInstance().addClickEventLikeButtons();
 }
+
 let maxPage = 0;
 
 const searchObj = {
@@ -24,11 +25,11 @@ const searchObj = {
     count: 10
 }
 
-class LikeApi {
+class MypageApi {
     static #instance = null;
     static getInstance() {
         if(this.#instance == null) {
-            this.#instance = new LikeApi();
+            this.#instance = new MypageApi();
         }
         return this.#instance;
     }
@@ -39,7 +40,7 @@ class LikeApi {
         $.ajax({
             async: false,
             type: "get",
-            url: "http://127.0.0.1:8000/api/hot/search/totalcount",
+            url: "http://127.0.0.1:8000/api/search/totalcount",
             data: searchObj,
             dataType: "json",
             success: response => {
@@ -115,11 +116,11 @@ class LikeApi {
 
 }
 
-class LikeService {
+class MypageService {
     static #instance = null;
     static getInstance() {
         if(this.#instance == null) {
-            this.#instance = new LikeService();
+            this.#instance = new MypageService();
         }
         return this.#instance;
     }
@@ -138,7 +139,7 @@ class LikeService {
     }
 
     loadLikeCount() {
-        const totalResponseData = LikeApi.getInstance().getTotalCount();
+        const totalResponseData = MypageApi.getInstance().getTotalCount();
         const principal = PrincipalApi.getInstance().getPrincipal();
 
         console.log(totalResponseData)
@@ -158,7 +159,7 @@ class LikeService {
     }
 
     loadLikeEmos() {
-        const responseData = LikeApi.getInstance().getUserLikeEmo();
+        const responseData = MypageApi.getInstance().getUserLikeEmo();
         const contentFlex = document.querySelector(".like-list");
         const principal = PrincipalApi.getInstance().getPrincipal();
 
@@ -170,17 +171,19 @@ class LikeService {
         responseData.forEach((data, index) => {
             contentFlex.innerHTML += `
             <li class="like-lists">
-                <input type="hidden" class="emo-id" value="${data.emoId}">
-                <img src="http://127.0.0.1:8000/image/emo/${data.saveName != null ? data.saveName : "noimg.png"}" class="like-img">
-                <div class="like-names">
-                    <div class="like-button">
+            <input type="hidden" class="emo-id" value="${data.emoId}">
+            <img src="http://127.0.0.1:8000/image/emo/${data.saveName != null ? data.saveName : "noimg.png"}" class="like-img">
+            <div class="like-names">
+                <div class="like-button">
 
-                    </div>
+                </div>
+                <a href="http://127.0.0.1:8000/main/detail/?emoCode=${data.emoCode}">
                     <div class="like-name">
                         <h3>${data.emoName}</h3>
                         <p>>${data.company}</p>
                     </div>
-                </div>
+                </a>
+            </div>
             </li>
             `;
 
@@ -195,9 +198,9 @@ class LikeService {
                 `;
             }else {
                 Buttons[ButtonsLength + index].innerHTML += `
-                <button type="button" class="like-buttons like-button" >
-                    <i class="fa-regular fa-heart"></i>
-                </button>
+                    <button type="button" class="like-buttons like-button">
+                        <i class="fa-regular fa-heart"></i>
+                    </button>
                 `;
             }
             ComponentEvent.getInstance().addClickEventLikeButtons()
@@ -232,17 +235,19 @@ class ComponentEvent {
     addClickEventLikeButtons() {
         const likeButtons = document.querySelectorAll(".like-buttons");
         const emoIds = document.querySelectorAll(".emo-id");
+        const likeCounts = document.querySelectorAll(".like-count")
 
-        likeButtons.forEach((button, index, i) => {
+        likeButtons.forEach((button, index) => {
             button.onclick = () => {
                 if(button.classList.contains("like-button")){
-                    const likeCount = LikeApi.getInstance().setLike(emoIds[index].value);
+                    const likeCount = MypageApi.getInstance().setLike(emoIds[index].value);
                     if(likeCount != -1){
                         button.classList.remove("like-button");
                         button.classList.add("dislike-button");
                     }
+                    
                 }else {
-                    const likeCount = LikeApi.getInstance().setDisLike(emoIds[index].value);
+                    const likeCount = MypageApi.getInstance().setDisLike(emoIds[index].value);
                     if(likeCount != -1){
                         button.classList.remove("dislike-button");
                         button.classList.add("like-button");
@@ -251,21 +256,5 @@ class ComponentEvent {
             }
         });
     }
-
-    // addClickEventLikeButtonsNoLogin() {
-    //     const likeButtonError = document.querySelectorAll(".no-login-like");
-    //     const emoIds = document.querySelectorAll(".emo-id");
-
-    //     likeButtonError.forEach((button, index) => {
-    //         button.onclick = () => {
-    //             const Flag = emoIds[index].value;
-    //             if(Flag != 1){
-    //                 alert("로그인 후 사용")
-    //                 location.replace("/account/login");
-    //             }
-    //         }
-
-    //     });
-    // }
-      
+   
 }

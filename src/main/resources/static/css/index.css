@@ -338,6 +338,7 @@
 .footer{
   display: flex;
   justify-content: center;
+
   width: 100%;
   height: 231px;
 
@@ -347,10 +348,8 @@
   background-color: white;
 }
 .info{
-  margin-top: 50px;
-
   width: 1024px;
-  height: 180px;
+  height: 231px;
 
   background-color: white;
 }

@@ -1,6 +1,4 @@
 window.onload = () => {
-    // console.log(HotSearchApi.getInstance().getTotalCount());
-    // console.log(HotSearchApi.getInstance().searchEmo());
 
     ToggleService.getInstance().loadlogin();
 
@@ -39,7 +37,7 @@ class HotSearchApi {
         $.ajax({
             async: false,
             type: "get",
-            url: "http://127.0.0.1:8000/api/hot/search/totalcount",
+            url: "http://127.0.0.1:8000/api/search/totalcount",
             data: searchObj,
             dataType: "json",
             success: response => {
@@ -159,7 +157,6 @@ class HotSearchService {
                         
                         
                         <p class="author">${data.company}</p>
-
                     </div>
                 </a>
                     <div class="buttons">
@@ -172,21 +169,23 @@ class HotSearchService {
 
             const Buttons = document.querySelectorAll(".buttons");
             
-            if(principal == null) {
+            if(principal == null) {         
                 
                 Buttons[ButtonsLength + index].innerHTML += `
-                <button type="button" class="no-login-like like-button disabled">
-                    <i class="fa-regular fa-heart" ></i>
+                <button type="button" class="no-login-like like-button">
+                    <i class="fa-regular fa-heart"></i>
                 </button>
                 `;
+
+                ComponentEvent.getInstance().addClickEventLikeButtonsNoLogin();
 
             }else {              
                 if(data.likeId != 0){
                     console.log("ButtonLength : " + ButtonsLength);
                     Buttons[ButtonsLength + index].innerHTML += `
-                        <button type="button" class="like-buttons dislike-button">
-                            <i class="fa-solid fa-heart"></i>
-                        </button>
+                    <button type="button" class="like-buttons dislike-button">
+                        <i class="fa-solid fa-heart hot-like-heart"></i>
+                    </button>
                     `;
                 }else {
                     Buttons[ButtonsLength + index].innerHTML += `
@@ -251,20 +250,19 @@ class ComponentEvent {
         });
     }
 
-    // addClickEventLikeButtonsNoLogin() {
-    //     const likeButtonError = document.querySelectorAll(".no-login-like");
-    //     const emoIds = document.querySelectorAll(".emo-id");
+    addClickEventLikeButtonsNoLogin() {
+        const likeButtonError = document.querySelectorAll(".no-login-like");
+        const emoIds = document.querySelectorAll(".emo-id");
 
-    //     likeButtonError.forEach((button, index) => {
-    //         button.onclick = () => {
-    //             const Flag = emoIds[index].value;
-    //             if(Flag != 1){
-    //                 alert("로그인 후 사용")
-    //                 location.replace("/account/login");
-    //             }
-    //         }
-
-    //     });
-    // }
+        likeButtonError.forEach((button, index) => {
+            button.onclick = () => {
+                
+                if (confirm("로그인 후 사용 가능합니다")) {
+                    location.href = "/account/login"
+                }   
+            }
+        });
+    }
       
 }
+

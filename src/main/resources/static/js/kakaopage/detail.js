@@ -1,4 +1,9 @@
 window.onload = () => {
+    ToggleService.getInstance().loadlogin();
+
+    ToggleButton.getInstance().logoutButton();
+    ToggleButton.getInstance().toggleButton();
+    
     DetailService.getInstance().setEmoCode()
     DetailService.getInstance().loadEmoImageOne()
     DetailService.getInstance().loadEmoAndImageData()
@@ -122,6 +127,76 @@ class DetailApi {
 
 }
 
+class ImportApi {
+    static #instance = null;
+    static getInstance() {
+        if (this.#instance == null) {
+            this.#instance = new ImportApi();
+        }
+        return this.#instance;
+    }
+
+
+    IMP = null;
+
+    importInfo = {
+        impUid: "imp52178410",
+        restApikey: "3152048328612243",
+        restApiSecret: "ruBsQPZhs6UhDZqu5LNfvOreTCqR7amjBllCcYz34tf3b9pqD7HlpebIe6CIwBsZiTOikcbqxEysudsz"
+    }
+
+    importPayParams = {
+        pg: "kakaopay",
+        pay_method: "card",
+        merchant_uid: 'merchant_' + new Date().getTime(), //현재 날짜와 키값
+        name: '결제테스트',
+        amount: 2000,
+        buyer_email: '',
+        buyer_name: ''
+        // buyer_tel: '',
+        // buyer_addr: '서울특별시 강남구 삼성동',
+        // buyer_postcode: '123-456'
+    }
+
+    constructor() {
+        this.IMP = window.IMP;
+        this.IMP.init(this.importInfo.impUid);
+    }
+
+    requestPay() {
+        this.IMP.request_pay(this.importPayParams, this.responsePay);
+    }
+
+    responsePay(resp) {
+        console.log(resp);
+        if (resp.success) {
+            alert("결제 성공");
+        } else {
+            alert("결제 실패");
+            console.log(resp);
+        }
+    }
+
+
+    purchaseButton() {
+        const purchaseButton = document.querySelector(".purchase-button");
+        const principal = PrincipalApi.getInstance().getPrincipal();
+        const inputs = document.querySelectorAll(".product-input");
+
+
+        purchaseButton.onclick = () => {
+            if (principal == null) {
+                if (confirm("로그인 후 사용 가능합니다")) {
+                    location.href = "/account/login"
+                }
+            }else{
+                ImportApi.getInstance().importPayParams.name = inputs[0].value;
+                ImportApi.getInstance().requestPay();
+            }
+        }
+        console.log(purchaseButton);
+    }
+}
 
 class DetailService {
     static #instance = null
@@ -148,12 +223,10 @@ class DetailService {
     loadEmoImageOne() {
         const responseData = DetailApi.getInstance().getEmoAndImageOne()
         const emoticonArea = document.querySelector(".emoticon-area")
-        const principal = PrincipalApi.getInstance().getPrincipal();
-
-        const Buttons = document.querySelectorAll(".right-like-box");
-        const ButtonsLength = Buttons == null ? 0 : Buttons.length;
-        
-
+        const principal = PrincipalApi.getInstance().getPrincipal()
+        const likeData = DetailApi.getInstance().setLike()
+        const disLikeData = DetailApi.getInstance().setDisLike()
+    
         emoticonArea.innerHTML = `
             <div class="emoticon-product">
             <input type="hidden" class="emo-id" value="${responseData.emoId}">
@@ -175,7 +248,7 @@ class DetailService {
                             <span class="txt-price">2,000</span>
                             <span class="txt-price-won">원</span>
                             <div class="right-like-box">
-                                <i class="fa-regular fa-heart heart-detail"></i>
+                        
                             </div>
                         </div>
                     </div>
@@ -184,24 +257,26 @@ class DetailService {
             </div>
         `;
 
+        const Buttons = document.querySelectorAll(".right-like-box")
+
         if(principal == null) {
+            console.log(Buttons.length)
                 
-            Buttons[ButtonsLength + index].innerHTML += `
+            Buttons.innerHTML += `
             <button type="button" class="no-login-like like-button disabled">
             <i class="fa-regular fa-heart"></i>
             </button>
             `;
 
         }else {              
-            if(responseData.likeId != 0){
-                console.log("ButtonLength : " + ButtonsLength);
-                Buttons[ButtonsLength + index].innerHTML += `
+            if(likeData.likeId != 0){
+                Buttons[1].innerHTML += `
                 <button type="button" class="like-buttons dislike-button">
                 <i class="fa-solid fa-heart"></i>
                 </button>
                 `;
             }else {
-                Buttons[ButtonsLength + index].innerHTML += `
+                Buttons[1].innerHTML += `
                     <button type="button" class="like-buttons like-button">
                     <i class="fa-regular fa-heart"></i>
                     </button>

@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="/static/css/togglemenu.css">
     <link rel="stylesheet" href="/static/css/index.css">
     <link rel="stylesheet" href="/static/css/search.css">
-    <link rel="stylesheet" href="/static/css/mypage.css">
+    <link rel="stylesheet" href="/static/css/account/mypage.css">
 </head>
 <body>
     <div id="container">
@@ -30,11 +30,11 @@
                 <i class="fa-solid fa-bars"></i>
             </button>
 
-            <a class="logo-button">
+            <a href="/index" class="logo-button">
                 <h1>kakao<span>emoticon</span> shop</h1>
             </a>
 
-            <button class="search-button">
+            <button class="search-button" onclick="goToSearchPageButton()">
                 <i class="fa-solid fa-magnifying-glass"></i>
             </button>
 
@@ -51,16 +51,6 @@
             </ul>
         </nav>
     </header>
-    <div class="search-page" style="display: none;"> <!-- //-> 검색창 온오프  -->
-        <div class="search-bar">
-            <input class="search-bar-input" type="text" placeholder="이모티콘을 검색해보세요!" 
-            onkeyup="addSearchInputEvent()"> <!-- //-> 결과창 이동 함수 -->
-            <button class="search-bar-button">
-                <i class="fa-solid fa-magnifying-glass"></i>
-            </button>
-        </div>
-        <div class="backboard"></div> <!-- // -> 반투명 배경 -->
-    </div>
 
     <div class="banner">
         <div class="banner-content">
@@ -75,61 +65,48 @@
     <div class="content">
         <div class="like-title">
             <h2>좋아요</h2>
-            <p>12</p>
+            <!-- <p>12</p> -->
         </div>
 
         <div class="like-box">
             <ul class="like-list" onclick="">
-                
+               
             </ul>
         </div>
     </div>
 
     <footer class="footer">
-    <div class="info">
-        <h3 class="searvice-info">
-            <a href="">이용약관</a>
-            <a href="">유료이용안내</a>
-            <a href="">개인정보처리방침</a>
-            <a href="">기업고객</a>
-            <a href="">문의하기</a>
-            <a href="">공정위사업자정보</a>
-            <a href="">(주) 카카오</a>
-        </h3>
-        <h4 class="warp-info">
-            카카오 이모티콘샵에서 판매되는 콘텐츠의 저작권은 콘텐츠 제공자에게 있으며, 이를 무단 이용하는 경우 저작권법 등에 따라 처벌될 수 있습니다.
-            <br />
-            <br />
-            대표: 홍은택 사업자등록번호: 120-81-47521 통신판매업신고번호: 제2015-제주아라-0032호
-            <br />
-            주소: 제주특별자치도 제주시 첨단로 242(영평동) 호스팅사업자: (주)카카오고객센터 1577-3754 메일: help.notice@kakaocorp.com
-        </h4>
-    </div>
-  </footer>
+        <div class="info">
+            <h3 class="searvice-info">
+                <a href="">이용약관</a>
+                <a href="">유료이용안내</a>
+                <a href="">개인정보처리방침</a>
+                <a href="">기업고객</a>
+                <a href="">문의하기</a>
+                <a href="">공정위사업자정보</a>
+                <a href="">(주) 카카오</a>
+            </h3>
+            <h4 class="warp-info">
+                카카오 이모티콘샵에서 판매되는 콘텐츠의 저작권은 콘텐츠 제공자에게 있으며, 이를 무단 이용하는 경우 저작권법 등에 따라 처벌될 수 있습니다.
+                <br />
+                <br />
+                대표: 홍은택 사업자등록번호: 120-81-47521 통신판매업신고번호: 제2015-제주아라-0032호
+                <br />
+                주소: 제주특별자치도 제주시 첨단로 242(영평동) 호스팅사업자: (주)카카오고객센터 1577-3754 메일: help.notice@kakaocorp.com
+            </h4>
+        </div>
+    </footer>
 
-
-<!-- 자바스크립트 -->
-    <script> // -> 검색창 온오프 버튼
-        $(function() {
-            $('.search-button').click(function(){
-                if($('.search-page').css('display') == "none") {
-                    $('.search-page').show();
-                } else {
-                    $('.search-page').hide();
-                }
-            });
-        });
-    </script>
-        
-     <script> // -> 검색결과 입력 후 결과창으로 이동
-        const searchInput = document.querySelector(".search-bar-input");
-        function addSearchInputEvent() {
-            if(window.event.keyCode == 13) {
-                location.href = 'http://127.0.0.1:8000/kakaopage/search';
-            }
-        }
-    </script>
 </body>
+
+<script>
+    function goToSearchPageButton() {
+        const searchPageButton = document.querySelector(".search-button");
+        searchPageButton.onclick(
+            location.href = '/search'
+        )
+    }
+</script>
 
 <script src="/static/js/account/principal.js"></script>
 <script src="/static/js/function/toggleuser.js"></script>

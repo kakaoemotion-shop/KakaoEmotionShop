@@ -61,9 +61,8 @@ class ToggleService {
                             
                                 <li class="mypage-style">
                                     <a href="" class="mypage-link"></a>
-                                        <i class="fa-regular fa-heart"></i>
-                                        <p class="mypage-chart">좋아요</p>
-                                    
+                                        <i class="fa-regular fa-face-kiss-wink-heart"></i>
+                                    <p class="mypage-chart">좋아요</p>
                                 </li>
                             </ul>
                         </div>
@@ -126,7 +125,7 @@ class ToggleService {
        
                                 <li class="mypage-style">
                                     <a href="/account/mypage" class="mypage-link">
-                                        <i class="fa-regular fa-heart"></i>
+                                    <i class="fa-regular fa-face-kiss-wink-heart login-heart"></i>
                                         <p class="mypage-chart">좋아요</p>
                                     </a>
                                 </li>
@@ -267,7 +266,7 @@ class ToggleButton {
     `
     }
     mypagLinkButton() {
-        const mypageLink = document.querySelector(".fa-heart");
+        const mypageLink = document.querySelector(".fa-face-kiss-wink-heart");
         const principal = PrincipalApi.getInstance().getPrincipal();
 
         mypageLink.onclick = () => {

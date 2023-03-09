@@ -13,7 +13,6 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="/static/css/reset.css">
     <link rel="stylesheet" href="/static/css/emoimg.css">
-    <link rel="stylesheet" href="/static/css/search.css">
     <link rel="stylesheet" href="/static/css/index.css">
     <link rel="stylesheet" href="/static/css/togglemenu.css">
 </head>
@@ -39,7 +38,7 @@
                 <h1>kakao<span>emoticon</span> shop</h1>
             </a>
 
-            <button class="search-button">
+            <button class="search-button" onclick="goToSearchPageButton()">
                 <i class="fa-solid fa-magnifying-glass"></i>
             </button>
 
@@ -50,23 +49,11 @@
         <nav class="header-menu">
             <ul class="menu-list">
                 <li class="menu-list-button"><a href="/index">홈</a></li>
-                <li class="menu-list-button"><a href="/main/newemoticon">신규</a></liu>
+                <li class="menu-list-button"><a href="/main/new">신규</a></liu>
                 <li class="menu-list-button"><a href="/main/hot">인기</a></li>
             </ul>
         </nav>
     </header>
-
-    <div class="search-page" style="display: none;"> <!--//-> 검색창 온오프  -->
-        <div class="search-bar">
-            <input class="search-bar-input" type="text" placeholder="이모티콘을 검색해보세요!" onkeyup="addSearchInputEvent()">
-            <!--//-> 결과창 이동 함수 onkeyup="addSearchEvent()" -->
-            <button class="search-bar-button">
-                <i class="fa-solid fa-magnifying-glass"></i>
-            </button>
-        </div>
-        <div class="backboard"></div>
-        <!-- -> 반투명 배경 -->
-    </div>
 
     <div class="main">
         <img src="/static/images/main.gif" alt="" class="main-img">
@@ -75,7 +62,7 @@
     <div class="content">
 
         <div class="new">
-            <h1 class="new-title"><a href="/main/newemoticon">신규 이모티콘<i class="fa-solid fa-chevron-right"></i></a></h1>
+            <h1 class="new-title"><a href="/main/new">신규 이모티콘<i class="fa-solid fa-chevron-right"></i></a></h1>
             <div class="new-emotion">
                 <ul class="new-list">
                     <li>
@@ -113,31 +100,19 @@
     </footer>
 
 
-
-    <script> // -> 검색창 온오프 버튼
-        $(function () {
-            $('.search-button').click(function () {
-                if ($('.search-page').css('display') == "none") {
-                    $('.search-page').show();
-                } else {
-                    $('.search-page').hide();
-                } a
-            });
-        });
-    </script>
-
-    <script> // -> 검색결과 입력 후 결과창으로 이동
-        const searchInput = document.querySelector(".search-bar-input");
-        function addSearchInputEvent() {
-            if (window.event.keyCode == 13) {
-                location.href = 'http://127.0.0.1:8000/kakaopage/search';
-            }
+    <script>
+        function goToSearchPageButton() {
+            const searchPageButton = document.querySelector(".search-button");
+            searchPageButton.onclick(
+                location.href = '/search'
+            )
         }
     </script>
-    <script src="/static/js/account/principal.js"></script>
-    <script src="/static/js/function/toggleuser.js"></script>
-    <script src="/static/js/kakaopage/mainpage.js"></script>
-    <script src="/static/js/function/index.js"></script>
+
+<script src="/static/js/account/principal.js"></script>
+<script src="/static/js/function/toggleuser.js"></script>
+<script src="/static/js/kakaopage/mainpage.js"></script>
+<script src="/static/js/function/index.js"></script>
 </body>
 
 </html>
