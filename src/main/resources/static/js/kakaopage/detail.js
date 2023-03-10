@@ -157,6 +157,7 @@ class DetailService {
         const emoticonArea = document.querySelector(".emoticon-area")
         const principal = PrincipalApi.getInstance().getPrincipal();
 
+
         emoticonArea.innerHTML = `
             <div class="emoticon-product">
             <input type="hidden" class="emo-id" value="${responseData.emoId}">
@@ -290,6 +291,25 @@ class ImportApi {
         return this.#instance;
     }
 
+    register(buyer) {
+        $.ajax({
+            async: false,
+            type: "post",
+            url: "/api/buyer/register",
+            contentType: "application/json",
+            data: JSON.stringify(buyer),
+            dataType: "json",
+            success: response => {
+                console.log(response);
+                alert("구매 등록완료")
+            },
+            error: error => {
+                console.log(error);
+
+            }
+        });
+    }
+
 
     IMP = null;
 
@@ -303,7 +323,7 @@ class ImportApi {
         pg: "kakaopay",
         pay_method: "card",
         merchant_uid: 'merchant_' + new Date().getTime(), //현재 날짜와 키값
-        name: '결제테스트',
+        name: '',
         amount: 2000,
         buyer_email: '',
         buyer_name: ''
@@ -325,6 +345,17 @@ class ImportApi {
         console.log(resp);
         if (resp.success) {
             alert("결제 성공");
+                const principal = PrincipalApi.getInstance().getPrincipal();
+                const responseData = DetailApi.getInstance().getEmoAndImage();
+                const usernameValue = principal.user.username;
+                const nameValue = principal.user.name;
+                const emailValue = principal.user.email;
+                const emoNameValue = responseData.emoMst.emoName;
+                
+                const buyer = new Buyer(usernameValue, nameValue, emailValue, emoNameValue);
+                
+                
+                ImportApi.getInstance().register(buyer);
         } else {
             alert("결제 실패");
             console.log(resp);
@@ -335,6 +366,7 @@ class ImportApi {
     purchaseButton() {
         const purchaseButton = document.querySelector(".purchase-button");
         const principal = PrincipalApi.getInstance().getPrincipal();
+        const responseData = DetailApi.getInstance().getEmoAndImage()
         const inputs = document.querySelectorAll(".product-input");
 
 
@@ -342,12 +374,39 @@ class ImportApi {
             if (principal == null) {
                 if (confirm("로그인 후 사용 가능합니다")) {
                     location.href = "/account/login"
+                }else{
+                
                 }
+
             }else{
-                ImportApi.getInstance().importPayParams.name = inputs[0].value;
+                // const usernameValue = principal.user.username;
+                // const nameValue = principal.user.name;
+                // const emailValue = principal.user.email;
+                // const emoNameValue = responseData.emoMst.emoName;
+                
+                // const buyer = new Buyer(usernameValue, nameValue, emailValue, emoNameValue);
+                
                 ImportApi.getInstance().requestPay();
+                // ImportApi.getInstance().register(buyer);
+                ImportApi.getInstance().importPayParams.name = responseData.emoMst.emoName;
+                ImportApi.getInstance().importPayParams.buyer_name = principal.user.username;
+                ImportApi.getInstance().importPayParams.buyer_email = principal.user.email;
             }
         }
         console.log(purchaseButton);
+    }
+}
+
+class Buyer {
+    username = null;
+    name = null;
+    email = null;
+    emoName = null;
+
+    constructor(username, name, email, emoName) {
+      this.username = username;
+      this.name = name;
+      this.email = email;
+      this.emoName = emoName;
     }
 }

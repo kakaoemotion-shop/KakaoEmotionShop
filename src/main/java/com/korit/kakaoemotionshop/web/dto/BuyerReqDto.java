@@ -4,8 +4,10 @@ import lombok.Data;
 
 @Data
 public class BuyerReqDto {
-    private int buyId;
-    private  String emoName;
-    private  String buyerName;
-    private  String buyerEmail;
+    private int buyerId;
+    private String username;
+    private String name;
+    private String email;
+    private String emoName;
+    private int buyDate;
 }
