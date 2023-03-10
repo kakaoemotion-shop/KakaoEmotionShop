@@ -126,7 +126,7 @@ class MypageService {
     }
 
     setMaxPage() {
-        const totalCount = LikeApi.getInstance().getTotalCount();
+        const totalCount = MypageApi.getInstance().getTotalCount();
         maxPage = totalCount % 10 == 0
             ? totalCount / 10
             : Math.floor(totalCount / 10) + 1;
@@ -139,18 +139,14 @@ class MypageService {
     }
 
     loadLikeCount() {
-        const totalResponseData = MypageApi.getInstance().getTotalCount();
+        const responseData = MypageApi.getInstance().getUserLikeEmo();
+        const contentFlex = document.querySelector(".like-title");
         const principal = PrincipalApi.getInstance().getPrincipal();
 
-        console.log(totalResponseData)
-
-        // totalResponseData.forEach((data, index) => {
-        //     contentFlex.innerHTML +=`
-        //     <h2>좋아요</h2>
-        //     <p>${totalResponseData}</p>
-        //     `;
-        // })
-            
+        contentFlex.innerHTML +=`
+            <h2>좋아요</h2>
+            <p>${responseData.length}</p>
+            `;
     }
 
     clearEmoLikeList() {
@@ -168,43 +164,53 @@ class MypageService {
         
         console.log(responseData)
 
-        responseData.forEach((data, index) => {
-            contentFlex.innerHTML += `
-            <li class="like-lists">
-            <input type="hidden" class="emo-id" value="${data.emoId}">
-            <img src="http://127.0.0.1:8000/image/emo/${data.saveName != null ? data.saveName : "noimg.png"}" class="like-img">
-            <div class="like-names">
-                <div class="like-button">
-
-                </div>
-                <a href="http://127.0.0.1:8000/main/detail/?emoCode=${data.emoCode}">
-                    <div class="like-name">
-                        <h3>${data.emoName}</h3>
-                        <p>>${data.company}</p>
+        if(responseData.length != 0) {
+            
+            responseData.forEach((data, index) => {
+                contentFlex.innerHTML += `
+                <li class="like-lists">
+                <input type="hidden" class="emo-id" value="${data.emoId}">
+                <img src="http://127.0.0.1:8000/image/emo/${data.saveName != null ? data.saveName : "noimg.png"}" class="like-img">
+                <div class="like-names">
+                    <div class="like-button">
+    
                     </div>
-                </a>
-            </div>
-            </li>
-            `;
-
-            const Buttons = document.querySelectorAll(".like-button");
-                        
-            if(data.likeId != 0){
-                console.log("ButtonLength : " + ButtonsLength);
-                Buttons[ButtonsLength + index].innerHTML += `
-                <button type="button" class="like-buttons dislike-button">
-                    <i class="fa-solid fa-heart"></i>
-                </button>
+                    <a href="http://127.0.0.1:8000/main/detail/?emoCode=${data.emoCode}">
+                        <div class="like-name">
+                            <h3>${data.emoName}</h3>
+                            <p>>${data.company}</p>
+                        </div>
+                    </a>
+                </div>
+                </li>
                 `;
-            }else {
-                Buttons[ButtonsLength + index].innerHTML += `
-                    <button type="button" class="like-buttons like-button">
-                        <i class="fa-regular fa-heart"></i>
+    
+                const Buttons = document.querySelectorAll(".like-button");
+                            
+                if(data.likeId != 0){
+                    Buttons[ButtonsLength + index].innerHTML += `
+                    <button type="button" class="like-buttons dislike-button">
+                        <i class="fa-solid fa-heart"></i>
                     </button>
-                `;
-            }
-            ComponentEvent.getInstance().addClickEventLikeButtons()
-        })
+                    `;
+                }else {
+                    Buttons[ButtonsLength + index].innerHTML += `
+                        <button type="button" class="like-buttons like-button">
+                            <i class="fa-regular fa-heart"></i>
+                        </button>
+                    `;
+                }
+                ComponentEvent.getInstance().addClickEventLikeButtons()
+            });
+        }else {
+            contentFlex.innerHTML += `
+            <div class="inner_area">
+            <img class="img_empty" src="/static/images/empty_like.png">
+            <strong class="tit_empty">좋아하는 이모티콘이 없습니다.</strong>
+            <p class="desc_empty">마음에 드는 이모티콘에 하트를 눌러보세요!</p>
+            </div>
+            `;
+        }
     }
     
 }
@@ -227,7 +233,7 @@ class ComponentEvent {
 
             if(scrollPosition < 250 && searchObj.page < maxPage) {
                 searchObj.page++;
-                LikeService.getInstance().loadLikeEmos();
+                MypageService.getInstance().loadLikeEmos();
             }
         }
     }

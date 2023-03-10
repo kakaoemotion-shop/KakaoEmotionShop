@@ -138,7 +138,7 @@ class ToggleService {
                                 <a href="/index" class="mypage-buttons">홈</a>
                             </li>
                             <li class="abc-li">
-                                <a href="/main/newemoticon" class="mypage-buttons">신규</a>
+                                <a href="/main/new" class="mypage-buttons">신규</a>
                             </li>
                             <li class="abc-li">
                                 <a href="/main/hot" class="mypage-buttons">인기</a>

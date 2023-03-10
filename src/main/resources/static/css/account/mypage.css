@@ -323,3 +323,30 @@ html {
   
     color: #393939;
   }
+
+
+.inner_area{
+    display:table-cell;
+    vertical-align:middle;
+    text-align:center;
+    padding:100px 0;
+}
+
+.tit_empty{
+    font-size:18px;
+    line-height:28px;
+    display: block;
+    margin: 12px 0;
+    font-weight: normal;
+    font-size: 20px;
+    line-height:24px;
+    margin: 0 0 4px;
+    margin-bottom: 6px;
+}
+
+.desc_empty{
+    font-size:17px;
+    font-weight:bold;
+    line-height:20px;
+    display: inline-block;
+}
