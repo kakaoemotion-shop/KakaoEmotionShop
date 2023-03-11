@@ -20,6 +20,6 @@ public class MypageEmo {
     private int likeId;
     private int likeCount;
 
-   
+
 
 }
