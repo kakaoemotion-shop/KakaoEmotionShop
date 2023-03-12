@@ -411,7 +411,7 @@ class ImportApi {
         if (resp.success) {
             alert("결제 성공");
                 const principal = PrincipalApi.getInstance().getPrincipal();
-                const responseData = DetailApi.getInstance().getEmoAndImage();
+                const responseData = DetailApi.getInstance().getEmoAndImageOne();
                 const usernameValue = principal.user.username;
                 const nameValue = principal.user.name;
                 const emailValue = principal.user.email;
@@ -431,9 +431,7 @@ class ImportApi {
     purchaseButton() {
         const purchaseButton = document.querySelector(".purchase-button");
         const principal = PrincipalApi.getInstance().getPrincipal();
-        const responseData = DetailApi.getInstance().getEmoAndImage()
-        const inputs = document.querySelectorAll(".product-input");
-
+        const responseData = DetailApi.getInstance().getEmoAndImageOne();
 
         purchaseButton.onclick = () => {
             if (principal == null) {
@@ -447,7 +445,6 @@ class ImportApi {
                 ImportApi.getInstance().requestPay();
             }
         }
-        console.log(purchaseButton);
     }
 }
 
