@@ -51,7 +51,7 @@
 </header>
 
 <div class="emoticon-area">
-    <div class="emoticon-product">
+    <!-- <div class="emoticon-product">
         <div class="emoticon-box">
             <div class="emoticon-thumb">
                 <img class="main-emoticon"
@@ -78,19 +78,27 @@
             </div>
             <button type="button" class="purchase-button">구매하기</button>
         </div>
-    </div>
+    </div> -->
 </div>
 <div class="subemoticon-area">
     <div class="subemoticon-box">
-        <div class="subemoticon-img">
-            <img class="subemoticon-number"
-                src="/static/images/noimg.jpg">
-            <img class="subemoticon-number"
-                src="/static/images/noimg.jpg">
-            <img class="subemoticon-number"
-                src="/static/images/noimg.jpg">
-            <img class="subemoticon-number"
-                src="/static/images/noimg.jpg">
+        <div class="subemoticon-container">
+            <div class="subemoticon-number">
+                <img class="subemoticon-img"
+                    src="/static/images/noimg.jpg">
+            </div>
+            <div class="subemoticon-number">
+                <img class="subemoticon-img"
+                    src="/static/images/noimg.jpg">
+            </div>
+            <div class="subemoticon-number">
+                <img class="subemoticon-img"
+                    src="/static/images/noimg.jpg">
+            </div>
+            <div class="subemoticon-number">
+                <img class="subemoticon-img"
+                    src="/static/images/noimg.jpg">
+            </div>
         </div>
     </div>
 </div>
@@ -139,9 +147,33 @@
     }
 </script>
 
+<script>
+    $(function () {
+    $('.product-btn').click(function () {
+        if ($('.product-btn-guide').css('display') == "none") {
+            $('.product-btn-guide').show();
+        } else {
+            $('.product-btn-guide').hide();
+        }
+    });
+});
+</script>
+<script>
+    $(function () {
+    $('.refund-btn').click(function () {
+        if ($('.refund-btn-guide').css('display') == "none") {
+            $('.refund-btn-guide').show();
+        } else {
+            $('.refund-btn-guide').hide();
+        }
+    });
+});
+</script>
+
 <body>
 
 </body>
+
 <script src="/static/js/account/principal.js"></script>
 <script src="/static/js/function/toggleuser.js"></script>
 <script src="/static/js/kakaopage/detail.js"></script>

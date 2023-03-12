@@ -3,8 +3,6 @@ window.onload = () => {
     ComponentEvent.getInstance().addChangeEventImgFile();
     ComponentEvent.getInstance().addClickEventImgRegisterButton();
     ComponentEvent.getInstance().addClickEventImgCancelButton();
-
-    // ComponentEvent.getInstance().addClickEventImgAddButton();
 }
 
 const emoObj = {

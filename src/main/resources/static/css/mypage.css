@@ -225,20 +225,11 @@ html {
     width: 410px;
     height: 50px;
 }
-.like-button {
+
+.like-buttons {
     margin-left: 10px;
     margin-top: 5px;
 
-    width: 40px;
-    height: 40px;
-
-    border: 1px solid #fff;
-    border-radius: 50%;
-    background-color: white;
-  
-    cursor: pointer;
-}
-.like-buttons {
     width: 40px;
     height: 40px;
 
@@ -248,14 +239,9 @@ html {
   
     cursor: pointer;
 }
-.full-heart {
-    margin: 0 auto;
-    font-size: 17px;
-    color: deeppink;
-}
-.empty-heart {
-    margin: 0 auto;
-    font-size: 17px;
+.fa-heart {
+    font-size: 16px;
+    text-align: center;
     color: deeppink;
 }
 
@@ -326,30 +312,3 @@ html {
   
     color: #393939;
   }
-
-
-.inner_area{
-    display:table-cell;
-    vertical-align:middle;
-    text-align:center;
-    padding:100px 0;
-}
-
-.tit_empty{
-    font-size:18px;
-    line-height:28px;
-    display: block;
-    margin: 12px 0;
-    font-weight: normal;
-    font-size: 20px;
-    line-height:24px;
-    margin: 0 0 4px;
-    margin-bottom: 6px;
-}
-
-.desc_empty{
-    font-size:17px;
-    font-weight:bold;
-    line-height:20px;
-    display: inline-block;
-}

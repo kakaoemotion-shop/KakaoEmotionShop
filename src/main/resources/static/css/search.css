@@ -5,6 +5,7 @@
   align-items: center;
   position: absolute;
   top: 110px;
+  /* z-index: 9999; */
 
   width: 100%;
   height: 110px;
@@ -51,14 +52,4 @@
   font-size: 25px;
 
   cursor: pointer;
-}
-
-.backboard {
-  position:absolute;
-  top: 110px;
-  left: 0px;
-  z-index: 5;
-  width: 100%;
-  height: 1080px;
-  background-color: #1b1b1b59;
 }

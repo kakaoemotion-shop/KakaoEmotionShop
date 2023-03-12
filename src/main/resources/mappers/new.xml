@@ -36,7 +36,7 @@
             1=1
         <if test='searchValue != null and searchValue != ""'>
             and (emo_name like concat('%', #{searchValue}, '%')
-            or company like concat('%', #{searchValue}, '%'))
+            or company like concat('%', #{searchValue}, '%')
         </if>
         group by
             em.emo_id,

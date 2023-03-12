@@ -24,6 +24,8 @@
   border: none;
   outline: none;
   background-color: white;
+
+  cursor: pointer;
 }
 
 .logo-button{

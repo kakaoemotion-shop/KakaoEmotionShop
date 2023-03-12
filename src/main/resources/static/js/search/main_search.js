@@ -10,8 +10,8 @@ window.onload = () => {
     ComponentEvent.getInstance().addScrollEventPaging();
 
     ToggleService.getInstance().loadlogin();
-    
     ToggleButton.getInstance().logoutButton();
+    ToggleButton.getInstance().mypagLinkButton();
     ToggleButton.getInstance().toggleButton();
 }
 

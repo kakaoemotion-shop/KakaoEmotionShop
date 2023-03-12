@@ -78,20 +78,42 @@
 .right-like-box{
     display: flex;
     float: right;
-    width: 30px;
-    height: 30px;
+    width: 50px;
+    height: 50px;
     border: 1px solid #7f7f7f;
     border-radius: 50%;
+    background-color: #fff;
+
+    cursor: pointer;
+}
+.like-button {
+    width: 50px;
+    height: 50px;
+    border: 1px solid #7f7f7f;
+    border-radius: 50%;
+    background-color: #fff;
+
+    cursor: pointer;
+}
+.dislike-button {
+    width: 50px;
+    height: 50px;
+    border: 1px solid #7f7f7f;
+    border-radius: 50%;
+    background-color: #fff;
+
+    cursor: pointer;
 }
 
-.heart-detail{
-    margin-left: 4px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 18px;
-    color: #dbdbdb;
-    padding-right: 0;
+.full-heart {
+    margin: 0 auto;
+    font-size: 20px;
+    color: deeppink;
+}
+.empty-heart {
+    margin: 0 auto;
+    font-size: 20px;
+    color: deeppink;
 }
 
 .purchase-button{
@@ -102,29 +124,33 @@
     height: 44px;
     font-size: 15px;
     background-color: #FEE500;
+
+    cursor: pointer;
 }
+
 .subemoticon-area{
-    display: flex;
     width: 100%;
     height: 100%;
     background-color: #fafafa;
 }
-.subemoticon-box{
+.subemoticon-container{
     display: flex;
+    justify-content: space-between;
+}
+.subemoticon-box{
     padding: 40px 0;
     margin: 0 auto;
     width: 1025px;
     height: 320px;
 }
-.subemoticon-img{
-    display: flex;
-    justify-content: space-between;
-
-}
 .subemoticon-number{
-    width: 240px;
-    height: 240px;
+    width: 200px;
+    height: 200px;
 }
+.subemoticon-img{
+    width: 100%;
+}
+
 .precautions{
     background-color: #fafafa;
 }

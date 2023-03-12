@@ -55,8 +55,6 @@
         </nav>
     </header>
 
-   
-
     <div class="main">
         <img src="/static/images/main.gif" alt="" class="main-img">
     </div>
@@ -102,19 +100,19 @@
     </footer>
 
 
-
     <script>
         function goToSearchPageButton() {
             const searchPageButton = document.querySelector(".search-button");
             searchPageButton.onclick(
-                location.href = 'http://127.0.0.1:8000/search'
+                location.href = '/search'
             )
         }
-</script>
-    <script src="/static/js/account/principal.js"></script>
-    <script src="/static/js/function/toggleuser.js"></script>
-    <script src="/static/js/function/index.js"></script>
-    <script src="/static/js/kakaopage/mainpage.js"></script>
+    </script>
+
+<script src="/static/js/account/principal.js"></script>
+<script src="/static/js/function/toggleuser.js"></script>
+<script src="/static/js/kakaopage/mainpage.js"></script>
+<script src="/static/js/function/index.js"></script>
 </body>
 
 </html>

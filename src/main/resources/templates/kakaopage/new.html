@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="/static/css/reset.css">
     <link rel="stylesheet" href="/static/css/togglemenu.css">
+    <link rel="stylesheet" href="/static/css/search.css">
     <link rel="stylesheet" href="/static/css/new.css">
 </head>
 <body>
@@ -48,9 +49,6 @@
   </nav>
   </header>
 
-
- 
-
   <div class="banner">
     <div class="banner-box">
       <img src="/static/images/kakapMain_new01.png" alt="" class="br-left-img">
@@ -82,16 +80,42 @@
     </div>
   </div>
   
+  <footer class="footer">
+    <div class="info">
+        <h3 class="searvice-info">
+          <span></span>
+            <a href="">이용약관</a>
+            <a href="">유료이용안내</a>
+            <a href="">개인정보처리방침</a>
+            <a href="">기업고객</a>
+            <a href="">문의하기</a>
+            <a href="">공정위사업자정보</a>
+            <a href="">(주) 카카오</a>
+        </h3>
+        <h4 class="warp-info">
+            카카오 이모티콘샵에서 판매되는 콘텐츠의 저작권은 콘텐츠 제공자에게 있으며, 이를 무단 이용하는 경우 저작권법 등에 따라 처벌될 수 있습니다.
+            <br />
+            <br />
+            대표: 홍은택 사업자등록번호: 120-81-47521 통신판매업신고번호: 제2015-제주아라-0032호
+            <br />
+            주소: 제주특별자치도 제주시 첨단로 242(영평동) 호스팅사업자: (주)카카오고객센터 1577-3754 메일: help.notice@kakaocorp.com
+        </h4>
+    </div>
+  </footer>
+
 </body>
+
 <script>
   function goToSearchPageButton() {
       const searchPageButton = document.querySelector(".search-button");
       searchPageButton.onclick(
-          location.href = 'http://127.0.0.1:8000/search'
+          location.href = '/search'
       )
   }
 </script>
+
+<script src="/static/js/search/new.js"></script>
 <script src="/static/js/account/principal.js"></script>
 <script src="/static/js/function/toggleuser.js"></script>
-<script src="/static/js/search/new.js"></script>
+
 </html>

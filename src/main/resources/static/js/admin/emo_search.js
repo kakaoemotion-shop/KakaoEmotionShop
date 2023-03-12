@@ -126,11 +126,16 @@ class EmoService {
             `;
         });
 
+
+        const noSearchReult = document.querySelector(".search-group");
+
         if(totalCount == 0){
-            emoListBody.innerHTML += `
-            <img src="/static/images/no_search_result.png" class="emo-img"> 
-            검색결과가 없습니다.
-            다른검색어로 다시 시도해주세요
+            noSearchReult.innerHTML += `
+                <div class="no-search">
+                    <img src="/static/images/no_search_result.png" class="emo-img"> 
+                    <h2>검색결과가 없습니다.</h2>
+                    <h3>다른검색어로 다시 시도해주세요</h3>
+                </div>
             `;
         }
 
