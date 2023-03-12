@@ -1,25 +1,27 @@
 window.onload = () => {
+    
     ToggleService.getInstance().loadlogin();
     ToggleButton.getInstance().logoutButton();
     ToggleButton.getInstance().mypagLinkButton();
     ToggleButton.getInstance().toggleButton();
-
+    
     DetailService.getInstance().setEmoCode()
     DetailService.getInstance().loadEmoImageOne()
     DetailService.getInstance().loadEmoAndImageData()
 
     ImportApi.getInstance().purchaseButton();
 
-
 }
 
 const emoObj = {
+    emoId:"",
     emoCode: "",
     emoName: "",
     company: "",
     emoDate: ""
 }
 const emoObj2 = {
+    emoId:"",
     emoCode: "",
     emoName: "",
     company: "",
@@ -50,13 +52,13 @@ class DetailApi {
         return this.#instance
     }
 
-    getEmoAndImageOne() {
-        let responseData = null
+    getEmo() {
+        let responseData = null;
 
         $.ajax({
             async: false,
             type: "get",
-            url: `http://127.0.0.1:8000/api/admin/emo/image/one/${emoObj2.emoCode}`,
+            url: `http://127.0.0.1:8000/api/emo/${emoObj.emoCode}`,
             dataType: "json",
             success: response => {
                 responseData = response.data
@@ -66,7 +68,25 @@ class DetailApi {
             }
         })
         return responseData
+    }
 
+    getEmoAndImageOne() {
+        let responseData = null
+
+        $.ajax({
+            async: false,
+            type: "get",
+        url: `http://127.0.0.1:8000/api/admin/emos/${emoObj2.emoCode}`,
+            dataType: "json",
+            success: response => {
+                responseData = response.data
+            },
+            error: error => {
+                console.log(error)
+            }
+        })
+        return responseData
+        
     }
 
     getEmoAndImage() {
@@ -87,13 +107,33 @@ class DetailApi {
         return responseData
     }
 
-    setLike(emoId) {
-        let likeCount = -1;
+    getLikeStatus() {
+        let likeStatus = -1;
+        
+        $.ajax({
+            async: false,
+            type: "get",
+            url: `http://127.0.0.1:8000/api/like/${emoObj2.emoId}/status`,
+            dataType: "json",
+            success: response => {
+                likeStatus = response.data;
+                console.log(response);
+            },
+            error: error => {
+                console.log(error);
+            }
+        });
 
+        return likeStatus;
+    }
+
+    setLike() {
+        let likeCount = -1;
+        
         $.ajax({
             async: false,
             type: "post",
-            url: `http://127.0.0.1:8000/api/emo/${emoId}/like`,
+            url: `http://127.0.0.1:8000/api/emo/${emoObj2.emoId}/like`,
             dataType: "json",
             success: response => {
                 likeCount = response.data;
@@ -107,13 +147,13 @@ class DetailApi {
         return likeCount;
     }
 
-    setDisLike(emoId) {
+    setDisLike() {
         let likeCount = -1;
-
+        
         $.ajax({
             async: false,
             type: "delete",
-            url: `http://127.0.0.1:8000/api/emo/${emoId}/like`,
+            url: `http://127.0.0.1:8000/api/emo/${emoObj2.emoId}/like`,
             dataType: "json",
             success: response => {
                 likeCount = response.data;
@@ -126,9 +166,7 @@ class DetailApi {
 
         return likeCount;
     }
-
 }
-
 
 class DetailService {
     static #instance = null
@@ -141,11 +179,13 @@ class DetailService {
 
     setEmoCode() {
         const URLSearch = new URLSearchParams(location.search)
-        const URLSearch2 = new URLSearchParams(location.search)
         emoObj.emoCode = URLSearch.get("emoCode")
         emoObj2.emoCode = URLSearch.get("emoCode")
-    }
+        // emoObj.emoId = DetailApi.getInstance().getEmo().emoId;
+        // emoObj2.emoId = DetailApi.getInstance().getEmo().emoId;
 
+    }
+    
     clearEmoList() {
         const contentFlex = document.querySelector(".emoticon-area");
         contentFlex.innerHTML = "";
@@ -153,18 +193,19 @@ class DetailService {
 
 
     loadEmoImageOne() {
-        const responseData = DetailApi.getInstance().getEmoAndImageOne()
-        const emoticonArea = document.querySelector(".emoticon-area")
+        const responseData = DetailApi.getInstance().getEmoAndImageOne();
+        const emoticonArea = document.querySelector(".emoticon-area");
         const principal = PrincipalApi.getInstance().getPrincipal();
-
+        const likeStatus = DetailApi.getInstance().getLikeStatus();
 
         emoticonArea.innerHTML = `
             <div class="emoticon-product">
-            <input type="hidden" class="emo-id" value="${responseData.emoId}">
+            <input type="hidden" class="emo-id" value="${responseData.emoMst.emoId}">
+            <input type="hidden" class="like-count" value="${responseData.emoMst.likeCount}">
                 <div class="emoticon-box">
                     <div class="emoticon-thumb">
                         <img class="main-emoticon"
-                            src="http://127.0.0.1:8000/image/emo/${responseData.emoImage[0].saveName != null ? responseData.emoImage[0].saveName : "noimg.png"}"
+                            src="http://127.0.0.1:8000/image/emo/${responseData.emoImage[0].saveName!= null ? responseData.emoImage[0].saveName :"noimg.png"}"
                             alt="">
                     </div>
                 </div>
@@ -179,20 +220,42 @@ class DetailService {
                             <span class="txt-price">2,000</span>
                             <span class="txt-price-won">원</span>
                             <div class="right-like-box">
-                                <i class="fa-regular fa-heart heart-detail"></i>
+                        
                             </div>
                         </div>
                     </div>
-                    <div class="charge">
-                        <input type="text" class="product-input" value= "${responseData.emoMst.emoName}"><br>
-                        <input type="text" class="product-input" value="2000">
-                    </div>
-                        <button type="button" class="purchase-button">구매하기</button>
+                    <button class="purchase-button">구매하기</button>
                 </div>
             </div>
-
         `;
 
+        const Buttons = document.querySelector(".right-like-box")
+
+        if(principal == null) {
+                
+            Buttons.innerHTML += `
+            <button type="button" class="no-login-like like-button ">
+            <i class="fa-regular fa-heart"></i>
+            </button>
+            `;
+            ComponentEvent.getInstance().addClickEventLikeButtonsNoLogin();
+
+        }else {              
+            if(likeStatus != 0){
+                Buttons.innerHTML += `
+                <button type="button" class="like-buttons dislike-button">
+                <i class="fa-solid fa-heart"></i>
+                </button>
+                `;
+            }else {
+                Buttons.innerHTML += `
+                    <button type="button" class="like-buttons like-button">
+                    <i class="fa-regular fa-heart"></i>
+                    </button>
+                `;
+            }
+            ComponentEvent.getInstance().addClickEventLikeButtons();
+        }
     }
 
     loadEmoAndImageData() {
@@ -213,9 +276,6 @@ class DetailService {
 
         }
     }
-
-
-
 }
 
 class ImgFileService {
@@ -256,30 +316,39 @@ class ComponentEvent {
     }
 
     addClickEventLikeButtons() {
-        const likeButtons = document.querySelectorAll(".like-buttons");
+        const likeButtons = document.querySelector(".like-buttons");
+
+        likeButtons.onclick = () => {
+            if(likeButtons.classList.contains("like-button")){
+                const likeCount = DetailApi.getInstance().setLike();
+                if(likeCount != -1){
+                    likeButtons.classList.remove("like-button");
+                    likeButtons.classList.add("dislike-button");
+                }
+                
+            }else {
+                const likeCount = DetailApi.getInstance().setDisLike();
+                if(likeCount != -1){
+                    likeButtons.classList.remove("dislike-button");
+                    likeButtons.classList.add("like-button");
+                }
+            }
+        }
+    }
+
+    addClickEventLikeButtonsNoLogin() {
+        const likeButtonError = document.querySelectorAll(".no-login-like");
         const emoIds = document.querySelectorAll(".emo-id");
 
-        likeButtons.forEach((button, index) => {
+        likeButtonError.forEach((button, index) => {
             button.onclick = () => {
-                if (button.classList.contains("like-button")) {
-                    const likeCount = DetailApi.getInstance().setLike(emoIds[index].value);
-                    if (likeCount != -1) {
-                        button.classList.remove("like-button");
-                        button.classList.add("dislike-button");
-                    }
-
-                } else {
-                    const likeCount = DetailApi.getInstance().setDisLike(emoIds[index].value);
-                    if (likeCount != -1) {
-                        button.classList.remove("dislike-button");
-                        button.classList.add("like-button");
-                    }
-                }
+                
+                if (confirm("로그인 후 사용 가능합니다")) {
+                    location.href = "/account/login"
+                }   
             }
         });
     }
-
-
 }
 
 class ImportApi {
