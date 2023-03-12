@@ -104,16 +104,6 @@ public class EmoApi {
                         "Successfully",true));
     }
 
-//    @ParamsAspect
-//    @GetMapping("/emo/{emoCode}/images")
-//    public ResponseEntity<CMRespDto<?>> getImages(@PathVariable String emoCode) {
-//        List<EmoImage> emoImages = emoService.getEmos(emoCode);
-//        return ResponseEntity
-//                .ok()
-//                .body(new CMRespDto<>(HttpStatus.OK.value(),
-//                        "Successfully",emoImages));
-//    }
-
     @DeleteMapping("/emo/{emoCode}/image/{imageId}")
     public ResponseEntity<CMRespDto<?>> removeEmoImg(@PathVariable String emoCode,
                                                      @PathVariable int imageId) {
@@ -130,16 +120,6 @@ public class EmoApi {
                 .ok()
                 .body(new CMRespDto<>(HttpStatus.OK.value(), "Successfully", emoService.getEmoTotalCount(searchNumberListDto)));
     }
-
-//    @GetMapping("/emo/{emoCode}")
-//    public ResponseEntity<CMRespDto<Map<String, Object>>> getEmo(@PathVariable String emoCode){
-//
-//        Map<String, Object> responseMap = new HashMap<>();
-//
-//        return ResponseEntity
-//                .ok()
-//                .body(new CMRespDto<>(HttpStatus.OK.value(), "Successfully", emoService.getEmoAndImage(emoCode)));
-//    }
 
     @GetMapping("/emos/{emoCode}")
     public ResponseEntity<CMRespDto<Map<String, Object>>> getEmos(@PathVariable String emoCode){

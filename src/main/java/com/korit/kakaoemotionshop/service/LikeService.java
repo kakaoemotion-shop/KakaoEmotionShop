@@ -16,9 +16,10 @@ public class LikeService {
     private LikeRepository likeRepository;
 
     public int getLikeStatus(int emoId, int userId) {
-        EmoLike emoLike = new EmoLike();
-        emoLike.setEmoId(emoId);
-        emoLike.setUserId(userId);
+        EmoLike emoLike = EmoLike.builder()
+                .emoId(emoId)
+                .userId(userId)
+                .build();
 
         return likeRepository.getLikeStatus(emoLike);
     }

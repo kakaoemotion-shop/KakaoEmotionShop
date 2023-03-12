@@ -390,9 +390,6 @@ class ImportApi {
         amount: 2000,
         buyer_email: '',
         buyer_name: ''
-        // buyer_tel: '',
-        // buyer_addr: '서울특별시 강남구 삼성동',
-        // buyer_postcode: '123-456'
     }
 
     constructor() {
@@ -437,23 +434,12 @@ class ImportApi {
             if (principal == null) {
                 if (confirm("로그인 후 사용 가능합니다")) {
                     location.href = "/account/login"
-                }else{
-                
                 }
-
-            }else{
-                // const usernameValue = principal.user.username;
-                // const nameValue = principal.user.name;
-                // const emailValue = principal.user.email;
-                // const emoNameValue = responseData.emoMst.emoName;
-                
-                // const buyer = new Buyer(usernameValue, nameValue, emailValue, emoNameValue);
-                
-                ImportApi.getInstance().requestPay();
-                // ImportApi.getInstance().register(buyer);
+            }else{ 
                 ImportApi.getInstance().importPayParams.name = responseData.emoMst.emoName;
                 ImportApi.getInstance().importPayParams.buyer_name = principal.user.username;
                 ImportApi.getInstance().importPayParams.buyer_email = principal.user.email;
+                ImportApi.getInstance().requestPay();
             }
         }
         console.log(purchaseButton);

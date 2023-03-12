@@ -182,7 +182,6 @@ class HotSearchService {
 
             }else {              
                 if(data.likeId != 0){
-                    console.log("ButtonLength : " + ButtonsLength);
                     Buttons[ButtonsLength + index].innerHTML += `
                     <button type="button" class="like-buttons dislike-button">
                     <i class="fa-solid fa-heart"></i>

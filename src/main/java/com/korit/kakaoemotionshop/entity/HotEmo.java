@@ -19,7 +19,4 @@ public class HotEmo {
     private int likeId;
     private int likeCount;
 
-    private int imageId;
-    private int imageSeq;
-
 }
