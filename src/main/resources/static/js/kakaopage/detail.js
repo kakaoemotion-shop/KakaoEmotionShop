@@ -1,4 +1,9 @@
 window.onload = () => {
+    ToggleService.getInstance().loadlogin();
+
+    ToggleButton.getInstance().logoutButton();
+    ToggleButton.getInstance().toggleButton();
+    
     DetailService.getInstance().setEmoCode()
     DetailService.getInstance().loadEmoImageOne()
     DetailService.getInstance().loadEmoAndImageData()
@@ -229,7 +234,7 @@ class DetailService {
                 
             Buttons.innerHTML += `
             <button type="button" class="no-login-like like-button ">
-            <i class="fa-regular fa-heart"></i>
+                <i class="fa-regular fa-heart empty-heart"></i>
             </button>
             `;
             ComponentEvent.getInstance().addClickEventLikeButtonsNoLogin();
@@ -238,13 +243,13 @@ class DetailService {
             if(likeStatus != 0){
                 Buttons.innerHTML += `
                 <button type="button" class="like-buttons dislike-button">
-                <i class="fa-solid fa-heart"></i>
+                    <i class="fa-solid fa-heart full-heart"></i>
                 </button>
                 `;
             }else {
                 Buttons.innerHTML += `
                     <button type="button" class="like-buttons like-button">
-                    <i class="fa-regular fa-heart"></i>
+                        <i class="fa-regular fa-heart empty-heart"></i>
                     </button>
                 `;
             }

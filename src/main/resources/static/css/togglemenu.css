@@ -105,14 +105,13 @@
     font-size: 20px
 }
 
-.fa-solid {
-    margin-left: 10px;
-    color: black;
-    font-size: 20px
-}
-
-.toggle-heart {
+.fa-face-kiss-wink-heart {
     margin-left: 22px;
+    color: black;
+    font-size: 20px;
+}
+.login-heart {
+    margin-left: 10px;
     color: black;
     font-size: 20px;
 }

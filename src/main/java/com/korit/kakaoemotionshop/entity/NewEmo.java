@@ -20,9 +20,6 @@ public class NewEmo {
     private int likeId;
     private int likeCount;
 
-    private int imageId;
-    private int imageSeq;
-
     private String newImage1;
     private String newImage2;
     private String newImage3;

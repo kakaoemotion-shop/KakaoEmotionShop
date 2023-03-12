@@ -61,7 +61,7 @@ class ToggleService {
                             
                                 <li class="mypage-style">
                                     <a href="" class="mypage-link"></a>
-                                    <i class="fa-regular fa-heart toggle-heart"></i>
+                                        <i class="fa-regular fa-face-kiss-wink-heart"></i>
                                     <p class="mypage-chart">좋아요</p>
                                 </li>
                             </ul>
@@ -125,7 +125,7 @@ class ToggleService {
        
                                 <li class="mypage-style">
                                     <a href="/account/mypage" class="mypage-link">
-                                        <i class="fa-regular fa-heart toggle-heart"></i>
+                                    <i class="fa-regular fa-face-kiss-wink-heart login-heart"></i>
                                         <p class="mypage-chart">좋아요</p>
                                     </a>
                                 </li>
@@ -138,7 +138,7 @@ class ToggleService {
                                 <a href="/index" class="mypage-buttons">홈</a>
                             </li>
                             <li class="abc-li">
-                                <a href="/main/new" class="mypage-buttons">신규</a>
+                                <a href="/main/newemoticon" class="mypage-buttons">신규</a>
                             </li>
                             <li class="abc-li">
                                 <a href="/main/hot" class="mypage-buttons">인기</a>
@@ -158,6 +158,9 @@ class ToggleService {
                             </li>
                             <li class="abcd-a">
                                 <a href="https://e.kakao.com/number" class="nqp-link">이모티콘 일련번호 입력하기</a>
+                            </li>
+                            <li class="abcd-d">
+                                <a href="/logout" class="nqp-link">로그아웃 하기</a>
                             </li>
                         </ul>
                     </div>
@@ -238,12 +241,10 @@ class ToggleButton {
         mypageButton.onclick = () => {
             if (principal != null) {
                 if (confirm("로그아웃하시겠습니까?")) {
-                    // 취소 클릭
+                    
                     location.href = "/logout"
                 } else {
-                    // 예 클릭
-                    //     console.log("예 클릭됨")
-                    // location.reload();
+                   
                 }
             } else {
                 location.href = "/account/login"
@@ -266,7 +267,7 @@ class ToggleButton {
     `
     }
     mypagLinkButton() {
-        const mypageLink = document.querySelector(".fa-heart");
+        const mypageLink = document.querySelector(".fa-face-kiss-wink-heart");
         const principal = PrincipalApi.getInstance().getPrincipal();
 
         mypageLink.onclick = () => {
