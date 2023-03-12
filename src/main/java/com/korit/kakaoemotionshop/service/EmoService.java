@@ -2,6 +2,7 @@ package com.korit.kakaoemotionshop.service;
 
 import com.korit.kakaoemotionshop.entity.EmoImage;
 import com.korit.kakaoemotionshop.entity.EmoMst;
+//import com.korit.kakaoemotionshop.entity.EmoRegisterImage;
 import com.korit.kakaoemotionshop.exception.CustomValidationException;
 import com.korit.kakaoemotionshop.repository.EmoRepository;
 import com.korit.kakaoemotionshop.web.dto.DeleteReqDto;
@@ -47,6 +48,7 @@ public class EmoService {
         return resultAll;
     }
 
+
     public List<EmoMst> searchEmo(SearchReqDto searchReqDto){
         searchReqDto.setIndex();
         return emoRepository.searchEmo(searchReqDto);
@@ -67,12 +69,19 @@ public class EmoService {
         }
     }
 
+    public int getEmoTotalCount(SearchNumberListDto searchNumberListDto){
+        return emoRepository.getEmoTotalCount(searchNumberListDto);
+    }
     public void modifyEmo(EmoReqDto emoReqDto) {
         emoRepository.updateEmoByEmoCode(emoReqDto);
     }
 
     public void removeEmo(String emoCode) {
         emoRepository.deleteEmo(emoCode);
+    }
+
+    public void removeEmos(DeleteReqDto deleteReqDto){
+        emoRepository.deleteEmos(deleteReqDto.getEmoId());
     }
 
     public void registerEmoImages(String emoCode, List<MultipartFile> files) {
@@ -85,37 +94,35 @@ public class EmoService {
         List<EmoImage> emoImages = new ArrayList<>();
 
         files.forEach(file ->{
-           String originFileName = file.getOriginalFilename();
-           String extension = originFileName.substring(originFileName.lastIndexOf("."));
-           String tempFileName = UUID.randomUUID().toString().replaceAll("-","")+extension;
+            String originFileName = file.getOriginalFilename();
+            String extension = originFileName.substring(originFileName.lastIndexOf("."));
+            String tempFileName = UUID.randomUUID().toString().replaceAll("-","")+extension;
 
-           Path uploadPath = Paths.get(filePath+"emo/"+tempFileName);
+            Path uploadPath = Paths.get(filePath+"/emo/"+tempFileName);
 
-           File f = new File(filePath + "emo");
-           if(!f.exists()) {
-               f.mkdirs();
-           }
-           try {
-               Files.write(uploadPath, file.getBytes());
-           } catch (IOException e) {
-               throw new RuntimeException(e);
-           }
+            File f = new File(filePath + "/emo");
+            if(!f.exists()) {
+                f.mkdirs();
+            }
+            try {
+                Files.write(uploadPath, file.getBytes());
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
 
-           EmoImage emoImage = EmoImage.builder()
-                   .emoCode(emoCode)
-                   .saveName(tempFileName)
-                   .originName(originFileName)
-                   .build();
+            EmoImage emoImage = EmoImage.builder()
+                    .emoCode(emoCode)
+                    .saveName(tempFileName)
+                    .originName(originFileName)
+                    .build();
 
-           emoImages.add(emoImage);
+            emoImages.add(emoImage);
         });
 
         emoRepository.registerEmoImages(emoImages);
     }
 
-//    public List<EmoImage> getEmos(String emoCode) {
-//        return emoRepository.findEmoImageAll(emoCode);
-//    }
+
 
     public void removeEmoImage(int imageId) {
         EmoImage emoImage = emoRepository.findEmoImageByImageId(imageId);
@@ -124,7 +131,7 @@ public class EmoService {
             Map<String,String> errorMap = new HashMap<String,String>();
             errorMap.put("error","존재하지 않는 imageId 입니다");
 
-            throw  new CustomValidationException(errorMap);
+            throw new CustomValidationException(errorMap);
         }
 
         if(emoRepository.deleteEmoImage(imageId) > 0 ) {
@@ -135,18 +142,5 @@ public class EmoService {
         }
     }
 
-    public int getEmoTotalCount(SearchNumberListDto searchNumberListDto){
-        return emoRepository.getEmoTotalCount(searchNumberListDto);
-    }
-
-    public Map<String, Object> getEmoAndImageOne(String emoCode){
-        Map<String, Object> resultAll = new HashMap<>();
-        resultAll.put("emoMst", emoRepository.findEmoByEmoCode(emoCode));
-        resultAll.put("emoImage", emoRepository.findEmoImageOne(emoCode));
-        return resultAll;
-    }
-    public void removeEmos(DeleteReqDto deleteReqDto){
-        emoRepository.deleteEmos(deleteReqDto.getEmoId());
-    }
 
 }
