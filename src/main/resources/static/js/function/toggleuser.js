@@ -78,9 +78,6 @@ class ToggleService {
                             <li class="abc-li">
                                 <a href="/main/hot" class="mypage-buttons">인기</a>
                             </li>
-                            <li class="abc-li">
-                                <a href="" class="mypage-buttons">스타일</a>
-                            </li>
                         </ul>
                     </div>
                     <div>
@@ -142,9 +139,6 @@ class ToggleService {
                             </li>
                             <li class="abc-li">
                                 <a href="/main/hot" class="mypage-buttons">인기</a>
-                            </li>
-                            <li class="abc-li">
-                                <a href="" class="mypage-buttons">스타일</a>
                             </li>
                         </ul>
                     </div>
