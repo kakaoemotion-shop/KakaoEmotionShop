@@ -142,7 +142,7 @@ class MainPageService {
                 </li>
             `
         })
-
+        
         
     }
 }

@@ -13,6 +13,7 @@ window.onload = () => {
     ComponentEvent.getInstance().addClickEventLikeButtons();
 }
 
+
 let maxPage = 0;
 
 const searchObj = {
@@ -146,21 +147,16 @@ class NewService {
         responseData.forEach((data, index) => {
             contentFlex.innerHTML += `
             <li>
-                <div class="new-title-group">
-                    <a class="new-link" href="http://127.0.0.1:8000/main/detail/?emoCode=${data.emoCode}">
-                        <div class="new-info-title">
-                            <input type="hidden" class="emo-id" value="${data.emoId}">
-                            <input type="hidden" class="like-count" value="${data.likeCount}">
-                            <h2 class="emo-name">${data.emoName}</h2>
-                            <p class="author">${data.company}</p>
-                        </div>
-                    </a>
-                    <div class="buttons">
-
-                        <span class="like-count" style="padding-top:3px; width: 30px; height: 30px; font-size: 20px; font-weight: 400; text-align: center; color: #dbdbdb;">
-                            ${data.likeCount != null ? data.likeCount : 0}
-                        </span>
-                    </div>
+            <a class="new-link" href="">
+                <div class="new-info-title">
+                <input type="hidden" class="emo-id" value="${data.emoId}">
+                <input type="hidden" class="like-count" value="${data.likeCount}">
+                <h2 class="emo-name">${data.emoName}</h2>
+                <p class="author">${data.company}</p>
+                <div class="buttons">
+                <span class="like-count">${data.likeCount != null ? data.likeCount : 0}</span>
+            
+                </div>
                 </div>
                 <div class="new-info-img">
                 <img src="http://127.0.0.1:8000/image/emo/${data.newImage1 != null ? data.newImage1 : "noimg.jpg"}" class="emo-img">
@@ -168,6 +164,7 @@ class NewService {
                 <img src="http://127.0.0.1:8000/image/emo/${data.newImage3 != null ? data.newImage3 : "noimg.jpg"}" class="emo-img">
                 <img src="http://127.0.0.1:8000/image/emo/${data.newImage4 != null ? data.newImage4 : "noimg.jpg"}" class="emo-img">
                 </div>
+            </a>
             </li>
             `;
 

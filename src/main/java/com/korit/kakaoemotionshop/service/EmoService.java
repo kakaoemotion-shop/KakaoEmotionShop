@@ -2,7 +2,6 @@ package com.korit.kakaoemotionshop.service;
 
 import com.korit.kakaoemotionshop.entity.EmoImage;
 import com.korit.kakaoemotionshop.entity.EmoMst;
-//import com.korit.kakaoemotionshop.entity.EmoRegisterImage;
 import com.korit.kakaoemotionshop.exception.CustomValidationException;
 import com.korit.kakaoemotionshop.repository.EmoRepository;
 import com.korit.kakaoemotionshop.web.dto.DeleteReqDto;
@@ -41,13 +40,15 @@ public class EmoService {
         return emoRepository.findEmoImageAll(emoCode);
     }
 
+    public EmoMst getEmoByEmoCode(String emoCode) {
+        return emoRepository.findEmoByEmoCode(emoCode);
+    }
     public Map<String, Object> getEmoAndAllImage(String emoCode){
         Map<String, Object> resultAll = new HashMap<>();
         resultAll.put("emoMst", emoRepository.findEmoByEmoCode(emoCode));
         resultAll.put("emoImage", emoRepository.findEmoImageAll(emoCode));
         return resultAll;
     }
-
 
     public List<EmoMst> searchEmo(SearchReqDto searchReqDto){
         searchReqDto.setIndex();
@@ -69,19 +70,12 @@ public class EmoService {
         }
     }
 
-    public int getEmoTotalCount(SearchNumberListDto searchNumberListDto){
-        return emoRepository.getEmoTotalCount(searchNumberListDto);
-    }
     public void modifyEmo(EmoReqDto emoReqDto) {
         emoRepository.updateEmoByEmoCode(emoReqDto);
     }
 
     public void removeEmo(String emoCode) {
         emoRepository.deleteEmo(emoCode);
-    }
-
-    public void removeEmos(DeleteReqDto deleteReqDto){
-        emoRepository.deleteEmos(deleteReqDto.getEmoId());
     }
 
     public void registerEmoImages(String emoCode, List<MultipartFile> files) {
@@ -98,9 +92,9 @@ public class EmoService {
             String extension = originFileName.substring(originFileName.lastIndexOf("."));
             String tempFileName = UUID.randomUUID().toString().replaceAll("-","")+extension;
 
-            Path uploadPath = Paths.get(filePath+"/emo/"+tempFileName);
+            Path uploadPath = Paths.get(filePath+"emo/"+tempFileName);
 
-            File f = new File(filePath + "/emo");
+            File f = new File(filePath + "emo");
             if(!f.exists()) {
                 f.mkdirs();
             }
@@ -122,7 +116,9 @@ public class EmoService {
         emoRepository.registerEmoImages(emoImages);
     }
 
-
+//    public List<EmoImage> getEmos(String emoCode) {
+//        return emoRepository.findEmoImageAll(emoCode);
+//    }
 
     public void removeEmoImage(int imageId) {
         EmoImage emoImage = emoRepository.findEmoImageByImageId(imageId);
@@ -131,7 +127,7 @@ public class EmoService {
             Map<String,String> errorMap = new HashMap<String,String>();
             errorMap.put("error","존재하지 않는 imageId 입니다");
 
-            throw new CustomValidationException(errorMap);
+            throw  new CustomValidationException(errorMap);
         }
 
         if(emoRepository.deleteEmoImage(imageId) > 0 ) {
@@ -142,5 +138,18 @@ public class EmoService {
         }
     }
 
+    public int getEmoTotalCount(SearchNumberListDto searchNumberListDto){
+        return emoRepository.getEmoTotalCount(searchNumberListDto);
+    }
+
+    public Map<String, Object> getEmoAndImageOne(String emoCode){
+        Map<String, Object> resultAll = new HashMap<>();
+        resultAll.put("emoMst", emoRepository.findEmoByEmoCode(emoCode));
+        resultAll.put("emoImage", emoRepository.findEmoImageOne(emoCode));
+        return resultAll;
+    }
+    public void removeEmos(DeleteReqDto deleteReqDto){
+        emoRepository.deleteEmos(deleteReqDto.getEmoId());
+    }
 
 }

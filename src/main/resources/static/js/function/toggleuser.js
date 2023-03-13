@@ -78,9 +78,6 @@ class ToggleService {
                             <li class="abc-li">
                                 <a href="/main/hot" class="mypage-buttons">인기</a>
                             </li>
-                            <li class="abc-li">
-                                <a href="" class="mypage-buttons">스타일</a>
-                            </li>
                         </ul>
                     </div>
                     <div>
@@ -138,13 +135,10 @@ class ToggleService {
                                 <a href="/index" class="mypage-buttons">홈</a>
                             </li>
                             <li class="abc-li">
-                                <a href="/main/new" class="mypage-buttons">신규</a>
+                                <a href="/main/newemoticon" class="mypage-buttons">신규</a>
                             </li>
                             <li class="abc-li">
                                 <a href="/main/hot" class="mypage-buttons">인기</a>
-                            </li>
-                            <li class="abc-li">
-                                <a href="" class="mypage-buttons">스타일</a>
                             </li>
                         </ul>
                     </div>
@@ -241,12 +235,10 @@ class ToggleButton {
         mypageButton.onclick = () => {
             if (principal != null) {
                 if (confirm("로그아웃하시겠습니까?")) {
-                    // 취소 클릭
+                    
                     location.href = "/logout"
                 } else {
-                    // 예 클릭
-                    //     console.log("예 클릭됨")
-                    // location.reload();
+                   
                 }
             } else {
                 location.href = "/account/login"

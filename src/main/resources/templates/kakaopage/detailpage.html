@@ -5,10 +5,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <script src="https://code.jquery.com/jquery-latest.min.js"></script>
     <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
-
     <title>상세페이지</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
     integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
@@ -33,7 +31,7 @@
         <a href="/index" class="logo-button">
             <h1>kakao<span>emoticon</span> shop</h1>
         </a>
-        <button class="search-button" onclick="goToSearchPageButton()" >
+        <button class="search-button" onclick="goToSearchPageButton()">
             <i class="fa-solid fa-magnifying-glass"></i>
         </button>
 
@@ -49,9 +47,8 @@
         </ul>
     </nav>
 </header>
-
 <div class="emoticon-area">
-    <!-- <div class="emoticon-product">
+    <div class="emoticon-product">
         <div class="emoticon-box">
             <div class="emoticon-thumb">
                 <img class="main-emoticon"
@@ -74,31 +71,21 @@
                     </div>
                 </div>
             </div>
-            <div class="charge">
-            </div>
-            <button type="button" class="purchase-button">구매하기</button>
+            <button class="purchase-button">구매하기</button>
         </div>
-    </div> -->
+    </div>
 </div>
 <div class="subemoticon-area">
     <div class="subemoticon-box">
-        <div class="subemoticon-container">
-            <div class="subemoticon-number">
-                <img class="subemoticon-img"
-                    src="/static/images/noimg.jpg">
-            </div>
-            <div class="subemoticon-number">
-                <img class="subemoticon-img"
-                    src="/static/images/noimg.jpg">
-            </div>
-            <div class="subemoticon-number">
-                <img class="subemoticon-img"
-                    src="/static/images/noimg.jpg">
-            </div>
-            <div class="subemoticon-number">
-                <img class="subemoticon-img"
-                    src="/static/images/noimg.jpg">
-            </div>
+        <div class="subemoticon-img">
+            <img class="subemoticon-number"
+                src="/static/images/noimg.jpg">
+            <img class="subemoticon-number"
+                src="/static/images/noimg.jpg">
+            <img class="subemoticon-number"
+                src="/static/images/noimg.jpg">
+            <img class="subemoticon-number"
+                src="/static/images/noimg.jpg">
         </div>
     </div>
 </div>
@@ -137,16 +124,6 @@
 <body>
 
 </body>
-
-<script>
-    function goToSearchPageButton() {
-        const searchPageButton = document.querySelector(".search-button");
-        searchPageButton.onclick(
-            location.href = 'http://127.0.0.1:8000/search'
-        )
-    }
-</script>
-
 <script>
     $(function () {
     $('.product-btn').click(function () {
@@ -170,10 +147,18 @@
 });
 </script>
 
+<script>
+    function goToSearchPageButton() {
+        const searchPageButton = document.querySelector(".search-button");
+        searchPageButton.onclick(
+            location.href = 'http://127.0.0.1:8000/search'
+        )
+    }
+</script>
+
 <body>
 
 </body>
-
 <script src="/static/js/account/principal.js"></script>
 <script src="/static/js/function/toggleuser.js"></script>
 <script src="/static/js/kakaopage/detail.js"></script>

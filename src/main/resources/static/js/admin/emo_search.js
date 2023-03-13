@@ -121,7 +121,7 @@ class EmoService {
                     <td>${data.emoName}</td>
                     <td>${data.company}</td>
                     <td>${data.emoDate}</td>
-                    <td><a href="/templates/admin/emo_modification.html?emoCode=${data.emoCode}"><i class="fa-solid fa-square-pen"></i></td>
+                    <td><a href="/admin/modify?emoCode=${data.emoCode}"><i class="fa-solid fa-square-pen"></i></td>
                 </tr>
             `;
         });
@@ -248,8 +248,8 @@ class ComponentEvent {
                         deleteArray.push(emoId[index].textContent)
                     }
                 });
-
-                EmoService.getInstance().deleteEmos(deleteArray)
+                
+                EmoSearchApi.getInstance().deleteEmos(deleteArray)
             }
         }
     }

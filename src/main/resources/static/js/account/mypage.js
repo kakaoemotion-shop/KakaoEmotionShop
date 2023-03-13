@@ -164,7 +164,6 @@ class MypageService {
         
         console.log(responseData)
 
-        if(responseData.length != 0) {
             
             responseData.forEach((data, index) => {
                 contentFlex.innerHTML += `
@@ -173,7 +172,7 @@ class MypageService {
                 <img src="http://127.0.0.1:8000/image/emo/${data.saveName != null ? data.saveName : "noimg.png"}" class="like-img">
                 <div class="like-names">
                     <div class="like-button">
-    
+
                     </div>
                     <a href="http://127.0.0.1:8000/main/detail/?emoCode=${data.emoCode}">
                         <div class="like-name">
@@ -184,34 +183,25 @@ class MypageService {
                 </div>
                 </li>
                 `;
-    
+
                 const Buttons = document.querySelectorAll(".like-button");
-                            
+
                 if(data.likeId != 0){
                     Buttons[ButtonsLength + index].innerHTML += `
                     <button type="button" class="like-buttons dislike-button">
-                        <i class="fa-solid fa-heart empty-heart"></i>
+                        <i class="fa-solid fa-heart"></i>
                     </button>
                     `;
                 }else {
                     Buttons[ButtonsLength + index].innerHTML += `
                         <button type="button" class="like-buttons like-button">
-                            <i class="fa-regular fa-heart full-heart"></i>
+                            <i class="fa-regular fa-heart"></i>
                         </button>
                     `;
                 }
                 ComponentEvent.getInstance().addClickEventLikeButtons()
             });
-        }
-        // else {
-        //     contentFlex.innerHTML += `
-        //     <div class="inner_area">
-        //         <img class="img_empty" src="/static/images/empty_like.png">
-        //         <strong class="tit_empty">좋아하는 이모티콘이 없습니다.</strong>
-        //         <p class="desc_empty">마음에 드는 이모티콘에 하트를 눌러보세요!</p>
-        //     </div>
-        //     `;
-        // }
+
     }
     
 }

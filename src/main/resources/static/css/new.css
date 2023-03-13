@@ -166,20 +166,16 @@
 .new-link{
   display: flex;
 }
-.new-title-group {
-  display: flex;
-  flex-direction: column;
-}
+
 .new-info-title{
   display: flex;
   flex-direction: column;
   justify-content: left;
 
   margin-top: 70px;
-  padding-left: 10px;
 
   width: 286px;
-  height: 70px;
+  height: 100px;
 }
 .emo-name{
   font-size: 20px;
@@ -199,12 +195,11 @@
 
   cursor: pointer;
 }
-
-.buttons {
-  display: flex;
-  justify-content: left;
-}
 .like-button{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
   width: 36px;
   height: 36px;
 

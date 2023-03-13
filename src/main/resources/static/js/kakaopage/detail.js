@@ -1,10 +1,9 @@
 window.onload = () => {
-
     ToggleService.getInstance().loadlogin();
     ToggleButton.getInstance().logoutButton();
     ToggleButton.getInstance().mypagLinkButton();
     ToggleButton.getInstance().toggleButton();
-
+    
     DetailService.getInstance().setEmoCode()
     DetailService.getInstance().loadEmoImageOne()
     DetailService.getInstance().loadEmoAndImageData()
@@ -14,14 +13,14 @@ window.onload = () => {
 }
 
 const emoObj = {
-    emoId: "",
+    emoId:"",
     emoCode: "",
     emoName: "",
     company: "",
     emoDate: ""
 }
 const emoObj2 = {
-    emoId: "",
+    emoId:"",
     emoCode: "",
     emoName: "",
     company: "",
@@ -76,7 +75,7 @@ class DetailApi {
         $.ajax({
             async: false,
             type: "get",
-            url: `http://127.0.0.1:8000/api/detail/emo/image/${emoObj2.emoCode}`,
+            url: `http://127.0.0.1:8000/api/admin/emo/image/one/${emoObj2.emoCode}`,
             dataType: "json",
             success: response => {
                 responseData = response.data
@@ -86,7 +85,7 @@ class DetailApi {
             }
         })
         return responseData
-
+        
     }
 
     getEmoAndImage() {
@@ -109,7 +108,7 @@ class DetailApi {
 
     getLikeStatus() {
         let likeStatus = -1;
-
+        
         $.ajax({
             async: false,
             type: "get",
@@ -129,7 +128,7 @@ class DetailApi {
 
     setLike() {
         let likeCount = -1;
-
+        
         $.ajax({
             async: false,
             type: "post",
@@ -149,7 +148,7 @@ class DetailApi {
 
     setDisLike() {
         let likeCount = -1;
-
+        
         $.ajax({
             async: false,
             type: "delete",
@@ -185,7 +184,7 @@ class DetailService {
         emoObj2.emoId = DetailApi.getInstance().getEmo().emoId;
 
     }
-
+    
     clearEmoList() {
         const contentFlex = document.querySelector(".emoticon-area");
         contentFlex.innerHTML = "";
@@ -205,7 +204,7 @@ class DetailService {
                 <div class="emoticon-box">
                     <div class="emoticon-thumb">
                         <img class="main-emoticon"
-                            src="http://127.0.0.1:8000/image/emo/${responseData.emoImage[0].saveName != null ? responseData.emoImage[0].saveName : "noimg.png"}"
+                            src="http://127.0.0.1:8000/image/emo/${responseData.emoImage[0].saveName!= null ? responseData.emoImage[0].saveName :"noimg.png"}"
                             alt="">
                     </div>
                 </div>
@@ -231,26 +230,26 @@ class DetailService {
 
         const Buttons = document.querySelector(".right-like-box")
 
-        if (principal == null) {
-
+        if(principal == null) {
+                
             Buttons.innerHTML += `
             <button type="button" class="no-login-like like-button ">
-            <i class="fa-regular fa-heart"></i>
+                <i class="fa-regular fa-heart empty-heart"></i>
             </button>
             `;
             ComponentEvent.getInstance().addClickEventLikeButtonsNoLogin();
 
-        } else {
-            if (likeStatus != 0) {
+        }else {              
+            if(likeStatus != 0){
                 Buttons.innerHTML += `
                 <button type="button" class="like-buttons dislike-button">
-                <i class="fa-solid fa-heart"></i>
+                    <i class="fa-solid fa-heart full-heart"></i>
                 </button>
                 `;
-            } else {
+            }else {
                 Buttons.innerHTML += `
                     <button type="button" class="like-buttons like-button">
-                    <i class="fa-regular fa-heart"></i>
+                        <i class="fa-regular fa-heart empty-heart"></i>
                     </button>
                 `;
             }
@@ -268,7 +267,7 @@ class DetailService {
             imgObj.saveName = responseData.emoImage.saveName
             imgObj.originName = responseData.emoImage.originName
 
-            const emoImg = document.querySelectorAll(".subemoticon-img")
+            const emoImg = document.querySelectorAll(".subemoticon-number")
 
             responseData.emoImage.forEach((imgObj, index) => {
                 emoImg[index].src = "http://127.0.0.1:8000/image/emo/" + imgObj.saveName;
@@ -319,16 +318,16 @@ class ComponentEvent {
         const likeButtons = document.querySelector(".like-buttons");
 
         likeButtons.onclick = () => {
-            if (likeButtons.classList.contains("like-button")) {
+            if(likeButtons.classList.contains("like-button")){
                 const likeCount = DetailApi.getInstance().setLike();
-                if (likeCount != -1) {
+                if(likeCount != -1){
                     likeButtons.classList.remove("like-button");
                     likeButtons.classList.add("dislike-button");
                 }
-
-            } else {
+                
+            }else {
                 const likeCount = DetailApi.getInstance().setDisLike();
-                if (likeCount != -1) {
+                if(likeCount != -1){
                     likeButtons.classList.remove("dislike-button");
                     likeButtons.classList.add("like-button");
                 }
@@ -342,10 +341,10 @@ class ComponentEvent {
 
         likeButtonError.forEach((button, index) => {
             button.onclick = () => {
-
+                
                 if (confirm("로그인 후 사용 가능합니다")) {
                     location.href = "/account/login"
-                }
+                }   
             }
         });
     }
@@ -396,9 +395,6 @@ class ImportApi {
         amount: 2000,
         buyer_email: '',
         buyer_name: ''
-        // buyer_tel: '',
-        // buyer_addr: '서울특별시 강남구 삼성동',
-        // buyer_postcode: '123-456'
     }
 
     constructor() {
@@ -414,17 +410,17 @@ class ImportApi {
         console.log(resp);
         if (resp.success) {
             alert("결제 성공");
-            const principal = PrincipalApi.getInstance().getPrincipal();
-            const responseData = DetailApi.getInstance().getEmoAndImage();
-            const usernameValue = principal.user.username;
-            const nameValue = principal.user.name;
-            const emailValue = principal.user.email;
-            const emoNameValue = responseData.emoMst.emoName;
-
-            const buyer = new Buyer(usernameValue, nameValue, emailValue, emoNameValue);
-
-
-            ImportApi.getInstance().register(buyer);
+                const principal = PrincipalApi.getInstance().getPrincipal();
+                const responseData = DetailApi.getInstance().getEmoAndImageOne();
+                const usernameValue = principal.user.username;
+                const nameValue = principal.user.name;
+                const emailValue = principal.user.email;
+                const emoNameValue = responseData.emoMst.emoName;
+                
+                const buyer = new Buyer(usernameValue, nameValue, emailValue, emoNameValue);
+                
+                
+                ImportApi.getInstance().register(buyer);
         } else {
             alert("결제 실패");
             console.log(resp);
@@ -435,34 +431,20 @@ class ImportApi {
     purchaseButton() {
         const purchaseButton = document.querySelector(".purchase-button");
         const principal = PrincipalApi.getInstance().getPrincipal();
-        const responseData = DetailApi.getInstance().getEmoAndImage()
-        const inputs = document.querySelectorAll(".product-input");
-
+        const responseData = DetailApi.getInstance().getEmoAndImageOne();
 
         purchaseButton.onclick = () => {
             if (principal == null) {
                 if (confirm("로그인 후 사용 가능합니다")) {
                     location.href = "/account/login"
-                } else {
-
                 }
-
-            } else {
-                // const usernameValue = principal.user.username;
-                // const nameValue = principal.user.name;
-                // const emailValue = principal.user.email;
-                // const emoNameValue = responseData.emoMst.emoName;
-
-                // const buyer = new Buyer(usernameValue, nameValue, emailValue, emoNameValue);
-
-                ImportApi.getInstance().requestPay();
-                // ImportApi.getInstance().register(buyer);
+            }else{ 
                 ImportApi.getInstance().importPayParams.name = responseData.emoMst.emoName;
                 ImportApi.getInstance().importPayParams.buyer_name = principal.user.username;
                 ImportApi.getInstance().importPayParams.buyer_email = principal.user.email;
+                ImportApi.getInstance().requestPay();
             }
         }
-        console.log(purchaseButton);
     }
 }
 
@@ -473,9 +455,9 @@ class Buyer {
     emoName = null;
 
     constructor(username, name, email, emoName) {
-        this.username = username;
-        this.name = name;
-        this.email = email;
-        this.emoName = emoName;
+      this.username = username;
+      this.name = name;
+      this.email = email;
+      this.emoName = emoName;
     }
 }
