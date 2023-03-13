@@ -1,9 +1,6 @@
 html {
     height: 100%;
 }
-
-
-
 /* =============== 상단 부분 ================ */
 .header{
     width: 100%;
@@ -110,9 +107,6 @@ html {
     border-bottom: 2px solid #000;
 }
 
-
-
-
 /* =============== 베너 부분 ================ */
 .banner {
     display: flex;
@@ -162,9 +156,7 @@ html {
     height: 190px;
 }
 
-
-
-/* =============== 콘텐츠 부분 ================ */
+/* =============== 베너 부분 ================ */
 .content {
     display: flex;
     flex-direction: column;
@@ -184,12 +176,12 @@ html {
     font-weight: 600;
     text-align: left;
 }
-/* .like-title p {
+.like-title p {
     margin-left: 4px;
     font-size: 20px;
     font-weight: 600;
     color: red;
-} */
+}
 
 .like-box {
     display: flex;
@@ -256,10 +248,14 @@ html {
   
     cursor: pointer;
 }
-.fa-heart {
+.full-heart {
     margin: 0 auto;
-
-    font-size: 16px;
+    font-size: 17px;
+    color: deeppink;
+}
+.empty-heart {
+    margin: 0 auto;
+    font-size: 17px;
     color: deeppink;
 }
 
@@ -283,9 +279,6 @@ html {
     font-weight: 400;
     color: #929292;
 }
-
-
-
 
 
 /* =============== 하단 부분 ================ */
@@ -333,3 +326,30 @@ html {
   
     color: #393939;
   }
+
+
+.inner_area{
+    display:table-cell;
+    vertical-align:middle;
+    text-align:center;
+    padding:100px 0;
+}
+
+.tit_empty{
+    font-size:18px;
+    line-height:28px;
+    display: block;
+    margin: 12px 0;
+    font-weight: normal;
+    font-size: 20px;
+    line-height:24px;
+    margin: 0 0 4px;
+    margin-bottom: 6px;
+}
+
+.desc_empty{
+    font-size:17px;
+    font-weight:bold;
+    line-height:20px;
+    display: inline-block;
+}

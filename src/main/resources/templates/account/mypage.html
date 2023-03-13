@@ -12,7 +12,6 @@
     <link rel="stylesheet" href="/static/css/indexTOP.css">
     <link rel="stylesheet" href="/static/css/togglemenu.css">
     <link rel="stylesheet" href="/static/css/index.css">
-    <link rel="stylesheet" href="/static/css/search.css">
     <link rel="stylesheet" href="/static/css/account/mypage.css">
 </head>
 <body>
@@ -30,7 +29,7 @@
                 <i class="fa-solid fa-bars"></i>
             </button>
 
-            <a href="/index" class="logo-button">
+            <a class="logo-button" href="/index">
                 <h1>kakao<span>emoticon</span> shop</h1>
             </a>
 
@@ -46,7 +45,7 @@
         <nav class="header-menu">
             <ul class="menu-list">
                 <li class="menu-list-button"><a href="/index">홈</a></li>
-                <li class="menu-list-button"><a href="/main/newemoticon">신규</a></liu>
+                <li class="menu-list-button"><a href="/main/new">신규</a></liu>
                 <li class="menu-list-button"><a href="/main/hot">인기</a></li>
             </ul>
         </nav>
@@ -65,7 +64,7 @@
     <div class="content">
         <div class="like-title">
             <h2>좋아요</h2>
-            <!-- <p>12</p> -->
+            <p>12</p>
         </div>
 
         <div class="like-box">
@@ -97,16 +96,18 @@
         </div>
     </footer>
 
-</body>
 
 <script>
     function goToSearchPageButton() {
         const searchPageButton = document.querySelector(".search-button");
         searchPageButton.onclick(
-            location.href = '/search'
+            location.href = 'http://127.0.0.1:8000/search'
         )
     }
 </script>
+
+
+</body>
 
 <script src="/static/js/account/principal.js"></script>
 <script src="/static/js/function/toggleuser.js"></script>

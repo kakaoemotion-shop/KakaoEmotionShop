@@ -157,7 +157,6 @@ html {
   width: 1024px;
 }
 .hot-info li{
-
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -168,6 +167,10 @@ html {
 
   border-bottom: 1px solid #dbdbdb;
   background-color: white;
+}
+.hot-title-group {
+  display: flex;
+  flex-direction: column;
 }
 .hot-link{
   display: flex;
@@ -196,7 +199,7 @@ html {
   margin-bottom: 10px;
 
   width: 294px;
-  height: 80px;
+  height: 60px;
 }
 .emo-name{
   font-size: 16px;
@@ -217,11 +220,13 @@ html {
   cursor: pointer;
 }
 
-.buttons{
-  /* margin-right: 10px; */
+.buttons {
+  display: flex;
+  justify-content: left;
 }
 .like-button{
   margin-top: 5px;
+  margin-bottom: 5px;
 
   width: 36px;
   height: 36px;

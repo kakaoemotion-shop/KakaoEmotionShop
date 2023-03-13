@@ -15,6 +15,14 @@ public class LikeService {
     @Autowired
     private LikeRepository likeRepository;
 
+    public int getLikeStatus(int emoId, int userId) {
+        EmoLike emoLike = new EmoLike();
+        emoLike.setEmoId(emoId);
+        emoLike.setUserId(userId);
+
+        return likeRepository.getLikeStatus(emoLike);
+    }
+
     public int like(int emoId, int userId) {
         EmoLike emoLike = EmoLike.builder()
                 .emoId(emoId)

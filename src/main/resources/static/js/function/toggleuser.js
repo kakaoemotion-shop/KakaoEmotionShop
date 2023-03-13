@@ -159,6 +159,9 @@ class ToggleService {
                             <li class="abcd-a">
                                 <a href="https://e.kakao.com/number" class="nqp-link">이모티콘 일련번호 입력하기</a>
                             </li>
+                            <li class="abcd-d">
+                                <a href="/logout" class="nqp-link">로그아웃 하기</a>
+                            </li>
                         </ul>
                     </div>
                     <div class="company-footer">

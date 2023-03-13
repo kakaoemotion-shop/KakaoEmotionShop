@@ -54,6 +54,26 @@ class MainPageApi {
 
         return responseData;
     }
+
+    getNewEmo() {
+        let responseData = null;
+
+        $.ajax({
+            async: false,
+            type: "get",
+            url: "http://127.0.0.1:8000/api/new/search",
+            data: searchObj,
+            dataType: "json",
+            success: response => {
+                responseData = response.data;
+            },
+            error: error => {
+                console.log(error);
+            }
+        })
+
+        return responseData;
+    }
 }
 
 class MainPageService {
@@ -82,7 +102,7 @@ class MainPageService {
     }
 
     loadNewEmos() {
-        const responseData = MainPageApi.getInstance().searchEmo();
+        const responseData = MainPageApi.getInstance().getNewEmo();
         const contentFlex = document.querySelector(".new-list");
 
         console.log(responseData)
@@ -90,7 +110,7 @@ class MainPageService {
             contentFlex.innerHTML +=`
                 <li>
                     <a class="index-link" href="http://127.0.0.1:8000/main/detail/?emoCode=${data.emoCode}">
-                        <img src="http://127.0.0.1:8000/image/emo/${data.saveName != null ? data.saveName : "noimg.jpg"}" alt="" class="emo-img">
+                        <img src="http://127.0.0.1:8000/image/emo/${data.newImage1 != null ? data.newImage1 : "noimg.jpg"}" alt="" class="emo-img">
                         <h2 class="emo-name">${data.emoName}</h2>
                     </a>
                 </li>
