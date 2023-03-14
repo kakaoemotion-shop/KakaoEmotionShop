@@ -97,19 +97,6 @@
             imageSeq
     </select>
 
-    <select id="findEmoImageOne" resultType="com.korit.kakaoemotionshop.entity.EmoImage">
-        select
-            min(image_id) as imageId,
-            image_seq as imageSeq,
-            emo_code as emoCode,
-            save_name as saveName,
-            origin_name as originName
-        from
-            emo_image
-        where
-            emo_code = #{emoCode}
-    </select>
-
     <select id="getEmoTotalCount" parameterType="com.korit.kakaoemotionshop.web.dto.SearchNumberListDto" resultType="integer">
         select
             count(*)

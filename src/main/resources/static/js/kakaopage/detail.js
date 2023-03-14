@@ -75,7 +75,7 @@ class DetailApi {
         $.ajax({
             async: false,
             type: "get",
-            url: `http://127.0.0.1:8000/api/admin/emo/image/one/${emoObj2.emoCode}`,
+            url: `http://127.0.0.1:8000/api/detail/emo/image/${emoObj2.emoCode}`,
             dataType: "json",
             success: response => {
                 responseData = response.data
