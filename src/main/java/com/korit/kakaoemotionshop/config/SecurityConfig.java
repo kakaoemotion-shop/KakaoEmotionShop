@@ -37,7 +37,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         .atCommonLocations());
         web.httpFirewall(defaultHttpFirewall());
     }
-
+    
     @Bean
     public HttpFirewall defaultHttpFirewall() {
         return new DefaultHttpFirewall();
