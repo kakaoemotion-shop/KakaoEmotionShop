@@ -151,14 +151,6 @@ public class EmoApi {
                 .body(new CMRespDto<>(HttpStatus.OK.value(), "Successfully", emoService.getEmoAndAllImage(emoCode)));
     }
 
-    @GetMapping("/emo/image/one/{emoCode}")
-    public ResponseEntity<CMRespDto<Map<String, Object>>> getEmoOne(@PathVariable String emoCode){
 
-        Map<String, Object> responseMap = new HashMap<>();
-
-        return ResponseEntity
-                .ok()
-                .body(new CMRespDto<>(HttpStatus.OK.value(), "Successfully", emoService.getEmoAndImageOne(emoCode)));
-    }
 
 }

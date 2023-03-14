@@ -43,4 +43,5 @@ public class DetailApi {
                 .ok()
                 .body(new CMRespDto<>(HttpStatus.OK.value(), "Successfully", detailService.getEmoAndImageOne(emoCode)));
     }
+
 }

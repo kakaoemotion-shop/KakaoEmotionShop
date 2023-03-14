@@ -31,4 +31,5 @@ public class DetailService {
         resultAll.put("emoImage", detailRepository.findEmoImageOne(emoCode));
         return resultAll;
     }
+
 }
