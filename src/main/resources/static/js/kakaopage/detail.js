@@ -7,6 +7,8 @@ window.onload = () => {
     DetailService.getInstance().setEmoCode()
     DetailService.getInstance().loadEmoImageOne()
     DetailService.getInstance().loadEmoAndImageData()
+
+    ImportApi.getInstance().purchaseButton();
 }
 
 const emoObj = {
@@ -72,7 +74,7 @@ class DetailApi {
         $.ajax({
             async: false,
             type: "get",
-            url: `http://127.0.0.1:8000/api/admin/emo/image/one/${emoObj2.emoCode}`,
+            url: `http://127.0.0.1:8000/api/detail/emo/image/${emoObj2.emoCode}`,
             dataType: "json",
             success: response => {
                 responseData = response.data
@@ -179,8 +181,6 @@ class DetailService {
         const URLSearch = new URLSearchParams(location.search)
         emoObj.emoCode = URLSearch.get("emoCode")
         emoObj2.emoCode = URLSearch.get("emoCode")
-        emoObj.emoId = DetailApi.getInstance().getEmo().emoId;
-        emoObj2.emoId = DetailApi.getInstance().getEmo().emoId;
 
     }
     
@@ -195,7 +195,6 @@ class DetailService {
         const emoticonArea = document.querySelector(".emoticon-area");
         const principal = PrincipalApi.getInstance().getPrincipal();
         const likeStatus = DetailApi.getInstance().getLikeStatus();
-        const disLikeData = DetailApi.getInstance().setDisLike();
     
         emoticonArea.innerHTML = `
             <div class="emoticon-product">
@@ -234,7 +233,7 @@ class DetailService {
                 
             Buttons.innerHTML += `
             <button type="button" class="no-login-like like-button ">
-                <i class="fa-regular fa-heart empty-heart"></i>
+            <i class="fa-regular fa-heart"></i>
             </button>
             `;
             ComponentEvent.getInstance().addClickEventLikeButtonsNoLogin();
@@ -243,13 +242,13 @@ class DetailService {
             if(likeStatus != 0){
                 Buttons.innerHTML += `
                 <button type="button" class="like-buttons dislike-button">
-                    <i class="fa-solid fa-heart full-heart"></i>
+                <i class="fa-solid fa-heart"></i>
                 </button>
                 `;
             }else {
                 Buttons.innerHTML += `
                     <button type="button" class="like-buttons like-button">
-                        <i class="fa-regular fa-heart empty-heart"></i>
+                    <i class="fa-regular fa-heart"></i>
                     </button>
                 `;
             }
@@ -362,6 +361,25 @@ class ImportApi {
         return this.#instance;
     }
 
+    register(buyer) {
+        $.ajax({
+            async: false,
+            type: "post",
+            url: "/api/buyer/register",
+            contentType: "application/json",
+            data: JSON.stringify(buyer),
+            dataType: "json",
+            success: response => {
+                console.log(response);
+                alert("구매 등록완료")
+            },
+            error: error => {
+                console.log(error);
+
+            }
+        });
+    }
+
 
     IMP = null;
 
@@ -375,7 +393,7 @@ class ImportApi {
         pg: "kakaopay",
         pay_method: "card",
         merchant_uid: 'merchant_' + new Date().getTime(), //현재 날짜와 키값
-        name: '결제테스트',
+        name: '',
         amount: 2000,
         buyer_email: '',
         buyer_name: ''
@@ -397,6 +415,17 @@ class ImportApi {
         console.log(resp);
         if (resp.success) {
             alert("결제 성공");
+                const principal = PrincipalApi.getInstance().getPrincipal();
+                const responseData = DetailApi.getInstance().getEmoAndImage();
+                const usernameValue = principal.user.username;
+                const nameValue = principal.user.name;
+                const emailValue = principal.user.email;
+                const emoNameValue = responseData.emoMst.emoName;
+                
+                const buyer = new Buyer(usernameValue, nameValue, emailValue, emoNameValue);
+                
+                
+                ImportApi.getInstance().register(buyer);
         } else {
             alert("결제 실패");
             console.log(resp);
@@ -407,6 +436,7 @@ class ImportApi {
     purchaseButton() {
         const purchaseButton = document.querySelector(".purchase-button");
         const principal = PrincipalApi.getInstance().getPrincipal();
+        const responseData = DetailApi.getInstance().getEmoAndImage()
         const inputs = document.querySelectorAll(".product-input");
 
 
@@ -414,12 +444,39 @@ class ImportApi {
             if (principal == null) {
                 if (confirm("로그인 후 사용 가능합니다")) {
                     location.href = "/account/login"
+                }else{
+                
                 }
+
             }else{
-                ImportApi.getInstance().importPayParams.name = inputs[0].value;
+                // const usernameValue = principal.user.username;
+                // const nameValue = principal.user.name;
+                // const emailValue = principal.user.email;
+                // const emoNameValue = responseData.emoMst.emoName;
+                
+                // const buyer = new Buyer(usernameValue, nameValue, emailValue, emoNameValue);
+                
                 ImportApi.getInstance().requestPay();
+                // ImportApi.getInstance().register(buyer);
+                ImportApi.getInstance().importPayParams.name = responseData.emoMst.emoName;
+                ImportApi.getInstance().importPayParams.buyer_name = principal.user.username;
+                ImportApi.getInstance().importPayParams.buyer_email = principal.user.email;
             }
         }
         console.log(purchaseButton);
+    }
+}
+
+class Buyer {
+    username = null;
+    name = null;
+    email = null;
+    emoName = null;
+
+    constructor(username, name, email, emoName) {
+      this.username = username;
+      this.name = name;
+      this.email = email;
+      this.emoName = emoName;
     }
 }
