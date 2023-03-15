@@ -56,7 +56,7 @@ class DetailApi {
         $.ajax({
             async: false,
             type: "get",
-            url: `http://127.0.0.1:8000/api/emo/${emoObj.emoCode}`,
+            url: `/api/emo/${emoObj.emoCode}`,
             dataType: "json",
             success: response => {
                 responseData = response.data
@@ -74,7 +74,7 @@ class DetailApi {
         $.ajax({
             async: false,
             type: "get",
-            url: `http://127.0.0.1:8000/api/detail/emo/image/${emoObj2.emoCode}`,
+            url: `/api/detail/emo/image/${emoObj2.emoCode}`,
             dataType: "json",
             success: response => {
                 responseData = response.data
@@ -93,7 +93,7 @@ class DetailApi {
         $.ajax({
             async: false,
             type: "get",
-            url: `http://127.0.0.1:8000/api/admin/emos/${emoObj.emoCode}`,
+            url: `/api/admin/emos/${emoObj.emoCode}`,
             dataType: "json",
             success: response => {
                 responseData = response.data
@@ -111,7 +111,7 @@ class DetailApi {
         $.ajax({
             async: false,
             type: "get",
-            url: `http://127.0.0.1:8000/api/like/${emoObj2.emoId}/status`,
+            url: `/api/like/${emoObj2.emoId}/status`,
             dataType: "json",
             success: response => {
                 likeStatus = response.data;
@@ -131,7 +131,7 @@ class DetailApi {
         $.ajax({
             async: false,
             type: "post",
-            url: `http://127.0.0.1:8000/api/emo/${emoObj2.emoId}/like`,
+            url: `/api/emo/${emoObj2.emoId}/like`,
             dataType: "json",
             success: response => {
                 likeCount = response.data;
@@ -151,7 +151,7 @@ class DetailApi {
         $.ajax({
             async: false,
             type: "delete",
-            url: `http://127.0.0.1:8000/api/emo/${emoObj2.emoId}/like`,
+            url: `/api/emo/${emoObj2.emoId}/like`,
             dataType: "json",
             success: response => {
                 likeCount = response.data;
@@ -203,7 +203,7 @@ class DetailService {
                 <div class="emoticon-box">
                     <div class="emoticon-thumb">
                         <img class="main-emoticon"
-                            src="http://127.0.0.1:8000/image/emo/${responseData.emoImage[0].saveName!= null ? responseData.emoImage[0].saveName :"noimg.png"}"
+                            src="/image/emo/${responseData.emoImage[0].saveName!= null ? responseData.emoImage[0].saveName :"noimg.png"}"
                             alt="">
                     </div>
                 </div>
@@ -270,7 +270,7 @@ class DetailService {
             const emoImg = document.querySelectorAll(".subemoticon-img")
 
             responseData.emoImage.forEach((imgObj, index) => {
-                emoImg[index].src = "http://127.0.0.1:8000/image/emo/" + imgObj.saveName;
+                emoImg[index].src = "/image/emo/" + imgObj.saveName;
             })
 
         }

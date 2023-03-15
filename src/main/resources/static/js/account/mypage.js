@@ -40,7 +40,7 @@ class MypageApi {
         $.ajax({
             async: false,
             type: "get",
-            url: "http://127.0.0.1:8000/api/search/totalcount",
+            url: "/api/search/totalcount",
             data: searchObj,
             dataType: "json",
             success: response => {
@@ -60,7 +60,7 @@ class MypageApi {
         $.ajax({
             async: false,
             type: "get",
-            url: "http://127.0.0.1:8000/api/mypage/like",
+            url: "/api/mypage/like",
             data: searchObj,
             dataType: "json",
             success: response => {
@@ -80,7 +80,7 @@ class MypageApi {
         $.ajax({
             async: false,
             type: "post",
-            url: `http://127.0.0.1:8000/api/emo/${emoId}/like`,
+            url: `/api/emo/${emoId}/like`,
             dataType: "json",
             success: response => {
                 likeCount = response.data;
@@ -100,7 +100,7 @@ class MypageApi {
         $.ajax({
             async: false,
             type: "delete",
-            url: `http://127.0.0.1:8000/api/emo/${emoId}/like`,
+            url: `/api/emo/${emoId}/like`,
             dataType: "json",
             success: response => {
                 likeCount = response.data;
@@ -170,12 +170,12 @@ class MypageService {
                 contentFlex.innerHTML += `
                 <li class="like-lists">
                 <input type="hidden" class="emo-id" value="${data.emoId}">
-                <img src="http://127.0.0.1:8000/image/emo/${data.saveName != null ? data.saveName : "noimg.png"}" class="like-img">
+                <img src="/image/emo/${data.saveName != null ? data.saveName : "noimg.png"}" class="like-img">
                 <div class="like-names">
                     <div class="like-button">
     
                     </div>
-                    <a href="http://127.0.0.1:8000/main/detail/?emoCode=${data.emoCode}">
+                    <a href="/main/detail/?emoCode=${data.emoCode}">
                         <div class="like-name">
                             <h3>${data.emoName}</h3>
                             <p>>${data.company}</p>

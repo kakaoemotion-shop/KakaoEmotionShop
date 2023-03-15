@@ -21,7 +21,7 @@ class MainPageApi {
         $.ajax({
             async: false,
             type: "get",
-            url: "http://127.0.0.1:8000/api/hot/search/totalcount",
+            url: "/api/hot/search/totalcount",
             data: searchObj,
             dataType: "json",
             success: response => {
@@ -41,7 +41,7 @@ class MainPageApi {
         $.ajax({
             async: false,
             type: "get",
-            url: "http://127.0.0.1:8000/api/hot/search",
+            url: "/api/hot/search",
             data: searchObj,
             dataType: "json",
             success: response => {
@@ -61,7 +61,7 @@ class MainPageApi {
         $.ajax({
             async: false,
             type: "get",
-            url: "http://127.0.0.1:8000/api/new/search",
+            url: "/api/new/search",
             data: searchObj,
             dataType: "json",
             success: response => {
@@ -109,8 +109,8 @@ class MainPageService {
         responseData.forEach((data, index) => {
             contentFlex.innerHTML +=`
                 <li>
-                    <a class="index-link" href="http://127.0.0.1:8000/main/detail/?emoCode=${data.emoCode}">
-                        <img src="http://127.0.0.1:8000/image/emo/${data.newImage1 != null ? data.newImage1 : "noimg.jpg"}" alt="" class="emo-img">
+                    <a class="index-link" href="/main/detail/?emoCode=${data.emoCode}">
+                        <img src="/image/emo/${data.newImage1 != null ? data.newImage1 : "noimg.jpg"}" alt="" class="emo-img">
                         <h2 class="emo-name">${data.emoName}</h2>
                     </a>
                 </li>
@@ -129,14 +129,14 @@ class MainPageService {
         responseData.forEach((data, index) => {
             contentFlex.innerHTML +=`
                 <li>
-                    <a class="index-hot-link" href="http://127.0.0.1:8000/main/detail/?emoCode=${data.emoCode}">
+                    <a class="index-hot-link" href="/main/detail/?emoCode=${data.emoCode}">
                         <span class="emo-id">${data.emoId}</span>
                         <div class="hot-sub-list">
                             <h2 class="emo-name">${data.emoName}</h2>
                             <p class="author">${data.company}</p>
                         </div>
                         <div class=".index-img-box">
-                            <img src="http://127.0.0.1:8000/image/emo/${data.saveName != null ? data.saveName : "noimg.jpg"}" alt="" class="emo-img">
+                            <img src="/image/emo/${data.saveName != null ? data.saveName : "noimg.jpg"}" alt="" class="emo-img">
                         </div>
                     </a>
                 </li>

@@ -32,7 +32,7 @@ class EmoSearchApi {
         $.ajax({
             async: false,
             type: "get",
-            url: "http://127.0.0.1:8000/api/admin/emos",
+            url: "/api/admin/emos",
             data: SearchObj,
             dataType: "json",
             success: response => {
@@ -53,7 +53,7 @@ class EmoSearchApi {
         $.ajax({
             async: false,
             type: "get",
-            url: "http://127.0.0.1:8000/api/admin/emos/totalcount",
+            url: "/api/admin/emos/totalcount",
             data: {
                 "searchValue": SearchObj.searchValue
             },
@@ -81,7 +81,7 @@ class EmoSearchApi {
                 { emoId: deleteArray }
             ),
             dataType: "json",
-            url: "http://127.0.0.1:8000/api/admin/emos",
+            url: "/api/admin/emos",
             success: response => {
                 console.log(response);
                 returnData = true;
