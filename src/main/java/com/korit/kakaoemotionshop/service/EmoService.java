@@ -28,6 +28,28 @@ public class EmoService {
     @Autowired
     private EmoRepository emoRepository;
 
+//    public Map<String, Object> getEmoAndImage(String emoCode){
+//        Map<String, Object> result = new HashMap<>();
+//        result.put("emoMst", emoRepository.findEmoByEmoCode(emoCode));
+//        result.put("emoImage", emoRepository.findEmoImageByEmoCode(emoCode));
+//
+//        return result;
+//    }
+
+    public List<EmoImage> getEmos(String emoCode) {
+        return emoRepository.findEmoImageAll(emoCode);
+    }
+
+    public EmoMst getEmoByEmoCode(String emoCode) {
+        return emoRepository.findEmoByEmoCode(emoCode);
+    }
+    public Map<String, Object> getEmoAndAllImage(String emoCode){
+        Map<String, Object> resultAll = new HashMap<>();
+        resultAll.put("emoMst", emoRepository.findEmoByEmoCode(emoCode));
+        resultAll.put("emoImage", emoRepository.findEmoImageAll(emoCode));
+        return resultAll;
+    }
+
     public List<EmoMst> searchEmo(SearchReqDto searchReqDto){
         searchReqDto.setIndex();
         return emoRepository.searchEmo(searchReqDto);
@@ -73,37 +95,37 @@ public class EmoService {
         List<EmoImage> emoImages = new ArrayList<>();
 
         files.forEach(file ->{
-           String originFileName = file.getOriginalFilename();
-           String extension = originFileName.substring(originFileName.lastIndexOf("."));
-           String tempFileName = UUID.randomUUID().toString().replaceAll("-","")+extension;
+            String originFileName = file.getOriginalFilename();
+            String extension = originFileName.substring(originFileName.lastIndexOf("."));
+            String tempFileName = UUID.randomUUID().toString().replaceAll("-","")+extension;
 
-           Path uploadPath = Paths.get(filePath+"/emo/"+tempFileName);
+            Path uploadPath = Paths.get(filePath+"emo/"+tempFileName);
 
-           File f = new File(filePath + "/emo");
-           if(!f.exists()) {
-               f.mkdirs();
-           }
-           try {
-               Files.write(uploadPath, file.getBytes());
-           } catch (IOException e) {
-               throw new RuntimeException(e);
-           }
+            File f = new File(filePath + "emo");
+            if(!f.exists()) {
+                f.mkdirs();
+            }
+            try {
+                Files.write(uploadPath, file.getBytes());
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
 
-           EmoImage emoImage = EmoImage.builder()
-                   .emoCode(emoCode)
-                   .saveName(tempFileName)
-                   .originName(originFileName)
-                   .build();
+            EmoImage emoImage = EmoImage.builder()
+                    .emoCode(emoCode)
+                    .saveName(tempFileName)
+                    .originName(originFileName)
+                    .build();
 
-           emoImages.add(emoImage);
+            emoImages.add(emoImage);
         });
 
         emoRepository.registerEmoImages(emoImages);
     }
 
-    public List<EmoImage> getEmos(String emoCode) {
-        return emoRepository.findEmoImageAll(emoCode);
-    }
+//    public List<EmoImage> getEmos(String emoCode) {
+//        return emoRepository.findEmoImageAll(emoCode);
+//    }
 
     public void removeEmoImage(int imageId) {
         EmoImage emoImage = emoRepository.findEmoImageByImageId(imageId);
@@ -123,5 +145,13 @@ public class EmoService {
         }
     }
 
+    public int getEmoTotalCount(SearchNumberListDto searchNumberListDto){
+        return emoRepository.getEmoTotalCount(searchNumberListDto);
+    }
+
+
+    public void removeEmos(DeleteReqDto deleteReqDto){
+        emoRepository.deleteEmos(deleteReqDto.getEmoId());
+    }
 
 }

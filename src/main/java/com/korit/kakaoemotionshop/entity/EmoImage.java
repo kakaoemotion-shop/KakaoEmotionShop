@@ -11,7 +11,11 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class EmoImage {
     private int imageId;
+    private int imageSeq;
     private String emoCode;
     private String saveName;
     private String originName;
+
+    private int emoId;
+    private int likeId;
 }

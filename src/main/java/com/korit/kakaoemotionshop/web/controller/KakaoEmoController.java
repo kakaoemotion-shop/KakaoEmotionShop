@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/main")
 public class KakaoEmoController {
 
-    @GetMapping("/newemoticon")
+    @GetMapping("/new")
     public String newEmoticon() {
         return "kakaopage/new";
     }
@@ -22,5 +22,4 @@ public class KakaoEmoController {
     public String detailpage() {
         return "kakaopage/detailpage";
     }
-
 }

@@ -36,21 +36,21 @@
         </if>
     </select>
 
-    <select id="getEmoTotalCount" parameterType="com.korit.kakaoemotionshop.web.dto.SearchNumberListDto" resultType="integer">
+    <select id="findEmoImageByEmoCode" resultType="com.korit.kakaoemotionshop.entity.EmoImage">
         select
-            count(*)
+            image_id as imageId,
+            image_seq as imageSeq,
+            emo_code as emoCode,
+            save_name as saveName,
+            origin_name as originName
         from
-            emo_mst
+            emo_image
         where
-            1 = 1
-        <if test='searchValue != null and searchValue !=""'>
-            and	(
-            emo_name like CONCAT('%', #{searchValue}, '%')
-            or	company like CONCAT('%', #{searchValue}, '%')
-            )
-        </if>
+            emo_code = #{emoCode}
+        order by
+            emoCode,
+            imageSeq
     </select>
-
 
     <select id="findEmoByEmoCode" resultType="com.korit.kakaoemotionshop.entity.EmoMst">
         select
@@ -68,6 +68,7 @@
     <select id="findEmoImageAll" resultType="com.korit.kakaoemotionshop.entity.EmoImage">
         select
             image_id as imageId,
+            image_seq as imageSeq,
             emo_code as emoCode,
             save_name as saveName,
             origin_name as originName
@@ -75,11 +76,15 @@
             emo_image
         where
             emo_code = #{emoCode}
+        order by
+            emoCode,
+            imageSeq
     </select>
 
     <select id="findEmoImageByImageId" resultType="com.korit.kakaoemotionshop.entity.EmoImage">
         select
             image_id as imageId,
+            image_seq as imageSeq,
             emo_code as emoCode,
             save_name as saveName,
             origin_name as originName
@@ -87,6 +92,24 @@
             emo_image
         where
             image_id = #{imageId}
+        order by
+            emoCode,
+            imageSeq
+    </select>
+
+    <select id="getEmoTotalCount" parameterType="com.korit.kakaoemotionshop.web.dto.SearchNumberListDto" resultType="integer">
+        select
+            count(*)
+        from
+            emo_mst
+        where
+            1 = 1
+        <if test='searchValue != null and searchValue !=""'>
+            and	(
+            emo_name like CONCAT('%', #{searchValue}, '%')
+            or	company like CONCAT('%', #{searchValue}, '%')
+            )
+        </if>
     </select>
 
     <insert id="saveEmo" parameterType="com.korit.kakaoemotionshop.web.dto.EmoReqDto">
@@ -98,8 +121,8 @@
     <insert id="registerEmoImages" parameterType="list">
         insert into emo_image
         values
-        <foreach collection="list" item="file" separator=",">
-            (0, #{file.emoCode}, #{file.saveName}, #{file.originName})
+        <foreach collection="list" index="index" item="file" separator=",">
+            (0, 1 + #{index}, #{file.emoCode}, #{file.saveName}, #{file.originName})
         </foreach>
     </insert>
 

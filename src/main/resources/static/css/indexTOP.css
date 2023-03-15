@@ -2,6 +2,7 @@
   width: 100%;
   height: 110px;
   background-color: white;
+  border-bottom: 1.5px solid #dbdbdb;
 }
 
 .header-top{
@@ -23,6 +24,8 @@
   border: none;
   outline: none;
   background-color: white;
+
+  cursor: pointer;
 }
 
 .logo-button{
