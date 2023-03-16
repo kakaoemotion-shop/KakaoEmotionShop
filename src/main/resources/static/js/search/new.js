@@ -36,7 +36,7 @@ class NewApi {
         $.ajax({
             async: false,
             type: "get",
-            url: "http://127.0.0.1:8000/api/search/totalcount",
+            url: ":8000/api/search/totalcount",
             data: searchObj,
             dataType: "json",
             success: response => {
@@ -56,7 +56,7 @@ class NewApi {
         $.ajax({
             async: false,
             type: "get",
-            url: "http://127.0.0.1:8000/api/new/search",
+            url: ":8000/api/new/search",
             data: searchObj,
             dataType: "json",
             success: response => {
@@ -76,7 +76,7 @@ class NewApi {
         $.ajax({
             async: false,
             type: "post",
-            url: `http://127.0.0.1:8000/api/emo/${emoId}/like`,
+            url: `:8000/api/emo/${emoId}/like`,
             dataType: "json",
             success: response => {
                 likeCount = response.data;
@@ -96,7 +96,7 @@ class NewApi {
         $.ajax({
             async: false,
             type: "delete",
-            url: `http://127.0.0.1:8000/api/emo/${emoId}/like`,
+            url: `:8000/api/emo/${emoId}/like`,
             dataType: "json",
             success: response => {
                 likeCount = response.data;
@@ -146,7 +146,7 @@ class NewService {
         responseData.forEach((data, index) => {
             contentFlex.innerHTML += `
             <li>
-            <a class="new-link" href="http://127.0.0.1:8000/main/detail/?emoCode=${data.emoCode}">
+            <a class="new-link" href=":8000/main/detail/?emoCode=${data.emoCode}">
                 <div class="new-info-title">
                 <input type="hidden" class="emo-id" value="${data.emoId}">
                 <input type="hidden" class="like-count" value="${data.likeCount}">
@@ -159,10 +159,10 @@ class NewService {
                 
                 </div>
                 <div class="new-info-img">
-                <img src="http://127.0.0.1:8000/image/emo/${data.newImage1 != null ? data.newImage1 : "noimg.jpg"}" class="emo-img">
-                <img src="http://127.0.0.1:8000/image/emo/${data.newImage2 != null ? data.newImage2 : "noimg.jpg"}" class="emo-img">
-                <img src="http://127.0.0.1:8000/image/emo/${data.newImage3 != null ? data.newImage3 : "noimg.jpg"}" class="emo-img">
-                <img src="http://127.0.0.1:8000/image/emo/${data.newImage4 != null ? data.newImage4 : "noimg.jpg"}" class="emo-img">
+                <img src=":8000/image/emo/${data.newImage1 != null ? data.newImage1 : "noimg.jpg"}" class="emo-img">
+                <img src=":8000/image/emo/${data.newImage2 != null ? data.newImage2 : "noimg.jpg"}" class="emo-img">
+                <img src=":8000/image/emo/${data.newImage3 != null ? data.newImage3 : "noimg.jpg"}" class="emo-img">
+                <img src=":8000/image/emo/${data.newImage4 != null ? data.newImage4 : "noimg.jpg"}" class="emo-img">
                 </div>
             </li>
             `;

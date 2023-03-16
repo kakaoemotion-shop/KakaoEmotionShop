@@ -37,7 +37,7 @@ class HotSearchApi {
         $.ajax({
             async: false,
             type: "get",
-            url: "http://127.0.0.1:8000/api/search/totalcount",
+            url: ":8000/api/search/totalcount",
             data: searchObj,
             dataType: "json",
             success: response => {
@@ -57,7 +57,7 @@ class HotSearchApi {
         $.ajax({
             async: false,
             type: "get",
-            url: "http://127.0.0.1:8000/api/hot/search",
+            url: ":8000/api/hot/search",
             data: searchObj,
             dataType: "json",
             success: response => {
@@ -77,7 +77,7 @@ class HotSearchApi {
         $.ajax({
             async: false,
             type: "post",
-            url: `http://127.0.0.1:8000/api/emo/${emoId}/like`,
+            url: `:8000/api/emo/${emoId}/like`,
             dataType: "json",
             success: response => {
                 likeCount = response.data;
@@ -97,7 +97,7 @@ class HotSearchApi {
         $.ajax({
             async: false,
             type: "delete",
-            url: `http://127.0.0.1:8000/api/emo/${emoId}/like`,
+            url: `:8000/api/emo/${emoId}/like`,
             dataType: "json",
             success: response => {
                 likeCount = response.data;
@@ -146,7 +146,7 @@ class HotSearchService {
         responseData.forEach((data, index) => {
             contentFlex.innerHTML += `
             <li>
-            <a href="http://127.0.0.1:8000/main/detail/?emoCode=${data.emoCode}" class="emo-tag">
+            <a href=":8000/main/detail/?emoCode=${data.emoCode}" class="emo-tag">
             <input type="hidden" class="emo-id" value="${data.emoId}">
             <input type="hidden" class="like-count" value="${data.likeCount}">
             <span class="number"></span>
@@ -164,7 +164,7 @@ class HotSearchService {
             
             </div>
             </div>
-            <img src="http://127.0.0.1:8000/image/emo/${data.saveName != null ? data.saveName : "noimg.jpg"}" class="emo-img">
+            <img src=":8000/image/emo/${data.saveName != null ? data.saveName : "noimg.jpg"}" class="emo-img">
             </li>
             `;
 

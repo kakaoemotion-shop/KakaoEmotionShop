@@ -38,7 +38,7 @@ class SearchApi {
         $.ajax({
             async: false,
             type: "get",
-            url: "http://127.0.0.1:8000/api/search/totalcount",
+            url: ":8000/api/search/totalcount",
             data: searchObj,
             dataType: "json",
             success: response => {
@@ -56,7 +56,7 @@ class SearchApi {
         $.ajax({
             async: false,
             type: "get",
-            url: "http://127.0.0.1:8000/api/search",
+            url: ":8000/api/search",
             data: searchObj,
             dataType: "json",
             success: response => {
@@ -136,7 +136,7 @@ class SearchService {
             searchFlex.innerHTML += `
             <div class="emotion-serch">
                 <div class="emotion-title">
-                    <a class="search-link" href="http://127.0.0.1:8000/main/detail/?emoCode=${data.emoCode}">
+                    <a class="search-link" href=":8000/main/detail/?emoCode=${data.emoCode}">
                         <h3>${data.emoName}</h3>
                         <h4>${data.company}</h4>
                         <button class="like-button">
@@ -146,7 +146,7 @@ class SearchService {
                 </div>
                 <a class="emotion-img-link" href="" >
                     <div class="emotion-view-img">
-                        <img src="http://127.0.0.1:8000/image/emo/${data.saveName != null ? data.saveName : 'noimg.jpg'}" alt="">
+                        <img src=":8000/image/emo/${data.saveName != null ? data.saveName : 'noimg.jpg'}" alt="">
                     </div>
                 </a>
             </div>
