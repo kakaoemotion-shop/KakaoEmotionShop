@@ -42,4 +42,4 @@ mybatis:
     - /mappers/*.xml
 
 file:
-  path: /Home/ubuntu/KakaoEmotionShop/upload/
+  path: /home/ubuntu/KakaoEmotionShop/upload/
